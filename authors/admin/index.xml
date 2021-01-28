@@ -5,12 +5,594 @@
     <link>https://CoMath21.github.io/authors/admin/</link>
       <atom:link href="https://CoMath21.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Xin态好先生</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Thu, 28 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://CoMath21.github.io/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg</url>
       <title>Xin态好先生</title>
       <link>https://CoMath21.github.io/authors/admin/</link>
     </image>
+    
+    <item>
+      <title>Python数据分析（三）</title>
+      <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/</guid>
+      <description>&lt;h2 id=&#34;pandas&#34;&gt;Pandas&lt;/h2&gt;
+&lt;p&gt;　&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python数据分析（二）</title>
+      <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902/</guid>
+      <description>&lt;h2 id=&#34;numpy&#34;&gt;Numpy&lt;/h2&gt;
+&lt;p&gt;　　Numpy是一个在Python中做科学计算的基础库，重在数值计算，也是大部分PYTHON科学计算库的基础库，多用于在大型、多维数组上执行数值运算.&lt;/p&gt;
+&lt;h3 id=&#34;numpy简单创建数组&#34;&gt;Numpy简单创建数组&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;import numpy as np
+# 创建简单的列表
+a = [1, 2, 3, 4]			 此处输出a的话是[1,2,3,4]
+# 将列表转换为数组
+b = np.array(a)			 此处b输出的话是[1 2 3 4]
+np.array(a) = np.array(range(1,4)) = np.arange(1,4)
+np,arrange([start, ] stop[, step,], ftype=None)
+# 去小数
+np.round(x,保留位数)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;numpy查看数组属性&#34;&gt;Numpy查看数组属性&lt;/h3&gt;
+&lt;p&gt;数组元素个数：&lt;code&gt;b.size&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;数组形状：&lt;code&gt;b.shape&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一维：列数(8,)；二维：行列(2, 4)；三维：块行列(2, 2, 4)&lt;/p&gt;
+&lt;p&gt;重塑&lt;code&gt;reshape&lt;/code&gt;：数组一个新的形状而不改变其数据.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 具有返回值的，不会改变原数组
+numpy.reshape(a, newshape, order=&#39;C&#39;)		
+order : {‘C’, ‘F’, ‘A’}  
+# C:横着读横着写; E:竖着的竖着写; A:竖着度横着写
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;b&gt;例&lt;/b&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a = np.array([[1,2,3], [4,5,6]])
+print(a)
+[[1 2 3]
+ [4 5 6]]
+print(np.reshape(a, (3,2)))
+ [[1 2]
+ [3 4]
+ [5 6]]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;数组维度：&lt;code&gt;b.ndim&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;数组元素类型：&lt;code&gt;b.dtype&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;快速创建N维数组的api函数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#创建10行10列的数值为浮点1的矩阵
+array_one = np.ones([10, 10])
+#创建10行10列的数值为浮点0的矩阵
+array_zero = np.zeros([10, 10])
+#降到一维：
+b.flatten(order=&#39;C&#39;)  
+# 把a降到一维，默认是按横的方向降order:{‘C’, ‘F’,‘A’,‘K’}
+b.flatten(&#39;F&#39;) 
+# 按竖的方向降
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;轴axis&#34;&gt;轴(axis)&lt;/h3&gt;
+&lt;p&gt;　　在numpy中可以理解为方向,使用0,1,2&amp;hellip;数字表示,对于一个一维数组,只有一个0轴,对于2维数组&lt;code&gt;(shape(2,2))&lt;/code&gt;,有0轴和1轴,对于三维数组&lt;code&gt;(shape(2,2, 3))&lt;/code&gt;,有0,1,2轴.
+&lt;img src=&#34;./f1.png&#34; alt=&#34;二维数组的轴&#34;&gt;
+&lt;img src=&#34;./f2.png&#34; alt=&#34;三维数组的轴&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;numpy读取数据&#34;&gt;Numpy读取数据&lt;/h3&gt;
+&lt;p&gt;（以后结合框架之类的读取文件大多数是从CSV文件中读取）&lt;/p&gt;
+&lt;p&gt;　　CSV（Comma-Separated Value,逗号分隔值文件）：由于csv便于展示,读取和写入,所以很多地方也是用csv的格式存储和传输中小型的数据,为了方便教学,我们会经常操作csv格式的文件,但是操作数据库中的数据也是很容易的实现的.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;方法&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;np.loadtxt(fname,dtype=np.float,delimiter=None,skiprows=0,usecols=None,unpack=False)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;注意&lt;/b&gt; 其中添加的&lt;code&gt;delimiter&lt;/code&gt;和&lt;code&gt;dtype&lt;/code&gt;以及&lt;code&gt;unpack&lt;/code&gt;效果.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;delimiter：指定边界符号是什么，不指定会导致每行数据为一个整体法人字符串而报错&lt;/li&gt;
+&lt;li&gt;dtype：默认情况下对于较大的数据将变为科学计数法的方式&lt;/li&gt;
+&lt;li&gt;upack：默认值是False(0)，默认情况下，有多少条数据就会有多少行；为True(1)的情况下，每一列的数据会组成一行，袁术数据有多少列，加载出来就会有多少行，相当于转置的效果.&lt;/li&gt;
+&lt;li&gt;其他转置方法：t.transpose()	t.T	t.swapaxes(1,0)  # 1轴和1轴互换.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;numpy索引和切片&#34;&gt;Numpy索引和切片&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 取行： T[行]
+# 取连续的多行： T [2:]
+# 取不连续的多行： T [ [2,8,10] ] = T [[2,10,3],:]
+取第2行：T [1,:]
+取第三行以后所有行：T [2:,:]
+#取列： T [:,0]
+#取连续的多列： T [:, 2 :]
+#取不连续的多列： T [:,[ 0,2]]
+#去行和列，取第3行，第四列的值：
+a = T [ 2, 3]
+print(type(a))	# int
+#取多行和多列，取第3行到第五行，第2列到第4列的结果
+#去的是行和列交叉点的位置
+b = T [2:5,1:4]
+#取多个不相邻的点--选出来的结果是（0，0） （2，1） （2，3）
+c = T [[0,2,2],[0,1,3]]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;numpy中布尔索引&#34;&gt;Numpy中布尔索引&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./f4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# numpy中三元运算符 
+np.where(condition, if True, if False)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f5.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;numpy中的clip裁剪&#34;&gt;Numpy中的clip(裁剪)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;numpy.clip(a, a_min, a_max, out=None)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;[a_min, a_max] 里面的数被保留下来,外面的被截取为&lt;code&gt;a_min&lt;/code&gt;或者&lt;code&gt;a_max &lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;out&lt;/code&gt;：可以把结果放置在此数组中.&lt;/p&gt;
+&lt;p&gt;例如，指定间隔为[0，1]，则小于0的值赋值为0，并且大于1的值赋值为1.&lt;/p&gt;
+&lt;p&gt;补充：int类型的情况下无法赋值为nan，所以需要将类型改为float.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;t.astype(float)
+t[x,y]=np.nan
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f6.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数组的拼接&#34;&gt;数组的拼接：&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;np.vstack((t1,t2))		# 竖直拼接
+np.hstack((t1,t2))		# 水平拼接
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f7.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数组的行列交换&#34;&gt;数组的行列交换&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./f8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;numpy更多好用的方法&#34;&gt;Numpy更多好用的方法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;获取最大值最小值的位置&lt;/li&gt;
+&lt;li&gt;np.argmax(t,axis=0)&lt;/li&gt;
+&lt;li&gt;np.argmin(t,axis=1)&lt;/li&gt;
+&lt;li&gt;创建一个全0的数组: np.zeros((3,4))&lt;/li&gt;
+&lt;li&gt;创建一个全1的数组:np.ones((3,4))&lt;/li&gt;
+&lt;li&gt;创建一个对角线为1的正方形数组(方阵)：np.eye(3)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;numpy生成随机数&#34;&gt;Numpy生成随机数&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./f9.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;numpy中的注意点copy和view&#34;&gt;Numpy中的注意点copy和view&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;a=b 完全不复制，a和b相互影响&lt;/li&gt;
+&lt;li&gt;a = b[:],视图的操作，一种切片，会创建新的对象a，但是a的数据完全由b保管，他们两个的数据变化是一致的，&lt;/li&gt;
+&lt;li&gt;a = b.copy(),复制，a和b互不影响&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;numpy中的nan和inf都是float类型&#34;&gt;Numpy中的nan和inf（都是float类型）&lt;/h3&gt;
+&lt;p&gt;nan(NAN,Nan):not a number表示不是一个数字.&lt;/p&gt;
+&lt;p&gt;什么时候numpy中会出现nan&lt;/p&gt;
+　　当我们读取本地的文件为float的时候，如果有缺失，就会出现nan．
+&lt;p&gt;　　当做了一个不合适的计算的时候(比如无穷大(inf)减去无穷大)．&lt;/p&gt;
+&lt;p&gt;inf(-inf,inf):infinity,inf表示正无穷，-inf表示负无穷&lt;/p&gt;
+&lt;p&gt;什么时候回出现inf包括（-inf，+inf）&lt;/p&gt;
+　　比如一个数字除以0，（python中直接会报错，numpy中是一个inf或者-inf）
+&lt;h3 id=&#34;numpy中的nan的注意点&#34;&gt;Numpy中的nan的注意点&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./f10.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;t.sum(axis=None) #求和 
+t.mean(a,axis=None)  # 均值 受离群点的影响较大
+np.median(t,axis=None)  # 中值：
+t.max(axis=None)  # 最大值：
+t.min(axis=None)  # 最小值：
+np.ptp(t,axis=None) # 极值 即最大值和最小值只差
+t.std(axis=None)  # 标准差 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;ndarry缺失值填充均值&#34;&gt;ndarry缺失值填充均值&lt;/h3&gt;
+&lt;p&gt;t中存在nan值，如何操作把其中的nan填充为每一列的均值&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;t = array([[  0.,   1.,   2.,   3.,   4.,   5.],
+       [  6.,   7.,  nan,   9.,  10.,  11.],
+       [ 12.,  13.,  14.,  nan,  16.,  17.],
+       [ 18.,  19.,  20.,  21.,  22.,  23.]])
+def fill_ndarray(t1):
+  #遍历每一列
+  for i in range(t1.shape[1]):  
+      temp_col = t1[:,i]  #当前的一列
+      nan_num = np.count_nonzero(temp_col!=temp_col)
+      if nan_num != 0: #不为0，说明当前这一列中有nan
+          temp_not_nan_col = temp_col[temp_col==temp_col] #当前一列不为nan的array
+          # 选中当前为nan的位置，把值赋值为不为nan的均值
+          temp_col[np.isnan(temp_col)] = temp_not_nan_col.mean()
+  return t1
+
+if __name__ == &#39;__main__&#39;:
+    t1 = np.arange(12).reshape((4, 3)).astype(&amp;quot;float&amp;quot;)
+    t1[1, 1:] = np.nan
+    print(t1)
+    t1 = fill_ndarray(t1)
+    print(t1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出结果&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[[ 0.  1.  2.]							[[ 0.  1.  2.]
+ [ 3. nan nan]							[ 3.  6.  7.]
+ [ 6.  7.  8.]							[ 6.  7.  8.]
+ [ 9. 10. 11.]]							[ 9. 10. 11.]]
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python数据分析（一）</title>
+      <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/</guid>
+      <description>&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+&lt;h3 id=&#34;环境安装不是必要只是为了能够更好的操作及维护&#34;&gt;环境安装（不是必要，只是为了能够更好的操作及维护）&lt;/h3&gt;
+&lt;p&gt;CONDA：
+conda类似于npm或maven的包管理工具，只是conda是针对于python的. 可以安装minconda或anaconda进行安装；Conda是一个包管理器；Anaconda是一个发行包.虽然Conda与Anaconda一起包装，但两者是具有不同目标的不同实体.
+CONDA安装（以Win64为例）:
+可以到&lt;a href=&#34;https://www.anaconda.com/download%e4%b8%8b%e8%bd%bd%e5%af%b9%e5%ba%94%e7%89%88%e6%9c%ac%e7%9a%84Anaconda&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;官网&lt;/a&gt;；也可以到国内&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;清华镜像源&lt;/a&gt;进行下载镜像文件：
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901.png&#34; alt=&#34;png&#34;&gt;
+安装 ： 打开安装包，一路next 即可.  注意，勾选 添加环境变量 和 默认python3.6 作为Anaconda的语言.
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902.png&#34; alt=&#34;png&#34;&gt;
+安装成功后打开cmd命令输入&amp;quot;python&amp;quot;查看版本信息.
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903.png&#34; alt=&#34;png&#34;&gt;
+查看当前有哪些可以使用的python版本：conda search  &amp;ndash;full -name python
+安装python版本（安装的3.6的版本）：conda create &amp;ndash;name tensorflow python=3.6&lt;/p&gt;
+&lt;h3 id=&#34;jupyter-notebook&#34;&gt;Jupyter notebook&lt;/h3&gt;
+&lt;p&gt;jupyter notebook:一款编程/文档/笔记/展示软件.
+启动命令:jupyter notebook  （已经安装Anaconda/在conda环境下）
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%905.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%906.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;jupyter-notebook好处&#34;&gt;Jupyter notebook好处&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;极其适合数据分析&lt;/li&gt;
+&lt;li&gt;支持多语言&lt;/li&gt;
+&lt;li&gt;分享便捷：支持以网页的形式分享，GitHub 中天然支持 Notebook 展示，也可以通过 nbviewer 分享你的文档. 当然也支持导出成 HTML、PDF、Markdown等多种格式的文档.&lt;/li&gt;
+&lt;li&gt;远程运行：在任何地点都可以通过网络链接远程服务器来实现运算.&lt;/li&gt;
+&lt;li&gt;交互式展现：不仅可以输出图片、视频、数学公式，甚至可以呈现一些互动的可视化内容，比如可以缩放的地图或者是可以旋转的三维模型. 这就需要交互式插件（Interactive widgets）来支持.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;基础知识&#34;&gt;基础知识&lt;/h2&gt;
+&lt;h3 id=&#34;matplotlib&#34;&gt;matplotlib&lt;/h3&gt;
+&lt;p&gt;最流行的Python底层绘图库，主要做数据可视化图表,名字取材于MATLAB，模仿MATLAB构建；能将数据进行可视化,更直观的呈现、使数据更加客观、更具说服力
+matplotlib使用流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;明确问题&lt;/li&gt;
+&lt;li&gt;选择图形的呈现方式&lt;/li&gt;
+&lt;li&gt;准备数据&lt;/li&gt;
+&lt;li&gt;绘图和图形完善&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;b&gt;例&lt;/b&gt;.
+假设一天中每隔两个小时(range(2,26,2))的气温(℃)分别是[15, 13, 14.5, 17, 20, 25, 26, 26, 27, 22, 18, 15].&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%907.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%908.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;设置图片大小&#34;&gt;设置图片大小&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;fig = plt.figure(figsize=(10,6),dpi=80)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;figure图形图标的意思，在这里指的是画的图；通过实例化一个figure并传递参数，能够在后台自动使用该figure实例；在图像模糊的时候可以传入dpi参数（每英寸上像素点的个数）&lt;/p&gt;
+&lt;h3 id=&#34;保存到本地&#34;&gt;保存到本地&lt;/h3&gt;
+&lt;p&gt;　　保存需要在绘制图形之后保存&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plt.show(&amp;quot;路径/名字.png&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;也可以保存为SVG这种矢量图的格式&lt;/p&gt;
+&lt;h3 id=&#34;描述信息比如x轴和y轴表示什么这个图表示什么&#34;&gt;描述信息,比如x轴和y轴表示什么,这个图表示什么&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;  plt.xlabel(&amp;quot;X轴&amp;quot;)
+  plt.ylabel(&amp;quot;Y轴&amp;quot;)
+  plt.title(&amp;quot;Title&amp;quot;) # 存在中文乱码问题
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;调整x或者y的刻度的间距&#34;&gt;调整x或者y的刻度的间距&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;设置x轴的刻度（一个参数）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;plt.xticks(x)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;想要密集点可以设置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;_xticks = [i/2 for I in range(4,49)]
+plt.xticks(_xticks)
+# 显得过于密集
+plt.xticks(_xticks[::3])
+# 每隔3取一个；只有列表的时候才能使用[ ]取步长
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;设置x轴的刻度（两个参数）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;plt.xticks(x,_xticks_labels)
+_x = x   # int类型
+_xtick_labels = [&amp;quot;hello,{}&amp;quot;.format(i) for i in _x]
+plt.xticks(_x,_xtick_labels)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;format函数&lt;/em&gt;:
+格式化字符串的函数 str.format()，它增强了字符串格式化的功能. 基本语法是通过 {} 和 : ，来代替以前的%.&lt;/p&gt;
+&lt;p&gt;format 函数可以接受不限个参数，位置可以不按顺序.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;{} {}&amp;quot;.format(&amp;quot;hello&amp;quot;, &amp;quot;world&amp;quot;) # 不设置指定位置，按默认顺序 
+&#39;hello world&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;format 函数可以接受不限个参数,位置也可以设置参数：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;print(&amp;quot;网站名：{name}, 地址 {url}&amp;quot;.format(name=&amp;quot;百度&amp;quot;, url=&amp;quot;www.Baidu.com&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%909.png&#34; alt=&#34;png&#34;&gt;
+改进：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;_x = list(x)   # int类型
+_xtick_labels = [&amp;quot;hello,{}&amp;quot;.format(i) for i in _x]	
+# 取步长一样，数字和字符串一一对应，数据长度一样
+plt.xticks(_x[::8],_xtick_labels[::8])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9010.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用rotation参数旋转&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plt.xticks(_x[::8],_xtick_labels[::8],rotation=45)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;中文情况处理&#34;&gt;中文情况处理：&lt;/h3&gt;
+&lt;p&gt;　　matplotlib默认不支持中文字符，因为默认的英文字体无法显示汉字&lt;/p&gt;
+&lt;p&gt;如何修改matplotlib的默认字体?&lt;/p&gt;
+　　通过matplotlib.rc可以修改,具体方法参见源码(windows/linux)
+&lt;pre&gt;&lt;code&gt;import matplotlib
+font = {&#39;family&#39;: &amp;quot;simhei&amp;quot;,&#39;size&#39;: &#39;10&#39;}    # 黑体
+matplotlib.rc(&amp;quot;font&amp;quot;,**font)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9011.png&#34; alt=&#34;png&#34;&gt;
+通过matplotlib 下的font_manager可以解决(windows/linux/mac)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 设置中文字体（指定的字体文件路径，然后在显示中文的地方添加fontproperties）
+my_font = font_manager.FontProperties(fname=&amp;quot;/System/Library/Fonts/PingFang.ttc&amp;quot;)
+plt.xticks(x[::5],_x_ticks[::5],rotation=90,fontproperties=my_font)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;线条的样式比如颜色透明度等&#34;&gt;线条的样式(比如颜色,透明度等)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;plt.grid()	# 绘制网格
+plt.grid(alpha=0.6)	# 绘制网格，并调整透明度
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;绘制风格及描述&#34;&gt;绘制风格及描述&lt;/h3&gt;
+&lt;p&gt;　　描述不同曲线含义：在plot()中添加参数&lt;code&gt;label=&amp;quot;Name&amp;quot;&lt;/code&gt;
+再添加语句：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plt.legend(loc=0)/plt.legend(prop=my_font)
+# loc位置：0=best/upper left
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9012.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9013.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用统计图&#34;&gt;常用统计图&lt;/h2&gt;
+&lt;p&gt;　　统计图是数据分析和数学建模最直接、最有效的可视化形式.这里只是简单说明在Python中不同的绘图命令.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;折线图:以折线的上升或下降来表示统计数量的增减变化的统计图.
+&lt;ul&gt;
+&lt;li&gt;特点:能够显示数据的变化趋势，反映事物的变化情况(变化).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;直方图:由一系列高度不等的纵向条纹或线段表示数据分布的情况. 一般用横轴表示数据范围，纵轴表示分布情况.
+&lt;ul&gt;
+&lt;li&gt;特点:绘制连续性的数据,展示一组或者多组数据的分布状况(统计).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;条形图:排列在工作表的列或行中的数据可以绘制到条形图中.
+&lt;ul&gt;
+&lt;li&gt;特点:绘制连离散的数据,能够一眼看出各个数据的大小,比较数据之间的差别(统计).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;散点图:用两组数据构成多个坐标点，考察坐标点的分布,判断两变量之间是否存在某种关联或总结坐标点的分布模式.
+&lt;ul&gt;
+&lt;li&gt;特点:判断变量之间是否存在数量关联趋势,展示离群点(分布规律).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;绘制折线图pltplotxy&#34;&gt;绘制折线图：plt.plot(x,y)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;import numpy as np
+
+linear_data = np.arange(1, 9)
+quadratic_data = linear_data ** 2
+
+plt.figure()
+plt.plot(linear_data, &#39;-o&#39;, quadratic_data, &#39;-o&#39;)
+
+# 注意，这里只指定了y轴数据，x轴的数据是matplotlib自动生成的
+# 添加坐标轴标签及图例
+plt.xlabel(&#39;x data&#39;)
+plt.ylabel(&#39;y data&#39;)
+plt.title(&#39;Line Chart Title&#39;)
+plt.legend([&#39;legend1&#39;, &#39;legend2&#39;, &#39;legend3&#39;])
+# 填充两个line间的区域plt.gca().fill_between(x,y1,y2,color,透明度)
+plt.gca().fill_between(range(len(linear_data)),
+                      linear_data, quadratic_data,
+                      facecolor=&#39;green&#39;,
+                      alpha=0.25)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9014.png&#34; alt=&#34;png&#34;&gt;
+注意：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 对于学术制图，可在标题中包含latex语法
+ax = plt.gca()
+ax.set_title(&#39;Quadratic ($x^2$) vs. Linear ($x$)&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;绘制散点图pltscatterxy&#34;&gt;绘制散点图：plt.scatter(x,y)&lt;/h3&gt;
+&lt;p&gt;假设通过爬虫你获取到了北京2016年3,10月份每天白天的最高气温(分别位于列表a,b),那么此时如何寻找出气温和随时间(天)变化的某种规律?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {&#39;family&#39;: &amp;quot;simhei&amp;quot;,
+        &#39;size&#39;:&#39;10&#39;}
+matplotlib.rc(&amp;quot;font&amp;quot;,**font)
+# 数据
+y_3 = [11,17,16,11,12,11,12,6,6,7,8,9,12,15,14,17,18,21,16,17,20,14,15,15,15,19,21,22,22,22,23]
+y_10 = [26,26,28,19,21,17,16,19,18,20,20,19,22,23,17,20,21,20,22,15,11,15,5,13,17,10,11,13,12,13,6]
+# 3月，10月范围
+x_3 = range(1,32)
+x_10 = range(50,81)
+# 合并横坐标
+plt.figure(figsize=(14,8),dpi=80)
+# 绘制散点图
+plt.scatter(x_3,y_3,label=&amp;quot;3月份&amp;quot;)
+plt.scatter(x_10,y_10,label=&amp;quot;10月份&amp;quot;)
+# 设置x轴
+_x = list(x_3) + list(x_10)
+_xticks_labels = [&amp;quot;3月{}日&amp;quot;.format(i) for i in x_3]
+_xticks_labels += [&amp;quot;10月{}日&amp;quot;.format(i) for i in x_10]
+plt.xticks(_x[::3],_xticks_labels[::3],rotation=45)
+plt.legend(loc=&amp;quot;upper left&amp;quot;)
+# 显示设置
+plt.xlabel(&amp;quot;月份&amp;quot;)
+plt.ylabel(&amp;quot;温度&amp;quot;)
+plt.title(&amp;quot;标题&amp;quot;)
+# 展示
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9015.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;绘制条形图柱状图&#34;&gt;绘制条形图/柱状图：&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;plt.bar(x, y, width=0.2, color=&#39;orange&#39;)
+plt.bar(x, y, height=0.2, color=&#39;orange&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;b&gt;例&lt;/b&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {&#39;family&#39;: &amp;quot;simhei&amp;quot;,
+        &#39;size&#39;:&#39;10&#39;}
+matplotlib.rc(&amp;quot;font&amp;quot;,**font)
+a = [&amp;quot;战狼2&amp;quot;,&amp;quot;速度与激情8&amp;quot;,&amp;quot;功夫瑜伽&amp;quot;,&amp;quot;西游伏妖篇&amp;quot;,&amp;quot;变形金刚5：最后的骑士&amp;quot;,&amp;quot;摔跤吧！爸爸&amp;quot;,&amp;quot;加勒比海盗5：死无对证&amp;quot;,&amp;quot;金刚：骷髅岛&amp;quot;,&amp;quot;极限特工：终极回归&amp;quot;,&amp;quot;生化危机6：终章&amp;quot;,&amp;quot;乘风破浪&amp;quot;,&amp;quot;神偷奶爸3&amp;quot;,&amp;quot;智取威虎山&amp;quot;,&amp;quot;大闹天竺&amp;quot;,&amp;quot;金刚狼3：殊死一战&amp;quot;,&amp;quot;蜘蛛侠：英雄归来&amp;quot;,&amp;quot;悟空传&amp;quot;,&amp;quot;银河护卫队2&amp;quot;,&amp;quot;情圣&amp;quot;,&amp;quot;新木乃伊&amp;quot;]
+b = [56.01,26.94,17.53,16.49,15.45,12.96,11.8,11.61,11.28,11.12,10.49,10.3,8.75,7.55,7.32,6.99,6.88,6.86,6.58,6.23]
+plt.figure(figsize=(12,8),dpi=80)
+x = range(len(a))
+plt.bar(x, b, width=0.2, color=&#39;orange&#39;)
+plt.xticks(x, a, rotation=45)
+
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9016.png&#34; alt=&#34;png&#34;&gt;
+　　发现字数长的名字错位,横向的条形图,将&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plt.bar(x, y, width=0.2, color=&#39;orange&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;改成&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plt.bar(x, y, height=0.2, color=&#39;orange&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;再适当调整其他参数.
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9017.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;例&lt;/b&gt;.假设你知道了列表a中电影分别在2017-09-14(b_14), 2017-09-15(b_15), 2017-09-16(b_16)三天的票房,为了展示列表中电影本身的票房以及同其他电影的数据对比情况,应该如何更加直观的呈现该数据?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {&#39;family&#39;: &amp;quot;simhei&amp;quot;, &#39;size&#39;:&#39;10&#39;}
+matplotlib.rc(&amp;quot;font&amp;quot;,**font)
+a = [&amp;quot;猩球崛起3：终极之战&amp;quot;,&amp;quot;敦刻尔克&amp;quot;,&amp;quot;蜘蛛侠：英雄归来&amp;quot;,&amp;quot;战狼2&amp;quot;]
+b_16 = [15746,312,4497,319]
+b_15 = [12357,156,2045,168]
+b_14 = [2358,399,2358,362]
+bar_width = 0.2
+plt.figure(figsize=(10,8),dpi=80)
+x_14 = list(range(len(a)))
+x_15 = [i+bar_width for i in x_14]
+x_16 = [i+bar_width for i in x_15]
+plt.bar(x_14, b_14, width=bar_width,label=&amp;quot;2017-09-14&amp;quot;)
+plt.bar(x_15, b_15, width=bar_width,label=&amp;quot;2017-09-15&amp;quot;)
+plt.bar(x_16, b_16, width=bar_width,label=&amp;quot;2017-09-16&amp;quot;)
+plt.xticks(x_15, a)
+plt.legend()
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9018.png&#34; alt=&#34;png&#34;&gt;
+堆叠柱状图&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# stack bar chart
+plt.figure()
+x_vals = list(range(len(linear_data)))
+plt.bar(x_vals, linear_data, width=0.3)
+plt.bar(x_vals, quadratic_data, width=0.3, bottom=linear_data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;绘制直方图&#34;&gt;绘制直方图&lt;/h3&gt;
+&lt;h4 id=&#34;频数分布直方图&#34;&gt;频数分布直方图&lt;/h4&gt;
+&lt;p&gt;　　假设你获取了250部电影的时长(列表a中),希望统计出这些电影时长的分布状态(比如时长为100分钟到120分钟电影的数量,出现的频率)等信息,你应该如何呈现这些数据?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {&#39;family&#39;: &amp;quot;simhei&amp;quot;, &#39;size&#39;:&#39;10&#39;}
+matplotlib.rc(&amp;quot;font&amp;quot;,**font)
+a=[131, 98, 125, 131, 124, 139, 131, 117, 128, 108, 135, 138, 131, 102, 107, 114, 119, 128, 121, ...]
+# 计算组距
+dis = 3
+num_bins = (max(a)-min(a))//dis
+plt.figure(figsize=(12,8),dpi=80)
+plt.hist(a, num_bins)
+plt.xticks(range(min(a),max(a)+dis,dis))
+plt.grid()
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9019.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;频率分布直方图&#34;&gt;频率分布直方图&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;plt.hist(a, num_bins,normed=1/True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9020.png&#34; alt=&#34;png&#34;&gt;
+&lt;b&gt;例&lt;/b&gt;. 在美国2004年人口普查发现有124 million的人在离家相对较远的地方工作. 根据他们从家到上班地点所需要的时间,通过抽样统计(最后一列)出了下表的数据,这些数据能够绘制成直方图么?
+&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9021.png&#34; alt=&#34;png&#34;&gt;
+&lt;em&gt;数据被统计后，组距不同（不能使用hist）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;解决办法：使用bar（条形图）在进行调整.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {&#39;family&#39;: &amp;quot;simhei&amp;quot;,
+        &#39;size&#39;:&#39;10&#39;}
+matplotlib.rc(&amp;quot;font&amp;quot;,**font)
+interval = [0,5,10,15,20,25,30,35,40,45,60,90]
+width = [5,5,5,5,5,5,5,5,5,15,30,60]
+quantity = [836,2737,3723,3926,3596,1438,3273,642,824,613,215,47]
+plt.figure(figsize=(14,8),dpi=80)
+# 默认宽度是0.8，为了是条形图连起来，令width=1
+plt.bar(range(12), quantity, width=1)
+# 设置X轴的刻度——为了让起点从零开始，所以i-1
+_x = [i-0.5 for i in range(13)]
+_xticks_labels = interval+[150]
+plt.xticks(_x, _xticks_labels)
+plt.grid(linestyle=&#39;--&#39;)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9022.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;复杂分析图&#34;&gt;复杂分析图&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 使用gridspec和直方图绘制一个复杂分析图
+import matplotlib.gridspec as gridspec
+
+x = np.random.random(size=10000)
+y = np.random.normal(loc=0., scale=1., size=10000)
+
+plt.figure()
+gspec = gridspec.GridSpec(3, 3)
+
+top_hist = plt.subplot(gspec[0, 1:])
+side_hist = plt.subplot(gspec[1:, 0])
+lower_right = plt.subplot(gspec[1:, 1:])
+
+lower_right.scatter(x, y)
+top_hist.hist(x, bins=100, normed=True)
+side_hist.hist(y, bins=100, orientation=&#39;horizontal&#39;, normed=True)
+side_hist.invert_xaxis()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;热图&#34;&gt;热图&lt;/h3&gt;
+&lt;p&gt;　　可用于三维数据可视化&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plt.imshow(arr)
+plt.hist2d()
+plt.colorbar() # 添加颜色条
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;其他&#34;&gt;其他&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;matplotlib支持的图形是非常多的，如果有其他的需求，可以查看一下url地址：http://matplotlib.org/gallery/index.html&lt;/li&gt;
+&lt;li&gt;echarts中可以看框架实例&lt;/li&gt;
+&lt;li&gt;更多绘图工具：
+plotly:可视化工具中的github,相比于matplotlib更加简单,图形更加漂亮,同时兼容matplotlib和pandas
+使用用法:简单,照着文档写即可&lt;/li&gt;
+&lt;li&gt;文档地址: &lt;a href=&#34;https://plot.ly/python/&#34;&gt;https://plot.ly/python/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;备注：如果想使用子图，用subplot函数，如果对比子图则徐亚坐标轴相同，添加sharey=（跟哪张图共享坐标轴）&lt;/p&gt;
+&lt;h2 id=&#34;pandas绘图&#34;&gt;Pandas绘图&lt;/h2&gt;
+&lt;h3 id=&#34;pandas的dataframe绘图&#34;&gt;Pandas的DataFrame绘图&lt;/h3&gt;
+&lt;p&gt;先转换成dataframe格式进行画图&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df.plot(kind=)
+pd.plotting.Tools
+pd.plotting.scatter_matrix()
+pd.plotting.parallel_coordinates()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;绘制折线图&#34;&gt;绘制折线图&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;np.random.seed(100)
+df = pd.DataFrame({&#39;A&#39;: np.random.randn(365).cumsum(0),
+                  &#39;B&#39;: np.random.randn(365).cumsum(0) + 20,
+                  &#39;C&#39;: np.random.randn(365).cumsum(0) - 20},
+                 index=pd.date_range(&#39;2017/1/1&#39;, periods=365))
+df.plot()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9023.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;绘制散点图&#34;&gt;绘制散点图&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;df.plot(&#39;A&#39;, &#39;B&#39;, kind=&#39;scatter&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9024.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 颜色(c)和大小(s)有&#39;B&#39;列的数据决定
+ax = df.plot(&#39;A&#39;, &#39;C&#39;, kind=&#39;scatter&#39;,
+        c=&#39;B&#39;, s=df[&#39;B&#39;], colormap=&#39;viridis&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9025.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;盒形图&#34;&gt;盒形图&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;df.plot(kind=&#39;box&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;柱状图&#34;&gt;柱状图&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;df.plot(kind=&#39;hist&#39;, alpha=0.7)
+df.plot(kind=&#39;kde&#39;) # 拟合分布
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;seaborn绘图&#34;&gt;Seaborn绘图&lt;/h2&gt;
+&lt;p&gt;seaborn的安装：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. conda install seaborn 
+2. pip install seaborn
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Typora使用</title>

@@ -1,0 +1,1553 @@
+<!DOCTYPE html><html lang="zh-Hans" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="CoMath">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Python数据分析前的准备.">
+
+  
+  <link rel="alternate" hreflang="zh-Hans" href="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9d711cebf380679328885aff8188d64e.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="CoMath">
+  <meta property="og:url" content="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/">
+  <meta property="og:title" content="Python数据分析（一） | CoMath">
+  <meta property="og:description" content="Python数据分析前的准备."><meta property="og:image" content="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/featured.png">
+  <meta property="twitter:image" content="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/featured.png"><meta property="og:locale" content="zh-Hans">
+  
+    
+      <meta property="article:published_time" content="2021-01-22T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-01-22T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/"
+  },
+  "headline": "Python数据分析（一）",
+  
+  "image": [
+    "https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/featured.png"
+  ],
+  
+  "datePublished": "2021-01-22T00:00:00Z",
+  "dateModified": "2021-01-22T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Xin态好先生"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CoMath",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Python数据分析前的准备."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Python数据分析（一） | CoMath</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7264cf0eba3b66951b36da7d2cecf9c5.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>搜索</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="搜索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="搜索...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="切换导航">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>首页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/category"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tag"><span>标签</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>说说</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/people"><span>关于</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="搜索"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>浅色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>深色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>自动</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Python数据分析（一）</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/admin/">Xin态好先生</a></span>, <span >
+      <a href="/authors/comath/">CoMath</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2021年1月22日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 分钟阅读时长
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>, <a href="/category/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 256px;">
+  <div style="position: relative">
+    <img src="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/featured_huc9cf4c4ccdccec5280115739a088e000_68859_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    <span class="article-header-caption">CoMath</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="准备工作">准备工作</h2>
+<h3 id="环境安装不是必要只是为了能够更好的操作及维护">环境安装（不是必要，只是为了能够更好的操作及维护）</h3>
+<p>CONDA：
+conda类似于npm或maven的包管理工具，只是conda是针对于python的. 可以安装minconda或anaconda进行安装；Conda是一个包管理器；Anaconda是一个发行包.虽然Conda与Anaconda一起包装，但两者是具有不同目标的不同实体.
+CONDA安装（以Win64为例）:
+可以到<a href="https://www.anaconda.com/download%e4%b8%8b%e8%bd%bd%e5%af%b9%e5%ba%94%e7%89%88%e6%9c%ac%e7%9a%84Anaconda" target="_blank" rel="noopener">官网</a>；也可以到国内<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">清华镜像源</a>进行下载镜像文件：
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901.png" alt="png">
+安装 ： 打开安装包，一路next 即可.  注意，勾选 添加环境变量 和 默认python3.6 作为Anaconda的语言.
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902.png" alt="png">
+安装成功后打开cmd命令输入&quot;python&quot;查看版本信息.
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903.png" alt="png">
+查看当前有哪些可以使用的python版本：conda search  &ndash;full -name python
+安装python版本（安装的3.6的版本）：conda create &ndash;name tensorflow python=3.6</p>
+<h3 id="jupyter-notebook">Jupyter notebook</h3>
+<p>jupyter notebook:一款编程/文档/笔记/展示软件.
+启动命令:jupyter notebook  （已经安装Anaconda/在conda环境下）
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904.png" alt="png">
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%905.png" alt="png">
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%906.png" alt="png"></p>
+<h3 id="jupyter-notebook好处">Jupyter notebook好处</h3>
+<ol>
+<li>极其适合数据分析</li>
+<li>支持多语言</li>
+<li>分享便捷：支持以网页的形式分享，GitHub 中天然支持 Notebook 展示，也可以通过 nbviewer 分享你的文档. 当然也支持导出成 HTML、PDF、Markdown等多种格式的文档.</li>
+<li>远程运行：在任何地点都可以通过网络链接远程服务器来实现运算.</li>
+<li>交互式展现：不仅可以输出图片、视频、数学公式，甚至可以呈现一些互动的可视化内容，比如可以缩放的地图或者是可以旋转的三维模型. 这就需要交互式插件（Interactive widgets）来支持.</li>
+</ol>
+<h2 id="基础知识">基础知识</h2>
+<h3 id="matplotlib">matplotlib</h3>
+<p>最流行的Python底层绘图库，主要做数据可视化图表,名字取材于MATLAB，模仿MATLAB构建；能将数据进行可视化,更直观的呈现、使数据更加客观、更具说服力
+matplotlib使用流程：</p>
+<ol>
+<li>明确问题</li>
+<li>选择图形的呈现方式</li>
+<li>准备数据</li>
+<li>绘图和图形完善</li>
+</ol>
+<p><b>例</b>.
+假设一天中每隔两个小时(range(2,26,2))的气温(℃)分别是[15, 13, 14.5, 17, 20, 25, 26, 26, 27, 22, 18, 15].</p>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%907.png" alt="png">
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%908.png" alt="png"></p>
+<h3 id="设置图片大小">设置图片大小</h3>
+<pre><code>fig = plt.figure(figsize=(10,6),dpi=80)
+</code></pre>
+<p>figure图形图标的意思，在这里指的是画的图；通过实例化一个figure并传递参数，能够在后台自动使用该figure实例；在图像模糊的时候可以传入dpi参数（每英寸上像素点的个数）</p>
+<h3 id="保存到本地">保存到本地</h3>
+<p>　　保存需要在绘制图形之后保存</p>
+<pre><code>plt.show(&quot;路径/名字.png&quot;)
+</code></pre>
+<p>也可以保存为SVG这种矢量图的格式</p>
+<h3 id="描述信息比如x轴和y轴表示什么这个图表示什么">描述信息,比如x轴和y轴表示什么,这个图表示什么</h3>
+<pre><code>  plt.xlabel(&quot;X轴&quot;)
+  plt.ylabel(&quot;Y轴&quot;)
+  plt.title(&quot;Title&quot;) # 存在中文乱码问题
+</code></pre>
+<h3 id="调整x或者y的刻度的间距">调整x或者y的刻度的间距</h3>
+<ul>
+<li>设置x轴的刻度（一个参数）</li>
+</ul>
+<pre><code>plt.xticks(x)
+</code></pre>
+<p>想要密集点可以设置：</p>
+<pre><code>_xticks = [i/2 for I in range(4,49)]
+plt.xticks(_xticks)
+# 显得过于密集
+plt.xticks(_xticks[::3])
+# 每隔3取一个；只有列表的时候才能使用[ ]取步长
+</code></pre>
+<ul>
+<li>设置x轴的刻度（两个参数）</li>
+</ul>
+<pre><code>plt.xticks(x,_xticks_labels)
+_x = x   # int类型
+_xtick_labels = [&quot;hello,{}&quot;.format(i) for i in _x]
+plt.xticks(_x,_xtick_labels)
+</code></pre>
+<p><em>format函数</em>:
+格式化字符串的函数 str.format()，它增强了字符串格式化的功能. 基本语法是通过 {} 和 : ，来代替以前的%.</p>
+<p>format 函数可以接受不限个参数，位置可以不按顺序.</p>
+<pre><code>&quot;{} {}&quot;.format(&quot;hello&quot;, &quot;world&quot;) # 不设置指定位置，按默认顺序 
+'hello world'
+</code></pre>
+<p>format 函数可以接受不限个参数,位置也可以设置参数：</p>
+<pre><code>print(&quot;网站名：{name}, 地址 {url}&quot;.format(name=&quot;百度&quot;, url=&quot;www.Baidu.com&quot;))
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%909.png" alt="png">
+改进：</p>
+<pre><code>_x = list(x)   # int类型
+_xtick_labels = [&quot;hello,{}&quot;.format(i) for i in _x]	
+# 取步长一样，数字和字符串一一对应，数据长度一样
+plt.xticks(_x[::8],_xtick_labels[::8])
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9010.png" alt="png"></p>
+<p>使用rotation参数旋转</p>
+<pre><code>plt.xticks(_x[::8],_xtick_labels[::8],rotation=45)
+</code></pre>
+<h3 id="中文情况处理">中文情况处理：</h3>
+<p>　　matplotlib默认不支持中文字符，因为默认的英文字体无法显示汉字</p>
+<p>如何修改matplotlib的默认字体?</p>
+　　通过matplotlib.rc可以修改,具体方法参见源码(windows/linux)
+<pre><code>import matplotlib
+font = {'family': &quot;simhei&quot;,'size': '10'}    # 黑体
+matplotlib.rc(&quot;font&quot;,**font)
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9011.png" alt="png">
+通过matplotlib 下的font_manager可以解决(windows/linux/mac)</p>
+<pre><code># 设置中文字体（指定的字体文件路径，然后在显示中文的地方添加fontproperties）
+my_font = font_manager.FontProperties(fname=&quot;/System/Library/Fonts/PingFang.ttc&quot;)
+plt.xticks(x[::5],_x_ticks[::5],rotation=90,fontproperties=my_font)
+</code></pre>
+<h3 id="线条的样式比如颜色透明度等">线条的样式(比如颜色,透明度等)</h3>
+<pre><code>plt.grid()	# 绘制网格
+plt.grid(alpha=0.6)	# 绘制网格，并调整透明度
+</code></pre>
+<h3 id="绘制风格及描述">绘制风格及描述</h3>
+<p>　　描述不同曲线含义：在plot()中添加参数<code>label=&quot;Name&quot;</code>
+再添加语句：</p>
+<pre><code>plt.legend(loc=0)/plt.legend(prop=my_font)
+# loc位置：0=best/upper left
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9012.png" alt="png">
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9013.png" alt="png"></p>
+<h2 id="常用统计图">常用统计图</h2>
+<p>　　统计图是数据分析和数学建模最直接、最有效的可视化形式.这里只是简单说明在Python中不同的绘图命令.</p>
+<ul>
+<li>折线图:以折线的上升或下降来表示统计数量的增减变化的统计图.
+<ul>
+<li>特点:能够显示数据的变化趋势，反映事物的变化情况(变化).</li>
+</ul>
+</li>
+<li>直方图:由一系列高度不等的纵向条纹或线段表示数据分布的情况. 一般用横轴表示数据范围，纵轴表示分布情况.
+<ul>
+<li>特点:绘制连续性的数据,展示一组或者多组数据的分布状况(统计).</li>
+</ul>
+</li>
+<li>条形图:排列在工作表的列或行中的数据可以绘制到条形图中.
+<ul>
+<li>特点:绘制连离散的数据,能够一眼看出各个数据的大小,比较数据之间的差别(统计).</li>
+</ul>
+</li>
+<li>散点图:用两组数据构成多个坐标点，考察坐标点的分布,判断两变量之间是否存在某种关联或总结坐标点的分布模式.
+<ul>
+<li>特点:判断变量之间是否存在数量关联趋势,展示离群点(分布规律).</li>
+</ul>
+</li>
+</ul>
+<h3 id="绘制折线图pltplotxy">绘制折线图：plt.plot(x,y)</h3>
+<pre><code>import numpy as np
+
+linear_data = np.arange(1, 9)
+quadratic_data = linear_data ** 2
+
+plt.figure()
+plt.plot(linear_data, '-o', quadratic_data, '-o')
+
+# 注意，这里只指定了y轴数据，x轴的数据是matplotlib自动生成的
+# 添加坐标轴标签及图例
+plt.xlabel('x data')
+plt.ylabel('y data')
+plt.title('Line Chart Title')
+plt.legend(['legend1', 'legend2', 'legend3'])
+# 填充两个line间的区域plt.gca().fill_between(x,y1,y2,color,透明度)
+plt.gca().fill_between(range(len(linear_data)),
+                      linear_data, quadratic_data,
+                      facecolor='green',
+                      alpha=0.25)
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9014.png" alt="png">
+注意：</p>
+<pre><code># 对于学术制图，可在标题中包含latex语法
+ax = plt.gca()
+ax.set_title('Quadratic ($x^2$) vs. Linear ($x$)')
+</code></pre>
+<h3 id="绘制散点图pltscatterxy">绘制散点图：plt.scatter(x,y)</h3>
+<p>假设通过爬虫你获取到了北京2016年3,10月份每天白天的最高气温(分别位于列表a,b),那么此时如何寻找出气温和随时间(天)变化的某种规律?</p>
+<pre><code>from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {'family': &quot;simhei&quot;,
+        'size':'10'}
+matplotlib.rc(&quot;font&quot;,**font)
+# 数据
+y_3 = [11,17,16,11,12,11,12,6,6,7,8,9,12,15,14,17,18,21,16,17,20,14,15,15,15,19,21,22,22,22,23]
+y_10 = [26,26,28,19,21,17,16,19,18,20,20,19,22,23,17,20,21,20,22,15,11,15,5,13,17,10,11,13,12,13,6]
+# 3月，10月范围
+x_3 = range(1,32)
+x_10 = range(50,81)
+# 合并横坐标
+plt.figure(figsize=(14,8),dpi=80)
+# 绘制散点图
+plt.scatter(x_3,y_3,label=&quot;3月份&quot;)
+plt.scatter(x_10,y_10,label=&quot;10月份&quot;)
+# 设置x轴
+_x = list(x_3) + list(x_10)
+_xticks_labels = [&quot;3月{}日&quot;.format(i) for i in x_3]
+_xticks_labels += [&quot;10月{}日&quot;.format(i) for i in x_10]
+plt.xticks(_x[::3],_xticks_labels[::3],rotation=45)
+plt.legend(loc=&quot;upper left&quot;)
+# 显示设置
+plt.xlabel(&quot;月份&quot;)
+plt.ylabel(&quot;温度&quot;)
+plt.title(&quot;标题&quot;)
+# 展示
+plt.show()
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9015.png" alt="png"></p>
+<h3 id="绘制条形图柱状图">绘制条形图/柱状图：</h3>
+<pre><code>plt.bar(x, y, width=0.2, color='orange')
+plt.bar(x, y, height=0.2, color='orange')
+</code></pre>
+<p><b>例</b>.</p>
+<pre><code>from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {'family': &quot;simhei&quot;,
+        'size':'10'}
+matplotlib.rc(&quot;font&quot;,**font)
+a = [&quot;战狼2&quot;,&quot;速度与激情8&quot;,&quot;功夫瑜伽&quot;,&quot;西游伏妖篇&quot;,&quot;变形金刚5：最后的骑士&quot;,&quot;摔跤吧！爸爸&quot;,&quot;加勒比海盗5：死无对证&quot;,&quot;金刚：骷髅岛&quot;,&quot;极限特工：终极回归&quot;,&quot;生化危机6：终章&quot;,&quot;乘风破浪&quot;,&quot;神偷奶爸3&quot;,&quot;智取威虎山&quot;,&quot;大闹天竺&quot;,&quot;金刚狼3：殊死一战&quot;,&quot;蜘蛛侠：英雄归来&quot;,&quot;悟空传&quot;,&quot;银河护卫队2&quot;,&quot;情圣&quot;,&quot;新木乃伊&quot;]
+b = [56.01,26.94,17.53,16.49,15.45,12.96,11.8,11.61,11.28,11.12,10.49,10.3,8.75,7.55,7.32,6.99,6.88,6.86,6.58,6.23]
+plt.figure(figsize=(12,8),dpi=80)
+x = range(len(a))
+plt.bar(x, b, width=0.2, color='orange')
+plt.xticks(x, a, rotation=45)
+
+plt.show()
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9016.png" alt="png">
+　　发现字数长的名字错位,横向的条形图,将</p>
+<pre><code>plt.bar(x, y, width=0.2, color='orange')
+</code></pre>
+<p>改成</p>
+<pre><code>plt.bar(x, y, height=0.2, color='orange')
+</code></pre>
+<p>再适当调整其他参数.
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9017.png" alt="png"></p>
+<p><b>例</b>.假设你知道了列表a中电影分别在2017-09-14(b_14), 2017-09-15(b_15), 2017-09-16(b_16)三天的票房,为了展示列表中电影本身的票房以及同其他电影的数据对比情况,应该如何更加直观的呈现该数据?</p>
+<pre><code>from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {'family': &quot;simhei&quot;, 'size':'10'}
+matplotlib.rc(&quot;font&quot;,**font)
+a = [&quot;猩球崛起3：终极之战&quot;,&quot;敦刻尔克&quot;,&quot;蜘蛛侠：英雄归来&quot;,&quot;战狼2&quot;]
+b_16 = [15746,312,4497,319]
+b_15 = [12357,156,2045,168]
+b_14 = [2358,399,2358,362]
+bar_width = 0.2
+plt.figure(figsize=(10,8),dpi=80)
+x_14 = list(range(len(a)))
+x_15 = [i+bar_width for i in x_14]
+x_16 = [i+bar_width for i in x_15]
+plt.bar(x_14, b_14, width=bar_width,label=&quot;2017-09-14&quot;)
+plt.bar(x_15, b_15, width=bar_width,label=&quot;2017-09-15&quot;)
+plt.bar(x_16, b_16, width=bar_width,label=&quot;2017-09-16&quot;)
+plt.xticks(x_15, a)
+plt.legend()
+plt.show()
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9018.png" alt="png">
+堆叠柱状图</p>
+<pre><code># stack bar chart
+plt.figure()
+x_vals = list(range(len(linear_data)))
+plt.bar(x_vals, linear_data, width=0.3)
+plt.bar(x_vals, quadratic_data, width=0.3, bottom=linear_data)
+</code></pre>
+<h3 id="绘制直方图">绘制直方图</h3>
+<h4 id="频数分布直方图">频数分布直方图</h4>
+<p>　　假设你获取了250部电影的时长(列表a中),希望统计出这些电影时长的分布状态(比如时长为100分钟到120分钟电影的数量,出现的频率)等信息,你应该如何呈现这些数据?</p>
+<pre><code>from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {'family': &quot;simhei&quot;, 'size':'10'}
+matplotlib.rc(&quot;font&quot;,**font)
+a=[131, 98, 125, 131, 124, 139, 131, 117, 128, 108, 135, 138, 131, 102, 107, 114, 119, 128, 121, ...]
+# 计算组距
+dis = 3
+num_bins = (max(a)-min(a))//dis
+plt.figure(figsize=(12,8),dpi=80)
+plt.hist(a, num_bins)
+plt.xticks(range(min(a),max(a)+dis,dis))
+plt.grid()
+plt.show()
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9019.png" alt="png"></p>
+<h4 id="频率分布直方图">频率分布直方图</h4>
+<pre><code>plt.hist(a, num_bins,normed=1/True)
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9020.png" alt="png">
+<b>例</b>. 在美国2004年人口普查发现有124 million的人在离家相对较远的地方工作. 根据他们从家到上班地点所需要的时间,通过抽样统计(最后一列)出了下表的数据,这些数据能够绘制成直方图么?
+<img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9021.png" alt="png">
+<em>数据被统计后，组距不同（不能使用hist）</em></p>
+<p>解决办法：使用bar（条形图）在进行调整.</p>
+<pre><code>from matplotlib import pyplot as plt
+import matplotlib
+# 设置字体样式
+font = {'family': &quot;simhei&quot;,
+        'size':'10'}
+matplotlib.rc(&quot;font&quot;,**font)
+interval = [0,5,10,15,20,25,30,35,40,45,60,90]
+width = [5,5,5,5,5,5,5,5,5,15,30,60]
+quantity = [836,2737,3723,3926,3596,1438,3273,642,824,613,215,47]
+plt.figure(figsize=(14,8),dpi=80)
+# 默认宽度是0.8，为了是条形图连起来，令width=1
+plt.bar(range(12), quantity, width=1)
+# 设置X轴的刻度——为了让起点从零开始，所以i-1
+_x = [i-0.5 for i in range(13)]
+_xticks_labels = interval+[150]
+plt.xticks(_x, _xticks_labels)
+plt.grid(linestyle='--')
+plt.show()
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9022.png" alt="png"></p>
+<h3 id="复杂分析图">复杂分析图</h3>
+<pre><code># 使用gridspec和直方图绘制一个复杂分析图
+import matplotlib.gridspec as gridspec
+
+x = np.random.random(size=10000)
+y = np.random.normal(loc=0., scale=1., size=10000)
+
+plt.figure()
+gspec = gridspec.GridSpec(3, 3)
+
+top_hist = plt.subplot(gspec[0, 1:])
+side_hist = plt.subplot(gspec[1:, 0])
+lower_right = plt.subplot(gspec[1:, 1:])
+
+lower_right.scatter(x, y)
+top_hist.hist(x, bins=100, normed=True)
+side_hist.hist(y, bins=100, orientation='horizontal', normed=True)
+side_hist.invert_xaxis()
+</code></pre>
+<h3 id="热图">热图</h3>
+<p>　　可用于三维数据可视化</p>
+<pre><code>plt.imshow(arr)
+plt.hist2d()
+plt.colorbar() # 添加颜色条
+</code></pre>
+<h3 id="其他">其他</h3>
+<ul>
+<li>matplotlib支持的图形是非常多的，如果有其他的需求，可以查看一下url地址：http://matplotlib.org/gallery/index.html</li>
+<li>echarts中可以看框架实例</li>
+<li>更多绘图工具：
+plotly:可视化工具中的github,相比于matplotlib更加简单,图形更加漂亮,同时兼容matplotlib和pandas
+使用用法:简单,照着文档写即可</li>
+<li>文档地址: <a href="https://plot.ly/python/">https://plot.ly/python/</a></li>
+</ul>
+<p>备注：如果想使用子图，用subplot函数，如果对比子图则徐亚坐标轴相同，添加sharey=（跟哪张图共享坐标轴）</p>
+<h2 id="pandas绘图">Pandas绘图</h2>
+<h3 id="pandas的dataframe绘图">Pandas的DataFrame绘图</h3>
+<p>先转换成dataframe格式进行画图</p>
+<pre><code>df.plot(kind=)
+pd.plotting.Tools
+pd.plotting.scatter_matrix()
+pd.plotting.parallel_coordinates()
+</code></pre>
+<h3 id="绘制折线图">绘制折线图</h3>
+<pre><code>np.random.seed(100)
+df = pd.DataFrame({'A': np.random.randn(365).cumsum(0),
+                  'B': np.random.randn(365).cumsum(0) + 20,
+                  'C': np.random.randn(365).cumsum(0) - 20},
+                 index=pd.date_range('2017/1/1', periods=365))
+df.plot()
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9023.png" alt="png"></p>
+<h3 id="绘制散点图">绘制散点图</h3>
+<pre><code>df.plot('A', 'B', kind='scatter')
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9024.png" alt="png"></p>
+<pre><code># 颜色(c)和大小(s)有'B'列的数据决定
+ax = df.plot('A', 'C', kind='scatter',
+        c='B', s=df['B'], colormap='viridis')
+</code></pre>
+<p><img src="./Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%9025.png" alt="png"></p>
+<h3 id="盒形图">盒形图</h3>
+<pre><code>df.plot(kind='box')
+</code></pre>
+<h3 id="柱状图">柱状图</h3>
+<pre><code>df.plot(kind='hist', alpha=0.7)
+df.plot(kind='kde') # 拟合分布
+</code></pre>
+<h2 id="seaborn绘图">Seaborn绘图</h2>
+<p>seaborn的安装：</p>
+<pre><code>1. conda install seaborn 
+2. pip install seaborn
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg" alt="Xin态好先生"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">Xin态好先生</a></h5>
+      <h6 class="card-subtitle">研究生</h6>
+      <p class="card-text">机会是给有准备的人的.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:comath@qq.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1375264022&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">
+        <i class="fab fa-qq"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CoMath21" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/comath/avatar_hu5dbed3c1e225bfb246e59dc7d66e77de_260503_270x270_fill_lanczos_center_2.png" alt="CoMath"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">CoMath</a></h5>
+      <h6 class="card-subtitle">微信公众号</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>相关</h3>
+    <ul>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/">Python数据分析（三）</a></li>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902/">Python数据分析（二）</a></li>
+      
+      <li><a href="/post/0-typora%E4%BD%BF%E7%94%A8/">Typora使用</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 CoMath Powered by Hugo Theme Academic
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> 复制
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> 下载
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"没有找到结果","placeholder":"搜索...","results":"搜索结果"};
+      const content_type = {
+        'post': "文章",
+        'project': "项目",
+        'publication' : "出版物",
+        'event' : "演讲",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
