@@ -5,7 +5,7 @@
     <link>https://CoMath21.github.io/post/</link>
       <atom:link href="https://CoMath21.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>归档</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Thu, 28 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Fri, 29 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
       <title>归档</title>
@@ -13,12 +13,2356 @@
     </image>
     
     <item>
+      <title>Hibernate学习笔记</title>
+      <link>https://CoMath21.github.io/post/1-hibernate/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-hibernate/</guid>
+      <description>&lt;h2 id=&#34;hibernate-是什么&#34;&gt;Hibernate 是什么？&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;hibernate是一个轻量级JavaEE应用的持久层框架（framework）&lt;/li&gt;
+&lt;li&gt;hibernate是一个ORM（object relation mapping对象关系映射）框架
+&lt;ul&gt;
+&lt;li&gt;o object -&amp;gt; 业务层(只对对象操作)&lt;/li&gt;
+&lt;li&gt;r relation-&amp;gt; 关系数据库，关系型数据库中二维表&lt;/li&gt;
+&lt;li&gt;m mapping 对象关系映射文件
+&lt;ul&gt;
+&lt;li&gt;java类&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&amp;gt;表&lt;/li&gt;
+&lt;li&gt;java对象&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;&amp;gt;表中记录&lt;/li&gt;
+&lt;li&gt;java对象属性&amp;mdash;&amp;mdash;-&amp;gt;表中字段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;hibernate 处于我们项目的持久层位置(正因为如此，所以有人又把hibernate称为 持久层框架)&lt;/li&gt;
+&lt;li&gt;hibernate 实际上就是对jdbc进行了轻量级的封装.&lt;/li&gt;
+&lt;li&gt;hibernate 的基础还是我们java反射机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;手动配置hibernate方式完成crud操作&#34;&gt;手动配置hibernate方式完成crud操作&lt;/h2&gt;
+&lt;p&gt;　　首先创建项目，再引入jar包. hibernate开发的三种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;由domain object –&amp;gt; mapping -&amp;gt; db (官方推荐).&lt;/li&gt;
+&lt;li&gt;由DB开始，用工具生成mapping和domain object (使用较多).&lt;/li&gt;
+&lt;li&gt;由映射开始.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;employeehbmlxml配置文件&#34;&gt;Employee.hbml.xml配置文件&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE hibernate-mapping PUBLIC &amp;quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&amp;quot;
+	&amp;quot;http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd&amp;quot;&amp;gt;
+&amp;lt;hibernate-mapping package=&amp;quot;com.hsp.domain&amp;quot;&amp;gt;
+  &amp;lt;class name=&amp;quot;Employee&amp;quot; table=&amp;quot;employee&amp;quot;&amp;gt;
+    &amp;lt;!-- id元素用于指定主键属性 --&amp;gt;
+    &amp;lt;id name=&amp;quot;id&amp;quot; column=&amp;quot;id&amp;quot; type=&amp;quot;java.lang.Integer&amp;quot;&amp;gt;
+    &amp;lt;!-- 该元素用于指定主键值生成策略hilo native increment sequence uuid --&amp;gt;
+      &amp;lt;generator class=&amp;quot;sequence&amp;quot;&amp;gt;
+        &amp;lt;param name=&amp;quot;sequence&amp;quot;&amp;gt;emp_seq&amp;lt;/param&amp;gt;
+      &amp;lt;/generator&amp;gt;
+    &amp;lt;/id&amp;gt;
+    &amp;lt;!-- 对其它属性还有配置 --&amp;gt;
+    &amp;lt;property name=&amp;quot;name&amp;quot; type=&amp;quot;java.lang.String&amp;quot;&amp;gt;
+      &amp;lt;column name=&amp;quot;name&amp;quot; not-null=&amp;quot;false&amp;quot;  /&amp;gt;
+    &amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;email&amp;quot; type=&amp;quot;java.lang.String&amp;quot; &amp;gt;
+      &amp;lt;column name=&amp;quot;email&amp;quot; not-null=&amp;quot;false&amp;quot;/&amp;gt;
+    &amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;hiredate&amp;quot; type=&amp;quot;java.util.Date&amp;quot;&amp;gt;
+      &amp;lt;column name=&amp;quot;hiredate&amp;quot; not-null=&amp;quot;false&amp;quot; /&amp;gt;
+    &amp;lt;/property&amp;gt;
+  &amp;lt;/class&amp;gt;	
+&amp;lt;/hibernate-mapping&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;hibernatecfgxml配置文件&#34;&gt;hibernate.cfg.xml配置文件&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+&amp;lt;!DOCTYPE hibernate-configuration PUBLIC
+        &amp;quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&amp;quot;
+        &amp;quot;http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd&amp;quot;&amp;gt;
+&amp;lt;hibernate-configuration&amp;gt;
+  &amp;lt;session-factory&amp;gt;
+    &amp;lt;!-- hibernate 设计者，给我们提供了一写常用的配置 --&amp;gt;
+    &amp;lt;!-- 配置使用的driver --&amp;gt;
+    &amp;lt;property name=&amp;quot;connection.driver_class&amp;quot;&amp;gt;oracle.jdbc.driver.OracleDriver&amp;lt;/property&amp;gt;
+    &amp;lt;!-- 配置使用的账户密码 --&amp;gt;
+    &amp;lt;property name=&amp;quot;connection.username&amp;quot;&amp;gt;scott&amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;connection.password&amp;quot;&amp;gt;tiger&amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;connection.url&amp;quot;&amp;gt;jdbc:oracle:thin:@127.0.0.1:1521:orclhsp&amp;lt;/property&amp;gt;
+    &amp;lt;!-- 配置dialect方言,明确告诉hibernate连接是哪种数据库 --&amp;gt;
+    &amp;lt;property name=&amp;quot;dialect&amp;quot;&amp;gt;org.hibernate.dialect.OracleDialect&amp;lt;/property&amp;gt;
+    &amp;lt;!-- 显示出对于sql语句 --&amp;gt;
+    &amp;lt;property name=&amp;quot;show_sql&amp;quot;&amp;gt;true&amp;lt;/property&amp;gt;
+    &amp;lt;!-- 指定管理的对象映射文件 --&amp;gt;
+    &amp;lt;mapping resource=&amp;quot;com/hsp/domain/Employee.hbm.xml&amp;quot;/&amp;gt;
+  &amp;lt;/session-factory&amp;gt;
+&amp;lt;/hibernate-configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;说明：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;connection.driver_class:在etc下可以找到；&lt;/li&gt;
+&lt;li&gt;hibernate.cfg.xml文件可以不写，但要在spring中配置.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;测试文件testmainjava&#34;&gt;测试文件TestMain.java&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;package com.hsp.view;
+import com.hsp.util.*;
+import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.*;
+
+import com.hsp.domain.Employee;
+public class TestMain {
+  public static void main(String[] args) {
+    //查询[load]-&amp;gt;hql语句(hibernate query language)
+  }
+  public static void delEmp() {
+    //删除
+    //获取一个session
+    Session session=MySessionFactory.getSessionFactory().openSession();
+    Transaction ts=session.beginTransaction();
+    //删除1.先获取该雇员，然后删除
+    Employee emp=(Employee) session.load(Employee.class, 3);
+    session.delete(emp);
+    ts.commit();
+    session.close();
+  }
+
+  public static void updateEmp() {
+    // TODO Auto-generated method stub
+    //修改用户
+    //获取一个会话
+    Session session=MySessionFactory.getSessionFactory().openSession();
+    
+    Transaction ts=session.beginTransaction();
+    //修改用户1. 获取要修改的用户，2.修改
+    //load是通过主键属性，获取该对象实例.&amp;lt;---&amp;gt;表的记录对应
+    Employee emp=(Employee) session.load(Employee.class, 3);
+    emp.setName(&amp;quot;韩顺平8&amp;quot;);//update...
+    emp.setEmail(&amp;quot;abc@sohu.com&amp;quot;);
+    ts.commit();
+    session.close();
+  }
+
+  public static void addEmployee() {
+    //我们使用hibernate完成crud操作[这里我们只见对象，不见表]
+    //现在我们不是用service ,直接测试.
+    //1. 创建Configuration,该对象用于读取hibernate.cfg.xml,并完成初始化
+    Configuration configuration=new Configuration().configure();
+    //2.创建SessoinFactory[这是一个会话工厂，是一个重量级的对象]
+    SessionFactory sessionFactory=configuration.buildSessionFactory();
+    //3.创建Sessoin 相当于jdbc Connection[ servelt HttpSession ,也不是 jsp session]
+    Session session=sessionFactory.openSession();
+    //4.对hiberate而言，要求在进行 增加，删除，修改的时候使用事务提交，
+    Transaction transaction = session.beginTransaction();
+    //添加一个雇员
+    Employee employee=new Employee();
+    employee.setName(&amp;quot;shunping&amp;quot;);
+    employee.setEmail(&amp;quot;shunping@sohu.com&amp;quot;);
+    employee.setHiredate(new Date());
+    //insert .............
+    //保存
+    session.save(employee);//save employee就是持久化该对象 (把对象保存到了数据库中称为一条记录)
+    //==&amp;gt;insert into ....[被hiberante封装]
+    //提交
+    transaction.commit();
+    session.close();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;code&gt;&amp;lt;Hibernate-mapping&amp;gt;&lt;/code&gt;标签的属性如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;package：指定一个包前缀，如果在映射文档中(就是在class标签的那么属性里没有指定全类名)没有指定全限定的类名，就使用这个作为包名.&lt;/li&gt;
+&lt;li&gt;schema：数据库schema的名称.&lt;/li&gt;
+&lt;li&gt;catalog：数据库catalog的名称.&lt;/li&gt;
+&lt;li&gt;default-cascade：默认的级联风格,默认为none.&lt;/li&gt;
+&lt;li&gt;default-access：Hibernate用来访问属性的策略.&lt;/li&gt;
+&lt;li&gt;default-lazy：指定了此属性，未明确注明lazy属性的Java属性和集合类，Hibernate会采取的默认使用这个属性加载风格,默认为true.&lt;/li&gt;
+&lt;li&gt;auto-import：指定我们是否可以在查询语言中使用非全限定的类名,默认为true,如果项目中有两个同名的持久化类,则最好在这两个类的对应的映射文件中配置为false.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;　　Hibernate的子标签class标签：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;class 元素用于指定类和表的映射 .&lt;/li&gt;
+&lt;li&gt;name:指定该持久化类映射的持久化类的类名.
+&lt;ul&gt;
+&lt;li&gt;example:&lt;code&gt;&amp;lt;class name=&amp;quot;com.jeremy.hibernate.example.News&amp;quot; table=&amp;quot;NEWS&amp;quot;&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;table:指定该持久化类映射的表名, Hibernate 默认以持久化类的类名作为表名 .
+&lt;ul&gt;
+&lt;li&gt;example:&lt;code&gt;&amp;lt;class name=&amp;quot;com.jeremy.hibernate.example.News&amp;quot; table=&amp;quot;NEWS&amp;quot;&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;dynamic-insert: 若设置为 true, 表示当（调用Session的save()方法时）保存一个对象时, 会动态生成 insert 语句, insert 语句中仅包含所有取值不为 null 的字段. 默认值为 false.&lt;/li&gt;
+&lt;li&gt;Example:这个跟dynamic-update一个意思.&lt;/li&gt;
+&lt;li&gt;dynamic-update: 若设置为 true, 表示当(调用对象的set()方法)更新一个对象时, 会动态生成 update 语句, update 语句中仅包含所有取值需要更新的字段. 默认值为 false.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　Hibernate映射文件主要内容:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;映射内容的定义:
+Hibernate映射文件由&lt;code&gt;&amp;lt;hibernate-mapping package=&amp;quot;JavaBean所在包的全路径&amp;quot;&amp;gt;&lt;/code&gt;节点定义映射内容并指定所对应的JavaBean的位置(也可以不在该节点中用package属性指定对应的JavaBean位置,而在该节点下的class节点中的name属性中指定).&lt;/li&gt;
+&lt;li&gt;数据库和JavaBean的关联:
+Hibernate映射文件中用&lt;code&gt;&amp;lt;hibernate-mapping&amp;gt;&lt;/code&gt;节点下的
+&lt;code&gt;&amp;lt;class name=&amp;quot;JavaBean名称&amp;quot; table=&amp;quot;对应数据库中的表名&amp;quot;&amp;gt;&lt;/code&gt;节点指定数据库表和JavaBean的关联. ( 该节点的父节点中用package属性指定了JavaBean的包名时用)/全路径(该节点的父节点中没用package属性指定JavaBean的包名时用).&lt;/li&gt;
+&lt;li&gt;主键映射:
+在&lt;code&gt;&amp;lt;class &amp;gt;&lt;/code&gt;节点下用&lt;code&gt;&amp;lt;id name=&amp;quot;数据库中主键在JavaBean中的属性名称&amp;quot; column=&amp;quot;数据库中主键名&amp;quot; type=&amp;quot;string&amp;quot;&amp;gt;&lt;/code&gt;节点映射对应的主键,该节点必须有且只有一个(因为主键只有一个),同时必须放在&lt;code&gt;&amp;lt;property ...&amp;gt;&lt;/code&gt;节点前.&lt;/li&gt;
+&lt;li&gt;普通字段映射:
+在&lt;code&gt;&amp;lt;class ...&amp;gt;&lt;/code&gt;节点下用&lt;code&gt;&amp;lt;property name=&amp;quot;数据库中字段在JavaBean中的属性名称&amp;quot; column=&amp;quot;数据库中的字段名&amp;quot; type=&amp;quot;string&amp;quot;/&amp;gt;&lt;/code&gt;节点映射普通字段,该节点可有多个(一个字段用一个该节点来映射).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;　　Heibernate的主键映射方式：&lt;/p&gt;
+&lt;p&gt;　　在&lt;code&gt;&amp;lt;id ...&amp;gt;节点下用&amp;lt;generator class=&amp;quot;映射方式&amp;quot;/&amp;gt;&lt;/code&gt;节点指定Hibernate向数据库插入数据时主键的生成方式.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;assigned：应用程序自身对id赋值. 当设置&lt;code&gt;&amp;lt;generator class=&amp;quot;assigned&amp;quot;/&amp;gt;&lt;/code&gt;时，应用程序自身需要负责主键id的赋值，由外部程序负责生成(在session.save()之前为对象的主键设置值),无需Hibernate参与，一般应用在主键为自然主键时. 例如XH为主键时，当添加一个学生信息时，就需要程序员自己设置学号的值，这时就需要应用该id生成器.&lt;/li&gt;
+&lt;li&gt;native：由数据库对id赋值. 当设置&lt;code&gt;&amp;lt;generator class=&amp;quot;native&amp;quot;/&amp;gt;&lt;/code&gt;时，数据库负责主键id的赋值，最常见的是int型的自增型主键. 例如，在SQLServer中建立表的id字段为identity，配置了该生成器，程序员就不用为该主键设置值，它会自动设置.&lt;/li&gt;
+&lt;li&gt;identity：采用数据库提供的主键生成机制，为long/short/int型列生成唯一标识如SQL Server、MySQL中的自增主键生成机制.&lt;/li&gt;
+&lt;li&gt;hilo：通过hi/lo算法实现的主键生成机制，需要额外的数据库表保存主键生成历史状态.&lt;/li&gt;
+&lt;li&gt;seqhilo：与hi/lo类似，通过hi/lo算法实现的主键生成机制，只是主键历史状态保存在sequence中，适用于支持sequence的数据库，如Oracle.&lt;/li&gt;
+&lt;li&gt;increment：主键按数值顺序递增. 此方式的实现机制为在当前应用实例中维持一个变量，以保存当前的最大值，之后每次需要生成主键的时候将此值加1作为主键. 这种方式可能产生的问题是：如果当前有多个实例访问同一个数据库，由于各个实例各自维护主键状态，不同实例可能生成同样的主键，从而造成主键重复异常. 因此，如果同一个数据库有多个实例访问，这种方式应该避免使用.&lt;/li&gt;
+&lt;li&gt;sequence：采用数据库提供的sequence机制生成主键，用于用序列方式产生主键的数据库(如:Oracle、DB2等的Sequence),用于为long/short/int型列生成唯一标识,如:&lt;code&gt;&amp;lt;generator class=&amp;quot;sequence&amp;quot;&amp;gt;&amp;lt;param name=&amp;quot;sequence&amp;quot;&amp;gt;序列名&amp;lt;/param&amp;gt;&amp;lt;/generator&amp;gt;&lt;/code&gt;如Oracle sequence.&lt;/li&gt;
+&lt;li&gt;uuid.hex：由Hibernate基于128位唯一值产生算法，根据当前设备IP、时间、JVM启动时间、内部自增量等4个参数生成十六进制数值（编码后长度为32位的字符串表示）作为主键. 即使是在多实例并发运行的情况下，这种算法在最大程度上保证了产生id的唯一性. 当然，重复的概率在理论上依然存在，只是概率比较小. 一般而言，利用uuid.hex方式生成主键将提供最好的数据插入性能和数据平台适应性.&lt;/li&gt;
+&lt;li&gt;uuid.string：与uuid.hex类似，只是对生成的主键进行编码（长度为16位）. 在某些数据库中可能出现问题.&lt;/li&gt;
+&lt;li&gt;foreign：使用外部表的字段作为主键. 该主键一般应用在表与表之间的关系上，会在后面的表对应关系上进一步讲解.&lt;/li&gt;
+&lt;li&gt;select：Hibernate 3新引入的主键生成机制，主要针对遗留系统的改造工程.
+由于常用的数据库，如SQLServer、MySQL等，都提供了易用的主键生成机制（如auto-increase字段），可以在数据库提供的主键生成机制上，采用native生成器来配置主键生成方式.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hibernate的核心类和接口&#34;&gt;Hibernate的核心类和接口&lt;/h2&gt;
+&lt;h3 id=&#34;1configuration类&#34;&gt;1、Configuration类&lt;/h3&gt;
+&lt;p&gt;它的作用是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;负责管理hibernate的配置信息；&lt;/li&gt;
+&lt;li&gt;读取hibernate.cfg.xml文件；&lt;/li&gt;
+&lt;li&gt;加载hibernate.cfg.xml配置文件中配置的驱动文件，url，用户名，密码，连接池；&lt;/li&gt;
+&lt;li&gt;管理 *.hbm.xml对象关系文件.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2hibernatecfgxml文件&#34;&gt;2、hibernate.cfg.xml文件&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;该文件主要用于制定各个参数，值hibernate核心文件；&lt;/li&gt;
+&lt;li&gt;默认放在src目录下，也可以在别的目录下；&lt;/li&gt;
+&lt;li&gt;指定连接数据库的驱动、用户名、url、密码、连接池；&lt;/li&gt;
+&lt;li&gt;制定对象关系映射文件位置；&lt;/li&gt;
+&lt;li&gt;也可以使用hibernate,properties文件来替代该文件.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3sessionfactory-接口&#34;&gt;3、SessionFactory 接口&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;可以缓存SQL语句或者数据（称为）.&lt;/li&gt;
+&lt;li&gt;在应用程序化的时候创建，是一个重量级的类，一般用单例模式保证一个应用只需要一个SessionFactory实例.&lt;/li&gt;
+&lt;li&gt;如果某个应用访问多个数据库，则要创建多个回话工厂实例，一般一个数据库一个会话工厂实例.&lt;/li&gt;
+&lt;li&gt;通过SessionFactory接口可以获得Session实例.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;Configuration cf = new Configuration().configure();
+SessionFactory sf = cf.buildSessionFactory();
+Session s = sf.getCurrentSession();
+//或者：Session  s = sf.openSession(); 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;31-opensession和getcurrentsession区别&#34;&gt;3.1 openSession()和getCurrentSession()区别&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;采用getCurrentSession()创建的session会绑定到当前线程中，而采用openSession()创建的Session则不会；&lt;/li&gt;
+&lt;li&gt;采用getCurrentSession()创建的session在commit或rollback时会自动关闭，而采用openSession()创建的session必须手动关闭（建议不管是用哪个，最好都要手动关闭）；&lt;/li&gt;
+&lt;li&gt;使用getCurrentSession()需要在hibernate.cfg.xml文件中加入如下配置：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;* 如果使用的是本地事务（jdbc事务：针对一个数据库的事务）*
+&amp;lt;property name=&amp;quot;hibernate.current_session_context_class&amp;quot;&amp;gt;thread&amp;lt;/property&amp;gt;
+* 如果使用的是全局事务（jta事务：卷数据库的事务）*
+&amp;lt;property name=&amp;quot;hibernate.current_session_context_class&amp;quot;&amp;gt;jta&amp;lt;/property&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;如何选择openSession()和getCurrentSession()&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;原则：&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果需要在同一线程中，保证使用同一个Session，则使用getCurrentSession().&lt;/li&gt;
+&lt;li&gt;如果在一个线程中，需要使用不同的Session，则使用openSession().&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;32get-vs-load&#34;&gt;3.2	get vs load&lt;/h4&gt;
+&lt;p&gt;　可以使用&lt;code&gt;session.get(Student.class,i)/session.load(…)&lt;/code&gt;获取值&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果查询不到数据，get会返回 null,但是不会报错, load如果查询不到数据，则报错ObjectNotFoundException&lt;/li&gt;
+&lt;li&gt;使用get 去查询数据，(先到一级/二级)会立即向db发出查询请求(select &amp;hellip;), 如果你使用的是 load查询数据，(先到一级、二级))即使查询到对象，返回的是一个代理对象,如果后面没有使用查询结果，它不会真的向数据库发select ,当程序员使用查询结果的时候才真的发出select ,这个现象我们称为“懒加载”(lazy)&lt;/li&gt;
+&lt;li&gt;通过修改配置文件，我们可以取消“懒加载”；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;class  name=&amp;quot;Employee&amp;quot; lazy=&amp;quot;false&amp;quot; table=&amp;quot;employee&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;如何选择使用哪个: 如果你确定DB中有这个对象就用load(),不确定就用get()（这样效率高）.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4transaction事务接口&#34;&gt;4、Transaction（事务）接口&lt;/h3&gt;
+&lt;p&gt;　　事务简单地说就是一组对数据库的操作集合，他们要么全部成功，要么全部失败，这个可以保证数据的一致性，事务具有原子性.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Transaction是底层的事物实现中抽取出来的接口；&lt;/li&gt;
+&lt;li&gt;可能是一个jdbc或者jta的事务，这样有利于hibernate在不同执行环境的移植；&lt;/li&gt;
+&lt;li&gt;Hibernate要求显示的调用事务（如果仅仅是查询可以不调用）.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;//增加删除修改如果发生异常要tx.rollback()回滚
+Session sess = factory.openSession();
+Transaction tx;
+try {
+    tx = sess.beginTransaction();
+    //do some work
+    ...
+    tx.commit();
+}
+catch (Exception e) {
+    if (tx!=null) tx.rollback();
+    throw e;
+}
+finally {
+    sess.close();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;5query-接口&#34;&gt;5、Query 接口&lt;/h3&gt;
+&lt;p&gt;　　Query接口类型的对象可以对数据库操作，他可以使用Hql，Qbc，Qbe和原生SQL（native Sql）对数据库操作，官方推荐使用Hql语句.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//获取query引用[这里Employee不是表名，而是domain类名]，where后面的条件最好使用类下的属性名
+Query query = session.createQuery(&amp;quot;from Employee where id=10&amp;quot;);
+//通过list方法获取结果，这个list会自动封装成对应的domain对象
+List&amp;lt;Employee&amp;gt; list = query.list();
+for(Employee e:list)
+	...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;6criteria接口&#34;&gt;6、Criteria接口&lt;/h3&gt;
+&lt;p&gt;　　什么是QBC：
+QBC（Query By Criteria）按条件查询，通过Criteria构造查询条件，即通过调用Criteria的api实现各种查询.&lt;/p&gt;
+&lt;p&gt;　　通过Criteria对象拼装 查询条件，调用Criteria的add方法拼接查询条件，最终hibernate通过criteria对象自动生成sql语句.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;（了解）纯面向对象的检索方式&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Session session=HibernateUtil.getCurrentSession();
+Transaction ts=null;		
+try {			
+  ts=session.beginTransaction();			
+  Criteria cri = session.createCriteria(Employee.class).
+  setMaxResults(2).addOrder(Order.desc(&amp;quot;id&amp;quot;) );//按照升序   
+  List&amp;lt;Employee&amp;gt; list=cri.list();
+  for(Employee e: list){
+    System.out.println(e.getAaaid());
+  }			
+  ts.commit();			
+} catch (Exception e) {			
+  if(ts!=null){
+    ts.rollback();
+  }
+  throw new RuntimeException(e.getMessage());
+}finally{
+  //关闭session
+  if(session!=null&amp;amp;&amp;amp;session.isOpen()){
+    session.close();
+  }
+  
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mysql记录总数查询&#34;&gt;MySQL记录总数查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;分页查询
+&lt;img src=&#34;./4.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;投影查询方法
+&lt;img src=&#34;./5.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;记录总数查询
+&lt;img src=&#34;./6.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;detachedcriteria&#34;&gt;DetachedCriteria&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;DetachedCriteria是什么？离线的Criteria.&lt;/li&gt;
+&lt;li&gt;DetachedCriteria和Criteria区别：
+&lt;ul&gt;
+&lt;li&gt;Criteria创建方法：session.createCriteria&lt;/li&gt;
+&lt;li&gt;DetachedCriteria创建方法：不需要session．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DetachedCriteria和Criteria相同点：实现查询条件拼装.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　建议使用DetachedCriteria，因为DetachedCriteria创建不需要session，在任何代码中通过DetachedCriteria 拼接查询条件.
+&lt;img src=&#34;./7.png&#34; alt=&#34;png&#34;&gt;
+这里的HibernateUtil为打开SessionFactory.&lt;/p&gt;
+&lt;h2 id=&#34;service&#34;&gt;service&lt;/h2&gt;
+&lt;p&gt;　　接收servlet传入查询条件，将查询条件拼装成DetachedCritriea.
+&lt;img src=&#34;./8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Override
+public Long findCustomerCount(CstCustomer cstCustomer) {
+  
+  //创建DetachedCriteria
+  DetachedCriteria detachedCriteria = DetachedCriteria.forClass(CstCustomer.class);
+  
+  //根据cstCustomer中数据动态拼接查询条件
+  if(cstCustomer!=null){
+    //拼接客户名称查询条件，使用like
+    if(cstCustomer.getCustName()!=null &amp;amp;&amp;amp; !cstCustomer.getCustName().equals(&amp;quot;&amp;quot;)){
+      detachedCriteria.add(Restrictions.like(&amp;quot;custName&amp;quot;, &amp;quot;%&amp;quot;+cstCustomer.getCustName()+&amp;quot;%&amp;quot;));
+    }
+    //拼接联系人查询条件
+    if(cstCustomer.getCustLinkman()!=null &amp;amp;&amp;amp; !cstCustomer.getCustLinkman().equals(&amp;quot;&amp;quot;)){
+      detachedCriteria.add(Restrictions.eq(&amp;quot;custLinkman&amp;quot;,cstCustomer.getCustLinkman()));
+    }
+  }
+  
+  CstCustomerDao cstCustomerDao = new CstCustomerDaoImpl();
+  
+  return cstCustomerDao.findCustomerCount(detachedCriteria);
+}
+@Override
+public List&amp;lt;CstCustomer&amp;gt; findCustomerList(CstCustomer cstCustomer, int firstResult, int maxResults) {
+  CstCustomerDao cstCustomerDao = new CstCustomerDaoImpl();
+  //创建DetachedCriteria
+  DetachedCriteria detachedCriteria = DetachedCriteria.forClass(CstCustomer.class);
+  
+  //拼接查询条件
+  //根据cstCustomer中数据动态拼接查询条件
+  if(cstCustomer!=null){
+    //拼接客户名称查询条件，使用like
+    if(cstCustomer.getCustName()!=null &amp;amp;&amp;amp; !cstCustomer.getCustName().equals(&amp;quot;&amp;quot;)){
+      detachedCriteria.add(Restrictions.like(&amp;quot;custName&amp;quot;, &amp;quot;%&amp;quot;+cstCustomer.getCustName()+&amp;quot;%&amp;quot;));
+    }
+    //拼接联系人查询条件
+    if(cstCustomer.getCustLinkman()!=null &amp;amp;&amp;amp; !cstCustomer.getCustLinkman().equals(&amp;quot;&amp;quot;)){
+      detachedCriteria.add(Restrictions.eq(&amp;quot;custLinkman&amp;quot;,cstCustomer.getCustLinkman()));
+    }
+  }
+  
+  return cstCustomerDao.findCustomerList(detachedCriteria, firstResult, maxResults);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;log4j学习&#34;&gt;log4j学习&lt;/h2&gt;
+&lt;p&gt;目标：学会使用log4j自定义输出日志信息.&lt;/p&gt;
+&lt;p&gt;hibernate默认使用slf4j框架.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;slf4j：提供了一套日志记录接口规范.&lt;/li&gt;
+&lt;li&gt;log4j：日志接口的实现类.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　如果 使用log4j需要以classpath下添加log4j.properties文件.&lt;/p&gt;
+&lt;p&gt;Log4j包括三个主要部件，分别是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;记录器（Loggers）：配置日志在哪记录.&lt;/li&gt;
+&lt;li&gt;输出源（Appenders）：配置日志输出到哪里.
+&lt;img src=&#34;./9.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;布局（Layouts），指定日志输出格式
+&lt;img src=&#34;./10.png&#34; alt=&#34;png&#34;&gt;
+&lt;em&gt;记录器：&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;log4j.rootLogger=debug,A
+log4j.appender.A=org.apache.log4j.ConsoleAppender
+log4j.appender.A.layout=org.apache.log4j.PatternLayout
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;日志级别&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;日志级别由低到高为：ALL &amp;lt; TRACE &amp;lt; DEBUG &amp;lt; INFO &amp;lt; WARN &amp;lt; ERROR &amp;lt; FATAL &amp;lt; OFF.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;日志级别越低输出日志越多，因为将系统调试信息设置级别低，系统的错误信息级别要高，设置成error.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;根据log4j.properties中级别设置，将级别高的日志输出.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;在开发阶段设置为debug，在生产环境设置info或error.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;用myeclipse进行hibernate快速开发&#34;&gt;用MyEclipse进行hibernate快速开发&lt;/h2&gt;
+&lt;p&gt;　　手动配置:&lt;/p&gt;
+&lt;p&gt;db(table )-&amp;gt; 手写domain对象-&amp;gt;对象关系映射文件.&lt;/p&gt;
+&lt;p&gt;现在我们希望用工具完成Domain对象和关系映射文件的工作.
+&lt;img src=&#34;./11.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./12.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./13.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./14.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;错误信息&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font color=red&gt;java.lang.AbstractMethodError: com.microsoft.jdbc.base.BaseDatabaseMetaData.supportsGetGeneratedKeys()Z&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;解决&lt;/b&gt;：microsoft提供的数据库驱动存在bug. 需要换一种驱动连接，使用jtds（&lt;a href=&#34;http://sourceforge.net/projects/jtds/files/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;下载地址&lt;/a&gt;）下载jtds1.2版，解压得到jtds-1.2.jar，引用到eclipse中项目目录下（去除原驱动引用），更改hibernate配置文件.&lt;/p&gt;
+&lt;p&gt;原驱动连接配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;property name=&amp;quot;connection.driver_class&amp;quot;&amp;gt;com.microsoft.jdbc.sqlserver.SQLServerDriver&amp;lt;/property&amp;gt;
+&amp;lt;property name=&amp;quot;connection.url&amp;quot;&amp;gt;jdbc:microsoft:sqlserver://127.0.0.1:1433;DatabaseName=hibernate&amp;lt;/property&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更改jtds连接：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;property name=&amp;quot;connection.driver_class&amp;quot;&amp;gt;net.sourceforge.jtds.jdbc.Driver&amp;lt;/property&amp;gt;
+&amp;lt;property name=&amp;quot;connection.url&amp;quot;&amp;gt;jdbc:jtds:sqlserver://127.0.0.1:1433;DatabaseName=hibernate&amp;lt;/property&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;问题得到解决.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;补充&lt;/b&gt;：java代码调原驱动连接数据库是没有问题的，搭配hibernate会有此问题.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# HibernateUtil工具类：
+package com.haibao.util;
+
+import javax.persistence.Entity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+@Entity
+final public class HibernateUtil {
+  private static SessionFactory sessionFactory = null;
+  private static ThreadLocal&amp;lt;Session&amp;gt; threadLocal = new ThreadLocal&amp;lt;Session&amp;gt;();
+
+  private HibernateUtil(){};
+
+  static{
+    sessionFactory = new Configuration().configure().buildSessionFactory();
+  }
+
+  public static Session openSession(){
+    return sessionFactory.openSession();
+  }
+
+  public static Session getCurrentSession(){
+    Session session = threadLocal.get();
+    if(session==null){
+      session = sessionFactory.openSession();
+      threadLocal.set(session);
+    }
+    return session;
+  }
+}
+# 实现类：
+package com.haibao.view;
+
+import javax.persistence.Entity;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.haibao.bean.Person;
+import com.haibao.util.HibernateUtil;
+
+@Entity
+public class Main {
+  public static void main(String[] args) {
+
+    Session session = null;
+    Transaction ts = null;
+    try {
+      session = HibernateUtil.getCurrentSession();
+      ts = session.beginTransaction();
+      Person p = new Person();
+      p.setName(&amp;quot;asd&amp;quot;);
+      p.setSex(&amp;quot;男&amp;quot;);
+      session.persist(p);
+      ts.commit();
+    } catch (Exception e) {
+      if(ts!=null){
+        ts.rollback();
+      }
+      throw new RuntimeException(e.getMessage());
+    }finally{
+      if(session!=null &amp;amp;&amp;amp; session.isOpen()){
+        session.close();
+      }
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;hql语句hibernate-query-language&#34;&gt;HQL语句（Hibernate Query Language）&lt;/h2&gt;
+&lt;p&gt;　　面向对象的查询语句，与SQL不同，HQl中的对象是区分大小写的（除了JAVA类和属性其他部分不区分大小写）；在HQL中查的是对象而不是表，并且支持多态；HQL主要通过Query来操作，Query的创建方式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Query query = session.createQuery(hql);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;　　现在使用hibernate工具，自动生成 domain 对象 和映射文件,如果我们的表有主外键的关系，则应当先映射主表，再映射从表.&lt;/p&gt;
+&lt;h2 id=&#34;uniqueresult方法&#34;&gt;uniqueResult方法&lt;/h2&gt;
+&lt;p&gt;　　如果我们检索一个对象，明确知道最多只有一个对象，则建议使用该方法，简单高效. 具体用法如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Student s=(Student) session.createQuery(&amp;quot;from Student where sid=&#39;20050003&#39;&amp;quot;).uniqueResult();
+System.out.println(s.getSname());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;distinct的用法&#34;&gt;distinct的用法&lt;/h2&gt;
+&lt;p&gt;过滤重复的记录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//比如，显示所有学生的性别和年龄.
+List list=session.createQuery(&amp;quot;select distinct sage,ssex from Student&amp;quot;).list();
+  for(int i=0;i&amp;lt;list.size();i++){
+    Object []  objs=(Object[]) list.get(i);
+    System.out.println(objs[0].toString()+&amp;quot; &amp;quot;+objs[1].toString());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;between-and&#34;&gt;between and..&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;List list=session.createQuery(&amp;quot;select distinct sage,ssex,sname from Student where sage between 20 and 22&amp;quot;).list();
+  for(int i=0;i&amp;lt;list.size();i++){
+    Object []  objs=(Object[]) list.get(i);
+    System.out.println(objs[0].toString()+&amp;quot; &amp;quot;+objs[1].toString()+objs[2].toString());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;innot-in&#34;&gt;in/not in&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;//查询计算机系和外语系的学生信息
+List&amp;lt;Student&amp;gt; list=session.createQuery(&amp;quot;from Student where sdept in (&#39;计算机系&#39;,&#39;外语系&#39;)&amp;quot;).list();
+//取出1. for 增强
+for(Student s:list){
+  System.out.println(s.getSname()+&amp;quot; &amp;quot;+s.getSaddress()+&amp;quot; &amp;quot;+s.getSdept());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;group-by使用&#34;&gt;group by使用&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;//显示各个系的学生的平均年龄
+List&amp;lt;Object[]&amp;gt; list=session.createQuery(&amp;quot;select avg(sage),sdept from  Student group by sdept&amp;quot;).list();
+  //取出1. for 增强
+  for(Object[] obj:list){
+    System.out.println(obj[0].toString()+&amp;quot; &amp;quot;+obj[1].toString());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;having的使用&#34;&gt;having的使用&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;//1.对分组查询后的结果，进行筛选:比如请显示人数大于3的系名称
+//a. 查询各个系分别有多少学生.
+List&amp;lt;Object[]&amp;gt; list=session.createQuery(&amp;quot;select count(*) as c1,sdept from  Student group by sdept having count(*)&amp;gt;3&amp;quot;).list();
+//取出1. for 增强
+for(Object[] obj:list){
+  System.out.println(obj[0].toString()+&amp;quot; &amp;quot;+obj[1].toString());
+}
+//2查询女生少于200人的系
+//a.查询各个系的女生有多个个
+List&amp;lt;Object[]&amp;gt; list=session. createQuery(&amp;quot;select count(*) as c1,sdept from  Student where ssex=&#39;F&#39; group by sdept&amp;quot;).list();
+//取出1. for 增强
+for(Object[] obj:list){
+  System.out.println(obj[0].toString()+&amp;quot; &amp;quot;+obj[1].toString());
+}
+//1.查询计算机系共多少人?-&amp;gt;如果我们返回的是一列数据
+//这时我们的取法是直接取出list-&amp;gt;object 而不是 list-&amp;gt;Object[]
+List&amp;lt;Object[]&amp;gt; list=session.createQuery(&amp;quot;select sage from  Student where sdept=&#39;计算机系&#39;&amp;quot;).list();
+//取出1. for 增强
+for(Object obj:list){
+  System.out.println(obj.toString());
+}
+//3.查询选修11号课程的最高分和最低分.
+List&amp;lt;Object[]&amp;gt; list=session.
+createQuery(&amp;quot;select 11,max(grade),min(grade) from Studcourse where course.cid=11&amp;quot;).list();
+//取出1. for 增强
+for(Object[] obj:list){
+  System.out.println(obj[0].toString()+&amp;quot; max=&amp;quot;+obj[1].toString()+&amp;quot; min=&amp;quot;+obj[2].toString());
+}
+//4.计算各个科目不及格的学生数量.
+List&amp;lt;Object[]&amp;gt; list=session. createQuery(&amp;quot;select count(*),student.sdept from StudCourse where grade&amp;lt;60 group by student.sdept&amp;quot;).list();
+//取出1. for 增强
+for(Object[] obj:list){
+  System.out.println(obj[0].toString()+&amp;quot; &amp;quot;+obj[1].toString());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;分页显示对象&#34;&gt;分页显示对象：&lt;/h2&gt;
+&lt;p&gt;　　根据用户输入的pageNow和pageSize现实对象&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Query query = session.createQuery(hql);
+query.setFirdtRequest(从第几条取//从0开始计算);
+query.setMaxRequest(取出几条);
+List list = query.list();
+//list就是结果
+query = session.createQuery(得到count(*)的查询语句);
+int pageRow = (Integer)query.list().get(0).intValue();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;参数绑定&#34;&gt;参数绑定&lt;/h3&gt;
+&lt;p&gt;　　可以用setParameter()方法来确定变量的值：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Query query = session.createQuery(&amp;quot;from Student where sdept = :dept and sage&amp;gt;:age&amp;quot;);
+query.setParameter(参数名，值);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用绑定参数的好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可读性好&lt;/li&gt;
+&lt;li&gt;性能提高&lt;/li&gt;
+&lt;li&gt;防止SQL注入（where 1=1）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;提示：也可以使用setInteger().setString()…来指定值.&lt;/p&gt;
+&lt;p&gt;另外：hql语句也可以用“?”来指定带绑定的参数.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Query query = session.createQuery(“from Student where sdept = ? and sage&amp;gt;?”);
+query.setParameter(0，值);
+query.setParameter(1，值);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;在映射文件中得到hql语句&#34;&gt;在映射文件中得到hql语句&lt;/h2&gt;
+&lt;p&gt;　　可以从某些映射文件中得到hql语句，执行查询语句，这样可以更加灵活，在某种情况下，可以考虑使用. 比如：在Student.hbm.xml中.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;query name=”myquerytest”&amp;gt;
+&amp;lt;![CDATA[select sname,ssex from Student where sage&amp;gt;22]]&amp;gt;
+&amp;lt;/query&amp;gt;
+如何使用：
+List list = session.getNameQuery(“myQuerytest”).lise();
+  System.out.println(list.size());
+Iterator iterator = list.iterator();
+while(iterator.hasNext()){
+  Object obj[] = (Object[])iterator.next();
+  System.out.println(“N=”+obj[0]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;使用子查询&#34;&gt;使用子查询&lt;/h2&gt;
+&lt;h3 id=&#34;hibernate中的对象存在三种关系&#34;&gt;hibernate中的对象存在三种关系&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;one-to-one：身份证←→人&lt;/li&gt;
+&lt;li&gt;one-to-many【many-to-one】部门←→员工&lt;/li&gt;
+&lt;li&gt;many-to-many：老师←→学生（尽量化简）
+实际开发中，如果出现了many-to-many关系，用将其装换成两个one-to-many或者many-to-one，这样程序好控制，同时不会冗余.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;criterial使用:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//查询年龄大于10岁的学生 criteria
+Session s=HibernateUtil.getCurrentSession();
+Transaction tx=s.beginTransaction();
+Criteria cri=s.createCriteria(Student.class);
+//添加检索条件
+cri.add(Restrictions.gt(&amp;quot;sage&amp;quot;, new Long(10)));
+List&amp;lt;Student&amp;gt; list=cri.list();
+for(Student s1: list){
+  System.out.println(s1.getSname());
+}
+tx.commit();      
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;hibernate开发的三种方式中的&#34;&gt;hibernate开发的三种方式中的&lt;/h2&gt;
+&lt;p&gt;　　编写domain object + 映射文件 &amp;mdash;&amp;mdash;&amp;gt; 创建出对应的数据库,这里我们说明如果要自动的创建出对应的数据库，需要做配置(hibernate.cfg.xml).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;property name=&amp;quot;hbm2ddl.auto&amp;quot;&amp;gt;create&amp;lt;/property&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里有四个配置值: create , update , create-drop, validate&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;create:当我们的应用程序加载hibernate.cfg.xml[new Configuration().config();]就会根据映射文件，创建出数据库, 每次都会重新创建， 原来表中的数据就没有!!!&lt;/li&gt;
+&lt;li&gt;update: 如果数据库中没有该表，则创建，如果有表，则看有没有变化，如果有变化，则更新.&lt;/li&gt;
+&lt;li&gt;create-drop: 在显示关闭 sessionFactory时，将drop掉数据库的schema&lt;/li&gt;
+&lt;li&gt;validate: 相当于每次插入数据之前都会验证数据库中的表结构和hbm文件的结构是否一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　在开发测试中，我们配置哪个都可以测试，但是如果项目发布后，最好自己配置一次，让对应的数据库生成，完后取消配置.&lt;/p&gt;
+&lt;p&gt;domain对象的细节:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需要一个无参的构造函数(用于hibernate反射该对象)&lt;/li&gt;
+&lt;li&gt;应当有一个无业务逻辑的主键属性.&lt;/li&gt;
+&lt;li&gt;给每个属性提供 get/set方法.&lt;/li&gt;
+&lt;li&gt;在domian对象中的属性，只有配置到了对象映射文件xxx.hbm.xml后，才会被hiberante管理.&lt;/li&gt;
+&lt;li&gt;属性一般是private范围&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对象关系映射文件的说明：&lt;/p&gt;
+&lt;p&gt;　　对象关系文件中，有些属性是可以不配，hibernate会采用默认机制，比如&lt;code&gt;&amp;lt;class table=&amp;quot;?&amp;quot; &amp;gt;&lt;/code&gt; table 值不配，则以类的小写做表名；&lt;code&gt;&amp;lt;property type=&amp;quot;?&amp;quot;&amp;gt; &lt;/code&gt;type不配置，则hibernate会根据类的属性类型，选择一个适当的类型.&lt;/p&gt;
+&lt;p&gt;Hibernate的三种状态：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;瞬时态：对象刚刚被创建，没有处于session的管理下，同时在数据库没有记录；&lt;/li&gt;
+&lt;li&gt;持久态：既处于session的管理下，同时又被保存到数据库中（在数据库中有记录）；&lt;/li&gt;
+&lt;li&gt;脱管/游离态：没有在session管理下，但在数据库中有记录.
+&lt;img src=&#34;./15.png&#34; alt=&#34;png&#34;&gt;
+&lt;b&gt;如何判断一个对象处于怎样的状态？&lt;/b&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;主要的依据是:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;看该对象是否处于session管理；&lt;/li&gt;
+&lt;li&gt;看在数据库中有没有对应的记录.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;瞬时态: 没有session管理,同时数据库没有对应记录;new了一个对象，此时对象就是瞬时态;瞬时态对象和数据库记录没有对关系，和session没有关系.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;持久态: 有session管理，同时在数据库中有记录; 瞬时态对象执行save变化持久层;持久态对象和数据库记录存在对应关系，和session有关系.修改对象的属性，直接将数据保证到数据库.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;管态/游离态： 没有session管理，但是在数据库中有记录.当session关闭后，持久态对象变为托管态;	托管态对象和session没有关系，可能和数据库存在对象也可能不对应.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;托管态和瞬时态区别&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;托管态对象:	和session没有关联，可能和数据库存在对应关系，托管态对象中存在主键的值.&lt;/li&gt;
+&lt;li&gt;持久态对象:	和session有状态&lt;/li&gt;
+&lt;li&gt;瞬时态对象:	和session没有关联，和数据库记录没有对象关系，没有主键.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;将瞬时态对象设置一个主键值，它就变为了托管态对象！！！&lt;/p&gt;
+&lt;h3 id=&#34;saveorupdate方法测试&#34;&gt;saveOrUpdate方法测试：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;对瞬时态对象执行insert操作&lt;/li&gt;
+&lt;li&gt;对持久态对象执行update操作&lt;/li&gt;
+&lt;li&gt;对托管态对象执行update操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;懒加载&#34;&gt;懒加载:&lt;/h2&gt;
+&lt;p&gt;　　简述: 当我们查询一个对象的时候，在默认情况下,返回的只是该对象的普通属性（直接属性，不需要通过外键等查询得到）,当用户去使用对象属性时，才会向数据库发出再一次的查询.这种现象我们称为 lazy现象.
+解决方法可以这样:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;显示初始化代理对象： Hibernate.initized(student.getDepart())；与直接属性相连的对象.&lt;/li&gt;
+&lt;li&gt;修改对象关系文件 lazy  改写 lazy=false（说明：不要再one-to-many的one中设置false，在many中设置可以提高效率）
+以上两种方法 不能直接解决懒加载问题.&lt;/li&gt;
+&lt;li&gt;通过过滤器(web项目) openSessionInView
+添加一个过滤器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;懒加载详解&#34;&gt;懒加载详解：&lt;/h3&gt;
+&lt;p&gt;　　懒加载（Load On Demand）是一种独特而又强大的数据获取方法，是指程序推迟访问数据库，这样可以保证有时候不必要的访问数据库，因为一次访问数据库是比较耗时的.
+懒加载的几种情况：
+首先明确一点：Domain Object是非finally的，才能实现懒加载. 解决方法：（因为要重写集合Set…）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;明确初始化
+在session还没有关闭时，访问一次xxx.getXxx()，强制访问数据库. 或者Hibernate.initialize(xxx)；&lt;/li&gt;
+&lt;li&gt;openSessionView
+这个往往需要过滤器配合使用(web程序)；&lt;/li&gt;
+&lt;li&gt;在ssh中，可以实现在service层，标准方式解决懒加载；&lt;/li&gt;
+&lt;li&gt;在映射文件中配置，lazy=false.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;hibernate的关系映射&#34;&gt;Hibernate的关系映射：&lt;/h2&gt;
+&lt;h3 id=&#34;mang-to-one&#34;&gt;mang-to-one：&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 对于private Department depart就不能用property many-to-one 的name=“变量名” column name=“将来生成表的名” --&amp;gt;
+&amp;lt;many-to-one name=&amp;quot;depart&amp;quot;&amp;gt;
+  &amp;lt;column name=&amp;quot;depart_id&amp;quot;&amp;gt;&amp;lt;/column&amp;gt;
+&amp;lt;/many-to-one&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./16.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;one-to-many&#34;&gt;one-to-many&lt;/h3&gt;
+&lt;p&gt;需求：查询所有一号部门的学生.&lt;/p&gt;
+&lt;p&gt;常规思维：&lt;code&gt;String hql = “from Student where dept.id=1”&lt;/code&gt;;&lt;/p&gt;
+&lt;p&gt;还可以采用一对多：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;现在Department中添加一个Set集合，并生成get/set方法；
+private Set&lt;Student&gt; stu;//一个部门可以对应多个学生&lt;/li&gt;
+&lt;li&gt;在Department.hbm.xml文件中添加&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;set name=“集合对象属性名”&amp;gt;
+  &amp;lt;key column=“外键名”&amp;gt;
+  &amp;lt;one-to-many class=“集合存放的类名”&amp;gt;
+&amp;lt;/set&amp;gt;
+&amp;lt;!-- 配置onne-to-many关系 --&amp;gt;
+  &amp;lt;set name=“stus” cascade=“联级”&amp;gt;
+  &amp;lt;key column=“depart_id”&amp;gt;
+  &amp;lt;one-to-many class=“Student”&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;one-to-one&#34;&gt;one-to-one&lt;/h3&gt;
+&lt;p&gt;一对一有两种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;基于主键的一对一:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;主键关联映射：其中一个表的主键依赖于另一张表的主键而建立起的一对一的关系，这两张互相关联的表的主键一致.&lt;/li&gt;
+&lt;li&gt;必须为one-to-one元素增加constrained=&amp;ldquo;true&amp;quot;属性，表明该类的主键由关联类生成.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;【要点】&lt;/b&gt;Person - IdCard&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./17.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./18.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;id name=”id”&amp;gt;
+&amp;lt;generator class=”foreign”&amp;gt;
+&amp;lt;param name=”property”&amp;gt;idCard&amp;lt;/param&amp;gt;
+&amp;lt;/generator&amp;gt;
+&amp;lt;/id&amp;gt;
+&amp;lt;one-to-one name=”idCard” constrained=”true”/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;基于外键的一对一
+和&lt;many-to-one&gt;N-1相同，多添加一个unique=&amp;ldquo;true&amp;rdquo; 属性，用以表示N的一端必须唯一，加了唯一约束，即成了1-1&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;b&gt;【举例】&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;one-to-one name=”idCard” property-ref=“person”/&amp;gt;             
+&amp;lt;many-to-one name=”person” unique=”true” /&amp;gt;
+# property-ref：用于指定关联类的一个属性，这个属性将会和本外键相对应
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;many-to-many&#34;&gt;many-to-many&lt;/h3&gt;
+&lt;p&gt;　　学生←→课程   顾客←→商品
+student:one-to-mangy
+&lt;img src=&#34;./19.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Student{
+  private Integer id;
+  private String name;
+  private Set&amp;lt;StuCourse&amp;gt; stuCourses;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;从stucourse的角度看是 many-to-one
+&lt;img src=&#34;./20.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class StuCourse{
+  private Integer id;
+  private Student student;
+  private Course course;
+  private Integer grade;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;courset:one-to-mangy
+&lt;img src=&#34;./21.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Course{
+  private Integer id;
+  private String name;
+  private Set&amp;lt;StuCourse&amp;gt; stuCourses;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;cascadeemployee-departmentbbs项目等&#34;&gt;cascade（Employee-Department、bbs项目等）&lt;/h3&gt;
+&lt;p&gt;所谓级联操作就是说，当进行某个操作（添加/删除/修改…），就有hibernate自动完成. 例如：Department←→Employee当某个部门被删除后，员工也不会存在. 常用的cascade：none、all、save-update、delete、lock、refresh、evict、replic、persist、merge、delete-orphan(one-to-many). 一般对many-to-many，many-to-one不设置联级，在one-to-many和one-to-one中设置联级.&lt;/p&gt;
+&lt;h3 id=&#34;在jsp页面中获取项目名称&#34;&gt;在JSP页面中获取项目名称：&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%=this.getServletContext().getContextPath()%&amp;gt; //java片段
+${ pageContext.request.contextPath } //通过标签
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;缓存&#34;&gt;缓存&lt;/h2&gt;
+&lt;p&gt;　　缓存的作用主要用来提高性能，可以简单的理解成一个Map；使缓存涉及到三个操作：把数据放入缓存、从缓存获取数据、删除缓存中的无效数据.&lt;/p&gt;
+&lt;h3 id=&#34;一级缓存session级共享&#34;&gt;一级缓存（Session级共享）&lt;/h3&gt;
+&lt;p&gt;一级缓存是 session对象中一块内存.
+在同一个session中，查询一个对象是不会发出sql语句.
+session关闭一级缓存不存在了，再查询对象，会发出sql.&lt;/p&gt;
+&lt;p&gt;save，update，saveOrUpdate，load，get，list，iterator，lock这些方法都会将对象放在一级缓存中，一级缓存不能控制缓存的数量，所以要注意将大批量操作数据时可能造成内存溢出；可以用evict(清楚一个对象)，clear(清除所有对象)方法清除缓存的内容.
+用HashMap来模拟一个Session缓存，加深对缓存的深入.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;package com.hsp.view;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+public class MyCache {
+  //使用map来模拟缓存
+  static Map&amp;lt;Integer,Student&amp;gt; maps=new HashMap&amp;lt;Integer,Student&amp;gt;();
+  public static void main(String[] args) {
+    // TODO Auto-generated method stub
+
+    getStudent(1);
+    getStudent(1);
+    getStudent(1);
+    getStudent(1);
+    getStudent(3);
+    getStudent(3);
+  }
+
+  public static Student getStudent(Integer id){  //s.get()
+    //先到缓存去
+    if(maps.containsKey(id)){
+      //在缓存有
+      System.out.println(&amp;quot;从缓存取出&amp;quot;);
+      return maps.get(id);
+    }else{
+      System.out.println(&amp;quot;从数据库中取&amp;quot;);
+      //到数据库取
+      Student stu=MyDB.getStudentFromDB(id);
+      //放入缓存
+      maps.put(id, stu);
+      return stu;
+    }
+  }
+}
+
+//我的数据库
+class MyDB{	
+  static List&amp;lt;Student&amp;gt; lists=new  ArrayList&amp;lt;Student&amp;gt;();
+  //初始化数据库,假设有三个学生
+  static{
+    Student s1=new Student();
+    s1.setId(1);
+    s1.setName(&amp;quot;aaa&amp;quot;);
+    Student s2=new Student();
+    s2.setId(2);
+    s2.setName(&amp;quot;bbb&amp;quot;);
+    Student s3=new Student();
+    s3.setId(3);
+    s3.setName(&amp;quot;ccc&amp;quot;);
+    lists.add(s1);
+    lists.add(s2);
+    lists.add(s3);
+  }
+  public static Student getStudentFromDB(Integer id){
+    for(Student s: lists){
+      if(s.getId().equals(id)){
+        return s;
+      }
+    }
+    return null;// 在数据库中没有.
+  }
+}
+
+class Student{
+  private Integer id;
+  private String name;
+  public Integer getId() {
+    return id;
+  }
+  public void setId(Integer id) {
+    this.id = id;
+  }
+  public String getName() {
+    return name;
+  }
+  public void setName(String name) {
+    this.name = name;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;二级缓存sessionfactory级共享&#34;&gt;二级缓存（SessionFactory级共享）&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;为什么需要二级缓存?&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　因为一级缓存有限(生命周期短),所以我们需要二级缓存(SessionFactory缓存)来弥补这个问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需要配置&lt;/li&gt;
+&lt;li&gt;二级缓存是交给第三方去处理,常见的Hashtable , OSCache , EHCache&lt;/li&gt;
+&lt;li&gt;二级缓存的原理；&lt;/li&gt;
+&lt;li&gt;二级缓存的对象可能放在内存，也可能放在磁盘.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用OsCache来演示二级缓存的使用.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置二级缓存&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对配置说明:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;property name=&amp;quot;hbm2ddl.auto&amp;quot;&amp;gt;update&amp;lt;/property&amp;gt;
+  &amp;lt;!-- 启动二级缓存 --&amp;gt;
+  &amp;lt;property name=&amp;quot;cache.use_second_level_cache&amp;quot;&amp;gt;true&amp;lt;/property&amp;gt;
+  &amp;lt;!-- 指定使用哪种二级缓存 --&amp;gt;
+  &amp;lt;property name=&amp;quot;cache.provider_class&amp;quot;&amp;gt;org.hibernate.cache.OSCacheProvider&amp;lt;/property&amp;gt;
+  &amp;lt;mapping resource=&amp;quot;com/hsp/domain/Department.hbm.xml&amp;quot; /&amp;gt;
+  &amp;lt;mapping resource=&amp;quot;com/hsp/domain/Student.hbm.xml&amp;quot; /&amp;gt;
+  &amp;lt;!-- 指定哪个domain启用二级缓存 
+  特别说明二级缓存策略:
+  1. read-only
+  2. read-write
+  3. nonstrict-read-write
+  4. transcational
+  --&amp;gt;
+  &amp;lt;class-cache class=&amp;quot;com.hsp.domain.Student&amp;quot; usage=&amp;quot;read-write&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;可以把oscache.properties文件放在 src目录下，这样你可以指定放入二级缓存的对象capacity 大小. 默认1000.&lt;/li&gt;
+&lt;li&gt;使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// TODO Auto-generated method stub
+//通过获取一个sesion,让hibernate框架运行(config-&amp;gt;加载hibernate.cfg.xml)
+Session s=null;
+Transaction tx=null;		
+try {
+//我们使用基础模板来讲解.
+s=HibernateUtil.openSession();
+tx=s.beginTransaction();			
+//查询45号学生		
+Student stu1=(Student) s.get(Student.class, 45);//45-&amp;gt;一级缓存		System.out.println(stu1.getName());
+tx.commit();			
+} catch (Exception e) {
+  e.printStackTrace();
+  if(tx!=null){
+    tx.rollback();
+  }
+}finally{			
+  if(s!=null &amp;amp;&amp;amp; s.isOpen()){
+    s.close();
+  }
+}		
+System.out.println(&amp;quot;*********************************&amp;quot;);
+try {
+  //我们使用基础模板来讲解.
+  s=HibernateUtil.openSession();
+  tx=s.beginTransaction();			
+  //查询45号学生		
+  Student stu1=(Student) s.get(Student.class, 45);	
+  System.out.println(stu1.getName());			
+  Student stu3=(Student) s.get(Student.class, 46);	
+  System.out.println(stu3.getName());
+    tx.commit();			
+} catch (Exception e) {
+  e.printStackTrace();
+  if(tx!=null){
+    tx.rollback();
+  }
+}finally{
+  
+  if(s!=null &amp;amp;&amp;amp; s.isOpen()){
+    s.close();
+  }
+}
+
+//完成一个统计，统计的信息在Sessfactory
+//SessionFactory对象.
+Statistics statistics= HibernateUtil.getSessionFactory().getStatistics();
+System.out.println(statistics);
+System.out.println(&amp;quot;放入&amp;quot;+statistics.getSecondLevelCachePutCount());
+System.out.println(&amp;quot;命中&amp;quot;+statistics.getSecondLevelCacheHitCount());
+System.out.println(&amp;quot;错过&amp;quot;+statistics.getSecondLevelCacheMissCount());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;在配置了二级缓存后，请大家要注意可以通过 Statistics,查看你的配置命中率高不高.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;事务管理&#34;&gt;事务管理&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在hibernate设置隔离级别
+在hibernate.cfg.xml中设置隔离级别：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 事务隔离级别 --&amp;gt;
+&amp;lt;property name=&amp;quot;hibernate.connection.isolation&amp;quot;&amp;gt;4&amp;lt;/property&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;事务控制在哪里进行？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;service(){
+  session.beginTransaction;//开启事务
+  try{
+  调用dao方法1
+  调用dao方法2
+  .....
+    session.getTransaction().commit();//提交事务
+  }catch(Exception ex){
+    session.getTransaction().rollback();//回滚事务
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;session如何管理&#34;&gt;session如何管理&lt;/h3&gt;
+&lt;p&gt;　　在service接口中，每个dao请求中使用同一个session即使用同一个数据库连接，保证多个dao调用在一个事务中. 在service执行开始处开启一个新session，将session和当前线程绑定，在每个dao调用中获取当前线程绑定的session，实现每个dao获取到的session是同一个session.
+&lt;img src=&#34;./23.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;主键增长策略&#34;&gt;主键增长策略&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;increment:
+自增，每次增长1, 适用于所有数据库. 但是不要使用在多进程,主键类型是数值型 select max(id) from Student&lt;/li&gt;
+&lt;li&gt;identity :
+自增，每次增长1, 适用于支持identity的数据(mysql,sql server), 主键类型是数值&lt;/li&gt;
+&lt;li&gt;sequence&lt;/li&gt;
+&lt;li&gt;native:会根据数据类型来选择，使用identity,sequence ,hilo select hibernate_sequence.nextval from dual.主键类型是数值long , short ,int&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;id name=&amp;quot;id&amp;quot; type=&amp;quot;java.lang.Integer&amp;quot;&amp;gt; 
+&amp;lt;generator class=&amp;quot;native&amp;quot;/&amp;gt;
+&amp;lt;/id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;hilo:hilo标识符生成器由Hibernate按照一种high/low算法生成标识符.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;b&gt;用法:&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;id name=”id” type=”java.lang.Integer” column=”ID”&amp;gt;
+&amp;lt;generator class=”hilo”&amp;gt;
+  &amp;lt;param name=”table”&amp;gt;my_hi_value&amp;lt;/param&amp;gt;
+  &amp;lt;param name=”column”&amp;gt;next_value&amp;lt;/param&amp;gt;
+&amp;lt;/generator&amp;gt;
+&amp;lt;/id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;uuid:
+会根据uuid算法，生成128-bit的字串
+主键属性类型不能是数值型，而是字串型&lt;/li&gt;
+&lt;li&gt;assigned:
+用户自己设置主键值，所以主键属性类型可以是数值，字串&lt;/li&gt;
+&lt;li&gt;映射复合主键&lt;/li&gt;
+&lt;li&gt;foreign:
+在one-to-one的关系中，有另一张表的主键(Person) 来决定 自己主键/外键( IdCard)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;给出一个简单原则:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;针对oracle [主键是int/long/short 建议使用 sequence] 主键是String 使用uuid或者assinged&lt;/li&gt;
+&lt;li&gt;针对 mysql [主键是 int/long/short 建议使用increment/assigend ,如果是字串 UUId/assigned]&lt;/li&gt;
+&lt;li&gt;针对 sql server [主键是 int/long/short 建议使用identity/native/assinged ,如果主键是字串，使用uuid/assigned ]&lt;/li&gt;
+&lt;li&gt;one-to-one 又是基于主键的则使用foreign&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hibernate不适合的场景&#34;&gt;Hibernate不适合的场景&lt;/h2&gt;
+&lt;p&gt;　　不适合OLAP（On-Line-Analytical Processing联机分析处理），已查询分析数据为主流的系统，适合OLTP（On-line transaction Processing联机事务处理）&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;OLTP&lt;/th&gt;
+&lt;th&gt;OLAP&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;用户&lt;/td&gt;
+&lt;td&gt;操作人员，底层管理人员&lt;/td&gt;
+&lt;td&gt;决策人员，高级管理人员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;功能&lt;/td&gt;
+&lt;td&gt;日常操作管理&lt;/td&gt;
+&lt;td&gt;分析决策&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DB设计&lt;/td&gt;
+&lt;td&gt;面向应用&lt;/td&gt;
+&lt;td&gt;面向主题&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;数据&lt;/td&gt;
+&lt;td&gt;当前的，最新的，细节的，二维的分立的&lt;/td&gt;
+&lt;td&gt;历史的、聚集的、多维的集成的，统一的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;存取&lt;/td&gt;
+&lt;td&gt;读/写数十条记录&lt;/td&gt;
+&lt;td&gt;读/写上百万 条记录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;工作单位&lt;/td&gt;
+&lt;td&gt;简单事务&lt;/td&gt;
+&lt;td&gt;复杂查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;用户&lt;/td&gt;
+&lt;td&gt;上千个&lt;/td&gt;
+&lt;td&gt;上百个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DB大小&lt;/td&gt;
+&lt;td&gt;100M-GB&lt;/td&gt;
+&lt;td&gt;100GB-TB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Struts2学习笔记</title>
+      <link>https://CoMath21.github.io/post/1-struts2/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-struts2/</guid>
+      <description>&lt;h2 id=&#34;1什么是struts2&#34;&gt;1、什么是Struts2:&lt;/h2&gt;
+&lt;p&gt;　　Struts2是一个基于MVC设计模式的Web应用框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互. Struts2是WebWork2基础发展而来的.&lt;/p&gt;
+&lt;h2 id=&#34;2struts2优点&#34;&gt;2、Struts2优点：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Struts2的应用可以不依赖于Servlet API（request,response）和struts API；这种设计属于无侵入式设计.&lt;/li&gt;
+&lt;li&gt;Struts2提供了拦截器,利用拦截器可以进行AOP编程,实现如权限拦截等功能.&lt;/li&gt;
+&lt;li&gt;Struts2提供类型转换器,可以把特殊类型参数转换程序要的类型.&lt;/li&gt;
+&lt;li&gt;Struts2提供支持多种表现层技术,如JSP,freeMarker,Velocity等.&lt;/li&gt;
+&lt;li&gt;Struts2的输入校验可以对指定的方法进行校验.&lt;/li&gt;
+&lt;li&gt;Struts2提供了全局范围、包范围、和Action范围的国际换资源文件管理实现.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;3搭建struts2开发环境&#34;&gt;3、搭建Struts2开发环境&lt;/h2&gt;
+&lt;h3 id=&#34;31开发struts2应用依赖的jar文件&#34;&gt;3.1、开发Struts2应用依赖的jar文件&lt;/h3&gt;
+&lt;p&gt;开发Struts2应用需要依赖的jar文件在解压目录的lib文件夹下,不同的应用需要的JAR包是不同的. 开发Struts2程序最少需要的JAR.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;struts2-core-2.x.x.jar ：Struts2框架的核心类库.&lt;/li&gt;
+&lt;li&gt;xwork-2.x.x jar ：XWork类库,Struts2在其上构建.&lt;/li&gt;
+&lt;li&gt;ognl-2.6.x.jar ：对象图导航语言(Object Graph Navigation Language),struts2框架通过其读写对象的属性.&lt;/li&gt;
+&lt;li&gt;freemarker-2.3.x.jar ：Struts 2的UI标签的模板使用FreeMarker编写.&lt;/li&gt;
+&lt;li&gt;commons-logging-1.1.x jar ：ASF出品的日志包,Struts2框架使用这个日志包来支持Log4J和JDK1.4+的日志记录.&lt;/li&gt;
+&lt;li&gt;commons-fileupload-12 .1.jar ：文件上传组件,2 .1.6版本后必须加入此文件.
+&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;32搭建struts2开发环境&#34;&gt;3.2、搭建Struts2开发环境&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;找到Struts2需要的几个jar包；&lt;/li&gt;
+&lt;li&gt;编写配置struts2的配置文件：src下创建struts.xml文件；&lt;/li&gt;
+&lt;li&gt;在web.xml中加入struts2 MVC框架启动配置&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;filter&amp;gt;
+  &amp;lt;filter-name&amp;gt;struts2&amp;lt;/filter-name&amp;gt;
+  &amp;lt;filter-class&amp;gt;org.apache.struts2.dispatcher.ng.filter.
+StrutsPrepareAndExecuteFilter&amp;lt;/filter-class&amp;gt;
+  &amp;lt;/filter&amp;gt;
+
+  &amp;lt;filter-mapping&amp;gt;
+    &amp;lt;filter-name&amp;gt;struts2&amp;lt;/filter-name&amp;gt;
+    &amp;lt;url-pattern&amp;gt;/*&amp;lt;/url-pattern&amp;gt;
+  &amp;lt;/filter-mapping&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4strutsxml配置中的包介绍&#34;&gt;4、Struts.xml配置中的包介绍&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;配置包时必须指定name属性：
+该属性名字可以任意,但是必须唯一,主要作用在于：如果其他包要继承该包就必须通过该属性(name属性)进行引用.&lt;/li&gt;
+&lt;li&gt;包的namespace属性：
+用于定义该包的命名空间,命名空间作为访问该包下Action路径的一部分. 如果不配置,默认为””(空字符串).&lt;/li&gt;
+&lt;li&gt;继承方法extends：
+通常每个包都应该继承struts-default包,因为Struts2很多核心的功能都是拦截器来实现的. struts-default定义了这些拦截器和Result类型；struts-default包是在struts2-core-2.jar文件中的struts-default.xml中定义的,struts-default.xml也是Struts2默认配置文件. Struts2每次都会自动加载struts-default.xml文件.&lt;br&gt;
+&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./4.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./5.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;41action配置中的各种默认值&#34;&gt;4.1、Action配置中的各种默认值&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./6.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果没有为action指定class,默认是ActionSupport.&lt;/li&gt;
+&lt;li&gt;如果没有为action指定method,默认执行action中的execute()方法.&lt;/li&gt;
+&lt;li&gt;如果没有指定action的name属性,默认值为success.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;action中的result的各种转发类型&#34;&gt;Action中的result的各种转发类型&lt;/h4&gt;
+&lt;p&gt;　　Struts2常用的结果类型有：dispathcher(默认值)、redirect(重定向)、redirectAction、plainText
+在result中可以使用${属性名}表达式访问action中的属性,表达式里的属性名对应action中的属性.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;dispathcher(默认值)：内部请求转发&lt;/li&gt;
+&lt;li&gt;redirect(重定向)：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;// 格式：
+&amp;lt;result type=&amp;quot;redirect&amp;quot;&amp;gt;/hello.jsp&amp;lt;/result&amp;gt;
+// 如果重定向需要带参数,则用：
+&amp;lt;result type=&amp;quot;redirect&amp;quot;&amp;gt;/hello.jsp?id=${id}&amp;lt;/result&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此时,需要在对应的Action下有对应的变量,并且提供get属性.
+注意：重定向不能访问WEB-INF下的文件.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redirectAction(在其他*Action下)：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;// 格式：
+&amp;lt;action name=&amp;quot; redirectActionName&amp;quot;&amp;gt;
+&amp;lt;result type=&amp;quot; redirectAction&amp;quot;&amp;gt;重定向的name&amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+// 如果不不在同一个包下需配置项
+&amp;lt;result type=&amp;quot; redirectAction&amp;quot;&amp;gt;
+	&amp;lt;param name=&amp;quot; actionName&amp;quot;&amp;gt;xxx&amp;lt;/param&amp;gt;
+&amp;lt;param name=&amp;quot; namespace&amp;quot;&amp;gt;/…/…&amp;lt;/param&amp;gt;
+&amp;lt;/result&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;b&gt;补充&lt;/b&gt;.&lt;/p&gt;
+&lt;p&gt;中文字符编码、解码&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编码&lt;code&gt;(java.net.URLEncoder)：URLEncoder.encode(&amp;quot;字符串&amp;quot;,&amp;quot;UTF-8&amp;quot;)&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;解码&lt;code&gt;(java.net.URLDecoder)：URLDecoder.encode(new String (request.getParameter(&amp;quot;属性名&amp;quot;).getBytes(&amp;quot;ISO8859-1&amp;quot;),&amp;quot;UTF-8&amp;quot;),&amp;quot;UTF-8&amp;quot;)&lt;/code&gt;;
+JSP文件中可以用&lt;code&gt;$(param.属性名)&lt;/code&gt;访问Action中的属性(会乱码)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　plaintext(显示原始文件内容的重定向)：例如某功能需要查看源代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;action name=&amp;quot; plainText&amp;quot;&amp;gt;
+	&amp;lt;result type=&amp;quot; plainText&amp;quot;&amp;gt;&amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;注意：当该JSP文件存在中文的时候,会乱码！
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;需要加入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;param name=&amp;quot; location&amp;quot;&amp;gt;/xxx.jsp&amp;lt;/param&amp;gt;&amp;lt;!—定向的路径--&amp;gt;
+&amp;lt;param name=&amp;quot; charSet&amp;quot;&amp;gt;UTF-8&amp;lt;/param&amp;gt;&amp;lt;!--指定读取文件的编码--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;附：Struts2的全视图
+单个包下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;package name=&amp;quot; xxx&amp;quot; namespace=&amp;quot; /…/…&amp;quot; extends=&amp;quot; struts-default&amp;quot;&amp;gt;
+&amp;lt;global-results&amp;gt;	
+&amp;lt;result type=&amp;quot; mess…&amp;quot;&amp;gt;/…/…&amp;lt;/result&amp;gt;
+&amp;lt;/global-results&amp;gt;
+&amp;lt;/package&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;全局：(在一个包中写,然后其他包继承该包)&lt;/p&gt;
+&lt;h3 id=&#34;42为action属性注入值&#34;&gt;4.2、为Action属性注入值&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;package name=&amp;quot; xxx&amp;quot; namespace=&amp;quot; /…/…&amp;quot; extends=&amp;quot; struts-default&amp;quot;&amp;gt;
+&amp;lt;action name=&amp;quot; list&amp;quot; class=&amp;quot;com.haibao.HelloWorldAction&amp;quot; method=&amp;quot;execute&amp;quot;&amp;gt;
+  &amp;lt;param name=&amp;quot;path &amp;quot;&amp;gt;/image&amp;lt;/param&amp;gt;
+  &amp;lt;result name=&amp;quot;success &amp;quot;&amp;gt;/xxx.jsp &amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&amp;lt;/package&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;附：在HelloWorldAction下必须存在“path”属性的get方法 ,访问xxx.jsp得到的是“/image”&lt;/p&gt;
+&lt;h2 id=&#34;5指定struts2处理的请求后缀&#34;&gt;5、指定struts2处理的请求后缀&lt;/h2&gt;
+&lt;h3 id=&#34;51默认后缀及修改&#34;&gt;5.1、默认后缀及修改&lt;/h3&gt;
+&lt;p&gt;默认后缀：.action
+默认后缀可以通过常量&amp;quot;struts.action.extension&amp;quot;进行修改&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;constant name=&amp;quot; struts.action.extension&amp;quot; value=&amp;quot;do&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果用户指定多个请求后缀,则多个后缀之间以英文逗号( , )隔开&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;constant name=&amp;quot; struts.action.extension&amp;quot; value=&amp;quot;do,action&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;52常用的常量&#34;&gt;5.2、常用的常量&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--指定默认编码集,作用于HTTPServletRequest的setCharacterEncoding方法和freemarker、velocity的输出--&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.i18n.encoding&amp;quot; value=&amp;quot;UTF-8&amp;quot;/&amp;gt;
+&amp;lt;!-- 该属性指定需要的struts2处理的后缀请求如果用户指定多个请求后缀,则多个后缀之间以英文逗号(,)隔开--&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.action.extension&amp;quot; value=&amp;quot;do,action&amp;quot;/&amp;gt;
+&amp;lt;!-- 设置浏览器是否缓存静态内容. 默认值为true(生产环境下使用)--&amp;gt;
+&amp;lt;constant name=&amp;quot;struts.serve.static.browserCache&amp;quot; value=&amp;quot;false&amp;quot;/&amp;gt;
+&amp;lt;!-- 当struts的配置文件修改后,系统是否自动重新加载该文件,默认false(生产环境下使用) --&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.configuration.xml.reload&amp;quot; value=&amp;quot;true&amp;quot;/&amp;gt;
+&amp;lt;!-- 开发模式下使用,这样可以打印出更详细的错误信息 --&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.devMode&amp;quot; value=&amp;quot;true&amp;quot;/&amp;gt; 
+&amp;lt;!-- 默认的视图主题 --&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.ui.theme&amp;quot; value=&amp;quot;smple&amp;quot;/&amp;gt; 
+&amp;lt;!-- 与Spring集成时,指定有Spring负责action对象的创建 --&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.objectFactory&amp;quot; value=&amp;quot;spring&amp;quot;/&amp;gt;
+&amp;lt;!-- 该属性设置Struts2是否支持动态方法调用,默认为true --&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.enable.DynamicMethodlnvocation&amp;quot; value=&amp;quot;true&amp;quot;/&amp;gt;
+&amp;lt;!-- 上传文件的大小限制 --&amp;gt;
+&amp;lt;constant name=&amp;quot; struts.multipart.maxSize&amp;quot; value=&amp;quot;10701096&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;53常量的定义&#34;&gt;5.3、常量的定义&lt;/h3&gt;
+&lt;p&gt;常量可以在struts.xml或struts.propreties中配置,建议在struts.xml中配置
+在struts.xml文件中配置常量：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;struts&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.action.extension&amp;quot; value=&amp;quot;do&amp;quot;&amp;gt;
+&amp;lt;/struts&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在struts.propreties中配置常量：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;struts.action.extension=do
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常量可以在下面多个配置文件中定义,加载常量的搜索顺序为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;struts-default.xml&lt;/li&gt;
+&lt;li&gt;struts-plugin.xml&lt;/li&gt;
+&lt;li&gt;struts.xml&lt;/li&gt;
+&lt;li&gt;struts.propreties&lt;/li&gt;
+&lt;li&gt;web.xml&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;多个文件中配置了同一个常量,则后一个文件中配置的常量值会覆盖前面文件中配置的常量值.&lt;/p&gt;
+&lt;h2 id=&#34;6struts2的处理流程&#34;&gt;6、Struts2的处理流程&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./7.png&#34; alt=&#34;png&#34;&gt;
+　　StrutsPrepareAndExecuteFilter是Struts的核心控制器,他负责拦截由&lt;url-pattern&gt;/*&lt;/url-patternt&gt;指定的所有用户请求,当用户请求到达时,给Filter会过滤用户的请求. 默认情况下,如果用户请求路径不带后缀或者以.action结尾,这时请求被转入Struts2框架处理,否则Struts2框架将略过该请求的处理. 当请求转入Struts2框架处理时会经过一系列的拦截器,然后到Action. 与Struts1不同,Struts2对用户的每一次请求都会创建一个Action,所以Struts2中的Action是线程安全的.&lt;/p&gt;
+&lt;p&gt;为应用指定多个Struts配置文件&lt;/p&gt;
+&lt;p&gt;　　在大部分应用里,随着应用规模的增加,系统中Action的数量也会大大增加,导致struts.xml配置文件变得臃肿,为了避免struts.xml文件过于庞大,提高struts.xml文件的可读性,可以将一个struts.xml配置文件分解成多个配置文件,然后在struts.xml文件中包含其他配置文件(通过&lt;include&gt;元素指定多个配置文件)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;struts&amp;gt;
+  &amp;lt;include file=&amp;quot;struts-user.xml&amp;quot;/&amp;gt;
+  &amp;lt;include file=&amp;quot;struts-order.xml&amp;quot;/&amp;gt;
+&amp;lt;/struts&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;7动态方法调用&#34;&gt;7、动态方法调用：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;动态方法调用DMI（动态指定）,可以在url地址中动态指定action执行哪个方法,可以通过action+!+方法名. (注：只要Action对象中有这个方法,并且返回类型为String就可以调用,这样struts.xml文件配置文件就可以不需要配置method属性)：&lt;/li&gt;
+&lt;li&gt;设置Struts2是否支持动态方法调用,如果没有这一行要加上去,要不然会报错误,如果你加上这一行,但是你把value值改成false,也会报错！
+&lt;img src=&#34;./8.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;8使用通配符定义action&#34;&gt;8、使用通配符定义action&lt;/h2&gt;
+&lt;p&gt;　　其中*匹配所有,在method=&amp;quot;{数字}&amp;ldquo;中用{数字}表示匹配第几个*,其中跳转页面的命名也是根据第一个*的值进行的.
+&lt;img src=&#34;./9.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;9请求参数的接收&#34;&gt;9、请求参数的接收&lt;/h2&gt;
+&lt;p&gt;　　在Action中必须存在该属性并且存在该属性的set方法,这样在url中赋值才能接收到get方法直接在url后面加入&lt;code&gt;“?属性名=属性值&amp;amp;属性名=属性值”&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;91基本类型&#34;&gt;9.1、基本类型&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./10.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;92复合类型&#34;&gt;9.2、复合类型&lt;/h3&gt;
+&lt;p&gt;（为了减少复杂度,尽量用复合类型）
+&lt;img src=&#34;./11.png&#34; alt=&#34;png&#34;&gt;
+原理：Struts2首先通过反射技术调用Person的默认构造器创建product对象,然后再通过反射技术调用product中与请求参数同名的属性的setter方法来获取请求参数的值.&lt;/p&gt;
+&lt;h2 id=&#34;10关于struts216接收中文请求参数乱码问题&#34;&gt;10、关于Struts2.1.6接收中文请求参数乱码问题&lt;/h2&gt;
+&lt;p&gt;　　Struts2.1.6版本中存在一个Bug,即接收到的中文请求参数为乱码（以post方法提交）,原因是struts2.1.6在获取并使用了请求参数后才调用HttpServletRequest的setCharacterEncoding()方法进行编码设置,导致应用使用的就是乱码请求参数.&lt;/p&gt;
+&lt;p&gt;解决方法：新建一个Filter,把这个Filter放置在Struts2的Filter之前,然后在doFilter()方法里添加一下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public void doFilter(…){
+  HttpServletRequest req = (HttpServletRequest)request;
+  req.setCharacterEncoding(&amp;quot;UTF-8&amp;quot;);
+  filterchain.doFilter(request,response);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;11自定义类型转换器&#34;&gt;11、自定义类型转换器&lt;/h2&gt;
+&lt;h3 id=&#34;111局部类型转换器&#34;&gt;11.1、局部类型转换器：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;首先需要定义类并继承DefaultTypeConverter类;&lt;/li&gt;
+&lt;li&gt;在Action类所在的包下放置ActionClassName-conversion.properties文件；其中ActionClassName是Action的类名,后面的-conversion.properties是固定写法;&lt;/li&gt;
+&lt;li&gt;在.properties文件中内容为：属性名称=类型转换器的全类名.
+以出生年月为例：
+&lt;img src=&#34;./12.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;112全局类型转换器&#34;&gt;11.2、全局类型转换器：&lt;/h3&gt;
+&lt;p&gt;在src(根目录)下放置xwork-conversion.properties.
+文件中的内容为：
+带转换的类型=类型转换器的全类名
+例如：java.util.Date=com.haibao.…
+11.3、访问或添加属性
+仅仅是为了访问添加：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public String scope() throws Exception{//方法
+  ActionContext ctx = ActionContext.getContext();
+  ctx.getApplication().put(&amp;quot;app&amp;quot;,&amp;quot;应用范围&amp;quot;);//往ServletContext里放入app
+  ctx.getSession().put(&amp;quot;ses&amp;quot;,&amp;quot;session范围&amp;quot;)；//往ServletContext里放入ses
+  ctx.put(&amp;quot;req&amp;quot;,&amp;quot;request范围&amp;quot;)；//往ServletContext里放入req
+  return &amp;quot;scope&amp;quot;;//
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;JSP中：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;body&amp;gt;
+  ${applicationScope.app}&amp;lt;br&amp;gt;
+  ${sessionScope.ses}&amp;lt;br&amp;gt;
+  ${requestScope.ses}&amp;lt;br&amp;gt;
+&amp;lt;body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;要是想得到对象：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 方法一：通过ServletActionContext类直接实现
+public String rsa() throws Exception{//方法
+  HttpServletRequest request = ServletActionContext.getRequest();
+  ServletContext servletContext = ServletActionContext.getServletContest();
+  request.setAttribute(&amp;quot;req&amp;quot;,&amp;quot;应用范围&amp;quot;);
+  request.getSession().setAttribute(&amp;quot;ses&amp;quot;,&amp;quot;session范围&amp;quot;)；
+  servletContext.setAttribute(&amp;quot;app&amp;quot;,&amp;quot;应用范围&amp;quot;);
+  return &amp;quot;scope&amp;quot;;//
+}
+// 方法二：通过指定接口,有Struts框架运行时注入
+public class HelloWorldAction implements ServletRequestAware,
+ServletResponseAware,ServletContextAware{
+  private HttpServletRequest requesr;
+  private ServletContextResponse Context;
+  private HttpServletResponse response;
+
+public void setServletRequest(HttoServletRequest req){
+  this.request = req;
+}
+public void setServletResponse(){
+
+}
+public void setServletContext(){
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;12文件上传&#34;&gt;12、文件上传&lt;/h2&gt;
+&lt;h3 id=&#34;121单文件上传&#34;&gt;12.1、单文件上传&lt;/h3&gt;
+&lt;p&gt;&lt;b&gt;步骤&lt;/b&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一步：在WEB-INF/lib下加入commons-fileupload-1.2.1.jar（2.1版本之后必须添加）、commons-io.jar（需要用到里面的工具类）&lt;/li&gt;
+&lt;li&gt;第二步：把form表的enctype设置为：“multipart/form-data”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;form action=&amp;quot;${pageContext.request.contextPath}/uploadAction_execute.action&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot; method=&amp;quot;post&amp;quot;&amp;gt;
+    文件：&amp;lt;input type=&amp;quot;file&amp;quot; name=&amp;quot;image&amp;quot;&amp;gt;
+&amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;上传&amp;quot;&amp;gt;
+&amp;lt;/form&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;第三步：在Action类中添加以下属性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;public class UploadAction {
+  private File image;// 文件名称
+  // 如果想得到上传文件的名称,则定义文件名. 格式：文件名称+FileName
+  private String imageFileName;// 得到上传文件名称
+  // 如果想得到文件的类型,则定义文件名. 格式：文件名称+ContextType
+  private String imageContextType;
+  public String getImageFileName() {
+    return imageFileName;
+  }
+  public void setImageFileName(String imageFileName) {
+    this.imageFileName = imageFileName;
+  }
+  // 提供与字段名称相符的get、set属性,以便得到上传的文件
+  public File getImage() {
+    return image;
+  }
+  public void setImage(File image) {
+    this.image = image;
+  }
+  public String execute() throws Exception {
+    // 在该方法下进行保存
+    String realPath = ServletActionContext.getServletContext().getRealPath(
+        &amp;quot;/images&amp;quot;);// 得到根目录
+    System.out.println(&amp;quot;*****&amp;quot; + realPath + &amp;quot;****&amp;quot;);
+    if (image != null) {
+      File savefile = new File(new File(realPath), imageFileName);// 保存到...
+      if (!savefile.getParentFile().exists())
+        savefile.getParentFile().mkdirs();
+      FileUtils.copyFile(image, savefile);// 调用commons-io.jar下的工具类Copy文件到指定位置
+      ActionContext.getContext().put(&amp;quot;message&amp;quot;, &amp;quot;上传成功&amp;quot;);// 返回信息
+    }
+    return &amp;quot;success&amp;quot;;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./13.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./14.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;122多文件上传&#34;&gt;12.2、多文件上传&lt;/h3&gt;
+&lt;p&gt;　　只需要将单文件上传的第三步：在Action类中添加以下属性中把单个文件变成数组.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class moreUploadAction {
+  private File[] image;// 文件名称
+  // 如果想得到上传文件的名称,则定义文件名. 格式：文件名称+FileName
+  private String[] imageFileName;// 得到上传文件名称
+  // 如果想得到文件的类型,则定义文件名. 格式：文件名称+ContextType
+  private String[] imageContextType;
+  public File[] getImage() {
+    return image;
+  }
+  public void setImage(File[] image) {
+    this.image = image;
+  }
+  public String[] getImageFileName() {
+    return imageFileName;
+  }
+  public void setImageFileName(String[] imageFileName) {
+    this.imageFileName = imageFileName;
+  }
+  public String[] getImageContextType() {
+    return imageContextType;
+  }
+  public void setImageContextType(String[] imageContextType) {
+    this.imageContextType = imageContextType;
+  }
+  public String execute() throws Exception {
+    // 在该方法下进行保存
+    String realPath = ServletActionContext.getServletContext().getRealPath(
+        &amp;quot;/images&amp;quot;);// 得到根目录
+    System.out.println(&amp;quot;*****&amp;quot; + realPath + &amp;quot;****&amp;quot;);
+    if (image != null) {
+      File savedir = new File(realPath);
+      if (!savedir.exists())
+        savedir.mkdirs();
+      for (int i = 0; i &amp;lt; image.length; i++) {
+        File savefile = new File(savedir, imageFileName[i]);// 保存到...
+        FileUtils.copyFile(image[i], savefile);// 调用commons-io.jar下的工具类Copy文件到指定位置
+      }
+  ActionContext.getContext().put(&amp;quot;message&amp;quot;, &amp;quot;上传成功&amp;quot;);// 返回信息
+    }
+    return &amp;quot;success&amp;quot;;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;13自定义拦截器&#34;&gt;13、自定义拦截器&lt;/h2&gt;
+&lt;p&gt;需求：对于登陆的用户可以访问Action中的所有方法,而没有登录的用户则不可以访问任何方法.&lt;/p&gt;
+&lt;p&gt;方法：添加自定义拦截器. 实现&lt;code&gt;com.opensymphony.xwork2.interceptor.interceptor&lt;/code&gt;接口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Override
+public String intercept(ActionInvocation arg0) throws Exception {
+  // 当拦截到Action时执行该方法
+  // 得到session中存在的对象
+  Object user = ActionContext.getContext()
+.getSession().get(&amp;quot;user&amp;quot;);
+  // 如果希望被拦截的的方法执行,调用arg0.invoke();
+  if (user != null)
+    return arg0.invoke();//如果User不为null,代表合法用户,允许访问方法
+  // 返回的是Action中对应方法的返回值String
+  ActionContext.getContext().put(&amp;quot;message&amp;quot;, &amp;quot;请先登录&amp;quot;);
+  return &amp;quot;success&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在struts.xml中定义拦截器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 定义拦截器 --&amp;gt;
+&amp;lt;interceptors&amp;gt;
+  &amp;lt;!-- 自定义拦截器 --&amp;gt;
+  &amp;lt;interceptor name=&amp;quot;permission&amp;quot; class=&amp;quot;com.haibao.interceptor.PermissionInterceptor&amp;quot; /&amp;gt;
+  &amp;lt;!-- 定义拦截器栈  目的：使得Struts2自带的拦截器有效 --&amp;gt;
+  &amp;lt;interceptor-stack name=&amp;quot;permissionStack&amp;quot;&amp;gt;
+    &amp;lt;interceptor-ref name=&amp;quot;defaultStack&amp;quot;/&amp;gt;
+    &amp;lt;interceptor-ref name=&amp;quot;permission&amp;quot;/&amp;gt;
+  &amp;lt;/interceptor-stack&amp;gt;
+&amp;lt;/interceptors&amp;gt;
+&amp;lt;action name=&amp;quot;loginAction_*&amp;quot; class=&amp;quot;com.haibao.action.LoginAction&amp;quot;	method=&amp;quot;{1}&amp;quot;&amp;gt;
+&amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;/WEB-INF/page/LoginPage.jsp&amp;lt;/result&amp;gt;
+&amp;lt;interceptor-ref name=&amp;quot;permissionStack&amp;quot;/&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：
+如果直接在action中定义使用拦截器,则不会在使用Struts自带拦截器！这样Struts2的优势就没有了，所以引入拦截器栈的概念，在拦截器栈中要把Struts的拦截器写在前面，以保证web项目会首先执行Struts再带的拦截器.
+如果想所有的程序都是用自定义的拦截器，可以使用：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;default-interceptor-ref name=&amp;quot;permissionStack&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;效果演示：&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;直接访问会被拦截：
+&lt;img src=&#34;./15.png&#34; alt=&#34;png&#34;&gt;
+登录后访问
+&lt;img src=&#34;./16.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;14输入校验&#34;&gt;14、输入校验&lt;/h2&gt;
+&lt;p&gt;　　Struts2中可以实现对action的所有方法进行校验或者对action的指定方法进项校验，实现方法有两种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;采用手工编写代码实现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;对所有方法进行校验
+　　重写validate()方法实现，validate()方法会校验action中所有的与execute方法签名相同的方法. 当某个数据校验失败时，调用addFieldError()方法往系统的fieldErrors添加校验失败信息，（为了使用addFieldError()方法，action可以继承ActionSupport），如果系统的fieldError包含失败信息，struts2会将请求转发到名为input的result. 在input视图中可以通过&amp;lt;s:fielderror/&amp;gt;显示失败信息. 需要引入标签&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ taglab url=&amp;quot;/struts-tags&amp;quot; prefix=&amp;quot;s&amp;quot;%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;public void validate(){
+  if(this.mobile==null||&amp;quot;&amp;quot;.equals(this.mobile.trim())){
+    this.addFieldError(&amp;quot;username&amp;quot;,&amp;quot;用户名不能为空&amp;quot;);
+  }
+  if(this.mobile==null||&amp;quot;&amp;quot;.equals(this.mobile.trim())){
+    this.addFieldError(&amp;quot;mobile&amp;quot;,&amp;quot;手机号不能为空&amp;quot;);
+  }else{
+      if(!Pattern.compile(&amp;quot;^1[358]\\d{9}&amp;quot;).matcher(this.mobile.trim()).matches()){
+      this.addFieldError(&amp;quot;mobile&amp;quot;,&amp;quot;手机号格式不正确&amp;quot;);
+    }
+  }		
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;对指定方法进行校验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　重写validateXxx()方法实现，validate()方法会校验action中所有的与execute方法签名相同的方法. 当某个数据校验失败时，调用addFieldError()方法往系统的fieldErrors添加校验失败信息，（为了使用addFieldError()方法，action可以继承ActionSupport），如果系统的fieldError包含失败信息，struts2会将请求转发到名为input的result. 在input视图中可以通过&amp;lt;s:fielderror/&amp;gt;显示失败信息. 需要引入标签&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ taglab url=&amp;quot;/struts-tags&amp;quot; prefix=&amp;quot;s&amp;quot;%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;public void validateUpdata(){
+  if(this.mobile==null||&amp;quot;&amp;quot;.equals(this.mobile.trim())){
+    this.addFieldError(&amp;quot;username&amp;quot;,&amp;quot;用户名不能为空&amp;quot;);
+  }
+  if(this.mobile==null||&amp;quot;&amp;quot;.equals(this.mobile.trim())){
+    this.addFieldError(&amp;quot;mobile&amp;quot;,&amp;quot;手机号不能为空&amp;quot;);
+  }else{
+      if(!Patten.compile(&amp;quot;^1[358]\\d{9}&amp;quot;).matcher(this.mobile.trim()).matches()){
+      this.addFieldError(&amp;quot;mobile&amp;quot;,&amp;quot;手机号格式不正确&amp;quot;);
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;输入校验的流程
+&lt;ul&gt;
+&lt;li&gt;类型转换器队请求参数执行类型转换，并把转换后的赋值给action中的属性.&lt;/li&gt;
+&lt;li&gt;如果在执行类型转换的过程中出现异常，系统会将异常信息保存到ActionContext，conversionError拦截器将异常信息封装到fieldErrors里. 不管类型转换是否出现异常，都会进入第3步.&lt;/li&gt;
+&lt;li&gt;系统通过反射技术先调用action中的validateXxx()方法，Xxx为方法名.&lt;/li&gt;
+&lt;li&gt;在调用action中的validate()方法.&lt;/li&gt;
+&lt;li&gt;经过上面4步，如果系统中的fieldErrors存在错误信息（即存放错误信息的集合的size&amp;gt;0），系统自动将请求转发至名称为input视图. 如果系统中的fieldErrors没有任何错误信息，系统将执行action中的处理方法.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;基于XML配置方式实现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;　　&lt;b&gt;a) 对所有方法进行校验&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　在Action相同包下创建ActionClassName-validation.xml文件.
+&lt;img src=&#34;./17.png&#34; alt=&#34;png&#34;&gt;
+Struts2 的验证规则大概有以下数种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;required:必填校验器，要求field的值不能为null&lt;/li&gt;
+&lt;li&gt;requiredstring:必填字符串校验器，要求field的值不能为null,并且长度大于0，默  认情况下会对字符串去掉前后空格&lt;/li&gt;
+&lt;li&gt;int:整数校验器，要求field的值必须在整数范围内，min指定最小值，max指定最大值&lt;/li&gt;
+&lt;li&gt;double:双精度浮点数校验器&lt;/li&gt;
+&lt;li&gt;date:日期校验器&lt;/li&gt;
+&lt;li&gt;expression:表达式校验器&lt;/li&gt;
+&lt;li&gt;fieldexpression:字段表达式校验器&lt;/li&gt;
+&lt;li&gt;email:电子邮件校验器，要求如果field的值非空，则必须是合法的邮件地址&lt;/li&gt;
+&lt;li&gt;url:网址校验器，要求如果field的值非空，则必须是合法的url地址&lt;/li&gt;
+&lt;li&gt;visitor:Visitor校验器，用于校验action的复合属性，它指定一个校验文件用于校验复合属性中的属性&lt;/li&gt;
+&lt;li&gt;conversion:转换校验器&lt;/li&gt;
+&lt;li&gt;stringlength:字符串长度校验器&lt;/li&gt;
+&lt;li&gt;regex:正则表达式校验器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;常用的验证规则&#34;&gt;常用的验证规则：&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;必填检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;username&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;required&amp;quot;&amp;gt;
+&amp;lt;message&amp;gt;指定检验失败的提示信息&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;必填字符串检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;username&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;requiredstring&amp;quot;&amp;gt;
+&amp;lt;param name=&amp;quot;trim&amp;quot;&amp;gt;true&amp;lt;/param&amp;gt;
+&amp;lt;message&amp;gt;指定检验失败的提示信息&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;整数检验器/浮点检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;age&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;int&amp;quot;&amp;gt;
+&amp;lt;param name=&amp;quot;min&amp;quot;&amp;gt;1&amp;lt;/param&amp;gt;
+&amp;lt;param name=&amp;quot;max&amp;quot;&amp;gt;150&amp;lt;/param&amp;gt;
+&amp;lt;message&amp;gt;年纪必须在1到150之间&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;日期检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;birth&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;date&amp;quot;&amp;gt;
+&amp;lt;param name=&amp;quot;min&amp;quot;&amp;gt;1900-01-01&amp;lt;/param&amp;gt;
+&amp;lt;param name=&amp;quot;max&amp;quot;&amp;gt;2050-02-21&amp;lt;/param&amp;gt;
+&amp;lt;message key=&amp;quot;birth.range&amp;quot;/&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;字段表达式检验器(要求指定字段满足一个逻辑表达式)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;re_pass&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;fieldexpression&amp;quot;&amp;gt;
+&amp;lt;!--指定逻辑表达式 --&amp;gt;
+&amp;lt;param name=&amp;quot;expression&amp;quot;&amp;gt; (pass eq re_pass)&amp;lt;/param&amp;gt;
+&amp;lt;message&amp;gt;密码必须和确认密码相等&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;邮件地址校验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;email&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;email&amp;quot;&amp;gt;
+&amp;lt;message&amp;gt;你的电子邮件地址必须是一个有效的电邮地址&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;网址检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;url&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;url&amp;quot;&amp;gt;
+&amp;lt;message&amp;gt;你的主页地址必须是一个有效的网址&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;字符串长度检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;user&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;stringlength&amp;quot;&amp;gt;
+&amp;lt;param name=&amp;quot;minlength&amp;quot;&amp;gt;4&amp;lt;/param&amp;gt;
+&amp;lt;param name=&amp;quot;maxlength&amp;quot;&amp;gt;20&amp;lt;/param&amp;gt;
+&amp;lt;message&amp;gt;你的用户名长度必须在4到20之间&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;正则表达式检验&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;validators&amp;gt;
+&amp;lt;field name=&amp;quot;user&amp;quot;&amp;gt;
+&amp;lt;field-validator type=&amp;quot;regex&amp;quot;&amp;gt;
+&amp;lt;param name=&amp;quot;regex&amp;quot;&amp;gt;&amp;lt;![CDATA[(\w{4,25})]]&amp;gt;&amp;lt;/param&amp;gt;
+&amp;lt;message&amp;gt;您输入的用户名只能是字母和数组，且长度必须在4到25之间&amp;lt;/message&amp;gt;
+&amp;lt;/field-validator&amp;gt;
+&amp;lt;/field&amp;gt;
+&amp;lt;/validators
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;　　&lt;b&gt;b) 对指定方法进行校验&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　取名更改为ActionClassName-ActionName-validation.xml&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;注意&lt;/b&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;当action同时提供了两个校验方法，则按照“所有方法”，“指定方法”的顺序汇总后执行；如果后面的文件包含前面文件的方法发生冲突，则只是用后面文件中的校验规则.&lt;/li&gt;
+&lt;li&gt;当action继承了另外一个action，父类action的校验文件会先被搜索到.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;15国际化&#34;&gt;15、国际化&lt;/h2&gt;
+&lt;p&gt;准备资源文件，资源文件的命名格式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;baseName_language_country.propeties
+baseName_language.propeties
+baseName.propeties
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中baseName是资源文件的基本名，可以自定义，但language和country必须是java支持的语言和国家.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;中国：baseName_zh_CN.properties&lt;/li&gt;
+&lt;li&gt;美国：baseName_en_US.properties&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果没有使用开发工具，对于中文的属性文件，应该使用JDK提供的native2ascii命令把文件转换为Unicode编码的文件. 命令使用如下：
+native2ascii 源文件.properties 目标文件.properties&lt;/p&gt;
+&lt;h3 id=&#34;151配置全局资源与输出国际化信息&#34;&gt;15.1、配置全局资源与输出国际化信息&lt;/h3&gt;
+&lt;p&gt;当准备好资源文件之后，可以在struts.xml中通过struts.custom.i18n.resources常量把资源文件定义为全局变量：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;constant name=&amp;quot;struts.custom.i18n.resources&amp;quot; value=&amp;quot;baseName&amp;quot;/ &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中baseName为资源的基本名.
+之后就可以在页面或者action中访问国际化信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在JSP页面中使用&lt;code&gt;&amp;lt;s:text name=&amp;quot;&amp;quot;/&amp;gt;&lt;/code&gt;标签输出国际化信息；&lt;code&gt;&amp;lt;s:text name=&amp;quot;user&amp;quot;/&amp;gt;&lt;/code&gt;,name为资源文件中的Key.&lt;/li&gt;
+&lt;li&gt;在Action类中，可以继承ActionSupport，使用getText()方法得到国际化信息，该方法的第一个参数用于指定资源文件中的Key.&lt;/li&gt;
+&lt;li&gt;在表单标签中，通过Key属性指定资源文件中的Key，如：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:textfield name=&amp;quot;realname&amp;quot; key=&amp;quot;use&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;输出带占位符的国际化信息&#34;&gt;输出带占位符的国际化信息&lt;/h4&gt;
+&lt;p&gt;资源文件中的内容如下：
+welcome={0},你好{1}&lt;/p&gt;
+&lt;h3 id=&#34;152jsp页面中输出占位符的国际化信息&#34;&gt;15.2、JSP页面中输出占位符的国际化信息&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:text name=&amp;quot;welcome&amp;quot;&amp;gt;
+  &amp;lt;s:param&amp;gt;熊大&amp;lt;/s:param&amp;gt;
+  &amp;lt;s:param&amp;gt;学习&amp;lt;/s:param&amp;gt;
+&amp;lt;s:text/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;　　在Action类中获取带占位符的国际化信息，可以使用getText(String Key，String[] args)或者getText(String Key，List args)方法&lt;/p&gt;
+&lt;h3 id=&#34;153包范围资源文件&#34;&gt;15.3、包范围资源文件&lt;/h3&gt;
+&lt;p&gt;　　在一个大型应用中，整个应用有大量的内容需要实现国际化，如果把国际化的内容放置在全局资源属性文件中，显然会导致资源文件变的庞大、臃肿、不便于维护，支个时候可以针对不同末班，使用包范围来组织国际化文件.&lt;/p&gt;
+&lt;p&gt;方法：在java的包下放置package_language_country.properties资源文件，package为固定写法，处于该包及子包下的action都可以访问该资源，当查到指定Key的消息时，系统会先从package资源文件查找，当不存在对应的Key时，才会从常量struts.custom.i18n.resources指定的资源文件中寻找.&lt;/p&gt;
+&lt;h3 id=&#34;154action范围资源文件&#34;&gt;15.4、Action范围资源文件&lt;/h3&gt;
+&lt;p&gt;　　在Action类所在的路径，放置ActionClassName_languaage_country.properties资源文件，ActionClassName为action类的简单名称；当指定key的消息时，系统会先从ActionClassName_languaage_country.properties资源文件中查找.&lt;/p&gt;
+&lt;h3 id=&#34;155jsp中直接访问某个资源文件&#34;&gt;15.5、JSP中直接访问某个资源文件&lt;/h3&gt;
+&lt;p&gt;struts2提供了&amp;lt;s:i18n&amp;gt;标签，使用&amp;lt;s:i18n&amp;gt;标签可以在类路径下直接从某个资源文件中获取国际化数据，无需任何配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:i18n name=&amp;quot;realname&amp;quot;&amp;gt;
+  &amp;lt;s:text name=&amp;quot;realname&amp;quot;/&amp;gt;
+&amp;lt;s:i18n&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;realname为要访问的资源文件的基本名&lt;/p&gt;
+&lt;p&gt;如果要访问的资源文件在类路径的某个包下，可以访问：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:i18n name=&amp;quot;com/haibao/action/package&amp;quot;&amp;gt;
+  &amp;lt;s:text name=&amp;quot;realname&amp;quot;&amp;gt;
+    &amp;lt;s:param&amp;gt;熊大&amp;lt;/s:param&amp;gt;
+  &amp;lt;/s:text/&amp;gt;
+&amp;lt;s:i18n&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面访问com.haibao.action包下基本名为&lt;font color=red&gt;package&lt;/font&gt;的资源文件.&lt;/p&gt;
+&lt;h2 id=&#34;16ognl表达式语言&#34;&gt;16、OGNL表达式语言&lt;/h2&gt;
+&lt;p&gt;　　OGNL是Object Graphic Navigation Language（对象图导航语言）的缩写，是一个开源的项目. Struts2框架采用OGNL作为默认的表达式语言.&lt;/p&gt;
+&lt;p&gt;相对于EL表达式，OGNL提供了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持对象方法调用：如xxx.sayHello()；&lt;/li&gt;
+&lt;li&gt;支持类静态方法调用和值访问，表达式的格式为@[类全名（包括路径）]@[方法名|值名]
+例如：&lt;code&gt;@java.lang.String@format(&#39;foo %s&#39;，bar)&lt;/code&gt;
+或者 &lt;code&gt;@com.haibao.Constant@APP_NAME&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;操作集合对象.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　Ognl有一个上下文（Context）概念，它实现了了java.utils.Map接口，Struts2中说明：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;上下文（Context）的实现为ActionContext. 当Struts2接受一个请求时，会迅速创建ActionContext，ValueStack，action. 然后把action存进ValueStack，所以action的实例变量可以被OGNL访问.&lt;/li&gt;
+&lt;li&gt;访问上下文（Context）中的对象需要使用#符号标注命名空间. 如&lt;code&gt;#application、#session&lt;/code&gt;. 如：&lt;code&gt;#application[&#39;userName&#39;]==#application.userName//获得application中userName值. &lt;/code&gt;
+（#session对象、#request对象、#paramete对象、attr对象—按照page—request—session—application顺序访问其属性）.&lt;/li&gt;
+&lt;li&gt;OGNL设定了一个跟对象（root）对象，在Struts2中根对象就是ValueStack（值栈）. 如果访问根对象中的属性，则可以省略#命名空间，直接访问该对象的属性即可. 如：${foo}//获得栈值中某个对象的foo属性.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;注意：Struts2中，OGNL表达式需要配合Struts标签使用. 如：&lt;code&gt;&amp;lt;s:property value=&amp;quot;name&amp;quot;&amp;gt;&lt;/code&gt;；使用EL表达式能够访问valueStack中对象的属性，原因是：Struts2对HTTPServletRequest作了进一步的封装.&lt;/p&gt;
+&lt;h2 id=&#34;17采用ognl表达式创建listmap集合对象&#34;&gt;17、采用OGNL表达式创建List/Map集合对象&lt;/h2&gt;
+&lt;h3 id=&#34;171试用如下直接生成一个list对象&#34;&gt;17.1、试用如下直接生成一个List对象：&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:set name=&amp;quot;list&amp;quot; value=&amp;quot;{&#39;zhangsan&#39;,&#39;lisi&#39;,&#39;wangwu&#39;}&amp;quot;/&amp;gt;
+&amp;lt;s:iterator value=&amp;quot;#list&amp;quot;&amp;gt;&amp;lt;!-- 迭代器 --&amp;gt;
+	&amp;lt;s:property/&amp;gt;&amp;lt;br&amp;gt;
+&amp;lt;/s:iterator&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./18.png&#34; alt=&#34;png&#34;&gt;
+　　Set标签用于将某个值放入指定范围&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;scope：指定变量被放置的范围，该属性可以接受application、session、request、page或action. 如果没有设置该属性，则默认放置在OGNL Context中.&lt;/li&gt;
+&lt;li&gt;value：赋给变量的值，如果没有设置该属性，则将ValueStack栈顶的值赋值给变量.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;生成一个Map对象：(Key&amp;ndash;Value)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:set name=&amp;quot;foobar&amp;quot; value=&amp;quot;#{&#39;k1&#39;: &#39;value1&#39;,&#39;k2&#39;:&#39;value2&#39;}&amp;quot;/&amp;gt;
+&amp;lt;s:iterator value=&amp;quot;# foobar &amp;quot;&amp;gt;&amp;lt;!-- 迭代器 --&amp;gt;
+  &amp;lt;s:property value=&amp;quot;key&amp;quot;/&amp;gt;=&amp;lt;s:property value=&amp;quot;value&amp;quot;/&amp;gt;&amp;lt;br&amp;gt;
+&amp;lt;/s:iterator&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;java 迭代方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;for(Map.Entry&amp;lt;String,Integer&amp;gt;entry:maps.entrySet){
+  System.out.println(entry.getKey()+&amp;quot;=&amp;quot;+entry.getValue());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;18采用ognl表达式判断对象是否存在于集合中&#34;&gt;18、采用OGNL表达式判断对象是否存在于集合中&lt;/h2&gt;
+&lt;p&gt;使用in和not in
+in表达式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:if test=&amp;quot;foor&amp;quot; in {&#39;foo&#39;, &#39;bar&#39;}&amp;gt;
+在
+&amp;lt;/s:if&amp;gt;
+&amp;lt;s:else&amp;gt;
+  不在
+&amp;lt;/s:else&amp;gt;
+not in 表达式
+&amp;lt;s:if test=&amp;quot;foor&amp;quot; not in {&#39;foo&#39;,&#39;bar&#39;}&amp;gt;
+  不在
+&amp;lt;/s:if&amp;gt;
+&amp;lt;s:else&amp;gt;
+  在
+&amp;lt;/s:else&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;附加：
+除了in和not in之外OGNL还允许使用某个规则获得集合对象的子集&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;?:获得所有符合逻辑的元素.&lt;/li&gt;
+&lt;li&gt;^:获得符合逻辑的第一个元素.&lt;/li&gt;
+&lt;li&gt;$:获得符合逻辑的最后一个元素.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:iterator value=&amp;quot;books.{?#this.price}35}&amp;quot;	/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;19常用标签&#34;&gt;19、常用标签&lt;/h2&gt;
+&lt;h3 id=&#34;191propert标签&#34;&gt;19.1、propert标签：&lt;/h3&gt;
+&lt;p&gt;用于输出指定值：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:set name=&amp;quot;name&amp;quot; value=&amp;quot;kk&amp;quot;/&amp;gt;
+&amp;lt;s:property value=&amp;quot;#name&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;default:可选属性，如果需要输出指定的属性值为null，则显示该属性指定的值.&lt;/li&gt;
+&lt;li&gt;value：可选属性，指定需要输出的属性值，如果没有指定该属性，则默认输出ValueStack栈顶的值.&lt;/li&gt;
+&lt;li&gt;escape：可选属性，指定是否格式化HTML代码.&lt;/li&gt;
+&lt;li&gt;id：可选属性，指定还元素的标识.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;192iterator标签&#34;&gt;19.2、iterator标签&lt;/h3&gt;
+&lt;p&gt;iterator标签用于对集合进行迭代，治理的集合包含List、Set和数组&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:set name=&amp;quot;list&amp;quot; value=&amp;quot;{&#39;foo&#39;,&#39;bar&#39;}&amp;quot;/&amp;gt;
+&amp;lt;s:iterator value=&amp;quot;#list&amp;quot; status=&amp;quot;st&amp;quot;&amp;gt;
+&amp;lt;s:color=&amp;lt;s:if test=&amp;quot;#st.odd&amp;quot;&amp;gt;red&amp;lt;/s:if&amp;gt;&amp;lt;s:else&amp;gt;blue&amp;lt;/s:else&amp;gt;&amp;gt;
+  &amp;lt;s:property/&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;br&amp;gt;
+&amp;lt;/s:iterator&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;value:可选属性，指定被迭代的集合，如果没有设置该属性，则使用ValueStack栈顶的集合&lt;/li&gt;
+&lt;li&gt;id:可选属性，指定即合理元素的id. （过时）&lt;/li&gt;
+&lt;li&gt;status：该属性指定迭代时的IteratorStatus实例. 该实例包含以下几个方法：
+&lt;ul&gt;
+&lt;li&gt;int getCount()，返回当前迭代了几个元素&lt;/li&gt;
+&lt;li&gt;int getIndex()，返回当前迭代元素的索引&lt;/li&gt;
+&lt;li&gt;boolean isEven()，返回当前被迭代元素的索引是否为偶数&lt;/li&gt;
+&lt;li&gt;boolean isOdd()，返回当前被迭代元素的索引是否为奇数&lt;/li&gt;
+&lt;li&gt;boolean isFirst()，返回当前被迭代元素的索引是否是第一个元素&lt;/li&gt;
+&lt;li&gt;boolean isLast()，返回当前被迭代元素的索引是否最后一个元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;193url标签&#34;&gt;19.3、url标签&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:url value=&amp;quot;hellowoeld_add&amp;quot; namespace=&amp;quot;/test&amp;quot;&amp;gt;&amp;lt;s:param name=&amp;quot;person&amp;quot; value=&amp;quot;23&amp;quot;/&amp;gt;&amp;lt;/s:url&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成类似如下路径：
+/&lt;font color=red&gt;struts&lt;/font&gt;/test/helloworld_add&lt;font color=red&gt;.adtion&lt;/font&gt;?persom=23
+红色部分为内容路径&lt;/p&gt;
+&lt;p&gt;当标签的属性作为字符串类型处理时，“%”符号的用途试计算OGNL表达式的值&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:set value=&amp;quot;myurl&amp;quot; value=&#39;&amp;quot;http://www.sohu.com&amp;quot;&#39;/&amp;gt;
+&amp;lt;s:url value=&amp;quot;myurl&amp;quot;/&amp;gt;&amp;lt;/br&amp;gt;
+&amp;lt;s:url value=&amp;quot;%{#myurl}&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# myurl
+http://www.sohu.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;194表单标签checkboxlist复选框&#34;&gt;19.4、表单标签：checkboxlist复选框&lt;/h3&gt;
+&lt;p&gt;如果集合为list&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:checkboxlist name=&amp;quot;list&amp;quot; list=&amp;quot;{&#39;Java&#39;,&#39;.Net&#39;,&#39;Ror&#39;,&#39;PHP&#39;}&amp;quot; value=&amp;quot;{&#39;Java&#39;,&#39;.Net&#39;}&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成如下html代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot;Java&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Java&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot;.Net&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;.Net&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot; Ror&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Ror&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot; PHP&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;PHP&amp;lt;/lable&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果集合为Map&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:checkboxlist name=&amp;quot;map&amp;quot; list=&amp;quot;#{1:&#39;Java&#39;,2:&#39;.Net&#39;,3:&#39;Ror&#39;,4:&#39;PHP&#39;}&amp;quot; listKey=&amp;quot;key&amp;quot; listValue=&amp;quot;value&amp;quot; value=&amp;quot;{1,2,3}&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成如下html代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;1&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Java&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;2&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;.Net&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;3&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Ror&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;4&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;PHP&amp;lt;/lable&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果集合里存放的是javabean&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%
+  Person p1 = new Person(1,&amp;quot;第一个&amp;quot;);
+  Person p1 = new Person(2,&amp;quot;第一个&amp;quot;);
+  List&amp;lt;Person&amp;gt; list = new ArrayList&amp;lt;Person&amp;gt;();
+  list.add(p1);
+  list.add(p2);
+  request.setAttribute(&amp;quot;person&amp;quot;, list);
+%&amp;gt;
+&amp;lt;s:checkboxlist list=&amp;quot;#request.persons&amp;quot; listKey=&amp;quot;personid&amp;quot; listValue=&amp;quot;name&amp;quot;&amp;gt;&amp;lt;/s:checkboxlist&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;personid和name为Person的属性
+生成如下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;beans&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;第一个&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;checkbox&amp;quot; name=&amp;quot;beans&amp;quot; value=&amp;quot;2&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;第二个&amp;lt;/lable&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;195表单标签radio单选框&#34;&gt;19.5、表单标签：radio单选框&lt;/h3&gt;
+&lt;p&gt;如果集合为list&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:radio name=&amp;quot;list&amp;quot; list=&amp;quot;{&#39;Java&#39;,&#39;.Net&#39;,&#39;Ror&#39;,&#39;PHP&#39;}&amp;quot; value=&amp;quot;&#39;Java&#39;&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成如下html代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot;Java&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Java&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot;.Net&amp;quot;/&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot;Ror&amp;quot;/&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;list&amp;quot; value=&amp;quot;PHP&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果集合为Map&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:radio name=&amp;quot;map&amp;quot; list=&amp;quot;#{1:&#39;Java&#39;,2:&#39;.Net&#39;3:,&#39;Ror&#39;,4:&#39;PHP&#39;}&amp;quot; 
+listKey=&amp;quot;key&amp;quot; listValue=&amp;quot;value&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成如下html代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;1&amp;quot; checked=&amp;quot;checked&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Java&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;2&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;.Net&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;3&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;Ror&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;map&amp;quot; value=&amp;quot;4&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;PHP&amp;lt;/lable&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果集合里存放的是javabean&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%
+  Person p1 = new Person(1,&amp;quot;第一个&amp;quot;);
+  Person p1 = new Person(2,&amp;quot;第一个&amp;quot;);
+  List&amp;lt;Person&amp;gt; list = new ArrayList&amp;lt;Person&amp;gt;();
+  list.add(p1);
+  list.add(p2);
+  request.setAttribute(&amp;quot;person&amp;quot;, list);
+%&amp;gt;
+&amp;lt;s:radio name=&amp;quot;beans&amp;quot; list=&amp;quot;#request.persons&amp;quot; listKey=&amp;quot;personid&amp;quot; listValue=&amp;quot;name&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;personid和name为Person的属性
+生成如下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;beans&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;第一个&amp;lt;/lable&amp;gt;
+&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;beans&amp;quot; value=&amp;quot;2&amp;quot;/&amp;gt;&amp;lt;lable&amp;gt;第二个&amp;lt;/lable&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;196表单标签select下拉选择框&#34;&gt;19.6、表单标签select下拉选择框&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:select name=&amp;quot;list&amp;quot; list=&amp;quot;{&#39;Java&#39;,&#39;.Net&#39;}&amp;quot; value=&amp;quot;&#39;Java&#39;&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成如下html代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:select name=&amp;quot;list&amp;quot; id=&amp;quot;list&amp;quot;&amp;gt;
+&amp;lt;option value=&amp;quot;Java&amp;quot; selected=&amp;quot;selected&amp;quot;&amp;gt;Java&amp;lt;option/&amp;gt;
+&amp;lt;option value=&amp;quot;.Net&amp;quot;&amp;gt;.Net &amp;lt;option/&amp;gt;
+&amp;lt;/select&amp;gt;
+&amp;lt;s:select name=&amp;quot;map&amp;quot; list=&amp;quot;#{1:&#39;Java&#39;,2:&#39;.Net&#39;3:,&#39;Ror&#39;,4:&#39;PHP&#39;}&amp;quot; 
+listKey=&amp;quot;key&amp;quot; listValue=&amp;quot;value&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成如下html代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:select name=&amp;quot;list&amp;quot; id=&amp;quot;list&amp;quot;&amp;gt;
+&amp;lt;option value=&amp;quot;1&amp;quot; selected=&amp;quot;selected&amp;quot;&amp;gt;Java&amp;lt;option/&amp;gt;
+&amp;lt;option value=&amp;quot;2&amp;quot;&amp;gt;.Net&amp;lt;option/&amp;gt;
+&amp;lt;/select&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;20stoken标签放置重复提交&#34;&gt;20、&amp;lt;s:token/&amp;gt;标签放置重复提交&lt;/h2&gt;
+&lt;p&gt;&amp;lt;s:token/&amp;gt;标签放置重复提交用法如下：
+第一步：在表单中加入&amp;lt;s:token/&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;s:form action=&amp;quot;Action_execute()&amp;quot; method=&amp;quot;post&amp;quot; &amp;gt;
+  姓名&amp;lt;s:textfield name=&amp;quot;name&amp;quot;/&amp;gt;&amp;lt;s:token/&amp;gt;
+  &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;发送&amp;quot;/&amp;gt;
+&amp;lt;/s:form&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;第二步：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;action name=&amp;quot;Action_*&amp;quot; class=&amp;quot;com.haibao.action.XMLvalidate&amp;quot;
+      method=&amp;quot;{1}&amp;quot;&amp;gt;
+  &amp;lt;interceptor-ref name=&amp;quot;defaultStack&amp;quot;/&amp;gt;
+  &amp;lt;interceptor-ref name=&amp;quot;token&amp;quot;/&amp;gt;
+  &amp;lt;result name=&amp;quot;ivalid.token&amp;quot;&amp;gt;/message.jsp&amp;lt;/result&amp;gt;
+  &amp;lt;result name=&amp;quot;success&amp;quot;&amp;gt;/WEB-INF/page/message.jsp&amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上配置加入了“token”拦截器和“ivalid.token”结果，因为“token”拦截器在会话的token与请求的token不一致时，将会直接返回“ivalid.token”结果.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python数据分析（四）</title>
+      <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/</guid>
+      <description>&lt;p&gt;　　对于这一组电影数据，如果我们想runtime的分布情况.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# coding=utf-8
+import pandas as pd
+from matplotlib import pyplot as plt
+file_path = &amp;quot;./IMDB-Movie-Data.csv&amp;quot;
+df = pd.read_csv(file_path)
+# print(temp_list.tolist())
+# nums = set([i for j in temp_list for i in j])
+# print(len(nums))
+time_list = df[&amp;quot;Runtime (Minutes)&amp;quot;].values
+
+max_time = time_list.max()
+min_time = time_list.min()
+
+dis = (max_time - min_time)//5
+plt.figure(figsize=(20,8),dpi=80)
+plt.hist(time_list,dis)
+plt.xticks(range(min_time,max_time,5))
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;
+　　对于这一组电影数据，如果我们希望统计电影分类(genre)的情况，应该如何处理数据？&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;思路&lt;/b&gt;：重新构造一个全为0的数组，列名为分类，如果某一条数据中分类出现过，就让0变为1.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# coding=utf-8
+import pandas as pd
+from matplotlib import pyplot as plt
+import numpy as np
+file_path = &amp;quot;./IMDB-Movie-Data.csv&amp;quot;
+# 读取CSV文件
+df = pd.read_csv(file_path)
+print(df[&amp;quot;Genre&amp;quot;].head(3))
+# 统计分类的列表
+temp_list = df[&amp;quot;Genre&amp;quot;].str.split(&amp;quot;,&amp;quot;).tolist()  #[[],[],[]]
+genre_list = list(set([i for j in temp_list for i in j]))
+# 等价于 genre_list = []
+# for i in temp_genre_list:
+#    genre_list.extend(i)
+# genre_list = list(set(genre_list))
+
+# 构造全为0的数组
+zeros_df = pd.DataFrame(np.zeros((df.shape[0],len(genre_list))),columns=genre_list)
+# 给每个电影出现分类的位置赋值1
+for i in range(df.shape[0]):
+    #zeros_df.loc[0,[&amp;quot;Sci-fi&amp;quot;,&amp;quot;Mucical&amp;quot;]] = 1
+    zeros_df.loc[i,temp_list[i]] = 1
+# 统计每个分类的电影的数量和
+genre_count = zeros_df.sum(axis=0)
+# 排序
+genre_count = genre_count.sort_values()
+_x = genre_count.index
+_y = genre_count.values
+#画图
+plt.figure(figsize=(20,8),dpi=80)
+plt.bar(range(len(_x)),_y,width=0.4,color=&amp;quot;orange&amp;quot;)
+plt.xticks(range(len(_x)),_x)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;数据合并之join&#34;&gt;数据合并之join&lt;/h2&gt;
+&lt;p&gt;　　join:默认情况下他是把行索引相同的数据合并到一起.
+&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;数据合并之merge&#34;&gt;数据合并之merge&lt;/h2&gt;
+&lt;p&gt;　　merge:按照指定的列把数据按照一定的方式合并到一起&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;merge(left, right, how=&#39;inner&#39;, on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=(&#39;_x&#39;, &#39;_y&#39;), copy=True, indicator=False, validate=None)
+import pandas as pd
+df1=pd.DataFrame({&#39;key&#39;:[&#39;a&#39;,&#39;b&#39;,&#39;a&#39;,&#39;b&#39;,&#39;b&#39;],&#39;value1&#39;:range(5)})
+df2=pd.DataFrame({&#39;key&#39;:[&#39;a&#39;,&#39;c&#39;,&#39;c&#39;,&#39;c&#39;,&#39;c&#39;],&#39;value2&#39;:range(5)})
+display(df1,df2,pd.merge(df1,df2))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认的合并方式inner，交集;&lt;/li&gt;
+&lt;li&gt;merge outer，并集，NaN补全;&lt;/li&gt;
+&lt;li&gt;merge left，左边为准，NaN补全;&lt;/li&gt;
+&lt;li&gt;merge right，右边为准，NaN补全.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;分组和聚合&#34;&gt;分组和聚合&lt;/h2&gt;
+&lt;p&gt;　　在pandas中类似的分组的操作有很简单的方式来完成&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grouped = df.groupby(by=&amp;quot;columns_name&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;grouped是一个DataFrameGroupBy对象，是可迭代的;grouped中的每一个元素是一个元组，元组里面是（索引(分组的值)，分组之后的DataFrame）.&lt;/p&gt;
+&lt;p&gt;那么，&lt;em&gt;分组之后的每个DataFrame的长度？&lt;/em&gt;
+长度是一个思路，但更多的方法(聚合方法)来解决这个问题.
+DataFrameGroupBy对象有很多经过优化的方法.
+&lt;img src=&#34;./5.png&#34; alt=&#34;png&#34;&gt;
+　　如果需要对国家和省份进行分组统计&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grouped = df.groupby(by=[df[&amp;quot;Country&amp;quot;],df[&amp;quot;State/Province&amp;quot;]])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;很多时候我们只希望对获取分组之后的某一部分数据，或者说我们只希望对某几列数据进行分组，这个时候我们应该怎么办呢？
+获取分组之后的某一部分数据：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df.groupby(by=[&amp;quot;Country&amp;quot;,&amp;quot;State/Province&amp;quot;])[&amp;quot;Country&amp;quot;].count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对某几列数据进行分组：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df[&amp;quot;Country&amp;quot;].groupby(by=[df[&amp;quot;Country&amp;quot;],df[&amp;quot;State/Province&amp;quot;]]).count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;观察结果，由于只选择了一列数据，所以结果是一个Series类型.&lt;/p&gt;
+&lt;p&gt;如果我想返回一个DataFrame类型呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;t1 = df[[&amp;quot;Country&amp;quot;]].groupby(by=[df[&amp;quot;Country&amp;quot;],df[&amp;quot;State/Province&amp;quot;]]).count()
+t2 = df.groupby(by=[&amp;quot;Country&amp;quot;,&amp;quot;State/Province&amp;quot;])[[&amp;quot;Country&amp;quot;]].count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上的两条命令结果一样，和之前的结果的区别在于当前返回的是一个DataFrame类型.&lt;/p&gt;
+&lt;h2 id=&#34;索引和复合索引&#34;&gt;索引和复合索引&lt;/h2&gt;
+&lt;h3 id=&#34;简单的索引操作&#34;&gt;简单的索引操作：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;获取index：&lt;code&gt;df.index&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定index ：&lt;code&gt;df.index = [&#39;x&#39;,&#39;y&#39;]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重新设置index : &lt;code&gt;df.reindex(list(&amp;quot;abcedf&amp;quot;))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定某一列作为index ：&lt;code&gt;df.set_index(&amp;quot;Country&amp;quot;,drop=False)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;返回index的唯一值：&lt;code&gt;df.set_index(&amp;quot;Country&amp;quot;).index.unique()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　假设a为一个DataFrame,那么当&lt;code&gt;a.set_index([&amp;quot;c&amp;quot;,&amp;quot;d&amp;quot;])&lt;/code&gt;即设置两个索引的时候是什么样子的结果呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a = pd.DataFrame({&#39;a&#39;: range(7),&#39;b&#39;: range(7, 0, -1),&#39;c&#39;: [&#39;one&#39;,&#39;one&#39;,&#39;one&#39;,&#39;two&#39;,&#39;two&#39;,&#39;two&#39;, &#39;two&#39;],&#39;d&#39;: list(&amp;quot;hjklmno&amp;quot;)})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;series复合索引&#34;&gt;Series复合索引&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./6.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./7.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dataframe复合索引&#34;&gt;DataFrame复合索引&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;例&lt;/b&gt;.现在有2015到2017年25万条911的紧急电话的数据，请统计出出这些数据中不同类型的紧急情况的次数.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import pandas as pd
+import numpy as np
+from matplotlib import pyplot as plt
+
+df = pd.read_csv(&amp;quot;./911.csv&amp;quot;)
+
+# print(df.info())
+temp_list = df[&amp;quot;title&amp;quot;].str.split(&amp;quot;:&amp;quot;).tolist()
+cate_list = [i[0] for i in temp_list]
+cate_set_list = list(set(cate_list))
+df[&amp;quot;type&amp;quot;] = pd.DataFrame(np.array(cate_list).reshape((df.shape[0],1)))
+# print(df.head())
+cate_zeros = pd.DataFrame(np.zeros((df.shape[0],len(cate_set_list))),columns=cate_set_list)
+for cate in cate_set_list:
+    cate_zeros[cate][df[&amp;quot;type&amp;quot;].str.contains(cate)] = 1
+zeros_sum = cate_zeros.sum(axis=0)
+sum_values = zeros_sum.values
+plt.figure(figsize=(8, 6),dpi=80)
+plt.bar(cate_set_list,sum_values,color=&amp;quot;orange&amp;quot;,width=0.4)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./9.png&#34; alt=&#34;png&#34;&gt;
+　　统计出不同月份不同类型紧急电话的次数的变化情况，应该怎么做可以按照上面的方法将时间戳按照右边“-”进行切割，然后将前面的字符串定义为原数组的最后一列，在进行其他操作. 也可以使用pandas的时间序列.&lt;/p&gt;
+&lt;h2 id=&#34;pandas中的时间序列&#34;&gt;pandas中的时间序列&lt;/h2&gt;
+&lt;p&gt;　　不管在什么行业，时间序列都是一种非常重要的数据形式，很多统计数据以及数据的规律也都和时间序列有着非常重要的联系,而且在pandas中处理时间序列是非常简单的生成一段时间范围.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pd.date_range(start=None, end=None, periods=None, freq=&#39;D&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;start和end以及freq配合能够生成start和end范围内以频率freq的一组时间索引.
+start和periods以及freq配合能够生成从start开始的频率为freq的periods个时间索引.
+&lt;img src=&#34;./10.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./11.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;在dataframe中使用时间序列&#34;&gt;在DataFrame中使用时间序列&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;index=pd.date_range(&amp;quot;20170101&amp;quot;,periods=10)
+df = pd.DataFrame(np.random.rand(10),index=index)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;回到最开始的911数据的案例中，我们可以使用pandas提供的方法把时间字符串转化为时间序列.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df[&amp;quot;timeStamp&amp;quot;] = pd.to_datetime(df[&amp;quot;timeStamp&amp;quot;],format=&amp;quot;&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;format参数大部分情况下可以不用写，但是对于pandas无法格式化的时间字符串，我们可以使用该参数，比如包含中文.&lt;/p&gt;
+&lt;h2 id=&#34;pandas重采样&#34;&gt;pandas重采样&lt;/h2&gt;
+&lt;p&gt;　　重采样：指的是将时间序列从一个频率转化为另一个频率进行处理的过程，将高频率数据转化为低频率数据为降采样，低频率转化为高频率为升采样.pandas提供了一个resample的方法来帮助我们实现频率转化.
+&lt;img src=&#34;./12.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;periodindex&#34;&gt;PeriodIndex&lt;/h2&gt;
+&lt;p&gt;　　之前所学习的DatetimeIndex可以理解为时间戳，那么现在我们要学习的PeriodIndex可以理解为时间段．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;periods = pd.PeriodIndex(year=data[&amp;quot;year&amp;quot;],month=data[&amp;quot;month&amp;quot;],day=data[&amp;quot;day&amp;quot;],hour=data[&amp;quot;hour&amp;quot;],freq=&amp;quot;H&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;那么如果给这个时间段降采样呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data = df.set_index(periods).resample(&amp;quot;10D&amp;quot;).mean()
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Spring2.5学习笔记</title>
+      <link>https://CoMath21.github.io/post/1-spring2.5/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-spring2.5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python数据分析（三）</title>
       <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/</link>
-      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
       <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/</guid>
-      <description>&lt;h2 id=&#34;pandas&#34;&gt;Pandas&lt;/h2&gt;
-&lt;p&gt;　&lt;/p&gt;
+      <description>&lt;p&gt;　　Numpy能够帮助我们处理数值，pandas除了处理数值之外(基于numpy)，还能够帮助我们处理其他类型的数据.&lt;/p&gt;
+&lt;h2 id=&#34;pandas的常用数据类型&#34;&gt;pandas的常用数据类型&lt;/h2&gt;
+&lt;h3 id=&#34;series-一维带标签数组&#34;&gt;Series 一维，带标签数组&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;t = pd.Series(np.arange(10),index=list(string.ascoo_uppercase[:10]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f1.png&#34; alt=&#34;png&#34;&gt;
+Series切片和索引
+&lt;img src=&#34;./f2.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./f3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;series的索引和值&#34;&gt;Series的索引和值&lt;/h4&gt;
+&lt;p&gt;对于一个陌生的series类型，可以通过t.index获取其索引值
+&lt;img src=&#34;./f4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pandas读取外部数据&#34;&gt;pandas读取外部数据：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;直接使用&lt;code&gt;pd. read_csv()&lt;/code&gt;即可.&lt;/li&gt;
+&lt;li&gt;如果待数据的数据没有列名，则需要补充，即在读取文件时给定参数names的值.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;pd.read_csv(“’’,names=column_names)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;column_names：指定类别名字,[&amp;lsquo;Sample code number&amp;rsquo;,&amp;lsquo;Clump Thickness&amp;rsquo;, &amp;lsquo;Uniformity of Cell Size&amp;rsquo;,&amp;lsquo;Uniformity of Cell Shape&amp;rsquo;,&amp;lsquo;Marginal Adhesion&amp;rsquo;, &amp;lsquo;Single Epithelial Cell Size&amp;rsquo;,&amp;lsquo;Bare Nuclei&amp;rsquo;,&amp;lsquo;Bland Chromatin&amp;rsquo;,&amp;lsquo;Normal Nucleoli&amp;rsquo;,&amp;lsquo;Mitoses&amp;rsquo;,&amp;lsquo;Class&amp;rsquo;]&lt;/li&gt;
+&lt;li&gt;return:数据.&lt;/li&gt;
+&lt;li&gt;replace(to_replace=’’,value=)：返回数据.&lt;/li&gt;
+&lt;li&gt;dropna():返回数据.
+注：读取文件只要是.CSV文件就可以使用load_csv()方法，即使文件地址是网站.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dataframe-二维series容器&#34;&gt;DataFrame 二维，Series容器&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./f5.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;dataframe对象既有行索引又有列索引&#34;&gt;DataFrame对象既有行索引，又有列索引&lt;/h4&gt;
+&lt;p&gt;行索引，表明不同行，横向索引，叫index，0轴，axis=0；
+列索引，表名不同列，纵向索引，叫columns，1轴，axis=1．
+和一个ndarray一样，通过ndim，shape，dtype了解这个ndarray的基本信息．
+&lt;img src=&#34;./f6.png&#34; alt=&#34;png&#34;&gt;
+　　获得使用次数最高的前几个名字是什么？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import pandas as pd
+df = pd.read_csv(&amp;quot;./dogNames.csv&amp;quot;)
+# print(df.head())
+# print(df.info())
+# dataFrame 中排序的方法
+df = df.sort_values(&amp;quot;Count_AnimalName&amp;quot;,ascending=False)
+print(df.head())
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f7.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def sort_values(self, by, axis=0, ascending=True, inplace=False, kind=&#39;quicksort&#39;, 
+		na_position=&#39;last&#39;)
+# ascending：升序：True		
+#            降序：False
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;问题：数据有10列，我想按照其中的第1，第3，第8列排序？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# pandas取行或者列的注意点
+# - 方括号写数组,表示取行,对行进行操作
+# - 写字符串,表示的去列索引,对列进行操作
+print(df[:20])
+print(df[&amp;quot;Row_Labels&amp;quot;])
+print(type(df[&amp;quot;Row_Labels&amp;quot;]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;还有更多的经过pandas优化过的选择方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;df.loc&lt;/code&gt; 通过标签索引行数据（行列的名字）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;df.loc[“a”,”w”]  # a行w列
+df.loc[“a”,:]  # a行
+df.loc[:,”w”]  # w列
+df.loc[[“a”,”c”],:]  # a，c行
+df.loc[:,[“w”,”z”]]  # w，z列
+df.loc[[“a”,”c” ,[“w”,”z”]]  # a,c行，w,z列
+df.loc[[“a”:”c” ,[“w”,”z”]]  # a到c行，w,z列
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;df.iloc &lt;/code&gt;通过位置获取行数据（行列号-1）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;df.iloc[1,:]    # 第二行
+df.iloc[:,2]    # 第三列
+df.iloc[:,[2,1]]    # 第三列第二列
+df.iloc[[0,2], [2,1]]	# 第1,3行, 第3,2列
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f9.png&#34; alt=&#34;png&#34;&gt;
+赋值更改数据的过程：
+&lt;img src=&#34;./f10.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;布尔索引&#34;&gt;布尔索引&lt;/h4&gt;
+&lt;p&gt;　　找到所有的使用次数超过800的狗的名字.
+&lt;img src=&#34;./f11.png&#34; alt=&#34;png&#34;&gt;
+找到所有的使用次数超过700并且名字的字符串的长度大于4的狗的名字
+&lt;img src=&#34;./f12.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;字符串方法&#34;&gt;字符串方法&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;./f13.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pandas缺失数据的处理&#34;&gt;Pandas缺失数据的处理&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./f14.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据缺失通常有两种情况&#34;&gt;数据缺失通常有两种情况：&lt;/h3&gt;
+&lt;p&gt;　　一种就是空，None等，在pandas是NaN(和np.nan一样);另一种是我们让其为0，蓝色框中对于NaN的数据，在numpy中我们是如何处理的？&lt;/p&gt;
+&lt;p&gt;　　在pandas中我们处理起来非常容易.&lt;/p&gt;
+&lt;p&gt;判断数据是否为NaN：&lt;code&gt;pd.isnull(df),pd.notnull(df)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;处理方式1：删除NaN所在的行列dropna (axis=0, how=&amp;lsquo;any&amp;rsquo;, inplace=False)# 是否原地修改&lt;/li&gt;
+&lt;li&gt;处理方式2：填充数据，t.fillna(t.mean()),t.fiallna(t.median()),t.fillna(0)&lt;/li&gt;
+&lt;li&gt;处理为0的数据：&lt;code&gt;t[t==0]=np.nan&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然并不是每次为0的数据都需要处理计算平均值等情况，nan是不参与计算的，但0会.&lt;/p&gt;
+&lt;h3 id=&#34;数据变形&#34;&gt;数据变形：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;处理重复数据
+&lt;ul&gt;
+&lt;li&gt;判断数据是否重复，&lt;code&gt;duplicated()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;去除重复数据，&lt;code&gt;drop_dumplicates()&lt;/code&gt;，可指定列及如何保留数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用函数或map转化数据，通常根据字典进行数据转化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;data = pd.DataFrame({&#39;food&#39;: [&#39;bacon&#39;, &#39;pulled pork&#39;, &#39;bacon&#39;, &#39;Pastrami&#39;, &#39;corned beef&#39;, 
+       &#39;Bacon&#39;, &#39;pastrami&#39;, &#39;honey ham&#39;, &#39;nova lox&#39;], 
+       &#39;ounces&#39;: [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f15.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 添加一列，用于指定食物的来源
+meat_to_animal = {
+    &#39;bacon&#39;: &#39;pig&#39;,
+    &#39;pulled pork&#39;: &#39;pig&#39;,
+    &#39;pastrami&#39;: &#39;cow&#39;,
+    &#39;corned beef&#39;: &#39;cow&#39;,
+    &#39;honey ham&#39;: &#39;pig&#39;,
+    &#39;nova lox&#39;: &#39;salmon&#39;
+}
+# 使用map()
+lowercased = data[&#39;food&#39;].str.lower()
+data[&#39;animal&#39;] = lowercased.map(meat_to_animal)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f16.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;替换值，&lt;code&gt;replace()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;离散化和分享操作，&lt;code&gt;pd.cut()&lt;/code&gt;，返回&lt;code&gt;Categorical&lt;/code&gt;对象
+&lt;img src=&#34;./f17.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./f18.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;哑变量操作，&lt;code&gt;pd.get_dummies()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;向量化字符串操作
+&lt;ul&gt;
+&lt;li&gt;字符串列越苏中是否包含子字符串，&lt;code&gt;ser_obj.str.contains()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;字符串列切片操作，&lt;code&gt;ser_obj.str[a:b]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

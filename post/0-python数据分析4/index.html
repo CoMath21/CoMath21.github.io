@@ -1,0 +1,1340 @@
+<!DOCTYPE html><html lang="zh-Hans" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="CoMath">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Python数据分析之常用统计方法.">
+
+  
+  <link rel="alternate" hreflang="zh-Hans" href="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9d711cebf380679328885aff8188d64e.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="CoMath">
+  <meta property="og:url" content="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/">
+  <meta property="og:title" content="Python数据分析（四） | CoMath">
+  <meta property="og:description" content="Python数据分析之常用统计方法."><meta property="og:image" content="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/featured.png">
+  <meta property="twitter:image" content="https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/featured.png"><meta property="og:locale" content="zh-Hans">
+  
+    
+      <meta property="article:published_time" content="2021-01-28T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-01-28T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/"
+  },
+  "headline": "Python数据分析（四）",
+  
+  "image": [
+    "https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/featured.png"
+  ],
+  
+  "datePublished": "2021-01-28T00:00:00Z",
+  "dateModified": "2021-01-28T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Xin态好先生"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CoMath",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Python数据分析之常用统计方法."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Python数据分析（四） | CoMath</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7264cf0eba3b66951b36da7d2cecf9c5.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>搜索</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="搜索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="搜索...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="切换导航">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>首页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/category"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tag"><span>标签</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>说说</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/people"><span>关于</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="搜索"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>浅色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>深色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>自动</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Python数据分析（四）</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/admin/">Xin态好先生</a></span>, <span >
+      <a href="/authors/comath/">CoMath</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2021年1月28日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 分钟阅读时长
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>, <a href="/category/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 327px;">
+  <div style="position: relative">
+    <img src="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/featured_hud4406663ca95c195b138a9aa64aa681b_38811_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    <span class="article-header-caption">CoMath</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>　　对于这一组电影数据，如果我们想runtime的分布情况.</p>
+<pre><code># coding=utf-8
+import pandas as pd
+from matplotlib import pyplot as plt
+file_path = &quot;./IMDB-Movie-Data.csv&quot;
+df = pd.read_csv(file_path)
+# print(temp_list.tolist())
+# nums = set([i for j in temp_list for i in j])
+# print(len(nums))
+time_list = df[&quot;Runtime (Minutes)&quot;].values
+
+max_time = time_list.max()
+min_time = time_list.min()
+
+dis = (max_time - min_time)//5
+plt.figure(figsize=(20,8),dpi=80)
+plt.hist(time_list,dis)
+plt.xticks(range(min_time,max_time,5))
+plt.show()
+</code></pre>
+<p><img src="./1.png" alt="png">
+　　对于这一组电影数据，如果我们希望统计电影分类(genre)的情况，应该如何处理数据？</p>
+<p><b>思路</b>：重新构造一个全为0的数组，列名为分类，如果某一条数据中分类出现过，就让0变为1.</p>
+<pre><code># coding=utf-8
+import pandas as pd
+from matplotlib import pyplot as plt
+import numpy as np
+file_path = &quot;./IMDB-Movie-Data.csv&quot;
+# 读取CSV文件
+df = pd.read_csv(file_path)
+print(df[&quot;Genre&quot;].head(3))
+# 统计分类的列表
+temp_list = df[&quot;Genre&quot;].str.split(&quot;,&quot;).tolist()  #[[],[],[]]
+genre_list = list(set([i for j in temp_list for i in j]))
+# 等价于 genre_list = []
+# for i in temp_genre_list:
+#    genre_list.extend(i)
+# genre_list = list(set(genre_list))
+
+# 构造全为0的数组
+zeros_df = pd.DataFrame(np.zeros((df.shape[0],len(genre_list))),columns=genre_list)
+# 给每个电影出现分类的位置赋值1
+for i in range(df.shape[0]):
+    #zeros_df.loc[0,[&quot;Sci-fi&quot;,&quot;Mucical&quot;]] = 1
+    zeros_df.loc[i,temp_list[i]] = 1
+# 统计每个分类的电影的数量和
+genre_count = zeros_df.sum(axis=0)
+# 排序
+genre_count = genre_count.sort_values()
+_x = genre_count.index
+_y = genre_count.values
+#画图
+plt.figure(figsize=(20,8),dpi=80)
+plt.bar(range(len(_x)),_y,width=0.4,color=&quot;orange&quot;)
+plt.xticks(range(len(_x)),_x)
+plt.show()
+</code></pre>
+<p><img src="./2.png" alt="png"></p>
+<h2 id="数据合并之join">数据合并之join</h2>
+<p>　　join:默认情况下他是把行索引相同的数据合并到一起.
+<img src="./3.png" alt="png"></p>
+<h2 id="数据合并之merge">数据合并之merge</h2>
+<p>　　merge:按照指定的列把数据按照一定的方式合并到一起</p>
+<pre><code>merge(left, right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), copy=True, indicator=False, validate=None)
+import pandas as pd
+df1=pd.DataFrame({'key':['a','b','a','b','b'],'value1':range(5)})
+df2=pd.DataFrame({'key':['a','c','c','c','c'],'value2':range(5)})
+display(df1,df2,pd.merge(df1,df2))
+</code></pre>
+<p><img src="./4.png" alt="png"></p>
+<ul>
+<li>默认的合并方式inner，交集;</li>
+<li>merge outer，并集，NaN补全;</li>
+<li>merge left，左边为准，NaN补全;</li>
+<li>merge right，右边为准，NaN补全.</li>
+</ul>
+<h2 id="分组和聚合">分组和聚合</h2>
+<p>　　在pandas中类似的分组的操作有很简单的方式来完成</p>
+<pre><code>grouped = df.groupby(by=&quot;columns_name&quot;)
+</code></pre>
+<p>grouped是一个DataFrameGroupBy对象，是可迭代的;grouped中的每一个元素是一个元组，元组里面是（索引(分组的值)，分组之后的DataFrame）.</p>
+<p>那么，<em>分组之后的每个DataFrame的长度？</em>
+长度是一个思路，但更多的方法(聚合方法)来解决这个问题.
+DataFrameGroupBy对象有很多经过优化的方法.
+<img src="./5.png" alt="png">
+　　如果需要对国家和省份进行分组统计</p>
+<pre><code>grouped = df.groupby(by=[df[&quot;Country&quot;],df[&quot;State/Province&quot;]])
+</code></pre>
+<p>很多时候我们只希望对获取分组之后的某一部分数据，或者说我们只希望对某几列数据进行分组，这个时候我们应该怎么办呢？
+获取分组之后的某一部分数据：</p>
+<pre><code>df.groupby(by=[&quot;Country&quot;,&quot;State/Province&quot;])[&quot;Country&quot;].count()
+</code></pre>
+<p>对某几列数据进行分组：</p>
+<pre><code>df[&quot;Country&quot;].groupby(by=[df[&quot;Country&quot;],df[&quot;State/Province&quot;]]).count()
+</code></pre>
+<p>观察结果，由于只选择了一列数据，所以结果是一个Series类型.</p>
+<p>如果我想返回一个DataFrame类型呢？</p>
+<pre><code>t1 = df[[&quot;Country&quot;]].groupby(by=[df[&quot;Country&quot;],df[&quot;State/Province&quot;]]).count()
+t2 = df.groupby(by=[&quot;Country&quot;,&quot;State/Province&quot;])[[&quot;Country&quot;]].count()
+</code></pre>
+<p>以上的两条命令结果一样，和之前的结果的区别在于当前返回的是一个DataFrame类型.</p>
+<h2 id="索引和复合索引">索引和复合索引</h2>
+<h3 id="简单的索引操作">简单的索引操作：</h3>
+<ul>
+<li>获取index：<code>df.index</code></li>
+<li>指定index ：<code>df.index = ['x','y']</code></li>
+<li>重新设置index : <code>df.reindex(list(&quot;abcedf&quot;))</code></li>
+<li>指定某一列作为index ：<code>df.set_index(&quot;Country&quot;,drop=False)</code></li>
+<li>返回index的唯一值：<code>df.set_index(&quot;Country&quot;).index.unique()</code></li>
+</ul>
+<p>　　假设a为一个DataFrame,那么当<code>a.set_index([&quot;c&quot;,&quot;d&quot;])</code>即设置两个索引的时候是什么样子的结果呢？</p>
+<pre><code>a = pd.DataFrame({'a': range(7),'b': range(7, 0, -1),'c': ['one','one','one','two','two','two', 'two'],'d': list(&quot;hjklmno&quot;)})
+</code></pre>
+<h3 id="series复合索引">Series复合索引</h3>
+<p><img src="./6.png" alt="png">
+<img src="./7.png" alt="png"></p>
+<h3 id="dataframe复合索引">DataFrame复合索引</h3>
+<p><img src="./8.png" alt="png"></p>
+<p><b>例</b>.现在有2015到2017年25万条911的紧急电话的数据，请统计出出这些数据中不同类型的紧急情况的次数.</p>
+<pre><code>import pandas as pd
+import numpy as np
+from matplotlib import pyplot as plt
+
+df = pd.read_csv(&quot;./911.csv&quot;)
+
+# print(df.info())
+temp_list = df[&quot;title&quot;].str.split(&quot;:&quot;).tolist()
+cate_list = [i[0] for i in temp_list]
+cate_set_list = list(set(cate_list))
+df[&quot;type&quot;] = pd.DataFrame(np.array(cate_list).reshape((df.shape[0],1)))
+# print(df.head())
+cate_zeros = pd.DataFrame(np.zeros((df.shape[0],len(cate_set_list))),columns=cate_set_list)
+for cate in cate_set_list:
+    cate_zeros[cate][df[&quot;type&quot;].str.contains(cate)] = 1
+zeros_sum = cate_zeros.sum(axis=0)
+sum_values = zeros_sum.values
+plt.figure(figsize=(8, 6),dpi=80)
+plt.bar(cate_set_list,sum_values,color=&quot;orange&quot;,width=0.4)
+plt.show()
+</code></pre>
+<p><img src="./9.png" alt="png">
+　　统计出不同月份不同类型紧急电话的次数的变化情况，应该怎么做可以按照上面的方法将时间戳按照右边“-”进行切割，然后将前面的字符串定义为原数组的最后一列，在进行其他操作. 也可以使用pandas的时间序列.</p>
+<h2 id="pandas中的时间序列">pandas中的时间序列</h2>
+<p>　　不管在什么行业，时间序列都是一种非常重要的数据形式，很多统计数据以及数据的规律也都和时间序列有着非常重要的联系,而且在pandas中处理时间序列是非常简单的生成一段时间范围.</p>
+<pre><code>pd.date_range(start=None, end=None, periods=None, freq='D')
+</code></pre>
+<p>start和end以及freq配合能够生成start和end范围内以频率freq的一组时间索引.
+start和periods以及freq配合能够生成从start开始的频率为freq的periods个时间索引.
+<img src="./10.png" alt="png">
+<img src="./11.png" alt="png"></p>
+<h2 id="在dataframe中使用时间序列">在DataFrame中使用时间序列</h2>
+<pre><code>index=pd.date_range(&quot;20170101&quot;,periods=10)
+df = pd.DataFrame(np.random.rand(10),index=index)
+</code></pre>
+<p>回到最开始的911数据的案例中，我们可以使用pandas提供的方法把时间字符串转化为时间序列.</p>
+<pre><code>df[&quot;timeStamp&quot;] = pd.to_datetime(df[&quot;timeStamp&quot;],format=&quot;&quot;)
+</code></pre>
+<p>format参数大部分情况下可以不用写，但是对于pandas无法格式化的时间字符串，我们可以使用该参数，比如包含中文.</p>
+<h2 id="pandas重采样">pandas重采样</h2>
+<p>　　重采样：指的是将时间序列从一个频率转化为另一个频率进行处理的过程，将高频率数据转化为低频率数据为降采样，低频率转化为高频率为升采样.pandas提供了一个resample的方法来帮助我们实现频率转化.
+<img src="./12.png" alt="png"></p>
+<h2 id="periodindex">PeriodIndex</h2>
+<p>　　之前所学习的DatetimeIndex可以理解为时间戳，那么现在我们要学习的PeriodIndex可以理解为时间段．</p>
+<pre><code>periods = pd.PeriodIndex(year=data[&quot;year&quot;],month=data[&quot;month&quot;],day=data[&quot;day&quot;],hour=data[&quot;hour&quot;],freq=&quot;H&quot;)
+</code></pre>
+<p>那么如果给这个时间段降采样呢？</p>
+<pre><code>data = df.set_index(periods).resample(&quot;10D&quot;).mean()
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg" alt="Xin态好先生"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">Xin态好先生</a></h5>
+      
+      <p class="card-text">机会是给有准备的人的.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:comath@qq.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1375264022&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">
+        <i class="fab fa-qq"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CoMath21" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/comath/avatar_hu5dbed3c1e225bfb246e59dc7d66e77de_260503_270x270_fill_lanczos_center_2.png" alt="CoMath"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">CoMath</a></h5>
+      <h6 class="card-subtitle">微信公众号</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>相关</h3>
+    <ul>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/">Python数据分析（三）</a></li>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902/">Python数据分析（二）</a></li>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%901/">Python数据分析（一）</a></li>
+      
+      <li><a href="/post/1-hibernate/">Hibernate学习笔记</a></li>
+      
+      <li><a href="/post/1-struts2/">Struts2学习笔记</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 CoMath Powered by Hugo Theme Academic
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> 复制
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> 下载
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"没有找到结果","placeholder":"搜索...","results":"搜索结果"};
+      const content_type = {
+        'post': "文章",
+        'project': "项目",
+        'publication' : "出版物",
+        'event' : "演讲",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

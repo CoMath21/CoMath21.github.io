@@ -1,0 +1,2050 @@
+<!DOCTYPE html><html lang="zh-Hans" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="CoMath">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="具体介绍Strust2的相关内容.">
+
+  
+  <link rel="alternate" hreflang="zh-Hans" href="https://CoMath21.github.io/post/1-struts2/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9d711cebf380679328885aff8188d64e.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://CoMath21.github.io/post/1-struts2/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="CoMath">
+  <meta property="og:url" content="https://CoMath21.github.io/post/1-struts2/">
+  <meta property="og:title" content="Struts2学习笔记 | CoMath">
+  <meta property="og:description" content="具体介绍Strust2的相关内容."><meta property="og:image" content="https://CoMath21.github.io/post/1-struts2/featured.png">
+  <meta property="twitter:image" content="https://CoMath21.github.io/post/1-struts2/featured.png"><meta property="og:locale" content="zh-Hans">
+  
+    
+      <meta property="article:published_time" content="2021-01-29T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-01-29T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://CoMath21.github.io/post/1-struts2/"
+  },
+  "headline": "Struts2学习笔记",
+  
+  "image": [
+    "https://CoMath21.github.io/post/1-struts2/featured.png"
+  ],
+  
+  "datePublished": "2021-01-29T00:00:00Z",
+  "dateModified": "2021-01-29T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Xin态好先生"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CoMath",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "具体介绍Strust2的相关内容."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Struts2学习笔记 | CoMath</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7264cf0eba3b66951b36da7d2cecf9c5.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>搜索</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="搜索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="搜索...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="切换导航">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>首页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/category"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tag"><span>标签</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>说说</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/people"><span>关于</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="搜索"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>浅色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>深色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>自动</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Struts2学习笔记</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/admin/">Xin态好先生</a></span>, <span >
+      <a href="/authors/comath/">CoMath</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2021年1月29日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 分钟阅读时长
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>, <a href="/category/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 383px;">
+  <div style="position: relative">
+    <img src="/post/1-struts2/featured_hu70dd5a183c6982c5b8fe13cfdb3532e4_8643_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    <span class="article-header-caption">CoMath</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="1什么是struts2">1、什么是Struts2:</h2>
+<p>　　Struts2是一个基于MVC设计模式的Web应用框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互. Struts2是WebWork2基础发展而来的.</p>
+<h2 id="2struts2优点">2、Struts2优点：</h2>
+<ol>
+<li>Struts2的应用可以不依赖于Servlet API（request,response）和struts API；这种设计属于无侵入式设计.</li>
+<li>Struts2提供了拦截器,利用拦截器可以进行AOP编程,实现如权限拦截等功能.</li>
+<li>Struts2提供类型转换器,可以把特殊类型参数转换程序要的类型.</li>
+<li>Struts2提供支持多种表现层技术,如JSP,freeMarker,Velocity等.</li>
+<li>Struts2的输入校验可以对指定的方法进行校验.</li>
+<li>Struts2提供了全局范围、包范围、和Action范围的国际换资源文件管理实现.</li>
+</ol>
+<h2 id="3搭建struts2开发环境">3、搭建Struts2开发环境</h2>
+<h3 id="31开发struts2应用依赖的jar文件">3.1、开发Struts2应用依赖的jar文件</h3>
+<p>开发Struts2应用需要依赖的jar文件在解压目录的lib文件夹下,不同的应用需要的JAR包是不同的. 开发Struts2程序最少需要的JAR.</p>
+<ol>
+<li>struts2-core-2.x.x.jar ：Struts2框架的核心类库.</li>
+<li>xwork-2.x.x jar ：XWork类库,Struts2在其上构建.</li>
+<li>ognl-2.6.x.jar ：对象图导航语言(Object Graph Navigation Language),struts2框架通过其读写对象的属性.</li>
+<li>freemarker-2.3.x.jar ：Struts 2的UI标签的模板使用FreeMarker编写.</li>
+<li>commons-logging-1.1.x jar ：ASF出品的日志包,Struts2框架使用这个日志包来支持Log4J和JDK1.4+的日志记录.</li>
+<li>commons-fileupload-12 .1.jar ：文件上传组件,2 .1.6版本后必须加入此文件.
+<img src="./1.png" alt="png"></li>
+</ol>
+<h3 id="32搭建struts2开发环境">3.2、搭建Struts2开发环境</h3>
+<ol>
+<li>找到Struts2需要的几个jar包；</li>
+<li>编写配置struts2的配置文件：src下创建struts.xml文件；</li>
+<li>在web.xml中加入struts2 MVC框架启动配置</li>
+</ol>
+<pre><code>&lt;filter&gt;
+  &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+  &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.
+StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+</code></pre>
+<p><img src="./2.png" alt="png"></p>
+<h2 id="4strutsxml配置中的包介绍">4、Struts.xml配置中的包介绍</h2>
+<ul>
+<li>配置包时必须指定name属性：
+该属性名字可以任意,但是必须唯一,主要作用在于：如果其他包要继承该包就必须通过该属性(name属性)进行引用.</li>
+<li>包的namespace属性：
+用于定义该包的命名空间,命名空间作为访问该包下Action路径的一部分. 如果不配置,默认为””(空字符串).</li>
+<li>继承方法extends：
+通常每个包都应该继承struts-default包,因为Struts2很多核心的功能都是拦截器来实现的. struts-default定义了这些拦截器和Result类型；struts-default包是在struts2-core-2.jar文件中的struts-default.xml中定义的,struts-default.xml也是Struts2默认配置文件. Struts2每次都会自动加载struts-default.xml文件.<br>
+<img src="./3.png" alt="png">
+<img src="./4.png" alt="png">
+<img src="./5.png" alt="png"></li>
+</ul>
+<h3 id="41action配置中的各种默认值">4.1、Action配置中的各种默认值</h3>
+<p><img src="./6.png" alt="png"></p>
+<ol>
+<li>如果没有为action指定class,默认是ActionSupport.</li>
+<li>如果没有为action指定method,默认执行action中的execute()方法.</li>
+<li>如果没有指定action的name属性,默认值为success.</li>
+</ol>
+<h4 id="action中的result的各种转发类型">Action中的result的各种转发类型</h4>
+<p>　　Struts2常用的结果类型有：dispathcher(默认值)、redirect(重定向)、redirectAction、plainText
+在result中可以使用${属性名}表达式访问action中的属性,表达式里的属性名对应action中的属性.</p>
+<ul>
+<li>dispathcher(默认值)：内部请求转发</li>
+<li>redirect(重定向)：</li>
+</ul>
+<pre><code>// 格式：
+&lt;result type=&quot;redirect&quot;&gt;/hello.jsp&lt;/result&gt;
+// 如果重定向需要带参数,则用：
+&lt;result type=&quot;redirect&quot;&gt;/hello.jsp?id=${id}&lt;/result&gt;
+</code></pre>
+<p>此时,需要在对应的Action下有对应的变量,并且提供get属性.
+注意：重定向不能访问WEB-INF下的文件.</p>
+<ul>
+<li>redirectAction(在其他*Action下)：</li>
+</ul>
+<pre><code>// 格式：
+&lt;action name=&quot; redirectActionName&quot;&gt;
+&lt;result type=&quot; redirectAction&quot;&gt;重定向的name&lt;/result&gt;
+&lt;/action&gt;
+// 如果不不在同一个包下需配置项
+&lt;result type=&quot; redirectAction&quot;&gt;
+	&lt;param name=&quot; actionName&quot;&gt;xxx&lt;/param&gt;
+&lt;param name=&quot; namespace&quot;&gt;/…/…&lt;/param&gt;
+&lt;/result&gt;
+</code></pre>
+<p><b>补充</b>.</p>
+<p>中文字符编码、解码</p>
+<ul>
+<li>编码<code>(java.net.URLEncoder)：URLEncoder.encode(&quot;字符串&quot;,&quot;UTF-8&quot;)</code>;</li>
+<li>解码<code>(java.net.URLDecoder)：URLDecoder.encode(new String (request.getParameter(&quot;属性名&quot;).getBytes(&quot;ISO8859-1&quot;),&quot;UTF-8&quot;),&quot;UTF-8&quot;)</code>;
+JSP文件中可以用<code>$(param.属性名)</code>访问Action中的属性(会乱码)</li>
+</ul>
+<p>　　plaintext(显示原始文件内容的重定向)：例如某功能需要查看源代码</p>
+<pre><code>&lt;action name=&quot; plainText&quot;&gt;
+	&lt;result type=&quot; plainText&quot;&gt;&lt;/result&gt;
+&lt;/action&gt;
+</code></pre>
+<pre><code>注意：当该JSP文件存在中文的时候,会乱码！
+</code></pre>
+<p>需要加入：</p>
+<pre><code>&lt;param name=&quot; location&quot;&gt;/xxx.jsp&lt;/param&gt;&lt;!—定向的路径--&gt;
+&lt;param name=&quot; charSet&quot;&gt;UTF-8&lt;/param&gt;&lt;!--指定读取文件的编码--&gt;
+</code></pre>
+<p>附：Struts2的全视图
+单个包下：</p>
+<pre><code>&lt;package name=&quot; xxx&quot; namespace=&quot; /…/…&quot; extends=&quot; struts-default&quot;&gt;
+&lt;global-results&gt;	
+&lt;result type=&quot; mess…&quot;&gt;/…/…&lt;/result&gt;
+&lt;/global-results&gt;
+&lt;/package&gt;
+</code></pre>
+<p>全局：(在一个包中写,然后其他包继承该包)</p>
+<h3 id="42为action属性注入值">4.2、为Action属性注入值</h3>
+<pre><code>&lt;package name=&quot; xxx&quot; namespace=&quot; /…/…&quot; extends=&quot; struts-default&quot;&gt;
+&lt;action name=&quot; list&quot; class=&quot;com.haibao.HelloWorldAction&quot; method=&quot;execute&quot;&gt;
+  &lt;param name=&quot;path &quot;&gt;/image&lt;/param&gt;
+  &lt;result name=&quot;success &quot;&gt;/xxx.jsp &lt;/result&gt;
+&lt;/action&gt;
+&lt;/package&gt;
+</code></pre>
+<p>附：在HelloWorldAction下必须存在“path”属性的get方法 ,访问xxx.jsp得到的是“/image”</p>
+<h2 id="5指定struts2处理的请求后缀">5、指定struts2处理的请求后缀</h2>
+<h3 id="51默认后缀及修改">5.1、默认后缀及修改</h3>
+<p>默认后缀：.action
+默认后缀可以通过常量&quot;struts.action.extension&quot;进行修改</p>
+<pre><code>&lt;constant name=&quot; struts.action.extension&quot; value=&quot;do&quot;/&gt;
+</code></pre>
+<p>如果用户指定多个请求后缀,则多个后缀之间以英文逗号( , )隔开</p>
+<pre><code>&lt;constant name=&quot; struts.action.extension&quot; value=&quot;do,action&quot;/&gt;
+</code></pre>
+<h3 id="52常用的常量">5.2、常用的常量</h3>
+<pre><code>&lt;!--指定默认编码集,作用于HTTPServletRequest的setCharacterEncoding方法和freemarker、velocity的输出--&gt;
+&lt;constant name=&quot; struts.i18n.encoding&quot; value=&quot;UTF-8&quot;/&gt;
+&lt;!-- 该属性指定需要的struts2处理的后缀请求如果用户指定多个请求后缀,则多个后缀之间以英文逗号(,)隔开--&gt;
+&lt;constant name=&quot; struts.action.extension&quot; value=&quot;do,action&quot;/&gt;
+&lt;!-- 设置浏览器是否缓存静态内容. 默认值为true(生产环境下使用)--&gt;
+&lt;constant name=&quot;struts.serve.static.browserCache&quot; value=&quot;false&quot;/&gt;
+&lt;!-- 当struts的配置文件修改后,系统是否自动重新加载该文件,默认false(生产环境下使用) --&gt;
+&lt;constant name=&quot; struts.configuration.xml.reload&quot; value=&quot;true&quot;/&gt;
+&lt;!-- 开发模式下使用,这样可以打印出更详细的错误信息 --&gt;
+&lt;constant name=&quot; struts.devMode&quot; value=&quot;true&quot;/&gt; 
+&lt;!-- 默认的视图主题 --&gt;
+&lt;constant name=&quot; struts.ui.theme&quot; value=&quot;smple&quot;/&gt; 
+&lt;!-- 与Spring集成时,指定有Spring负责action对象的创建 --&gt;
+&lt;constant name=&quot; struts.objectFactory&quot; value=&quot;spring&quot;/&gt;
+&lt;!-- 该属性设置Struts2是否支持动态方法调用,默认为true --&gt;
+&lt;constant name=&quot; struts.enable.DynamicMethodlnvocation&quot; value=&quot;true&quot;/&gt;
+&lt;!-- 上传文件的大小限制 --&gt;
+&lt;constant name=&quot; struts.multipart.maxSize&quot; value=&quot;10701096&quot;/&gt;
+</code></pre>
+<h3 id="53常量的定义">5.3、常量的定义</h3>
+<p>常量可以在struts.xml或struts.propreties中配置,建议在struts.xml中配置
+在struts.xml文件中配置常量：</p>
+<pre><code>&lt;struts&gt;
+  &lt;constant name=&quot;struts.action.extension&quot; value=&quot;do&quot;&gt;
+&lt;/struts&gt;
+</code></pre>
+<p>在struts.propreties中配置常量：</p>
+<pre><code>struts.action.extension=do
+</code></pre>
+<p>常量可以在下面多个配置文件中定义,加载常量的搜索顺序为：</p>
+<ul>
+<li>struts-default.xml</li>
+<li>struts-plugin.xml</li>
+<li>struts.xml</li>
+<li>struts.propreties</li>
+<li>web.xml</li>
+</ul>
+<p>多个文件中配置了同一个常量,则后一个文件中配置的常量值会覆盖前面文件中配置的常量值.</p>
+<h2 id="6struts2的处理流程">6、Struts2的处理流程</h2>
+<p><img src="./7.png" alt="png">
+　　StrutsPrepareAndExecuteFilter是Struts的核心控制器,他负责拦截由<url-pattern>/*</url-patternt>指定的所有用户请求,当用户请求到达时,给Filter会过滤用户的请求. 默认情况下,如果用户请求路径不带后缀或者以.action结尾,这时请求被转入Struts2框架处理,否则Struts2框架将略过该请求的处理. 当请求转入Struts2框架处理时会经过一系列的拦截器,然后到Action. 与Struts1不同,Struts2对用户的每一次请求都会创建一个Action,所以Struts2中的Action是线程安全的.</p>
+<p>为应用指定多个Struts配置文件</p>
+<p>　　在大部分应用里,随着应用规模的增加,系统中Action的数量也会大大增加,导致struts.xml配置文件变得臃肿,为了避免struts.xml文件过于庞大,提高struts.xml文件的可读性,可以将一个struts.xml配置文件分解成多个配置文件,然后在struts.xml文件中包含其他配置文件(通过<include>元素指定多个配置文件)</p>
+<pre><code>&lt;struts&gt;
+  &lt;include file=&quot;struts-user.xml&quot;/&gt;
+  &lt;include file=&quot;struts-order.xml&quot;/&gt;
+&lt;/struts&gt;
+</code></pre>
+<h2 id="7动态方法调用">7、动态方法调用：</h2>
+<ol>
+<li>动态方法调用DMI（动态指定）,可以在url地址中动态指定action执行哪个方法,可以通过action+!+方法名. (注：只要Action对象中有这个方法,并且返回类型为String就可以调用,这样struts.xml文件配置文件就可以不需要配置method属性)：</li>
+<li>设置Struts2是否支持动态方法调用,如果没有这一行要加上去,要不然会报错误,如果你加上这一行,但是你把value值改成false,也会报错！
+<img src="./8.png" alt="png"></li>
+</ol>
+<h2 id="8使用通配符定义action">8、使用通配符定义action</h2>
+<p>　　其中*匹配所有,在method=&quot;{数字}&ldquo;中用{数字}表示匹配第几个*,其中跳转页面的命名也是根据第一个*的值进行的.
+<img src="./9.png" alt="png"></p>
+<h2 id="9请求参数的接收">9、请求参数的接收</h2>
+<p>　　在Action中必须存在该属性并且存在该属性的set方法,这样在url中赋值才能接收到get方法直接在url后面加入<code>“?属性名=属性值&amp;属性名=属性值”</code></p>
+<h3 id="91基本类型">9.1、基本类型</h3>
+<p><img src="./10.png" alt="png"></p>
+<h3 id="92复合类型">9.2、复合类型</h3>
+<p>（为了减少复杂度,尽量用复合类型）
+<img src="./11.png" alt="png">
+原理：Struts2首先通过反射技术调用Person的默认构造器创建product对象,然后再通过反射技术调用product中与请求参数同名的属性的setter方法来获取请求参数的值.</p>
+<h2 id="10关于struts216接收中文请求参数乱码问题">10、关于Struts2.1.6接收中文请求参数乱码问题</h2>
+<p>　　Struts2.1.6版本中存在一个Bug,即接收到的中文请求参数为乱码（以post方法提交）,原因是struts2.1.6在获取并使用了请求参数后才调用HttpServletRequest的setCharacterEncoding()方法进行编码设置,导致应用使用的就是乱码请求参数.</p>
+<p>解决方法：新建一个Filter,把这个Filter放置在Struts2的Filter之前,然后在doFilter()方法里添加一下代码：</p>
+<pre><code>public void doFilter(…){
+  HttpServletRequest req = (HttpServletRequest)request;
+  req.setCharacterEncoding(&quot;UTF-8&quot;);
+  filterchain.doFilter(request,response);
+}
+</code></pre>
+<h2 id="11自定义类型转换器">11、自定义类型转换器</h2>
+<h3 id="111局部类型转换器">11.1、局部类型转换器：</h3>
+<ol>
+<li>首先需要定义类并继承DefaultTypeConverter类;</li>
+<li>在Action类所在的包下放置ActionClassName-conversion.properties文件；其中ActionClassName是Action的类名,后面的-conversion.properties是固定写法;</li>
+<li>在.properties文件中内容为：属性名称=类型转换器的全类名.
+以出生年月为例：
+<img src="./12.png" alt="png"></li>
+</ol>
+<h3 id="112全局类型转换器">11.2、全局类型转换器：</h3>
+<p>在src(根目录)下放置xwork-conversion.properties.
+文件中的内容为：
+带转换的类型=类型转换器的全类名
+例如：java.util.Date=com.haibao.…
+11.3、访问或添加属性
+仅仅是为了访问添加：</p>
+<pre><code>public String scope() throws Exception{//方法
+  ActionContext ctx = ActionContext.getContext();
+  ctx.getApplication().put(&quot;app&quot;,&quot;应用范围&quot;);//往ServletContext里放入app
+  ctx.getSession().put(&quot;ses&quot;,&quot;session范围&quot;)；//往ServletContext里放入ses
+  ctx.put(&quot;req&quot;,&quot;request范围&quot;)；//往ServletContext里放入req
+  return &quot;scope&quot;;//
+}
+</code></pre>
+<p>JSP中：</p>
+<pre><code>&lt;body&gt;
+  ${applicationScope.app}&lt;br&gt;
+  ${sessionScope.ses}&lt;br&gt;
+  ${requestScope.ses}&lt;br&gt;
+&lt;body&gt;
+</code></pre>
+<p>要是想得到对象：</p>
+<pre><code>// 方法一：通过ServletActionContext类直接实现
+public String rsa() throws Exception{//方法
+  HttpServletRequest request = ServletActionContext.getRequest();
+  ServletContext servletContext = ServletActionContext.getServletContest();
+  request.setAttribute(&quot;req&quot;,&quot;应用范围&quot;);
+  request.getSession().setAttribute(&quot;ses&quot;,&quot;session范围&quot;)；
+  servletContext.setAttribute(&quot;app&quot;,&quot;应用范围&quot;);
+  return &quot;scope&quot;;//
+}
+// 方法二：通过指定接口,有Struts框架运行时注入
+public class HelloWorldAction implements ServletRequestAware,
+ServletResponseAware,ServletContextAware{
+  private HttpServletRequest requesr;
+  private ServletContextResponse Context;
+  private HttpServletResponse response;
+
+public void setServletRequest(HttoServletRequest req){
+  this.request = req;
+}
+public void setServletResponse(){
+
+}
+public void setServletContext(){
+
+}
+</code></pre>
+<h2 id="12文件上传">12、文件上传</h2>
+<h3 id="121单文件上传">12.1、单文件上传</h3>
+<p><b>步骤</b></p>
+<ol>
+<li>第一步：在WEB-INF/lib下加入commons-fileupload-1.2.1.jar（2.1版本之后必须添加）、commons-io.jar（需要用到里面的工具类）</li>
+<li>第二步：把form表的enctype设置为：“multipart/form-data”</li>
+</ol>
+<pre><code>&lt;form action=&quot;${pageContext.request.contextPath}/uploadAction_execute.action&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot;&gt;
+    文件：&lt;input type=&quot;file&quot; name=&quot;image&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;上传&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<ol start="3">
+<li>第三步：在Action类中添加以下属性</li>
+</ol>
+<pre><code>public class UploadAction {
+  private File image;// 文件名称
+  // 如果想得到上传文件的名称,则定义文件名. 格式：文件名称+FileName
+  private String imageFileName;// 得到上传文件名称
+  // 如果想得到文件的类型,则定义文件名. 格式：文件名称+ContextType
+  private String imageContextType;
+  public String getImageFileName() {
+    return imageFileName;
+  }
+  public void setImageFileName(String imageFileName) {
+    this.imageFileName = imageFileName;
+  }
+  // 提供与字段名称相符的get、set属性,以便得到上传的文件
+  public File getImage() {
+    return image;
+  }
+  public void setImage(File image) {
+    this.image = image;
+  }
+  public String execute() throws Exception {
+    // 在该方法下进行保存
+    String realPath = ServletActionContext.getServletContext().getRealPath(
+        &quot;/images&quot;);// 得到根目录
+    System.out.println(&quot;*****&quot; + realPath + &quot;****&quot;);
+    if (image != null) {
+      File savefile = new File(new File(realPath), imageFileName);// 保存到...
+      if (!savefile.getParentFile().exists())
+        savefile.getParentFile().mkdirs();
+      FileUtils.copyFile(image, savefile);// 调用commons-io.jar下的工具类Copy文件到指定位置
+      ActionContext.getContext().put(&quot;message&quot;, &quot;上传成功&quot;);// 返回信息
+    }
+    return &quot;success&quot;;
+  }
+}
+</code></pre>
+<p><img src="./13.png" alt="png">
+<img src="./14.png" alt="png"></p>
+<h3 id="122多文件上传">12.2、多文件上传</h3>
+<p>　　只需要将单文件上传的第三步：在Action类中添加以下属性中把单个文件变成数组.</p>
+<pre><code>public class moreUploadAction {
+  private File[] image;// 文件名称
+  // 如果想得到上传文件的名称,则定义文件名. 格式：文件名称+FileName
+  private String[] imageFileName;// 得到上传文件名称
+  // 如果想得到文件的类型,则定义文件名. 格式：文件名称+ContextType
+  private String[] imageContextType;
+  public File[] getImage() {
+    return image;
+  }
+  public void setImage(File[] image) {
+    this.image = image;
+  }
+  public String[] getImageFileName() {
+    return imageFileName;
+  }
+  public void setImageFileName(String[] imageFileName) {
+    this.imageFileName = imageFileName;
+  }
+  public String[] getImageContextType() {
+    return imageContextType;
+  }
+  public void setImageContextType(String[] imageContextType) {
+    this.imageContextType = imageContextType;
+  }
+  public String execute() throws Exception {
+    // 在该方法下进行保存
+    String realPath = ServletActionContext.getServletContext().getRealPath(
+        &quot;/images&quot;);// 得到根目录
+    System.out.println(&quot;*****&quot; + realPath + &quot;****&quot;);
+    if (image != null) {
+      File savedir = new File(realPath);
+      if (!savedir.exists())
+        savedir.mkdirs();
+      for (int i = 0; i &lt; image.length; i++) {
+        File savefile = new File(savedir, imageFileName[i]);// 保存到...
+        FileUtils.copyFile(image[i], savefile);// 调用commons-io.jar下的工具类Copy文件到指定位置
+      }
+  ActionContext.getContext().put(&quot;message&quot;, &quot;上传成功&quot;);// 返回信息
+    }
+    return &quot;success&quot;;
+  }
+}
+</code></pre>
+<h2 id="13自定义拦截器">13、自定义拦截器</h2>
+<p>需求：对于登陆的用户可以访问Action中的所有方法,而没有登录的用户则不可以访问任何方法.</p>
+<p>方法：添加自定义拦截器. 实现<code>com.opensymphony.xwork2.interceptor.interceptor</code>接口</p>
+<pre><code>@Override
+public String intercept(ActionInvocation arg0) throws Exception {
+  // 当拦截到Action时执行该方法
+  // 得到session中存在的对象
+  Object user = ActionContext.getContext()
+.getSession().get(&quot;user&quot;);
+  // 如果希望被拦截的的方法执行,调用arg0.invoke();
+  if (user != null)
+    return arg0.invoke();//如果User不为null,代表合法用户,允许访问方法
+  // 返回的是Action中对应方法的返回值String
+  ActionContext.getContext().put(&quot;message&quot;, &quot;请先登录&quot;);
+  return &quot;success&quot;;
+}
+</code></pre>
+<p>在struts.xml中定义拦截器</p>
+<pre><code>&lt;!-- 定义拦截器 --&gt;
+&lt;interceptors&gt;
+  &lt;!-- 自定义拦截器 --&gt;
+  &lt;interceptor name=&quot;permission&quot; class=&quot;com.haibao.interceptor.PermissionInterceptor&quot; /&gt;
+  &lt;!-- 定义拦截器栈  目的：使得Struts2自带的拦截器有效 --&gt;
+  &lt;interceptor-stack name=&quot;permissionStack&quot;&gt;
+    &lt;interceptor-ref name=&quot;defaultStack&quot;/&gt;
+    &lt;interceptor-ref name=&quot;permission&quot;/&gt;
+  &lt;/interceptor-stack&gt;
+&lt;/interceptors&gt;
+&lt;action name=&quot;loginAction_*&quot; class=&quot;com.haibao.action.LoginAction&quot;	method=&quot;{1}&quot;&gt;
+&lt;result name=&quot;success&quot;&gt;/WEB-INF/page/LoginPage.jsp&lt;/result&gt;
+&lt;interceptor-ref name=&quot;permissionStack&quot;/&gt;
+&lt;/action&gt;
+</code></pre>
+<p>注意：
+如果直接在action中定义使用拦截器,则不会在使用Struts自带拦截器！这样Struts2的优势就没有了，所以引入拦截器栈的概念，在拦截器栈中要把Struts的拦截器写在前面，以保证web项目会首先执行Struts再带的拦截器.
+如果想所有的程序都是用自定义的拦截器，可以使用：</p>
+<pre><code>&lt;default-interceptor-ref name=&quot;permissionStack&quot;/&gt;
+</code></pre>
+<p><em>效果演示：</em></p>
+<p>直接访问会被拦截：
+<img src="./15.png" alt="png">
+登录后访问
+<img src="./16.png" alt="png"></p>
+<h2 id="14输入校验">14、输入校验</h2>
+<p>　　Struts2中可以实现对action的所有方法进行校验或者对action的指定方法进项校验，实现方法有两种：</p>
+<ol>
+<li>采用手工编写代码实现</li>
+</ol>
+<ul>
+<li>对所有方法进行校验
+　　重写validate()方法实现，validate()方法会校验action中所有的与execute方法签名相同的方法. 当某个数据校验失败时，调用addFieldError()方法往系统的fieldErrors添加校验失败信息，（为了使用addFieldError()方法，action可以继承ActionSupport），如果系统的fieldError包含失败信息，struts2会将请求转发到名为input的result. 在input视图中可以通过&lt;s:fielderror/&gt;显示失败信息. 需要引入标签</li>
+</ul>
+<pre><code>&lt;%@ taglab url=&quot;/struts-tags&quot; prefix=&quot;s&quot;%&gt;
+</code></pre>
+<pre><code>public void validate(){
+  if(this.mobile==null||&quot;&quot;.equals(this.mobile.trim())){
+    this.addFieldError(&quot;username&quot;,&quot;用户名不能为空&quot;);
+  }
+  if(this.mobile==null||&quot;&quot;.equals(this.mobile.trim())){
+    this.addFieldError(&quot;mobile&quot;,&quot;手机号不能为空&quot;);
+  }else{
+      if(!Pattern.compile(&quot;^1[358]\\d{9}&quot;).matcher(this.mobile.trim()).matches()){
+      this.addFieldError(&quot;mobile&quot;,&quot;手机号格式不正确&quot;);
+    }
+  }		
+}
+</code></pre>
+<ul>
+<li>对指定方法进行校验</li>
+</ul>
+<p>　　重写validateXxx()方法实现，validate()方法会校验action中所有的与execute方法签名相同的方法. 当某个数据校验失败时，调用addFieldError()方法往系统的fieldErrors添加校验失败信息，（为了使用addFieldError()方法，action可以继承ActionSupport），如果系统的fieldError包含失败信息，struts2会将请求转发到名为input的result. 在input视图中可以通过&lt;s:fielderror/&gt;显示失败信息. 需要引入标签</p>
+<pre><code>&lt;%@ taglab url=&quot;/struts-tags&quot; prefix=&quot;s&quot;%&gt;
+</code></pre>
+<pre><code>public void validateUpdata(){
+  if(this.mobile==null||&quot;&quot;.equals(this.mobile.trim())){
+    this.addFieldError(&quot;username&quot;,&quot;用户名不能为空&quot;);
+  }
+  if(this.mobile==null||&quot;&quot;.equals(this.mobile.trim())){
+    this.addFieldError(&quot;mobile&quot;,&quot;手机号不能为空&quot;);
+  }else{
+      if(!Patten.compile(&quot;^1[358]\\d{9}&quot;).matcher(this.mobile.trim()).matches()){
+      this.addFieldError(&quot;mobile&quot;,&quot;手机号格式不正确&quot;);
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>输入校验的流程
+<ul>
+<li>类型转换器队请求参数执行类型转换，并把转换后的赋值给action中的属性.</li>
+<li>如果在执行类型转换的过程中出现异常，系统会将异常信息保存到ActionContext，conversionError拦截器将异常信息封装到fieldErrors里. 不管类型转换是否出现异常，都会进入第3步.</li>
+<li>系统通过反射技术先调用action中的validateXxx()方法，Xxx为方法名.</li>
+<li>在调用action中的validate()方法.</li>
+<li>经过上面4步，如果系统中的fieldErrors存在错误信息（即存放错误信息的集合的size&gt;0），系统自动将请求转发至名称为input视图. 如果系统中的fieldErrors没有任何错误信息，系统将执行action中的处理方法.</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>基于XML配置方式实现</li>
+</ol>
+<p>　　<b>a) 对所有方法进行校验</b></p>
+<p>　　在Action相同包下创建ActionClassName-validation.xml文件.
+<img src="./17.png" alt="png">
+Struts2 的验证规则大概有以下数种：</p>
+<ul>
+<li>required:必填校验器，要求field的值不能为null</li>
+<li>requiredstring:必填字符串校验器，要求field的值不能为null,并且长度大于0，默  认情况下会对字符串去掉前后空格</li>
+<li>int:整数校验器，要求field的值必须在整数范围内，min指定最小值，max指定最大值</li>
+<li>double:双精度浮点数校验器</li>
+<li>date:日期校验器</li>
+<li>expression:表达式校验器</li>
+<li>fieldexpression:字段表达式校验器</li>
+<li>email:电子邮件校验器，要求如果field的值非空，则必须是合法的邮件地址</li>
+<li>url:网址校验器，要求如果field的值非空，则必须是合法的url地址</li>
+<li>visitor:Visitor校验器，用于校验action的复合属性，它指定一个校验文件用于校验复合属性中的属性</li>
+<li>conversion:转换校验器</li>
+<li>stringlength:字符串长度校验器</li>
+<li>regex:正则表达式校验器</li>
+</ul>
+<h4 id="常用的验证规则">常用的验证规则：</h4>
+<ol>
+<li>必填检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;username&quot;&gt;
+&lt;field-validator type=&quot;required&quot;&gt;
+&lt;message&gt;指定检验失败的提示信息&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="2">
+<li>必填字符串检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;username&quot;&gt;
+&lt;field-validator type=&quot;requiredstring&quot;&gt;
+&lt;param name=&quot;trim&quot;&gt;true&lt;/param&gt;
+&lt;message&gt;指定检验失败的提示信息&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="3">
+<li>整数检验器/浮点检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;age&quot;&gt;
+&lt;field-validator type=&quot;int&quot;&gt;
+&lt;param name=&quot;min&quot;&gt;1&lt;/param&gt;
+&lt;param name=&quot;max&quot;&gt;150&lt;/param&gt;
+&lt;message&gt;年纪必须在1到150之间&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="4">
+<li>日期检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;birth&quot;&gt;
+&lt;field-validator type=&quot;date&quot;&gt;
+&lt;param name=&quot;min&quot;&gt;1900-01-01&lt;/param&gt;
+&lt;param name=&quot;max&quot;&gt;2050-02-21&lt;/param&gt;
+&lt;message key=&quot;birth.range&quot;/&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="5">
+<li>字段表达式检验器(要求指定字段满足一个逻辑表达式)</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;re_pass&quot;&gt;
+&lt;field-validator type=&quot;fieldexpression&quot;&gt;
+&lt;!--指定逻辑表达式 --&gt;
+&lt;param name=&quot;expression&quot;&gt; (pass eq re_pass)&lt;/param&gt;
+&lt;message&gt;密码必须和确认密码相等&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="6">
+<li>邮件地址校验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;email&quot;&gt;
+&lt;field-validator type=&quot;email&quot;&gt;
+&lt;message&gt;你的电子邮件地址必须是一个有效的电邮地址&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="7">
+<li>网址检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;url&quot;&gt;
+&lt;field-validator type=&quot;url&quot;&gt;
+&lt;message&gt;你的主页地址必须是一个有效的网址&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="8">
+<li>字符串长度检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;user&quot;&gt;
+&lt;field-validator type=&quot;stringlength&quot;&gt;
+&lt;param name=&quot;minlength&quot;&gt;4&lt;/param&gt;
+&lt;param name=&quot;maxlength&quot;&gt;20&lt;/param&gt;
+&lt;message&gt;你的用户名长度必须在4到20之间&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators&gt;
+</code></pre>
+<ol start="9">
+<li>正则表达式检验</li>
+</ol>
+<pre><code>&lt;validators&gt;
+&lt;field name=&quot;user&quot;&gt;
+&lt;field-validator type=&quot;regex&quot;&gt;
+&lt;param name=&quot;regex&quot;&gt;&lt;![CDATA[(\w{4,25})]]&gt;&lt;/param&gt;
+&lt;message&gt;您输入的用户名只能是字母和数组，且长度必须在4到25之间&lt;/message&gt;
+&lt;/field-validator&gt;
+&lt;/field&gt;
+&lt;/validators
+</code></pre>
+<p>　　<b>b) 对指定方法进行校验</b></p>
+<p>　　取名更改为ActionClassName-ActionName-validation.xml</p>
+<p><b>注意</b></p>
+<ol>
+<li>当action同时提供了两个校验方法，则按照“所有方法”，“指定方法”的顺序汇总后执行；如果后面的文件包含前面文件的方法发生冲突，则只是用后面文件中的校验规则.</li>
+<li>当action继承了另外一个action，父类action的校验文件会先被搜索到.</li>
+</ol>
+<h2 id="15国际化">15、国际化</h2>
+<p>准备资源文件，资源文件的命名格式如下：</p>
+<pre><code>baseName_language_country.propeties
+baseName_language.propeties
+baseName.propeties
+</code></pre>
+<p>其中baseName是资源文件的基本名，可以自定义，但language和country必须是java支持的语言和国家.</p>
+<ul>
+<li>中国：baseName_zh_CN.properties</li>
+<li>美国：baseName_en_US.properties</li>
+</ul>
+<p>如果没有使用开发工具，对于中文的属性文件，应该使用JDK提供的native2ascii命令把文件转换为Unicode编码的文件. 命令使用如下：
+native2ascii 源文件.properties 目标文件.properties</p>
+<h3 id="151配置全局资源与输出国际化信息">15.1、配置全局资源与输出国际化信息</h3>
+<p>当准备好资源文件之后，可以在struts.xml中通过struts.custom.i18n.resources常量把资源文件定义为全局变量：</p>
+<pre><code>&lt;constant name=&quot;struts.custom.i18n.resources&quot; value=&quot;baseName&quot;/ &gt;
+</code></pre>
+<p>其中baseName为资源的基本名.
+之后就可以在页面或者action中访问国际化信息：</p>
+<ul>
+<li>在JSP页面中使用<code>&lt;s:text name=&quot;&quot;/&gt;</code>标签输出国际化信息；<code>&lt;s:text name=&quot;user&quot;/&gt;</code>,name为资源文件中的Key.</li>
+<li>在Action类中，可以继承ActionSupport，使用getText()方法得到国际化信息，该方法的第一个参数用于指定资源文件中的Key.</li>
+<li>在表单标签中，通过Key属性指定资源文件中的Key，如：</li>
+</ul>
+<pre><code>&lt;s:textfield name=&quot;realname&quot; key=&quot;use&quot;/&gt;
+</code></pre>
+<h4 id="输出带占位符的国际化信息">输出带占位符的国际化信息</h4>
+<p>资源文件中的内容如下：
+welcome={0},你好{1}</p>
+<h3 id="152jsp页面中输出占位符的国际化信息">15.2、JSP页面中输出占位符的国际化信息</h3>
+<pre><code>&lt;s:text name=&quot;welcome&quot;&gt;
+  &lt;s:param&gt;熊大&lt;/s:param&gt;
+  &lt;s:param&gt;学习&lt;/s:param&gt;
+&lt;s:text/&gt;
+</code></pre>
+<p>　　在Action类中获取带占位符的国际化信息，可以使用getText(String Key，String[] args)或者getText(String Key，List args)方法</p>
+<h3 id="153包范围资源文件">15.3、包范围资源文件</h3>
+<p>　　在一个大型应用中，整个应用有大量的内容需要实现国际化，如果把国际化的内容放置在全局资源属性文件中，显然会导致资源文件变的庞大、臃肿、不便于维护，支个时候可以针对不同末班，使用包范围来组织国际化文件.</p>
+<p>方法：在java的包下放置package_language_country.properties资源文件，package为固定写法，处于该包及子包下的action都可以访问该资源，当查到指定Key的消息时，系统会先从package资源文件查找，当不存在对应的Key时，才会从常量struts.custom.i18n.resources指定的资源文件中寻找.</p>
+<h3 id="154action范围资源文件">15.4、Action范围资源文件</h3>
+<p>　　在Action类所在的路径，放置ActionClassName_languaage_country.properties资源文件，ActionClassName为action类的简单名称；当指定key的消息时，系统会先从ActionClassName_languaage_country.properties资源文件中查找.</p>
+<h3 id="155jsp中直接访问某个资源文件">15.5、JSP中直接访问某个资源文件</h3>
+<p>struts2提供了&lt;s:i18n&gt;标签，使用&lt;s:i18n&gt;标签可以在类路径下直接从某个资源文件中获取国际化数据，无需任何配置：</p>
+<pre><code>&lt;s:i18n name=&quot;realname&quot;&gt;
+  &lt;s:text name=&quot;realname&quot;/&gt;
+&lt;s:i18n&gt;
+</code></pre>
+<p>realname为要访问的资源文件的基本名</p>
+<p>如果要访问的资源文件在类路径的某个包下，可以访问：</p>
+<pre><code>&lt;s:i18n name=&quot;com/haibao/action/package&quot;&gt;
+  &lt;s:text name=&quot;realname&quot;&gt;
+    &lt;s:param&gt;熊大&lt;/s:param&gt;
+  &lt;/s:text/&gt;
+&lt;s:i18n&gt;
+</code></pre>
+<p>上面访问com.haibao.action包下基本名为<font color=red>package</font>的资源文件.</p>
+<h2 id="16ognl表达式语言">16、OGNL表达式语言</h2>
+<p>　　OGNL是Object Graphic Navigation Language（对象图导航语言）的缩写，是一个开源的项目. Struts2框架采用OGNL作为默认的表达式语言.</p>
+<p>相对于EL表达式，OGNL提供了：</p>
+<ul>
+<li>支持对象方法调用：如xxx.sayHello()；</li>
+<li>支持类静态方法调用和值访问，表达式的格式为@[类全名（包括路径）]@[方法名|值名]
+例如：<code>@java.lang.String@format('foo %s'，bar)</code>
+或者 <code>@com.haibao.Constant@APP_NAME</code></li>
+<li>操作集合对象.</li>
+</ul>
+<p>　　Ognl有一个上下文（Context）概念，它实现了了java.utils.Map接口，Struts2中说明：</p>
+<ol>
+<li>上下文（Context）的实现为ActionContext. 当Struts2接受一个请求时，会迅速创建ActionContext，ValueStack，action. 然后把action存进ValueStack，所以action的实例变量可以被OGNL访问.</li>
+<li>访问上下文（Context）中的对象需要使用#符号标注命名空间. 如<code>#application、#session</code>. 如：<code>#application['userName']==#application.userName//获得application中userName值. </code>
+（#session对象、#request对象、#paramete对象、attr对象—按照page—request—session—application顺序访问其属性）.</li>
+<li>OGNL设定了一个跟对象（root）对象，在Struts2中根对象就是ValueStack（值栈）. 如果访问根对象中的属性，则可以省略#命名空间，直接访问该对象的属性即可. 如：${foo}//获得栈值中某个对象的foo属性.</li>
+</ol>
+<p>注意：Struts2中，OGNL表达式需要配合Struts标签使用. 如：<code>&lt;s:property value=&quot;name&quot;&gt;</code>；使用EL表达式能够访问valueStack中对象的属性，原因是：Struts2对HTTPServletRequest作了进一步的封装.</p>
+<h2 id="17采用ognl表达式创建listmap集合对象">17、采用OGNL表达式创建List/Map集合对象</h2>
+<h3 id="171试用如下直接生成一个list对象">17.1、试用如下直接生成一个List对象：</h3>
+<pre><code>&lt;s:set name=&quot;list&quot; value=&quot;{'zhangsan','lisi','wangwu'}&quot;/&gt;
+&lt;s:iterator value=&quot;#list&quot;&gt;&lt;!-- 迭代器 --&gt;
+	&lt;s:property/&gt;&lt;br&gt;
+&lt;/s:iterator&gt;
+</code></pre>
+<p><img src="./18.png" alt="png">
+　　Set标签用于将某个值放入指定范围</p>
+<ul>
+<li>scope：指定变量被放置的范围，该属性可以接受application、session、request、page或action. 如果没有设置该属性，则默认放置在OGNL Context中.</li>
+<li>value：赋给变量的值，如果没有设置该属性，则将ValueStack栈顶的值赋值给变量.</li>
+</ul>
+<p>生成一个Map对象：(Key&ndash;Value)</p>
+<pre><code>&lt;s:set name=&quot;foobar&quot; value=&quot;#{'k1': 'value1','k2':'value2'}&quot;/&gt;
+&lt;s:iterator value=&quot;# foobar &quot;&gt;&lt;!-- 迭代器 --&gt;
+  &lt;s:property value=&quot;key&quot;/&gt;=&lt;s:property value=&quot;value&quot;/&gt;&lt;br&gt;
+&lt;/s:iterator&gt;
+</code></pre>
+<p>java 迭代方法：</p>
+<pre><code>for(Map.Entry&lt;String,Integer&gt;entry:maps.entrySet){
+  System.out.println(entry.getKey()+&quot;=&quot;+entry.getValue());
+}
+</code></pre>
+<h2 id="18采用ognl表达式判断对象是否存在于集合中">18、采用OGNL表达式判断对象是否存在于集合中</h2>
+<p>使用in和not in
+in表达式</p>
+<pre><code>&lt;s:if test=&quot;foor&quot; in {'foo', 'bar'}&gt;
+在
+&lt;/s:if&gt;
+&lt;s:else&gt;
+  不在
+&lt;/s:else&gt;
+not in 表达式
+&lt;s:if test=&quot;foor&quot; not in {'foo','bar'}&gt;
+  不在
+&lt;/s:if&gt;
+&lt;s:else&gt;
+  在
+&lt;/s:else&gt;
+</code></pre>
+<p>附加：
+除了in和not in之外OGNL还允许使用某个规则获得集合对象的子集</p>
+<ul>
+<li>?:获得所有符合逻辑的元素.</li>
+<li>^:获得符合逻辑的第一个元素.</li>
+<li>$:获得符合逻辑的最后一个元素.</li>
+</ul>
+<p>例如：</p>
+<pre><code>&lt;s:iterator value=&quot;books.{?#this.price}35}&quot;	/&gt;
+</code></pre>
+<h2 id="19常用标签">19、常用标签</h2>
+<h3 id="191propert标签">19.1、propert标签：</h3>
+<p>用于输出指定值：</p>
+<pre><code>&lt;s:set name=&quot;name&quot; value=&quot;kk&quot;/&gt;
+&lt;s:property value=&quot;#name&quot;/&gt;
+</code></pre>
+<ul>
+<li>default:可选属性，如果需要输出指定的属性值为null，则显示该属性指定的值.</li>
+<li>value：可选属性，指定需要输出的属性值，如果没有指定该属性，则默认输出ValueStack栈顶的值.</li>
+<li>escape：可选属性，指定是否格式化HTML代码.</li>
+<li>id：可选属性，指定还元素的标识.</li>
+</ul>
+<h3 id="192iterator标签">19.2、iterator标签</h3>
+<p>iterator标签用于对集合进行迭代，治理的集合包含List、Set和数组</p>
+<pre><code>&lt;s:set name=&quot;list&quot; value=&quot;{'foo','bar'}&quot;/&gt;
+&lt;s:iterator value=&quot;#list&quot; status=&quot;st&quot;&gt;
+&lt;s:color=&lt;s:if test=&quot;#st.odd&quot;&gt;red&lt;/s:if&gt;&lt;s:else&gt;blue&lt;/s:else&gt;&gt;
+  &lt;s:property/&gt;&lt;/font&gt;&lt;br&gt;
+&lt;/s:iterator&gt;
+</code></pre>
+<ul>
+<li>value:可选属性，指定被迭代的集合，如果没有设置该属性，则使用ValueStack栈顶的集合</li>
+<li>id:可选属性，指定即合理元素的id. （过时）</li>
+<li>status：该属性指定迭代时的IteratorStatus实例. 该实例包含以下几个方法：
+<ul>
+<li>int getCount()，返回当前迭代了几个元素</li>
+<li>int getIndex()，返回当前迭代元素的索引</li>
+<li>boolean isEven()，返回当前被迭代元素的索引是否为偶数</li>
+<li>boolean isOdd()，返回当前被迭代元素的索引是否为奇数</li>
+<li>boolean isFirst()，返回当前被迭代元素的索引是否是第一个元素</li>
+<li>boolean isLast()，返回当前被迭代元素的索引是否最后一个元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="193url标签">19.3、url标签</h3>
+<pre><code>&lt;s:url value=&quot;hellowoeld_add&quot; namespace=&quot;/test&quot;&gt;&lt;s:param name=&quot;person&quot; value=&quot;23&quot;/&gt;&lt;/s:url&gt;
+</code></pre>
+<p>生成类似如下路径：
+/<font color=red>struts</font>/test/helloworld_add<font color=red>.adtion</font>?persom=23
+红色部分为内容路径</p>
+<p>当标签的属性作为字符串类型处理时，“%”符号的用途试计算OGNL表达式的值</p>
+<pre><code>&lt;s:set value=&quot;myurl&quot; value='&quot;http://www.sohu.com&quot;'/&gt;
+&lt;s:url value=&quot;myurl&quot;/&gt;&lt;/br&gt;
+&lt;s:url value=&quot;%{#myurl}&quot;/&gt;
+</code></pre>
+<p>输出结果：</p>
+<pre><code># myurl
+http://www.sohu.com
+</code></pre>
+<h3 id="194表单标签checkboxlist复选框">19.4、表单标签：checkboxlist复选框</h3>
+<p>如果集合为list</p>
+<pre><code>&lt;s:checkboxlist name=&quot;list&quot; list=&quot;{'Java','.Net','Ror','PHP'}&quot; value=&quot;{'Java','.Net'}&quot;/&gt;
+</code></pre>
+<p>生成如下html代码：</p>
+<pre><code>&lt;input type=&quot;checkbox&quot; name=&quot;list&quot; value=&quot;Java&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;Java&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;list&quot; value=&quot;.Net&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;.Net&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;list&quot; value=&quot; Ror&quot;/&gt;&lt;lable&gt;Ror&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;list&quot; value=&quot; PHP&quot;/&gt;&lt;lable&gt;PHP&lt;/lable&gt;
+</code></pre>
+<p>如果集合为Map</p>
+<pre><code>&lt;s:checkboxlist name=&quot;map&quot; list=&quot;#{1:'Java',2:'.Net',3:'Ror',4:'PHP'}&quot; listKey=&quot;key&quot; listValue=&quot;value&quot; value=&quot;{1,2,3}&quot;/&gt;
+</code></pre>
+<p>生成如下html代码：</p>
+<pre><code>&lt;input type=&quot;checkbox&quot; name=&quot;map&quot; value=&quot;1&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;Java&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;map&quot; value=&quot;2&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;.Net&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;map&quot; value=&quot;3&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;Ror&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;map&quot; value=&quot;4&quot;/&gt;&lt;lable&gt;PHP&lt;/lable&gt;
+</code></pre>
+<p>如果集合里存放的是javabean</p>
+<pre><code>&lt;%
+  Person p1 = new Person(1,&quot;第一个&quot;);
+  Person p1 = new Person(2,&quot;第一个&quot;);
+  List&lt;Person&gt; list = new ArrayList&lt;Person&gt;();
+  list.add(p1);
+  list.add(p2);
+  request.setAttribute(&quot;person&quot;, list);
+%&gt;
+&lt;s:checkboxlist list=&quot;#request.persons&quot; listKey=&quot;personid&quot; listValue=&quot;name&quot;&gt;&lt;/s:checkboxlist&gt;
+</code></pre>
+<p>personid和name为Person的属性
+生成如下代码：</p>
+<pre><code>&lt;input type=&quot;checkbox&quot; name=&quot;beans&quot; value=&quot;1&quot;/&gt;&lt;lable&gt;第一个&lt;/lable&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;beans&quot; value=&quot;2&quot;/&gt;&lt;lable&gt;第二个&lt;/lable&gt;
+</code></pre>
+<h3 id="195表单标签radio单选框">19.5、表单标签：radio单选框</h3>
+<p>如果集合为list</p>
+<pre><code>&lt;s:radio name=&quot;list&quot; list=&quot;{'Java','.Net','Ror','PHP'}&quot; value=&quot;'Java'&quot;/&gt;
+</code></pre>
+<p>生成如下html代码：</p>
+<pre><code>&lt;input type=&quot;radio&quot; name=&quot;list&quot; value=&quot;Java&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;Java&lt;/lable&gt;
+&lt;input type=&quot;radio&quot; name=&quot;list&quot; value=&quot;.Net&quot;/&gt;
+&lt;input type=&quot;radio&quot; name=&quot;list&quot; value=&quot;Ror&quot;/&gt;
+&lt;input type=&quot;radio&quot; name=&quot;list&quot; value=&quot;PHP&quot;/&gt;
+</code></pre>
+<p>如果集合为Map</p>
+<pre><code>&lt;s:radio name=&quot;map&quot; list=&quot;#{1:'Java',2:'.Net'3:,'Ror',4:'PHP'}&quot; 
+listKey=&quot;key&quot; listValue=&quot;value&quot; value=&quot;1&quot;/&gt;
+</code></pre>
+<p>生成如下html代码：</p>
+<pre><code>&lt;input type=&quot;radio&quot; name=&quot;map&quot; value=&quot;1&quot; checked=&quot;checked&quot;/&gt;&lt;lable&gt;Java&lt;/lable&gt;
+&lt;input type=&quot;radio&quot; name=&quot;map&quot; value=&quot;2&quot;/&gt;&lt;lable&gt;.Net&lt;/lable&gt;
+&lt;input type=&quot;radio&quot; name=&quot;map&quot; value=&quot;3&quot;/&gt;&lt;lable&gt;Ror&lt;/lable&gt;
+&lt;input type=&quot;radio&quot; name=&quot;map&quot; value=&quot;4&quot;/&gt;&lt;lable&gt;PHP&lt;/lable&gt;
+</code></pre>
+<p>如果集合里存放的是javabean</p>
+<pre><code>&lt;%
+  Person p1 = new Person(1,&quot;第一个&quot;);
+  Person p1 = new Person(2,&quot;第一个&quot;);
+  List&lt;Person&gt; list = new ArrayList&lt;Person&gt;();
+  list.add(p1);
+  list.add(p2);
+  request.setAttribute(&quot;person&quot;, list);
+%&gt;
+&lt;s:radio name=&quot;beans&quot; list=&quot;#request.persons&quot; listKey=&quot;personid&quot; listValue=&quot;name&quot;/&gt;
+</code></pre>
+<p>personid和name为Person的属性
+生成如下代码：</p>
+<pre><code>&lt;input type=&quot;radio&quot; name=&quot;beans&quot; value=&quot;1&quot;/&gt;&lt;lable&gt;第一个&lt;/lable&gt;
+&lt;input type=&quot;radio&quot; name=&quot;beans&quot; value=&quot;2&quot;/&gt;&lt;lable&gt;第二个&lt;/lable&gt;
+</code></pre>
+<h3 id="196表单标签select下拉选择框">19.6、表单标签select下拉选择框</h3>
+<pre><code>&lt;s:select name=&quot;list&quot; list=&quot;{'Java','.Net'}&quot; value=&quot;'Java'&quot;/&gt;
+</code></pre>
+<p>生成如下html代码：</p>
+<pre><code>&lt;s:select name=&quot;list&quot; id=&quot;list&quot;&gt;
+&lt;option value=&quot;Java&quot; selected=&quot;selected&quot;&gt;Java&lt;option/&gt;
+&lt;option value=&quot;.Net&quot;&gt;.Net &lt;option/&gt;
+&lt;/select&gt;
+&lt;s:select name=&quot;map&quot; list=&quot;#{1:'Java',2:'.Net'3:,'Ror',4:'PHP'}&quot; 
+listKey=&quot;key&quot; listValue=&quot;value&quot; value=&quot;1&quot;/&gt;
+</code></pre>
+<p>生成如下html代码：</p>
+<pre><code>&lt;s:select name=&quot;list&quot; id=&quot;list&quot;&gt;
+&lt;option value=&quot;1&quot; selected=&quot;selected&quot;&gt;Java&lt;option/&gt;
+&lt;option value=&quot;2&quot;&gt;.Net&lt;option/&gt;
+&lt;/select&gt;
+</code></pre>
+<h2 id="20stoken标签放置重复提交">20、&lt;s:token/&gt;标签放置重复提交</h2>
+<p>&lt;s:token/&gt;标签放置重复提交用法如下：
+第一步：在表单中加入&lt;s:token/&gt;</p>
+<pre><code>&lt;s:form action=&quot;Action_execute()&quot; method=&quot;post&quot; &gt;
+  姓名&lt;s:textfield name=&quot;name&quot;/&gt;&lt;s:token/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;发送&quot;/&gt;
+&lt;/s:form&gt;
+</code></pre>
+<p>第二步：</p>
+<pre><code>&lt;action name=&quot;Action_*&quot; class=&quot;com.haibao.action.XMLvalidate&quot;
+      method=&quot;{1}&quot;&gt;
+  &lt;interceptor-ref name=&quot;defaultStack&quot;/&gt;
+  &lt;interceptor-ref name=&quot;token&quot;/&gt;
+  &lt;result name=&quot;ivalid.token&quot;&gt;/message.jsp&lt;/result&gt;
+  &lt;result name=&quot;success&quot;&gt;/WEB-INF/page/message.jsp&lt;/result&gt;
+&lt;/action&gt;
+</code></pre>
+<p>以上配置加入了“token”拦截器和“ivalid.token”结果，因为“token”拦截器在会话的token与请求的token不一致时，将会直接返回“ivalid.token”结果.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  
+  <a class="badge badge-light" href="/tag/java/">Java</a>
+  
+  <a class="badge badge-light" href="/tag/struts2/">Struts2</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg" alt="Xin态好先生"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">Xin态好先生</a></h5>
+      
+      <p class="card-text">机会是给有准备的人的.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:comath@qq.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1375264022&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">
+        <i class="fab fa-qq"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CoMath21" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/comath/avatar_hu5dbed3c1e225bfb246e59dc7d66e77de_260503_270x270_fill_lanczos_center_2.png" alt="CoMath"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">CoMath</a></h5>
+      <h6 class="card-subtitle">微信公众号</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>相关</h3>
+    <ul>
+      
+      <li><a href="/post/1-hibernate/">Hibernate学习笔记</a></li>
+      
+      <li><a href="/post/1-spring2.5/">Spring2.5学习笔记</a></li>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/">Python数据分析（四）</a></li>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/">Python数据分析（三）</a></li>
+      
+      <li><a href="/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%902/">Python数据分析（二）</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 CoMath Powered by Hugo Theme Academic
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> 复制
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> 下载
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"没有找到结果","placeholder":"搜索...","results":"搜索结果"};
+      const content_type = {
+        'post': "文章",
+        'project': "项目",
+        'publication' : "出版物",
+        'event' : "演讲",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

@@ -13,12 +13,327 @@
     </image>
     
     <item>
+      <title>Python数据分析（四）</title>
+      <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%904/</guid>
+      <description>&lt;p&gt;　　对于这一组电影数据，如果我们想runtime的分布情况.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# coding=utf-8
+import pandas as pd
+from matplotlib import pyplot as plt
+file_path = &amp;quot;./IMDB-Movie-Data.csv&amp;quot;
+df = pd.read_csv(file_path)
+# print(temp_list.tolist())
+# nums = set([i for j in temp_list for i in j])
+# print(len(nums))
+time_list = df[&amp;quot;Runtime (Minutes)&amp;quot;].values
+
+max_time = time_list.max()
+min_time = time_list.min()
+
+dis = (max_time - min_time)//5
+plt.figure(figsize=(20,8),dpi=80)
+plt.hist(time_list,dis)
+plt.xticks(range(min_time,max_time,5))
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;
+　　对于这一组电影数据，如果我们希望统计电影分类(genre)的情况，应该如何处理数据？&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;思路&lt;/b&gt;：重新构造一个全为0的数组，列名为分类，如果某一条数据中分类出现过，就让0变为1.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# coding=utf-8
+import pandas as pd
+from matplotlib import pyplot as plt
+import numpy as np
+file_path = &amp;quot;./IMDB-Movie-Data.csv&amp;quot;
+# 读取CSV文件
+df = pd.read_csv(file_path)
+print(df[&amp;quot;Genre&amp;quot;].head(3))
+# 统计分类的列表
+temp_list = df[&amp;quot;Genre&amp;quot;].str.split(&amp;quot;,&amp;quot;).tolist()  #[[],[],[]]
+genre_list = list(set([i for j in temp_list for i in j]))
+# 等价于 genre_list = []
+# for i in temp_genre_list:
+#    genre_list.extend(i)
+# genre_list = list(set(genre_list))
+
+# 构造全为0的数组
+zeros_df = pd.DataFrame(np.zeros((df.shape[0],len(genre_list))),columns=genre_list)
+# 给每个电影出现分类的位置赋值1
+for i in range(df.shape[0]):
+    #zeros_df.loc[0,[&amp;quot;Sci-fi&amp;quot;,&amp;quot;Mucical&amp;quot;]] = 1
+    zeros_df.loc[i,temp_list[i]] = 1
+# 统计每个分类的电影的数量和
+genre_count = zeros_df.sum(axis=0)
+# 排序
+genre_count = genre_count.sort_values()
+_x = genre_count.index
+_y = genre_count.values
+#画图
+plt.figure(figsize=(20,8),dpi=80)
+plt.bar(range(len(_x)),_y,width=0.4,color=&amp;quot;orange&amp;quot;)
+plt.xticks(range(len(_x)),_x)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;数据合并之join&#34;&gt;数据合并之join&lt;/h2&gt;
+&lt;p&gt;　　join:默认情况下他是把行索引相同的数据合并到一起.
+&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;数据合并之merge&#34;&gt;数据合并之merge&lt;/h2&gt;
+&lt;p&gt;　　merge:按照指定的列把数据按照一定的方式合并到一起&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;merge(left, right, how=&#39;inner&#39;, on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=(&#39;_x&#39;, &#39;_y&#39;), copy=True, indicator=False, validate=None)
+import pandas as pd
+df1=pd.DataFrame({&#39;key&#39;:[&#39;a&#39;,&#39;b&#39;,&#39;a&#39;,&#39;b&#39;,&#39;b&#39;],&#39;value1&#39;:range(5)})
+df2=pd.DataFrame({&#39;key&#39;:[&#39;a&#39;,&#39;c&#39;,&#39;c&#39;,&#39;c&#39;,&#39;c&#39;],&#39;value2&#39;:range(5)})
+display(df1,df2,pd.merge(df1,df2))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认的合并方式inner，交集;&lt;/li&gt;
+&lt;li&gt;merge outer，并集，NaN补全;&lt;/li&gt;
+&lt;li&gt;merge left，左边为准，NaN补全;&lt;/li&gt;
+&lt;li&gt;merge right，右边为准，NaN补全.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;分组和聚合&#34;&gt;分组和聚合&lt;/h2&gt;
+&lt;p&gt;　　在pandas中类似的分组的操作有很简单的方式来完成&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grouped = df.groupby(by=&amp;quot;columns_name&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;grouped是一个DataFrameGroupBy对象，是可迭代的;grouped中的每一个元素是一个元组，元组里面是（索引(分组的值)，分组之后的DataFrame）.&lt;/p&gt;
+&lt;p&gt;那么，&lt;em&gt;分组之后的每个DataFrame的长度？&lt;/em&gt;
+长度是一个思路，但更多的方法(聚合方法)来解决这个问题.
+DataFrameGroupBy对象有很多经过优化的方法.
+&lt;img src=&#34;./5.png&#34; alt=&#34;png&#34;&gt;
+　　如果需要对国家和省份进行分组统计&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grouped = df.groupby(by=[df[&amp;quot;Country&amp;quot;],df[&amp;quot;State/Province&amp;quot;]])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;很多时候我们只希望对获取分组之后的某一部分数据，或者说我们只希望对某几列数据进行分组，这个时候我们应该怎么办呢？
+获取分组之后的某一部分数据：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df.groupby(by=[&amp;quot;Country&amp;quot;,&amp;quot;State/Province&amp;quot;])[&amp;quot;Country&amp;quot;].count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对某几列数据进行分组：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df[&amp;quot;Country&amp;quot;].groupby(by=[df[&amp;quot;Country&amp;quot;],df[&amp;quot;State/Province&amp;quot;]]).count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;观察结果，由于只选择了一列数据，所以结果是一个Series类型.&lt;/p&gt;
+&lt;p&gt;如果我想返回一个DataFrame类型呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;t1 = df[[&amp;quot;Country&amp;quot;]].groupby(by=[df[&amp;quot;Country&amp;quot;],df[&amp;quot;State/Province&amp;quot;]]).count()
+t2 = df.groupby(by=[&amp;quot;Country&amp;quot;,&amp;quot;State/Province&amp;quot;])[[&amp;quot;Country&amp;quot;]].count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上的两条命令结果一样，和之前的结果的区别在于当前返回的是一个DataFrame类型.&lt;/p&gt;
+&lt;h2 id=&#34;索引和复合索引&#34;&gt;索引和复合索引&lt;/h2&gt;
+&lt;h3 id=&#34;简单的索引操作&#34;&gt;简单的索引操作：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;获取index：&lt;code&gt;df.index&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定index ：&lt;code&gt;df.index = [&#39;x&#39;,&#39;y&#39;]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重新设置index : &lt;code&gt;df.reindex(list(&amp;quot;abcedf&amp;quot;))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;指定某一列作为index ：&lt;code&gt;df.set_index(&amp;quot;Country&amp;quot;,drop=False)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;返回index的唯一值：&lt;code&gt;df.set_index(&amp;quot;Country&amp;quot;).index.unique()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;　　假设a为一个DataFrame,那么当&lt;code&gt;a.set_index([&amp;quot;c&amp;quot;,&amp;quot;d&amp;quot;])&lt;/code&gt;即设置两个索引的时候是什么样子的结果呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a = pd.DataFrame({&#39;a&#39;: range(7),&#39;b&#39;: range(7, 0, -1),&#39;c&#39;: [&#39;one&#39;,&#39;one&#39;,&#39;one&#39;,&#39;two&#39;,&#39;two&#39;,&#39;two&#39;, &#39;two&#39;],&#39;d&#39;: list(&amp;quot;hjklmno&amp;quot;)})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;series复合索引&#34;&gt;Series复合索引&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./6.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./7.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dataframe复合索引&#34;&gt;DataFrame复合索引&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;例&lt;/b&gt;.现在有2015到2017年25万条911的紧急电话的数据，请统计出出这些数据中不同类型的紧急情况的次数.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import pandas as pd
+import numpy as np
+from matplotlib import pyplot as plt
+
+df = pd.read_csv(&amp;quot;./911.csv&amp;quot;)
+
+# print(df.info())
+temp_list = df[&amp;quot;title&amp;quot;].str.split(&amp;quot;:&amp;quot;).tolist()
+cate_list = [i[0] for i in temp_list]
+cate_set_list = list(set(cate_list))
+df[&amp;quot;type&amp;quot;] = pd.DataFrame(np.array(cate_list).reshape((df.shape[0],1)))
+# print(df.head())
+cate_zeros = pd.DataFrame(np.zeros((df.shape[0],len(cate_set_list))),columns=cate_set_list)
+for cate in cate_set_list:
+    cate_zeros[cate][df[&amp;quot;type&amp;quot;].str.contains(cate)] = 1
+zeros_sum = cate_zeros.sum(axis=0)
+sum_values = zeros_sum.values
+plt.figure(figsize=(8, 6),dpi=80)
+plt.bar(cate_set_list,sum_values,color=&amp;quot;orange&amp;quot;,width=0.4)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./9.png&#34; alt=&#34;png&#34;&gt;
+　　统计出不同月份不同类型紧急电话的次数的变化情况，应该怎么做可以按照上面的方法将时间戳按照右边“-”进行切割，然后将前面的字符串定义为原数组的最后一列，在进行其他操作. 也可以使用pandas的时间序列.&lt;/p&gt;
+&lt;h2 id=&#34;pandas中的时间序列&#34;&gt;pandas中的时间序列&lt;/h2&gt;
+&lt;p&gt;　　不管在什么行业，时间序列都是一种非常重要的数据形式，很多统计数据以及数据的规律也都和时间序列有着非常重要的联系,而且在pandas中处理时间序列是非常简单的生成一段时间范围.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pd.date_range(start=None, end=None, periods=None, freq=&#39;D&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;start和end以及freq配合能够生成start和end范围内以频率freq的一组时间索引.
+start和periods以及freq配合能够生成从start开始的频率为freq的periods个时间索引.
+&lt;img src=&#34;./10.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./11.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;在dataframe中使用时间序列&#34;&gt;在DataFrame中使用时间序列&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;index=pd.date_range(&amp;quot;20170101&amp;quot;,periods=10)
+df = pd.DataFrame(np.random.rand(10),index=index)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;回到最开始的911数据的案例中，我们可以使用pandas提供的方法把时间字符串转化为时间序列.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df[&amp;quot;timeStamp&amp;quot;] = pd.to_datetime(df[&amp;quot;timeStamp&amp;quot;],format=&amp;quot;&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;format参数大部分情况下可以不用写，但是对于pandas无法格式化的时间字符串，我们可以使用该参数，比如包含中文.&lt;/p&gt;
+&lt;h2 id=&#34;pandas重采样&#34;&gt;pandas重采样&lt;/h2&gt;
+&lt;p&gt;　　重采样：指的是将时间序列从一个频率转化为另一个频率进行处理的过程，将高频率数据转化为低频率数据为降采样，低频率转化为高频率为升采样.pandas提供了一个resample的方法来帮助我们实现频率转化.
+&lt;img src=&#34;./12.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;periodindex&#34;&gt;PeriodIndex&lt;/h2&gt;
+&lt;p&gt;　　之前所学习的DatetimeIndex可以理解为时间戳，那么现在我们要学习的PeriodIndex可以理解为时间段．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;periods = pd.PeriodIndex(year=data[&amp;quot;year&amp;quot;],month=data[&amp;quot;month&amp;quot;],day=data[&amp;quot;day&amp;quot;],hour=data[&amp;quot;hour&amp;quot;],freq=&amp;quot;H&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;那么如果给这个时间段降采样呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;data = df.set_index(periods).resample(&amp;quot;10D&amp;quot;).mean()
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Python数据分析（三）</title>
       <link>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/</link>
-      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
       <guid>https://CoMath21.github.io/post/0-python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%903/</guid>
-      <description>&lt;h2 id=&#34;pandas&#34;&gt;Pandas&lt;/h2&gt;
-&lt;p&gt;　&lt;/p&gt;
+      <description>&lt;p&gt;　　Numpy能够帮助我们处理数值，pandas除了处理数值之外(基于numpy)，还能够帮助我们处理其他类型的数据.&lt;/p&gt;
+&lt;h2 id=&#34;pandas的常用数据类型&#34;&gt;pandas的常用数据类型&lt;/h2&gt;
+&lt;h3 id=&#34;series-一维带标签数组&#34;&gt;Series 一维，带标签数组&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;t = pd.Series(np.arange(10),index=list(string.ascoo_uppercase[:10]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f1.png&#34; alt=&#34;png&#34;&gt;
+Series切片和索引
+&lt;img src=&#34;./f2.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./f3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;series的索引和值&#34;&gt;Series的索引和值&lt;/h4&gt;
+&lt;p&gt;对于一个陌生的series类型，可以通过t.index获取其索引值
+&lt;img src=&#34;./f4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pandas读取外部数据&#34;&gt;pandas读取外部数据：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;直接使用&lt;code&gt;pd. read_csv()&lt;/code&gt;即可.&lt;/li&gt;
+&lt;li&gt;如果待数据的数据没有列名，则需要补充，即在读取文件时给定参数names的值.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;pd.read_csv(“’’,names=column_names)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;column_names：指定类别名字,[&amp;lsquo;Sample code number&amp;rsquo;,&amp;lsquo;Clump Thickness&amp;rsquo;, &amp;lsquo;Uniformity of Cell Size&amp;rsquo;,&amp;lsquo;Uniformity of Cell Shape&amp;rsquo;,&amp;lsquo;Marginal Adhesion&amp;rsquo;, &amp;lsquo;Single Epithelial Cell Size&amp;rsquo;,&amp;lsquo;Bare Nuclei&amp;rsquo;,&amp;lsquo;Bland Chromatin&amp;rsquo;,&amp;lsquo;Normal Nucleoli&amp;rsquo;,&amp;lsquo;Mitoses&amp;rsquo;,&amp;lsquo;Class&amp;rsquo;]&lt;/li&gt;
+&lt;li&gt;return:数据.&lt;/li&gt;
+&lt;li&gt;replace(to_replace=’’,value=)：返回数据.&lt;/li&gt;
+&lt;li&gt;dropna():返回数据.
+注：读取文件只要是.CSV文件就可以使用load_csv()方法，即使文件地址是网站.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dataframe-二维series容器&#34;&gt;DataFrame 二维，Series容器&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;./f5.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;dataframe对象既有行索引又有列索引&#34;&gt;DataFrame对象既有行索引，又有列索引&lt;/h4&gt;
+&lt;p&gt;行索引，表明不同行，横向索引，叫index，0轴，axis=0；
+列索引，表名不同列，纵向索引，叫columns，1轴，axis=1．
+和一个ndarray一样，通过ndim，shape，dtype了解这个ndarray的基本信息．
+&lt;img src=&#34;./f6.png&#34; alt=&#34;png&#34;&gt;
+　　获得使用次数最高的前几个名字是什么？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import pandas as pd
+df = pd.read_csv(&amp;quot;./dogNames.csv&amp;quot;)
+# print(df.head())
+# print(df.info())
+# dataFrame 中排序的方法
+df = df.sort_values(&amp;quot;Count_AnimalName&amp;quot;,ascending=False)
+print(df.head())
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f7.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def sort_values(self, by, axis=0, ascending=True, inplace=False, kind=&#39;quicksort&#39;, 
+		na_position=&#39;last&#39;)
+# ascending：升序：True		
+#            降序：False
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;问题：数据有10列，我想按照其中的第1，第3，第8列排序？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# pandas取行或者列的注意点
+# - 方括号写数组,表示取行,对行进行操作
+# - 写字符串,表示的去列索引,对列进行操作
+print(df[:20])
+print(df[&amp;quot;Row_Labels&amp;quot;])
+print(type(df[&amp;quot;Row_Labels&amp;quot;]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;还有更多的经过pandas优化过的选择方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;df.loc&lt;/code&gt; 通过标签索引行数据（行列的名字）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;df.loc[“a”,”w”]  # a行w列
+df.loc[“a”,:]  # a行
+df.loc[:,”w”]  # w列
+df.loc[[“a”,”c”],:]  # a，c行
+df.loc[:,[“w”,”z”]]  # w，z列
+df.loc[[“a”,”c” ,[“w”,”z”]]  # a,c行，w,z列
+df.loc[[“a”:”c” ,[“w”,”z”]]  # a到c行，w,z列
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f8.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;df.iloc &lt;/code&gt;通过位置获取行数据（行列号-1）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;df.iloc[1,:]    # 第二行
+df.iloc[:,2]    # 第三列
+df.iloc[:,[2,1]]    # 第三列第二列
+df.iloc[[0,2], [2,1]]	# 第1,3行, 第3,2列
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f9.png&#34; alt=&#34;png&#34;&gt;
+赋值更改数据的过程：
+&lt;img src=&#34;./f10.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;布尔索引&#34;&gt;布尔索引&lt;/h4&gt;
+&lt;p&gt;　　找到所有的使用次数超过800的狗的名字.
+&lt;img src=&#34;./f11.png&#34; alt=&#34;png&#34;&gt;
+找到所有的使用次数超过700并且名字的字符串的长度大于4的狗的名字
+&lt;img src=&#34;./f12.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;字符串方法&#34;&gt;字符串方法&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;./f13.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pandas缺失数据的处理&#34;&gt;Pandas缺失数据的处理&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;./f14.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据缺失通常有两种情况&#34;&gt;数据缺失通常有两种情况：&lt;/h3&gt;
+&lt;p&gt;　　一种就是空，None等，在pandas是NaN(和np.nan一样);另一种是我们让其为0，蓝色框中对于NaN的数据，在numpy中我们是如何处理的？&lt;/p&gt;
+&lt;p&gt;　　在pandas中我们处理起来非常容易.&lt;/p&gt;
+&lt;p&gt;判断数据是否为NaN：&lt;code&gt;pd.isnull(df),pd.notnull(df)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;处理方式1：删除NaN所在的行列dropna (axis=0, how=&amp;lsquo;any&amp;rsquo;, inplace=False)# 是否原地修改&lt;/li&gt;
+&lt;li&gt;处理方式2：填充数据，t.fillna(t.mean()),t.fiallna(t.median()),t.fillna(0)&lt;/li&gt;
+&lt;li&gt;处理为0的数据：&lt;code&gt;t[t==0]=np.nan&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然并不是每次为0的数据都需要处理计算平均值等情况，nan是不参与计算的，但0会.&lt;/p&gt;
+&lt;h3 id=&#34;数据变形&#34;&gt;数据变形：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;处理重复数据
+&lt;ul&gt;
+&lt;li&gt;判断数据是否重复，&lt;code&gt;duplicated()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;去除重复数据，&lt;code&gt;drop_dumplicates()&lt;/code&gt;，可指定列及如何保留数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用函数或map转化数据，通常根据字典进行数据转化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;data = pd.DataFrame({&#39;food&#39;: [&#39;bacon&#39;, &#39;pulled pork&#39;, &#39;bacon&#39;, &#39;Pastrami&#39;, &#39;corned beef&#39;, 
+       &#39;Bacon&#39;, &#39;pastrami&#39;, &#39;honey ham&#39;, &#39;nova lox&#39;], 
+       &#39;ounces&#39;: [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f15.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 添加一列，用于指定食物的来源
+meat_to_animal = {
+    &#39;bacon&#39;: &#39;pig&#39;,
+    &#39;pulled pork&#39;: &#39;pig&#39;,
+    &#39;pastrami&#39;: &#39;cow&#39;,
+    &#39;corned beef&#39;: &#39;cow&#39;,
+    &#39;honey ham&#39;: &#39;pig&#39;,
+    &#39;nova lox&#39;: &#39;salmon&#39;
+}
+# 使用map()
+lowercased = data[&#39;food&#39;].str.lower()
+data[&#39;animal&#39;] = lowercased.map(meat_to_animal)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./f16.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;替换值，&lt;code&gt;replace()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;离散化和分享操作，&lt;code&gt;pd.cut()&lt;/code&gt;，返回&lt;code&gt;Categorical&lt;/code&gt;对象
+&lt;img src=&#34;./f17.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./f18.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;哑变量操作，&lt;code&gt;pd.get_dummies()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;向量化字符串操作
+&lt;ul&gt;
+&lt;li&gt;字符串列越苏中是否包含子字符串，&lt;code&gt;ser_obj.str.contains()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;字符串列切片操作，&lt;code&gt;ser_obj.str[a:b]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
