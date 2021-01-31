@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ajax | CoMath</title>
+    <link>https://CoMath21.github.io/tag/ajax/</link>
+      <atom:link href="https://CoMath21.github.io/tag/ajax/index.xml" rel="self" type="application/rss+xml" />
+    <description>Ajax</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
+      <title>Ajax</title>
+      <link>https://CoMath21.github.io/tag/ajax/</link>
+    </image>
+    
+    <item>
+      <title>Ajax简介</title>
+      <link>https://CoMath21.github.io/post/1-ajax%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-ajax%E7%AE%80%E4%BB%8B/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Ajax&lt;/strong&gt;：Asynchronous javascript and xml （异步javascript和xml）.AJax 不是新的编程语言，而是一种使用现有标准的新方法.&lt;/p&gt;
+&lt;h2 id=&#34;创建ajax对象&#34;&gt;创建ajax对象：&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;主流浏览器方式：
+火狐、Google、苹果Safari、opera包括IE7以上版本的浏览器
+var xhr = new XMLHTTPRequest();&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IE(6/7/8 )方式：
+var xhr = new ActiveObject(“Microsoft.XMLHTTP”);	//最原始方式
+var xhr = new ActiveObject(“Msxml2.XMLHTTP”);
+var xhr = new ActiveObject(“Msxml2.XMLHTTP.3.0”);
+var xhr = new ActiveObject(“Msxml2.XMLHTTP.5.0”);
+var xhr = new ActiveObject(“Msxml2.XMLHTTP.6.0”);	//IE维护的最高版本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;发起对服务器的请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script type=&amp;quot;&amp;quot;&amp;gt;
+  function f() {
+    //①创建ajax对象
+    var xhr = new XMLHttpRequest();
+	
+    //②创建新的http请求（并设置请求地址）
+    //open(请求方式get/post，url请求地址)
+    xhr.open(‘get’,’./xxx.php’);
+	
+    //③发送请求
+    //send(get---null/post---给服务器传递的信息)
+    xhr.send(null);
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;接收服务器端返回的信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ajax对象的成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;属性：
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;responseText：以字符串形式接收服务器端返回的信息.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;readyState：&lt;/p&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;刚创建ajax对象.&lt;/li&gt;
+&lt;li&gt;已经调用open方法.&lt;/li&gt;
+&lt;li&gt;已经调用send方法.&lt;/li&gt;
+&lt;li&gt;已经返回部分数据.&lt;/li&gt;
+&lt;li&gt;请求完成，数据返回完整.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;onreadstatechange：事件，当ajax状态readState发生变化的时候处触发执行，为了获得较多的状态，最好在创建好阿加西对象后就设置.最多可以感知1/2/3/4 四种状态.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;方法：
+&lt;ul&gt;
+&lt;li&gt;open(); 创建新的http请求.&lt;/li&gt;
+&lt;li&gt;send(); 把请+ 求发送给服务器端.　　&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script type=&amp;quot;&amp;quot;&amp;gt;
+  function f() {
+  //①创建ajax对象
+  var xhr = new XMLHttpRequest();
+
+  //④ 给ajax设置事件
+  xhr.onreadystatechange = function(){
+    //console.log(xhr.readState);
+    if(xhr.readyState==4){
+        //console.log(xhr.responseText);
+        //把服务端返回的信息显示在页面上
+        document.getElementById(‘request’).innerHTML = xhr.responseText;
+    }
+  }
+  //②创建新的http请求（并设置请求地址）
+  //open(请求方式get/post，url请求地址)
+  xhr.open(‘get’,’./xxx.php’);
+
+  //③发送请求
+  //send(get---null/post---给服务器传递的信息)
+  xhr.send(null);
+  }
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;get请求注意事项：&lt;/p&gt;
+&lt;p&gt;①	在url地址后面以请求字符串（传递的get参数信息）形式传递数据.&lt;/p&gt;
+&lt;p&gt;②	对中文、=、&amp;amp;等特殊符号处理.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对特殊信息的处理：&lt;/p&gt;
+&lt;p&gt;　　在浏览器里通过get参数传递一些特殊符号信息会被误解混淆，例如：=、&amp;amp;等.为了避免特殊符号被误解产生歧义，需要对其进行编码处理：在javascript里面可以通过encodeURLComponent()对特殊符号等信息进行编码;编码后的信息可以被正常接收使用，无需解码.&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;post请求的注意事项：&lt;/p&gt;
+&lt;p&gt;①	给服务器传递数据需要调用send(请求字符串数据)方法;
+②	调用方法sentRequestHeader()把传递的数据组织为xml格式（模仿form表单传递数据）;
+③	传递的中文信息无需编码，特殊符号 &amp;amp;、=等仍需编码;
+④	该房是请求的同时也可以传递get参数信息，同样适用$_GRT 接受信息.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;同步、异步&lt;/p&gt;
+&lt;p&gt;ajax对象.open(方式get/post，url地址，[异步true]同步false);&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;异步：同一时间点允许执行多个线程.&lt;/li&gt;
+&lt;li&gt;同步：同一时间点只允许执行一个线程.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;无刷新分页效果：&lt;/p&gt;
+&lt;p&gt;ajax刷新无分页效果是对传统分页效果的封装;先将传统分页效果制作出来,在javascript代码块中定义函数，再创建ajax对象，创建事件，打开open，send，其中在创建事件的时候将加载后的信息显示到指定位置，为了实现分页跳转，则需要将url地址传给函数作为参数，其原因主要是因为分页效果其实就是实现的超链接，而ajax实现无刷新分页效果则是将超链接替换成定义的函数.
+&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ajax对xml信息的接收和处理&lt;/p&gt;
+&lt;p&gt;ajax负责请求xml和接收xml信息，都没负责处理xml信息;&lt;/p&gt;
+&lt;p&gt;dom：javascript里，dom是负责javascript与html(xml)之间沟通的桥梁.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ajax对缓存的处理&lt;/p&gt;
+&lt;p&gt;①	给请求的地址设置随机数，即：保证每次请求的地址不一样；
+&lt;code&gt;url?Math.random();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;②	给动态程序设置header头信息，禁止浏览器对其缓存（PHP中这样设置）.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;header(“Cache-Control:no-cache”)
+header(“Pragma: :no-cache”)
+header(“Expires:-1”)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

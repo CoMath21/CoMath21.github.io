@@ -1,0 +1,2476 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Django | CoMath</title>
+    <link>https://CoMath21.github.io/tag/django/</link>
+      <atom:link href="https://CoMath21.github.io/tag/django/index.xml" rel="self" type="application/rss+xml" />
+    <description>Django</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
+      <title>Django</title>
+      <link>https://CoMath21.github.io/tag/django/</link>
+    </image>
+    
+    <item>
+      <title>Django学习笔记</title>
+      <link>https://CoMath21.github.io/post/1-%E6%85%95%E8%AF%BE%E7%BD%91mxonline/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-%E6%85%95%E8%AF%BE%E7%BD%91mxonline/</guid>
+      <description>&lt;p&gt;　　Python下有许多款不同的 Web 框架. Django是最有代表性的一个. 许多成功的网站和APP都基于Django. 2019年通过慕课网的视频教学整理了由基于Django的网站开发. 整过过程持续了多长时间已经记不清了. 中间很多磕磕碰碰，网上找了很多材料整合成了一个笔记. 本来想着能接着做点东西，但后来还是没捡起来.&lt;/p&gt;
+&lt;h2 id=&#34;虚拟环境的安装与配置&#34;&gt;虚拟环境的安装与配置&lt;/h2&gt;
+&lt;h3 id=&#34;virtualenv&#34;&gt;virtualenv&lt;/h3&gt;
+&lt;p&gt;virtualenv是一款轻量级第三方虚拟环境管理工具.&lt;/p&gt;
+&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+&lt;p&gt;安装virtualenv命令：pip install virtualenv&lt;/p&gt;
+&lt;p&gt;pip安装技巧：python豆瓣源：https://pypi.doubanio.com/simple/&lt;/p&gt;
+&lt;p&gt;安装时中间加入豆瓣源即可，如：&lt;/p&gt;
+&lt;p&gt;pip3 install -i &lt;a href=&#34;https://pypi.doubanio.com/simple/&#34;&gt;https://pypi.doubanio.com/simple/&lt;/a&gt; selenium&lt;/p&gt;
+&lt;p&gt;easy_install -i &lt;a href=&#34;https://pypi.doubanio.com/simple/&#34;&gt;https://pypi.doubanio.com/simple/&lt;/a&gt; selenium&lt;/p&gt;
+&lt;p&gt;创建虚拟环境：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正常创建：virtualenv 虚拟环境名称&lt;/li&gt;
+&lt;li&gt;其他版本：virtualenv -p python版本\python.exe 虚拟环境名称&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;进入到虚拟环境的目录下执行activate.bat命令启动虚拟环境&lt;/p&gt;
+&lt;p&gt;退出虚拟环境deactivate.bat命令&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./1.jpg&#34; alt=&#34;1563103307424&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./2.jpg&#34; alt=&#34;1563103375274&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;linux&#34;&gt;Linux&lt;/h4&gt;
+&lt;p&gt;安装virtualenv命令：sudo apt-get install python-virtualenv&lt;/p&gt;
+&lt;p&gt;创建虚拟环境：virtualenv 虚拟环境名称（默认是Python2.7版本）&lt;/p&gt;
+&lt;p&gt;需要进入到虚拟环境的bin目录下执行source activate启动虚拟环境&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./3.jpg&#34; alt=&#34;1563089841365&#34;&gt;&lt;/p&gt;
+&lt;p&gt;退出虚拟环境命令：deactivate&lt;/p&gt;
+&lt;p&gt;创建Python3的虚拟环境：&lt;/p&gt;
+&lt;p&gt;virtualenv -p python3目录 虚拟环境名称&lt;/p&gt;
+&lt;p&gt;virtualenv -p /usr/bin/python3 py3test&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./4.jpg&#34; alt=&#34;1563091155983&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;virtualenvwrapper&#34;&gt;virtualenvwrapper&lt;/h3&gt;
+&lt;p&gt;virtualenv使用过于麻烦，所以便于管理，使用virtualenvwrapper（依赖virtualenv）&lt;/p&gt;
+&lt;h4 id=&#34;windows-1&#34;&gt;Windows&lt;/h4&gt;
+&lt;p&gt;安装：&lt;/p&gt;
+&lt;p&gt;​	pip install virtualenvwrapper-win&lt;/p&gt;
+&lt;p&gt;命令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;workon：查看所有虚拟环境；&lt;/li&gt;
+&lt;li&gt;workon XXX：启动名为XXX的虚拟工作环境；&lt;/li&gt;
+&lt;li&gt;mkvirtualenv XXX ：创建名为XXX的虚拟环境；（目录在C:\Users\Wise_Hai\Envs）&lt;/li&gt;
+&lt;li&gt;mkvirtualenv &amp;ndash;python=python版本目录\python.exe XXX：创建名为XXX的python版本的虚拟环境；&lt;/li&gt;
+&lt;li&gt;deactivate：关闭当前虚拟环境.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;./5.jpg&#34; alt=&#34;1563104365797&#34;&gt;&lt;/p&gt;
+&lt;p&gt;配置工作环境（可选）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;计算机右键属性 》高级系统设置 》环境变量&lt;/li&gt;
+&lt;li&gt;新建系统变量
+&lt;ul&gt;
+&lt;li&gt;变量名：WORKON_HOME&lt;/li&gt;
+&lt;li&gt;变量值：工作环境地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;保存并退出，重新开启命令行窗口&lt;/li&gt;
+&lt;li&gt;如果需要，可以找到之前的虚拟环境目录将其中的虚拟环境直接拷贝过来即可.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;备注：可在虚拟环境中安装任意包，如果出错可以在&lt;a href=&#34;https://www.lfd.uci.edu/~gohlke/pythonlibs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;这里&lt;/a&gt;中找到安装失败的包及相应的版本进行下载安装，在执行之前的安装命令.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./6.jpg&#34; alt=&#34;1563104605220&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;linux-1&#34;&gt;Linux&lt;/h4&gt;
+&lt;p&gt;安装命令：pip install virtualenvwrapper&lt;/p&gt;
+&lt;p&gt;Linux不能像Windows一样直接调用mkvirtualenv，因为没有配置.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建目录来存放虚拟环境&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;mkdir $HOME/.virtualenvs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;需要通过sudo find / -name virtualenvwrapper.sh在根目录下查找virtualenvwrapper.sh文件的路径&lt;/li&gt;
+&lt;li&gt;配置文件：vim/sudo gedit ~/.bashrc
+&lt;ul&gt;
+&lt;li&gt;export  WORKON_HOME=$HOME/ .virtualenvs&lt;/li&gt;
+&lt;li&gt;export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3    #如果是pip3安装的virtualenvwrapper把这条加上&lt;/li&gt;
+&lt;li&gt;最后一行添加source virtualenvwrapper.sh文件的路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;重新加载：source ~/.bashrc&lt;/li&gt;
+&lt;li&gt;mkvirtualenv XXX ：在~/ .virtualenvs创建名为XXX的虚拟环境&lt;/li&gt;
+&lt;li&gt;mkvirtualenv &amp;ndash;python=/usr/bin/python3 XXX：创建名为XXX的python版本的虚拟环境；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;环境配置及model设计&#34;&gt;环境配置及Model设计&lt;/h2&gt;
+&lt;p&gt;环境配置（PyCharm，MySQL，Django1.11）&lt;/p&gt;
+&lt;p&gt;​	此项目主要是在Windows上创建并执行，所以所有环境需改成Windows环境，由于之前安装过Anconda，而虚拟环境需要pip安装virtualenv，所以通过以下方法使得Anconda与Python3.6共存，并且可以切换：&lt;/p&gt;
+&lt;p&gt;​	安装Python3.6（不添加到Path），在Python目录下将python.exe文件更名为python3.exe，并将其添加到Path下即可.测试：cmd中使用python3命令.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./7.jpg&#34; alt=&#34;1563102590513&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;项目初始化&#34;&gt;项目初始化&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建虚拟环境（这里随便起的名字）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./8.jpg&#34; alt=&#34;1563107285042&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Django Rest Framework（基于Django）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装Django Rest Framework：pip install djangorestframework&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./9.jpg&#34; alt=&#34;1563107492625&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：DjangRestFramework没有安装Django，需要手动安装&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装Django&lt;/p&gt;
+&lt;p&gt;pip install -i &lt;a href=&#34;https://pypi.doubanio.com/simple/&#34;&gt;https://pypi.doubanio.com/simple/&lt;/a&gt; django&lt;/p&gt;
+&lt;p&gt;地址：https://www.django-rest-framework.org/&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./09.jpg&#34; alt=&#34;1563107875715&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装markdown和django-filter&lt;/p&gt;
+&lt;p&gt;pip install markdown django-filter&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pycharm创建Django项目&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./10.jpg&#34; alt=&#34;1563190798577&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;测试运行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./11.jpg&#34; alt=&#34;1563108795550&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./12.jpg&#34; alt=&#34;1563108864784&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改数据库配置&lt;/p&gt;
+&lt;p&gt;将setting.py中的DATABASE内容&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./13.jpg&#34; alt=&#34;1563109120733&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,  # 连接mysql数据库
+        &#39;NAME&#39;: &amp;quot;mxshop&amp;quot;,  # 数据库名称
+        &#39;USER&#39;: &#39;root&#39;,  # 账户
+        &#39;PASSWORD&#39;: &amp;quot;root&amp;quot;,  # 密码
+        &#39;HOST&#39;: &amp;quot;127.0.0.1&amp;quot;,  # 地址
+        &amp;quot;OPTIONS&amp;quot;:{&amp;quot;init_command&amp;quot;:&amp;quot;SET default_storage_engine=INNODB;&amp;quot;} # mysql数据库的版本5.6以后
+        # &#39;OPTIONS&#39;: { &#39;init_command&#39;: &#39;SET storage_engine=INNODB;&#39; }
+        # 用于第三方登录
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建数据库&lt;/p&gt;
+&lt;p&gt;MySQL数据库下创建名为mxshop的数据库（此时重新运行醒目会出现数据库连接错误，主要是因为缺少连接数据的mysqlckient或者MySQL-python包）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./14.jpg&#34; alt=&#34;1563109995778&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装mysqlclient数据库&lt;/p&gt;
+&lt;p&gt;pip install -i &lt;a href=&#34;https://pypi.doubanio.com/simple/&#34;&gt;https://pypi.doubanio.com/simple/&lt;/a&gt; mysqlclient&lt;/p&gt;
+&lt;p&gt;此处可能有坑，如果报错无法安装，https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient找到对应版本下载，通过pip install xx 安装即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./15.jpg&#34; alt=&#34;1565411225582&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果出现下面问题，可能的问题&lt;/p&gt;
+&lt;p&gt;?: (mysql.W002) MySQL Strict Mode is not set for database connection &amp;lsquo;default&amp;rsquo;
+HINT: MySQL&amp;rsquo;s Strict Mode fixes many data integrity problems in MySQL, such as data truncation upon insertion, by escalating warnings into errors. It is strongly recommended you activate it. See: &lt;a href=&#34;https://docs.djangoproject.com/en/2.1/ref/databases/#mysql-sql-mode&#34;&gt;https://docs.djangoproject.com/en/2.1/ref/databases/#mysql-sql-mode&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 解决
+DATABASES = {    
+ &#39;default&#39;: {     
+     &#39;OPTIONS&#39;: {  
+         &amp;quot;init_command&amp;quot;: &amp;quot;SET sql_mode=&#39;STRICT_TRANS_TABLES&#39;&amp;quot;,     
+            }   
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装图片处理包&lt;/p&gt;
+&lt;p&gt;pip install -i &lt;a href=&#34;https://pypi.doubanio.com/simple/&#34;&gt;https://pypi.doubanio.com/simple/&lt;/a&gt; pillow&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;整理项目结构&lt;/p&gt;
+&lt;p&gt;创建Package&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;apps：保存所有app&lt;/li&gt;
+&lt;li&gt;extra_apps：存放第三方的包，随着源码包打包而不会安装到虚拟环境中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;创建Directory&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;media：保存图片等&lt;/li&gt;
+&lt;li&gt;db_tools：数据库初始化等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为了以后方便将apps和extra_apps映射Sources Root并且加入到setting的搜索目录下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./16.jpg&#34; alt=&#34;1563111411195&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sys
+sys.path.insert(0, BASE_DIR)
+sys.path.insert(0, os.path.join(BASE_DIR, &#39;apps&#39;))
+sys.path.insert(0, os.path.join(BASE_DIR, &#39;extra_apps&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;app-models设计&#34;&gt;app models设计&lt;/h3&gt;
+&lt;p&gt;在Tools的Run manage.py Task下运行startapp xxx创建model&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./17.jpg&#34; alt=&#34;1565438154785&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./18.jpg&#34; alt=&#34;1565438175298&#34;&gt;&lt;/p&gt;
+&lt;p&gt;找到对应model的逻辑，创建相应的model&lt;/p&gt;
+&lt;p&gt;注意：此处有坑！！&lt;/p&gt;
+&lt;p&gt;与视频不同的地方在于django以及MySQL的版本不同，创建外键的时候需要添加&lt;code&gt;on_delete=models.CASCADE&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;users-用户相关&#34;&gt;users-用户相关&lt;/h5&gt;
+&lt;p&gt;这里面主要是使用UserProfile覆盖了原Users&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# _*_ encoding:utf-8
+from datetime import datetime
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class UserProfile(AbstractUser):
+    nick_name = models.CharField(max_length=50, verbose_name=u&amp;quot;昵称&amp;quot;, default=&amp;quot;&amp;quot;)
+    birthday = models.DateField(verbose_name=u&amp;quot;生日&amp;quot;, null=True, blank=True)
+    gender = models.CharField(max_length=5, choices=((&amp;quot;male&amp;quot;, u&amp;quot;男&amp;quot;), (&amp;quot;female&amp;quot;, &amp;quot;女&amp;quot;)), default=&amp;quot;female&amp;quot;)
+    address = models.CharField(max_length=100, default=u&amp;quot;&amp;quot;)
+    mobile = models.CharField(max_length=11, null=True, blank=True)
+    image = models.ImageField(upload_to=&amp;quot;image/%Y/%m&amp;quot;, default=u&amp;quot;image/default..jpg&amp;quot;, max_length=100)
+
+    class Meta:
+        verbose_name = u&amp;quot;用户信息&amp;quot;
+        verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.username
+
+
+class EmailVerifyRecord(models.Model):
+    code = models.CharField(max_length=20, verbose_name=u&amp;quot;验证码&amp;quot;)
+    email = models.EmailField(max_length=50, verbose_name=u&amp;quot;邮箱&amp;quot;)
+    send_type = models.CharField(max_length=10, choices=((&amp;quot;register&amp;quot;, u&amp;quot;注册&amp;quot;), (&amp;quot;forget&amp;quot;, u&amp;quot;找回密码&amp;quot;)))
+    send_time = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        verbose_name = u&amp;quot;邮箱验证码&amp;quot;
+        verbose_name_plural = verbose_name
+
+    # def __unicode__(self):
+    #     return self.username
+
+
+class Banner(models.Model):
+    title = models.CharField(max_length=100, verbose_name=u&amp;quot;标题&amp;quot;)
+    image = models.ImageField(upload_to=&amp;quot;banner/%Y/%m&amp;quot;, verbose_name=u&amp;quot;轮播图&amp;quot;)
+    url = models.URLField(max_length=200, verbose_name=u&amp;quot;访问地址&amp;quot;)
+    index = models.IntegerField(default=100, verbose_name=u&amp;quot;顺序&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;轮播图&amp;quot;
+        verbose_name_plural = verbose_name
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;courses-课程相关&#34;&gt;courses-课程相关&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# _*_ encoding:utf-8
+from django.db import models
+from datetime import datetime
+
+
+class Course(models.Model):
+    name = models.CharField(max_length=50, verbose_name=u&amp;quot;课程名称&amp;quot;)
+    desc = models.CharField(max_length=50, verbose_name=u&amp;quot;课程描述&amp;quot;)
+    detail = models.TextField(verbose_name=u&amp;quot;课程详情&amp;quot;)
+    degree = models.CharField(max_length=2, choices=((&amp;quot;cj&amp;quot;, &amp;quot;初级&amp;quot;), (&amp;quot;zj&amp;quot;, &amp;quot;中级&amp;quot;), (&amp;quot;gj&amp;quot;, &amp;quot;高级&amp;quot;)))
+    learn_times = models.IntegerField(default=0, verbose_name=u&amp;quot;学习时长（分钟）&amp;quot;)
+    students = models.IntegerField(default=0, verbose_name=u&amp;quot;学习人数&amp;quot;)
+    fav_nums = models.IntegerField(default=0, verbose_name=u&amp;quot;收藏人数&amp;quot;)
+    image = models.ImageField(upload_to=&amp;quot;courses/%Y/%m&amp;quot;, verbose_name=u&amp;quot;封面图&amp;quot;, max_length=100)
+    click_nums = models.IntegerField(default=0, verbose_name=u&amp;quot;点击数&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;课程&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class Lesson(models.Model):
+    course = models.ForeignKey(Course, verbose_name=u&amp;quot;课程&amp;quot;, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name=u&amp;quot;章节名称&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;章节&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class Video(models.Model):
+    lesson = models.ForeignKey(Lesson, verbose_name=u&amp;quot;课程&amp;quot;, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name=u&amp;quot;视频名称&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;视频&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class CourseResource(models.Model):
+    course = models.ForeignKey(Course, verbose_name=u&amp;quot;课程&amp;quot;, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name=u&amp;quot;名称&amp;quot;)
+    download = models.FileField(upload_to=&amp;quot;course/resource/%Y/%m&amp;quot;, verbose_name=u&amp;quot;资源文件&amp;quot;,  max_length=100)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;课程资源&amp;quot;
+        verbose_name_plural = verbose_name
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;organization-机构相关&#34;&gt;organization-机构相关&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# _*_ encoding:utf-8
+from django.db import models
+from datetime import datetime
+
+
+class CityDic(models.Model):
+    name = models.CharField(max_length=20, verbose_name=u&amp;quot;城市&amp;quot;)
+    desc = models.CharField(max_length=200, verbose_name=u&amp;quot;描述&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;城市&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class CourseOrg(models.Model):
+    name = models.CharField(max_length=50, verbose_name=u&amp;quot;机构名称&amp;quot;)
+    desc = models.CharField(max_length=50, verbose_name=u&amp;quot;机构描述&amp;quot;)
+    fav_nums = models.IntegerField(default=0, verbose_name=u&amp;quot;收藏人数&amp;quot;)
+    click_nums = models.IntegerField(default=0, verbose_name=u&amp;quot;点击数&amp;quot;)
+    image = models.ImageField(upload_to=&amp;quot;courses/%Y/%m&amp;quot;, verbose_name=u&amp;quot;封面图&amp;quot;, max_length=100)
+    address = models.CharField(max_length=150, verbose_name=u&amp;quot;机构地址&amp;quot;)
+    city = models.ForeignKey(CityDic, on_delete=models.CASCADE, verbose_name=u&amp;quot;所在城市&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;课程机构&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class Teacher(models.Model):
+    org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name=u&amp;quot;所属机构&amp;quot;)
+    name = models.CharField(max_length=50, verbose_name=u&amp;quot;教师名&amp;quot;)
+    work_years = models.IntegerField(default=0, verbose_name=u&amp;quot;工作年限&amp;quot;)
+    work_company = models.CharField(max_length=50, verbose_name=u&amp;quot;就职公司&amp;quot;)
+    work_position = models.CharField(max_length=50, verbose_name=u&amp;quot;公司职位&amp;quot;)
+    points = models.CharField(max_length=50, verbose_name=u&amp;quot;教学特点&amp;quot;)
+    fav_nums = models.IntegerField(default=0, verbose_name=u&amp;quot;收藏人数&amp;quot;)
+    click_nums = models.IntegerField(default=0, verbose_name=u&amp;quot;点击数&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;教师&amp;quot;
+        verbose_name_plural = verbose_name
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;operation-操作相关&#34;&gt;operation-操作相关&lt;/h5&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# _*_ encoding:utf-8
+from django.db import models
+from datetime import datetime
+
+from users.models import UserProfile
+from courses.models import Course
+
+
+class UserAsk(models.Model):
+    name = models.CharField(max_length=20, verbose_name=u&amp;quot;姓名&amp;quot;)
+    mobile = models.CharField(max_length=11, verbose_name=u&amp;quot;手机&amp;quot;)
+    course_name = models.CharField(max_length=50, verbose_name=u&amp;quot;课程名&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;用户咨询&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class CourseComments(models.Model):
+    &amp;quot;课程评论&amp;quot;
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name=u&amp;quot;用户&amp;quot;)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name=u&amp;quot;课程&amp;quot;)
+    comments = models.CharField(max_length=200, verbose_name=u&amp;quot;评论&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;课程评论&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class UserFavorite(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name=u&amp;quot;用户&amp;quot;)
+    fav_id = models.IntegerField(default=0, verbose_name=u&amp;quot;数据id&amp;quot;)
+    fav_type = models.IntegerField(choices=((1, &amp;quot;课程&amp;quot;), (2, &amp;quot;课程机构&amp;quot;), (3, &amp;quot;讲师&amp;quot;)))
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;用户收藏&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class UserMessage(models.Model):
+    user = models.IntegerField(default=0, verbose_name=u&amp;quot;接收用户&amp;quot;)
+    message = models.CharField(max_length=500, verbose_name=u&amp;quot;消息内容&amp;quot;)
+    has_read = models.BooleanField(default=False, verbose_name=u&amp;quot;是否已读&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;用户消息&amp;quot;
+        verbose_name_plural = verbose_name
+
+
+class UserCourse(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name=u&amp;quot;用户&amp;quot;)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name=u&amp;quot;课程&amp;quot;)
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u&amp;quot;添加时间&amp;quot;)
+
+    class Meta:
+        verbose_name = u&amp;quot;用户课程&amp;quot;
+        verbose_name_plural = verbose_name
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;考虑到存在很多models的情况，创建名为apps的Python Package，存储所有的models，并且将所有apps映射成Sources Root（否则，各个model中调用的包将报错）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./19.jpg&#34; alt=&#34;1565438643911&#34;&gt;&lt;/p&gt;
+&lt;p&gt;并且，在settings.py中设置&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import os
+import sys
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, &#39;apps&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;文件上传操作&#34;&gt;文件上传操作&lt;/h3&gt;
+&lt;p&gt;设置字段的时候存在上传文件路径，所以需要配置文件上传的目录&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;image = models.ImageField(upload_to=&amp;quot;courses/%Y/%m&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;项目根目录下创建名为miedia的Directory，然后在settings.py中添加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;MEDIA_URL = &#39;/media/&#39;
+MEDIA_ROOT = os.path.join(BASE_DIR, &#39;media&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;文件上传访问&#34;&gt;文件上传访问&lt;/h3&gt;
+&lt;p&gt;配置文件上传访问处理函数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from django.views.static import serve
+from mxonline.settings import MEDIA_ROOT
+
+# 配置文件上传的访问处理函数
+    url(r&#39;^media/(?P&amp;lt;path&amp;gt;.*)$&#39;, serve, {&amp;quot;document_root&amp;quot;: MEDIA_ROOT}),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;配置上下文处理器（在settings.py中找到TEMPLATES下的&lt;code&gt;&#39;context_processors&#39;&lt;/code&gt; 添加&lt;code&gt;&#39;django.template.context_processors.media&#39;,&lt;/code&gt;),其目的是将&lt;code&gt;{{ MEDIA_URL }}&lt;/code&gt;注册到url中&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;TEMPLATES = [
+    {
+        &#39;OPTIONS&#39;: {
+            &#39;context_processors&#39;: [
+                &#39;django.template.context_processors.media&#39;,
+            ],
+        },
+    },
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在对应位置即可访问上传的图片&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;lt;img width=&amp;quot;200&amp;quot; height=&amp;quot;120&amp;quot; class=&amp;quot;scrollLoading&amp;quot; data-url=&amp;quot;{{ MEDIA_URL }}{{ xxx.image }}&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;后台管理系统&#34;&gt;后台管理系统&lt;/h2&gt;
+&lt;h3 id=&#34;admin&#34;&gt;admin&lt;/h3&gt;
+&lt;p&gt;创建Django之后就会自动生成再带的后台管理系统（注意：红色框框）&lt;/p&gt;
+&lt;p&gt;在PyCharm的新版本中创建Django文件的时候，不要勾掉最后的Enable Django admin&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./20.jpg&#34; alt=&#34;1563190798577&#34;&gt;&lt;/p&gt;
+&lt;p&gt;通过http://127.0.0.1:8000/admin进行访问，但是Django并不默认生成登录账号及密码，需要通过createsuperuser注册admin后台管理的账号和密码&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./21.jpg&#34; alt=&#34;1565439607016&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./22.jpg&#34; alt=&#34;1565439586940&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改成中文显示：在settings.py中设置&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;LANGUAGE_CODE = &#39;zh-hans&#39;
+
+TIME_ZONE = &#39;Asia/Shanghai&#39;
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = False
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./23.jpg&#34; alt=&#34;1565439746890&#34;&gt;&lt;/p&gt;
+&lt;p&gt;默认显示的只有Group，如果想显示其他model，需要在对应的model目录下的admin中创建对应的class即可&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;form django.contrib import admin 
+form .model import UserProfile
+
+class UserProfileAdmin(admin.ModelAdmin): 	# 添加一个管理器
+	pass
+	
+admin.site.register(UserProfile, UserProfileAdmin)	# 关联注册
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;url配置技巧&#34;&gt;url配置技巧&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;urlpatterns = [
+    # url(R&#39;^admin/&#39;, admin.site.urls)
+    url(r&#39;^form/$&#39;, getform, name=&#39;go_form&#39;)
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;解释为：以^后的名字开头，以/$结尾，转到getform的views下，在html的form表单中，可以通过配置action=&amp;quot;{%  url  &amp;lsquo;go_form&amp;rsquo;  %}&amp;ldquo;提交表单.&lt;/p&gt;
+&lt;h3 id=&#34;xadmin&#34;&gt;xadmin&lt;/h3&gt;
+&lt;h4 id=&#34;命令安装&#34;&gt;命令安装&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;p&gt;在对应的虚拟环境中通过pip install xadmin进行安装.（依赖的安装包也会被安装）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;环境配置&lt;/p&gt;
+&lt;p&gt;在项目setting.py中，找到INSTALLED_APPS，在下面添加&amp;rsquo;xadmin&amp;rsquo;以及&amp;rsquo;crispy_forms&#39;，在urls.py中，引入xadmin包，并经命令中的admin改成xadmin.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import xadmin
+   
+urlpatterns = [
+ url(r&#39;^xadmin/&#39;, xadmin.site.urls),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;生成管理表单&lt;/p&gt;
+&lt;p&gt;配置之后，xadmin需要自己的管理表单，所以重新创建表单makemigrations，migrate&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;源码安装推荐使用&#34;&gt;源码安装(推荐使用)&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GitHub下载&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./24.jpg&#34; alt=&#34;1563241510864&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./25.jpg&#34; alt=&#34;1563241532771&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./26.jpg&#34; alt=&#34;1563241620524&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;p&gt;解压下载的xadmin-master.zip文件，找到其中的xadmin文件夹并将其拷贝到项目文件的根目录下，为了能够更好的管理，也为了model能够直接访问到xadmin，创建一个package包（例如：extra_apps），并将其映射成Sources Root，将xadmin文件夹拖到改文件夹下即可.&lt;/p&gt;
+&lt;p&gt;注意：此时可以卸载命令行安装的xadmin包，但是不要卸载自动下载的依赖包.除此之外，还需要在setting.py下注册extra_apps.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sys.path.insert(0, os.path.join(BASE_DIR, &#39;extra_apps&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;依赖包：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./27.jpg&#34; alt=&#34;1565441213393&#34;&gt;&lt;/p&gt;
+&lt;p&gt;此处有坑：（Django版本在2.0以上有坑）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;首先报错：“ from future.utils import iteritems ImportError: No module named future.utils”&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原因是缺少future包&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pip install future&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;然后报错：from django.urls import NoReverseMatch, reverse&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原因是django2.0 把原来的 django.core.urlresolvers 包 更改为了 django.urls包&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将django.core.urlresolvers 改为 django.urls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有坑！！！！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有坑！！！！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有坑！！！！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;参照https://www.cnblogs.com/netalen/p/10987016.html更改&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;还有坑：需要将生成xadmin管理表，即执行makemigrations xadmin以及migrate xadmin.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;环境配置&lt;/p&gt;
+&lt;p&gt;将model注册到xadmin：&lt;/p&gt;
+&lt;p&gt;在相应的model创建adminx.py文件，并且&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import xadmin
+   
+from .models import modelClassName
+   
+class modelClassNameAdmin(object):
+    list_display = [&#39;字段1&#39;, &#39;字段2&#39;, ...]/(&#39;&#39;,)		# 显示xadmin列表题头(最好选择数组类型)
+    search_fields = [&#39;字段1&#39;, &#39;字段2&#39;, ...]/(&#39;&#39;,)		#搜索功能	
+    listr_filter = [&#39;字段1&#39;, &#39;字段2&#39;, ...]/(&#39;&#39;,)		# 过滤器功能
+       
+xadmin.site.register(modelClassName, modelClassNameAdmin)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果存在外键，在添加过滤器功能的时候需要制定通过哪个字段，如：&amp;lsquo;User__name&amp;rsquo;&lt;/p&gt;
+&lt;p&gt;这里要注意的是，添加一条数据之后需要添加以下代码，才能显示想要的数据&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def __unicode__(self):
+ return self.name
+# 或者
+def __str__(self):
+    return self.name
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;xadmin源码安装优势&lt;/p&gt;
+&lt;p&gt;可以享用xadmin的新特性，并且可以根据需求添加插件等.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;xadmin全局修改&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;设置主题：&lt;/p&gt;
+&lt;p&gt;在adminx.py下创建calss&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from xadmin import views
+     
+class BaseSetting(object):
+   enable_themes = True
+   use_bootswatch = True
+         
+xadmin.site.register(views.BaseAdminView, BaseSetting)    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;全局变量&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from xadmin import views
+     
+class GlobalSetting(object):
+   site_title = &amp;quot;&amp;quot;
+   site_footer = &amp;quot;&amp;quot;
+    menu_style = &amp;quot;accordion&amp;quot;	# 折叠菜单
+         
+xadmin.site.register(views.CommAdminView, GlobalSetting)  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./28.jpg&#34; alt=&#34;1565495646386&#34;&gt;&lt;/p&gt;
+&lt;p&gt;备注：如果需要对显示菜单名称改成中文咋需要在对应model下找到apps.py进行添加，然后更改当前目录下的&lt;code&gt;__init__.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;apps.py下添加&lt;code&gt;verbose_name = u&amp;quot;Name&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__init__.py&lt;/code&gt;下添加：&lt;code&gt;default_app_config = model.apps.ModelConfig &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;注意：如果在setting.py中配置&lt;code&gt;.XxxConfig&lt;/code&gt;则不需要上述&lt;code&gt;__init__.py&lt;/code&gt;操作.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./29.jpg&#34; alt=&#34;1565496620777&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;前端&#34;&gt;前端&lt;/h2&gt;
+&lt;h3 id=&#34;首页&#34;&gt;首页&lt;/h3&gt;
+&lt;p&gt;首先准备好前端页面及样式&lt;/p&gt;
+&lt;p&gt;在项目下创建名为static的Directory，同于存放所有的静态文件，并将img/images/css/js等文件拷贝到static文件夹下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./30.jpg&#34; alt=&#34;1565497383530&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后在urls.py中配置url即可访问&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.views.generic import TemplateView
+
+urlpatterns = [
+    url(&#39;^$&#39;, TemplateView.as_view(template_name=&amp;quot;index.html&amp;quot;), name=&amp;quot;index&amp;quot;)
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;存在问题：静态文件没有加载&lt;/p&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;settings.py中找到&lt;code&gt;STATIC_URL = &#39;/static/&#39;&lt;/code&gt;，在下面添加&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, &amp;quot;static&amp;quot;),
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在对应的html界面中找到对应的样式文件，将相对路径跟改为/static/&amp;hellip;或者引入&lt;code&gt;{% load staticfiles %}&lt;/code&gt;然后使用&lt;code&gt;{% static &#39;css/xx.css&#39; %}&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;登录页面&#34;&gt;登录页面&lt;/h3&gt;
+&lt;h4 id=&#34;页面&#34;&gt;页面&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;复制登录页面到template下，并更改样式文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置url访问路径：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;url(&#39;^login/$&#39;, TemplateView.as_view(template_name=&amp;quot;login.html&amp;quot;), name=&amp;quot;login&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找到index.html下的登录入口，a标签更改为&lt;code&gt;href=&amp;quot;/login&amp;quot;&lt;/code&gt;或者&lt;code&gt;{% url &#39;login&#39; %}&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;url使用include&#34;&gt;url使用include&lt;/h5&gt;
+&lt;p&gt;在项目下的urls.py文件中可以通过include导入其他url配置文件（url分解），也是为了更好的管理，不至于项目下的urls.py杂乱无章. 可以在对应的app下创建urls.py文件，然后导入即可.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 项目下的urls.py文件
+from django.conf.urls import url, include
+
+urlpatterns = [
+    # namespace命名空间
+	url(r&#39;^org/$&#39;, include(&#39;organization.urls&#39;), namespace=&amp;quot;org&amp;quot;),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# organization下的urls.py
+from django.conf.urls import url, include
+
+urlpatterns = [
+    # ...
+	url(r&#39;^list/$&#39;, OrgListView.as_view(), name=&amp;quot;org_list&amp;quot;),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;访问以&lt;code&gt;org*&lt;/code&gt;开头的的url都会到organization.urls中查找，提交变为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a href=&amp;quot;{% url &#39;org:org_list&#39; %}&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;访问地址由原来的&lt;code&gt;http://127.0.0.1:8000/org-list&lt;/code&gt;变为&lt;code&gt;http://127.0.0.1:8000/org/list&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;逻辑&#34;&gt;逻辑&lt;/h4&gt;
+&lt;p&gt;在users下的views.py中添加逻辑&lt;/p&gt;
+&lt;p&gt;注意：在view中配置函数逻辑后，就可以替换url下的内容，如：&lt;/p&gt;
+&lt;p&gt;在views.py中创建login函数方法&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def login(request):
+	if request.method == &amp;quot;POST&amp;quot;:
+		pass
+	elif request.method == &amp;quot;GET&amp;quot;:
+		return render(request, &amp;quot;login.html&amp;quot;, {})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在urls.py中就可以更改为：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.views.generic import TemplateView
+
+from model.views import login
+
+urlpatterns = [
+	url(&#39;^$&#39;, login, name=&amp;quot;index&amp;quot;)
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：这里面的&lt;code&gt;login&lt;/code&gt;不带()，不是点用函数方法，只是指向了&lt;code&gt;login&lt;/code&gt;函数.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTML表单提交&lt;/p&gt;
+&lt;p&gt;主要在于action以及method，除此之外，Django自带一种安全机制，防止跨越提交，反复向后台提交表单对服务器造成负担，Django为了防止这种攻击，会做一种CSRF验证（当用post提交数据的时候，Django会去检查是否有一个CSRF的随机字符串，如果没有就会报错），所以需要在form表单里面添加&lt;code&gt;{% csrf_token %}&lt;/code&gt;（可以查看页面源码,看到form中有一个input是隐藏的）!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./31.jpg&#34; alt=&#34;1565500485737&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;接收数据&lt;/p&gt;
+&lt;p&gt;views.py通过&lt;code&gt;request.POST.get(&amp;quot;labelName&amp;quot;,&amp;quot;&amp;quot;)&lt;/code&gt;来获取表单中的数据，第一个参数为参数名字，第二个参数为默认值.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;基于函数的登录操作&lt;/p&gt;
+&lt;p&gt;Django自带的用户认证auth，django.contrib.auth中提供了许多方法，其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;authenticate()&lt;/p&gt;
+&lt;p&gt;提供了用户认证，即验证用户名以及密码是否正确，一般需要username  password两个关键字参数，如果认证信息有效，会返回一个  User  对象.authenticate()会在User 对象上设置一个属性来标识后端已经认证了该用户，且该信息在后续的登录过程中是需要的。当试图登陆一个从数据库中直接取出来不经过authenticate()的User对象时会报错！&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.contrib.auth import authenticate
+user = authenticate(username=&#39;username&#39;,password=&#39;password&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;User对象&lt;/p&gt;
+&lt;p&gt;User 对象属性：username， password（必填项）password用哈希算法保存到数据库&lt;/p&gt;
+&lt;p&gt;is_staff ： 用户是否拥有网站的管理权限.&lt;/p&gt;
+&lt;p&gt;is_active ： 是否允许用户登录, 设置为&lt;code&gt;False&lt;/code&gt;，可以不用删除用户来禁止 用户登录&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;login(HttpRequest, user)　　
+该函数接受一个HttpRequest对象，以及一个认证了的User对象&lt;/p&gt;
+&lt;p&gt;备注：auth.login方法将校验通过的用户封装到request中，这样在request的生命周期我们都可以使用request.user得到这个用户的对象，不管是在视图函数还是在模板语言中都可以使用request.user 然后在 &lt;code&gt;.字段属性&lt;/code&gt;  来取到需要的内容。此函数使用django的session框架给某个已认证的用户附加上session id等信息.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.contrib.auth import authenticate, login
+        
+def user_login(request):
+    if request.method == &amp;quot;POST&amp;quot;:
+        username = request.POST.get(&amp;quot;username&amp;quot;, &amp;quot;&amp;quot;)
+        password = request.POST.get(&amp;quot;password&amp;quot;, &amp;quot;&amp;quot;)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, &amp;quot;index.html&amp;quot;)
+        else:
+            return render(request, &amp;quot;login.html&amp;quot;, {&amp;quot;msg&amp;quot;: &amp;quot;用户名或密码错误&amp;quot;})
+    elif request.method == &amp;quot;GET&amp;quot;:
+        return render(request, &amp;quot;login.html&amp;quot;, {})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示错误信息：&lt;/p&gt;
+&lt;p&gt;逻辑代码中返回的错误信息可以用&lt;code&gt;{{    }}&lt;/code&gt;来显示在页面中&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;lt;div class=&amp;quot;error btns login-form-tips&amp;quot; id=&amp;quot;jsLoginTips&amp;quot;&amp;gt;{{ msg }}&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./32.jpg&#34; alt=&#34;1565504344116&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;is_authenticated()&lt;/p&gt;
+&lt;p&gt;判断是否已经通过了认证，但通过认证并不意味着用户拥有任何权限，这个方法甚至也不检查该用户是否处于激活状态，只是表明用户成功的通过了认证。&lt;/p&gt;
+&lt;p&gt;这个方法很重要, 在后台用request.user.is_authenticated()判断用户是否已经登录，如果true则可以向前台展示request.user.name&lt;/p&gt;
+&lt;p&gt;备注：前端可以通过&lt;code&gt;{% request.user.is_authenticated() %}&lt;/code&gt;进行判断.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;logout(request) 注销用户　&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.contrib.auth import logout
+        
+def logout_view(request):
+  logout(request)
+  # Redirect to a success page.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;该函数接受一个HttpRequest对象，无返回值。当调用该函数时，当前请求的session信息会全部清除。该用户即使没有登录，使用该函数也不会报错.&lt;/p&gt;
+&lt;p&gt;备注：注销用户后，直接访问这个路径，还可以登录，但是可以&lt;code&gt;print(request.user)&lt;/code&gt;，当用户通过校验登录时，得到的是一个具体的用户对象；当注销时，再次访问，就会输出AnonymousUser（是一个类 &amp;lt;class &amp;lsquo;django.utils.functional.SimpleLazyObject&amp;rsquo;&amp;gt;），意为匿名用户，可以通过这个处理一些判断.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多账户信息登录&lt;/p&gt;
+&lt;p&gt;需要在usersModel下的views.py中创建继承&lt;code&gt;django.contrib.auth.backends import ModelBackends&lt;/code&gt;的类，然后定义函数，并将函数注册到settings.py下&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.contrib.auth.backends import ModelBackends
+from django.db.models import Q
+   
+calss CustomBackend(ModelBackends):
+    # 该方法会被django自动调用
+    def authenticate(self, username=None, password=None, **kwargs):
+        try:
+            # 根据用户名查找是否存在用户(get()函数只会返回存在一个的数据)
+            user = User.oject.get(username=username)
+            # 如果行多个账号形式，需要导入Q包，然后执行：
+            # user = User.oject.get(Q(username=username)|Q(email=username)
+            if user.check_password(password):
+                return user
+        except Exception as e:
+            retirn None
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;settings.py中配置&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;AUTHenTICATION_BACKENDS = (
+ &#39;model.views.CustomBackend&#39;,
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Q：&lt;/p&gt;
+&lt;p&gt;a、在 filter() 等函式中关键字参数彼此之间都是 &lt;strong&gt;&amp;ldquo;AND&amp;rdquo; 关系&lt;/strong&gt;。如果你要执行更复杂的查询(比如，实现筛选条件的 &lt;strong&gt;OR 关系&lt;/strong&gt;)，可以使用 Q 对象。
+b、Q对象包括 AND 关系 和OR 关系
+c、Q 对象可以用 &amp;amp; 和 | 运算符进行连接。当某个操作连接两个 Q 对象时，&lt;strong&gt;就会产生一个新的等价的 Q 对象。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如：下面这段语句就产生了一个 Q ，这是用 &amp;ldquo;OR&amp;rdquo; 关系连接&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Q(question__startswith=&#39;Who&#39;) | Q(question__startswith=&#39;What&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;d、每种查询函式(比如 filter(), exclude(), get()) 除了能接收关键字参数以外，也能以位置参数的形式接受一个或多个 Q 对象。如果你给查询函式传递了多个 Q 对象，那么它们彼此间都是**&amp;ldquo;AND&amp;rdquo; 关系。**例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;Poll.objects.get(
+Q(question__startswith=&#39;Who&#39;), Q(pub_date=date(2005, 5, 2)) |  Q(pub_date=date(2005, 5, 6))
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;e: filter() 等函数 可以接受 Q对象和条件参数，但Q对象必须放在 条件参数前面&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;settings.py中配置，重载变量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基于类的登录操作&lt;/p&gt;
+&lt;p&gt;定义继承django.views.generic.base下View的class类，直接重写get/post方法&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.views.generic.base import View
+   
+class LoginView（View）：
+ def get(self, request):
+        return render(request, &amp;quot;login.heml&amp;quot;, {})
+    def post(self, request):
+        username = request.POST[&#39;username&#39;]
+        password = request.POST[&#39;password&#39;]
+        user = authenticate(username=username, password=password)
+        if user is not None:
+          login(request, user)
+           # Redirect to a success page.
+            ...
+        else:
+           # Return an &#39;invalid login&#39; error message.
+           ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同时urls.py中还要更改为&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from model.views import LoginView
+   
+urlpatterns = [
+ # 调用LoginView下的as_view()方法
+ url(&#39;^login/$&#39;, LoginView.as_view(), name=&amp;quot;index&amp;quot;)
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Django  Form 表单&lt;/p&gt;
+&lt;p&gt;在实际的生产环境中比如登录和验证的时候，一般都使用Jquery+ajax来判断用户的输入是否为空，假如JS被禁用的话，这个认证屏障是就消失了（虽然一般不会禁用掉但是还是存在风险）&lt;/p&gt;
+&lt;p&gt;所以一般做两种认证一种是前端做一遍认证，在后端做一遍认证. 通过Django的form来实现.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Django的form的作用：
+1). 生成html标签&lt;/p&gt;
+&lt;p&gt;2). 用来做用户提交的验证&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;生成&lt;/p&gt;
+&lt;p&gt;创建forms.py脚本文件&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django import forms
+     
+class Loginform(forms.Form):
+    # 要求 变量名与form表单提交的字段名一致
+   email = forms.EmailField(required=True) #required是否可以为空,如果为False说明可以为空
+   username = forms.CharField() #如果required不写默认为Ture
+   password = forms.CharField() 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;views.py中&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from .forms import LginForm
+     
+# 创建实例,LoginForm(参数)需要传入字典类型的参数，这里将request.POST传入即可
+login_form = LoginForm(request.POST)
+# 就可以通过.is_valid()来判断用户输入是否合法
+if login_form.is_valid():
+    pass
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用&lt;code&gt;.is_valid()&lt;/code&gt;函数之后可以更改返回页面的错误信息，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;return render(request, &amp;quot;login.html&amp;quot;, {&amp;quot;login_form&amp;quot;: login_form})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;html页面中获取可以使用&lt;/p&gt;
+&lt;p&gt;循环获取错误信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{% for key, error in login_form.errors.items %}{{ error }}{% endfor %}{{ msg }} 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;formsmodelform&#34;&gt;Forms.ModelForm&lt;/h5&gt;
+&lt;p&gt;ModelForm表单同样需要导入包&lt;code&gt;from django import forms&lt;/code&gt;,它可以简化元form表单的生成，即可以直接将Model转换成表单，通过定义Meta类来指定Model，并且使用files指定哪些变量为表单内容&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django import forms
+
+from operation.models import UserAsk
+
+
+class UserAskForm(forms.ModelForm):
+    # 这里可以再添加字段
+    # temp = forms.CharField()
+    class Meta:
+        model = UserAsk
+        fields = [&#39;name&#39;, &#39;mobile&#39;, &#39;course_name&#39;]
+        
+    # 如果相对某个字段进行正则判断，可以定义&#39;clean_字段名&#39;的函数
+    def clean_mobile(self):
+        # 验证手机号码是否合法
+        mobile = self.cleaned_data[&#39;mobile&#39;]
+        REGEX_MOBIE = &amp;quot;^1[358]\d{9}$|^147\d{8}$|^176\\d{8}$&amp;quot;
+        p = re.compile(REGEX_MOBIE)
+        if p.match(mobile):
+            return mobile
+        else:
+            # 抛出异常
+            raise forms.ValidationError(u&amp;quot;手机号码非法&amp;quot;, &amp;quot;mobile_invalid&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实例化过程&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class AddUserAskView(View):
+	def post(self, request):
+    	userask_form = UserAskForm(request.POST)
+        if userask_form.valid():
+            user_ask = userask_form.save(commit=True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;备注：无需提取表单信息，直接save()即可&lt;/p&gt;
+&lt;p&gt;注意：需要指定save()参数&lt;code&gt;commit=TRUE&lt;/code&gt;否则无法存入数据库&lt;/p&gt;
+&lt;h3 id=&#34;注册页面&#34;&gt;注册页面&lt;/h3&gt;
+&lt;h4 id=&#34;页面-1&#34;&gt;页面&lt;/h4&gt;
+&lt;h5 id=&#34;django-captcha-验证码插件&#34;&gt;DJango captcha 验证码插件&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&#34;./33.jpg&#34; alt=&#34;1563269302912&#34;&gt;&lt;/p&gt;
+&lt;p&gt;下拉找到documentation online&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./34.jpg&#34; alt=&#34;1563269425425&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./35.jpg&#34; alt=&#34;1563269448271&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Installation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install &lt;code&gt;django-simple-captcha&lt;/code&gt; via &lt;a href=&#34;http://pypi.python.org/pypi/pip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pip&lt;/a&gt;: &lt;code&gt;pip install  django-simple-captcha&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add &lt;code&gt;captcha&lt;/code&gt; to the &lt;code&gt;INSTALLED_APPS&lt;/code&gt; in your &lt;code&gt;settings.py&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;code&gt;python manage.py migrate&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add an entry to your &lt;code&gt;urls.py&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;urlpatterns += [
+    url(r&#39;^captcha/&#39;, include(&#39;captcha.urls&#39;)),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Adding to a Form&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django import forms
+from captcha.fields import CaptchaField
+  
+class CaptchaTestForm(forms.Form):
+    myfield = AnyOtherField()
+    captcha = CaptchaField()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实例化CaptchaTestForm，传给前台在对应位置添加&lt;code&gt;{{ CaptchaTestForm.captcha }}&lt;/code&gt;即可.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;逻辑-1&#34;&gt;逻辑&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django import forms
+from captcha.fields import CaptchaField
+
+class RegisterForm(forms.Form):
+    myfield = AnyOtherField()  	# 与页面一一对应
+    captcha = CaptchaField()	# 可以添加参(error_messages={&amp;quot;错误内容&amp;quot;:&amp;quot;将显示的错误信息&amp;quot;})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在views.py中创建RegisterView(View)类， 然后再前端验证码label下面添加&lt;code&gt;{{ register_form.captcha  }}&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.contrib.auth.hashers import make_password
+
+class RegisterView(View):
+    def get(self, request)
+        register_form = RegisterForm()	# 实例化注册表单
+        return render(request, &amp;quot;register.html&amp;quot;, {&amp;quot;register_form&amp;quot;:register_form})
+
+	def post(self, request):
+    	# 创建实例register_form(参数)
+        register_form = RegisterForm(request.POST)
+        # 就可以通过.is_valid()来判断用户输入是否合法
+        if register_form.is_valid():
+            # ...
+            user.password = make_password(password)
+            user.save()  
+            
+            # 如果发送邮件执行发送邮箱验证代码
+            return 
+        else:
+            return 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;创建逻辑即可，值得一提的是存储明码的时候需要存密文，所以需要加密：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.contrib.auth.hashers import make_password
+
+user.password = make_password(password)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;发送邮箱验证&#34;&gt;发送邮箱验证&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;注册邮箱账号&lt;/p&gt;
+&lt;p&gt;首先注册邮箱账号（以新浪/网易邮箱为例），在常规设置中找到：&lt;strong&gt;POP3/SMTP/IMAP&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./36.jpg&#34; alt=&#34;1565013445488&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./37.jpg&#34; alt=&#34;1565012864520&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置Email&lt;/p&gt;
+&lt;p&gt;settings.py中添加&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;  EMAIL_HOST = &amp;quot;smtp.sina.com&amp;quot;
+  EMAIL_PORT= 25
+  EMAIL_HOST_USER = &amp;quot;xxx@xxx.com&amp;quot;
+  EMAIL_HOST_PASSWORD = &amp;quot;xxxxxx&amp;quot; # 这里的PASSWORD是授权码，而不是普通的邮箱密码
+  EMAIL_USE_TLS = False
+  EMAIL_FORM = &amp;quot;xxx@xxx.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;函数&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from random import Random
+from django.core.mail import send_mail
+  
+def random_str(randomlength=8):
+    str = &#39;&#39;
+    chars = &#39;AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789&#39;
+    length = len(chars) - 1
+    random = Random()
+    for i in range(randomlength):
+        str += chars[random.randint(0, length)]
+    return str
+  
+def send_register_email(email, send_type=&amp;quot;register&amp;quot;): 
+    email_record = EmailVerifyRecord()
+  code = random_str(16)
+    email_record.code = code
+    email_record.email = email
+    email_record.type = send_type
+    email_record.save()
+      
+    email title=&amp;quot;&amp;quot;
+    email body=&amp;quot;&amp;quot;
+  if send type==&amp;quot;register&amp;quot;：
+        email_title=&amp;quot;在线网注册激活链接”
+      email_body=&amp;quot;请点击下面的链接激活你的账号：http://127.0.0.1：8000/active/{0}&amp;quot;.format(code)
+    # 返回状态
+    send_status = send_mail(email_title, email_body, EMAIL_FORM, [email])
+    # send_status = send_mail(email_title, email_body, 需要导入settings.py, 列表list类型)	返回状态为0/1
+  if send_status:
+      pass
+    else:
+        pass
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;激活操作&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;urls.py配置拿到随机码进行匹配&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;url(r&#39;^active/(?P&amp;lt;Name&amp;gt;.*)/$&#39;, ActiveUserView.as_view())
+# 提取active/后面所有的东西存到Name中
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ActiveUserView(View):
+  def get(self, request, Name)
+          all_records = EmaolVerifyRecord.object.filter(code=Name)
+          if all_records:
+              for record in all_records:
+                  email = record.mail
+                  user = User.object.get(email=email)
+                  user.active = True
+                  user.save()
+          return ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./38.jpg&#34; alt=&#34;1565534156646&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在django中，查询经常用的两个API：get()和filter()两个方法，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;object.get()：得到的是一个对象，如果在数据库中查不到这个对象或者查找到对象都会报错！！！&lt;/li&gt;
+&lt;li&gt;object.filter() ：返回的是一个对象列表。如果在数据库中找不到这个对象，那么会返回一个空列表[]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;找回密码&#34;&gt;找回密码&lt;/h3&gt;
+&lt;h4 id=&#34;urlspy中配置链接&#34;&gt;urls.py中配置链接&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;url(r&#39;^active/(?P&amp;lt;Name&amp;gt;.*)/$&#39;, ForgetPwdView.as_view(), name=&amp;quot;forget_pwd
+&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;找到忘记密码的&lt;a&gt;标签，将&lt;code&gt;href=&#39;{% url &#39;forget_pwd&#39; %}&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ForgetPwdView(View):
+  def get(self, request)
+    forget_form = ForgetForm()	# 实例化忘记密码表单
+    return render(request, &amp;quot;forget.html&amp;quot;,{&amp;quot;forget_form&amp;quot;:forget_form})
+
+	def post(self, request)
+        forget_form = ForgetForm(request.POST)
+        if forget_form.is_valid():
+            # ...
+            email = request.POST.get(&amp;quot;email&amp;quot;)
+            
+            # 如果发送邮件执行发送邮箱验证代码
+            return 
+        else:
+            return 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;激活操作&#34;&gt;激活操作&lt;/h4&gt;
+&lt;p&gt;urls.py配置拿到随机码进行匹配&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;url(r&#39;^reset/(?P&amp;lt;Name&amp;gt;.*)/$&#39;, ResetView.as_view())
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class ResetView(View):
+	def get(self, request, Name)
+  		all_records = EmaolVerifyRecord.object.filter(code=Name)
+          if all_records:
+              for record in all_records:
+                  email = record.mail
+                  return render(request, &amp;quot;password.html&amp;quot; {&amp;quot;email&amp;quot;:email})
+            else: 
+                return 
+    def post(self, request):
+        ...  
+
+class ModifyPwdView(View):
+    def post(self, request):
+        modify_form = ModifyPwdForm(request.POST)
+        if modify_form.is_valid():
+            email = request.POST.get(&amp;quot;email&amp;quot;, &amp;quot;&amp;quot;)
+            password1 = request.POST.get(&amp;quot;password1&amp;quot;, &amp;quot;&amp;quot;)
+            password2 = request.POST.get(&amp;quot;password2&amp;quot;, &amp;quot;&amp;quot;)
+            if password1 != password2:
+                return render(request, &amp;quot;password_reset.html&amp;quot;, {&amp;quot;email&amp;quot;: email, &amp;quot;msg&amp;quot;: &amp;quot;密码不一致&amp;quot;})
+            modify_user = UserProfile.objects.get(email=email)
+            modify_user.password = make_password(password1)
+            modify_user.save()
+            return render(request, &amp;quot;login.html&amp;quot;)
+        else:
+            return render(request, &amp;quot;login.html&amp;quot;, {&amp;quot;modify_form&amp;quot;: modify_form})
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;机构的功能实现&#34;&gt;机构的功能实现&lt;/h2&gt;
+&lt;h3 id=&#34;django网页模板的继承block&#34;&gt;Django网页模板的继承block&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;新建母版html文件（在里面挖坑block）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+    {% block title %}&amp;lt;title&amp;gt;模板页&amp;lt;/title&amp;gt;{% endblock %}
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+{% block custom_bread %}
+     &amp;lt;section&amp;gt;
+        &amp;lt;div class=&amp;quot;wp&amp;quot;&amp;gt;
+            &amp;lt;ul class=&amp;quot;crumbs&amp;quot;&amp;gt;
+                &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{% url &#39;index&#39; %}&amp;quot;&amp;gt;首页&amp;lt;/a&amp;gt;&amp;gt;&amp;lt;/li&amp;gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/section&amp;gt;
+{% endblock %}
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新建子网页并继承母版extends（在里面填坑）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;{% extends &#39;base.html&#39; %} # 注意： 继承语句必须放在首行 
+{% block title %}授课机构列表{% endblock %}
+{% block custom_bread %}
+     &amp;lt;section&amp;gt;
+        &amp;lt;div class=&amp;quot;wp&amp;quot;&amp;gt;
+            &amp;lt;ul class=&amp;quot;crumbs&amp;quot;&amp;gt;
+                &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{% url &#39;index&#39; %}&amp;quot;&amp;gt;首页&amp;lt;/a&amp;gt;&amp;gt;&amp;lt;/li&amp;gt;
+                &amp;lt;li&amp;gt;课程机构&amp;lt;/li&amp;gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/section&amp;gt;
+{% endblock %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;写路由，只需写子网页的路由即可。（无需写母版页的路由）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from django.shortcuts import render
+from django.views.generic import View
+   
+class OrgListView(View):
+    def get(self, request):
+        return render(request, &amp;quot;org-list.html&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;分页功能&#34;&gt;分页功能&lt;/h3&gt;
+&lt;p&gt;geihub搜索：&lt;strong&gt;pure pagination&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./39.jpg&#34; alt=&#34;1565613210906&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;installation&#34;&gt;Installation&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Install package from PYPI:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;pip install django-pure-pagination
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​	or clone and install from repository:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone git@github.com:jamespacileo/django-pure-pagination.git
+cd django-pure-pagination
+python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Add pure_pagination to INSTALLED_APPS&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;INSTALLED_APPS = (
+    ...
+    &#39;pure_pagination&#39;,
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Finally substitute &lt;strong&gt;from django.core.paginator import Paginator&lt;/strong&gt; with &lt;strong&gt;from pure_pagination import Paginator&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A few settings can be set within settings.py&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;PAGINATION_SETTINGS = {
+    &#39;PAGE_RANGE_DISPLAYED&#39;: 10,
+    &#39;MARGIN_PAGES_DISPLAYED&#39;: 2,
+
+    &#39;SHOW_FIRST_PAGE_WHEN_INVALID&#39;: True,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;usage-example&#34;&gt;Usage example&lt;/h4&gt;
+&lt;p&gt;Following is a simple example for &lt;strong&gt;function based views&lt;/strong&gt;. For generic class-based views, see bellow.&lt;/p&gt;
+&lt;p&gt;view file: &lt;strong&gt;views.py&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# views.py
+from django.shortcuts import render_to_response
+
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
+
+
+def index(request):
+
+    try:
+        page = request.GET.get(&#39;page&#39;, 1)
+    except PageNotAnInteger:
+        page = 1
+
+    objects = [&#39;john&#39;, &#39;edward&#39;, &#39;josh&#39;, &#39;frank&#39;]
+
+    # Provide Paginator with the request object for complete querystring generation
+	# 需要传递三个参数，中间参数为每页显示数据
+    p = Paginator(objects, 5, request=request)
+
+    people = p.page(page)
+
+    return render_to_response(&#39;index.html&#39;, {
+        &#39;people&#39;: people,
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;template file: &lt;strong&gt;index.html&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{# index.html #}
+{% extends &#39;base.html&#39; %}
+
+{% block content %}
+
+{% for person in people.object_list %}
+    &amp;lt;div&amp;gt;
+        First name: {{ person }}
+    &amp;lt;/div&amp;gt;
+{% endfor %}
+
+{# The following renders the pagination html #}
+&amp;lt;div id=&amp;quot;pagination&amp;quot;&amp;gt;
+    {{ people.render }} # 默认页码样式
+&amp;lt;/div&amp;gt;
+
+{% endblock %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;自定义页码样式&lt;/p&gt;
+&lt;h4 id=&#34;usage&#34;&gt;Usage&lt;/h4&gt;
+&lt;p&gt;There a few different way you can make use of the features introduced within django-pure-pagination.&lt;/p&gt;
+&lt;p&gt;Easiest way to render the pagination is to call the render method i.e. &lt;strong&gt;{{ page.render }}&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Alternatively you can access the Page object low level methods yourself&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Special note:&lt;/strong&gt; &lt;strong&gt;page_obj&lt;/strong&gt; and &lt;strong&gt;current_page&lt;/strong&gt; both point to the page object within the template.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;{% load i18n %}
+&amp;lt;div class=&amp;quot;pagination&amp;quot;&amp;gt;
+    {% if page_obj.has_previous %}
+        &amp;lt;a href=&amp;quot;?{{ page_obj.previous_page_number.querystring }}&amp;quot; class=&amp;quot;prev&amp;quot;&amp;gt;&amp;amp;lsaquo;&amp;amp;lsaquo; {% trans &amp;quot;previous&amp;quot; %}&amp;lt;/a&amp;gt;
+    {% else %}
+        &amp;lt;span class=&amp;quot;disabled prev&amp;quot;&amp;gt;&amp;amp;lsaquo;&amp;amp;lsaquo; {% trans &amp;quot;previous&amp;quot; %}&amp;lt;/span&amp;gt;
+    {% endif %}
+    {% for page in page_obj.pages %}
+        {% if page %}
+            {% ifequal page page_obj.number %}
+                &amp;lt;span class=&amp;quot;current page&amp;quot;&amp;gt;{{ page }}&amp;lt;/span&amp;gt;
+            {% else %}
+                &amp;lt;a href=&amp;quot;?{{ page.querystring }}&amp;quot; class=&amp;quot;page&amp;quot;&amp;gt;{{ page }}&amp;lt;/a&amp;gt;
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        &amp;lt;a href=&amp;quot;?{{ page_obj.next_page_number.querystring }}&amp;quot; class=&amp;quot;next&amp;quot;&amp;gt;{% trans &amp;quot;next&amp;quot; %} &amp;amp;rsaquo;&amp;amp;rsaquo;&amp;lt;/a&amp;gt;
+    {% else %}
+        &amp;lt;span class=&amp;quot;disabled next&amp;quot;&amp;gt;{% trans &amp;quot;next&amp;quot; %} &amp;amp;rsaquo;&amp;amp;rsaquo;&amp;lt;/span&amp;gt;
+    {% endif %}
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;mxonline分页设置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;ul class=&amp;quot;pagelist&amp;quot;&amp;gt;
+	{% if all_orgs.has_previous %}
+     	&amp;lt;li  class=&amp;quot;long&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;?{{all_orgs.previous_page_number.querystring }}&amp;quot;&amp;gt;上一页&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+    {% endif %}
+    {% for page in all_orgs.pages %}
+        {% if page %}
+            {% ifequal page all_orgs.number %}
+            &amp;lt;li class=&amp;quot;active&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;?{{ page.querystring }}&amp;quot;&amp;gt;{{ page }}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+            {% else %}
+            &amp;lt;li&amp;gt;&amp;lt;a class=&amp;quot;page&amp;quot; href=&amp;quot;?{{ page.querystring }}&amp;quot;&amp;gt;{{ page }}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+            {% endifequal %}
+        {% else %}
+        	&amp;lt;li class=&amp;quot;none&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;&amp;quot;&amp;gt;...&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+        {% endif %}
+    {% endfor %}
+    {% if all_orgs.has_next %}
+   		 &amp;lt;li class=&amp;quot;long&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;?{{ all_orgs.next_page_number.querystring }}&amp;quot;&amp;gt;下一页&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+    {% endif %}
+    &amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;分类显示及课程排行&#34;&gt;分类显示及课程排行&lt;/h3&gt;
+&lt;p&gt;前端页面通过a标签向后跳提供参数，如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a href=&amp;quot;?ct=pxjg&amp;amp;city={{ city.id }}&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;view逻辑获取，并分页显示&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class OrgListView(View):
+    def get(self, request):
+        # 获取所有机构
+        all_orgs = CourseOrg.objects.all()
+        # 热门机构
+        # 注意这里，排序参数前如果有‘-’则代表着降序，没有则默认升序
+        hot_orgs = all_orgs.order_by(&amp;quot;-click_nums&amp;quot;)[:5]
+        all_citys = CityDic.objects.all()
+        # 取出筛选城市
+        city_id = request.GET.get(&#39;city&#39;, &amp;quot;&amp;quot;)
+        if city_id:
+            all_orgs = all_orgs.filter(city_id=int(city_id))
+
+        # 类别筛选
+        category = request.GET.get(&#39;ct&#39;, &amp;quot;&amp;quot;)
+        if category:
+            all_orgs = all_orgs.filter(category=category)
+
+        org_nums = all_orgs.count()
+        try:
+            page = request.GET.get(&#39;page&#39;, 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(all_orgs, 5, request=request)
+        orgs = p.page(page)
+        return render(request, &amp;quot;org-list.html&amp;quot;, {
+            &amp;quot;all_orgs&amp;quot;: orgs,
+            &amp;quot;org_nums&amp;quot;: org_nums,
+            &amp;quot;all_citys&amp;quot;: all_citys,
+            &amp;quot;city_id&amp;quot;: city_id,
+            &amp;quot;category&amp;quot;: category,
+            &amp;quot;hot_orgs&amp;quot;: hot_orgs
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;前端以通过&lt;code&gt;&amp;lt;span class=&amp;quot;{% ifequal category &amp;quot;pxjg&amp;quot; %} active2{% endifequal %}&amp;quot;&amp;gt;培训机构&amp;lt;/span&amp;gt;&lt;/code&gt;添加样式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a href=&amp;quot;?city={{ city.id }}&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;{% ifequal category &amp;quot;&amp;quot; %}active2{% endifequal %}&amp;quot;&amp;gt;全部&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;
+&amp;lt;a href=&amp;quot;?ct=pxjg&amp;amp;city={{ city.id }}&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;{% ifequal category &amp;quot;pxjg&amp;quot; %} active2{% endifequal %}&amp;quot;&amp;gt;培训机构&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# 课程排行前端
+
+&amp;lt;div class=&amp;quot;right companyrank layout&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;head&amp;quot;&amp;gt;授课机构排名&amp;lt;/div&amp;gt;
+{% for hot_org in hot_orgs %}
+    &amp;lt;dl class=&amp;quot;des&amp;quot;&amp;gt;
+    	&amp;lt;dt class=&amp;quot;num fl&amp;quot;&amp;gt;{{ forloop.counter }}&amp;lt;/dt&amp;gt;
+        &amp;lt;dd&amp;gt;
+            &amp;lt;a href=&amp;quot;/company/2/&amp;quot;&amp;gt;&amp;lt;h1&amp;gt;{{ hot_org.name }}&amp;lt;/h1&amp;gt;&amp;lt;/a&amp;gt;
+            &amp;lt;p&amp;gt;{{ hot_org.address }}&amp;lt;/p&amp;gt;
+        &amp;lt;/dd&amp;gt;
+    &amp;lt;/dl&amp;gt;
+{% endfor %}
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;页面内异步提交表单&#34;&gt;页面内异步提交表单&lt;/h3&gt;
+&lt;p&gt;异步操作需要ajax操作，对指定的表单声明自定义script&lt;/p&gt;
+&lt;p&gt;如对网页中的某一表单进行异步操作&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./40.jpg&#34; alt=&#34;1565672331542&#34;&gt;&lt;/p&gt;
+&lt;p&gt;配置url&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;url(&#39;^add_ask/$&#39;, AddUserAskView.as_view(), name=&amp;quot;add_ask&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;表单提交逻辑&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class AddUserAskView(View):
+    def post(self, request):
+        userask_form = UserAskForm(request.POST)
+        if userask_form.is_valid():
+            user_ask = userask_form.save(commit=True)
+            return HttpResponse(&#39;{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;}&#39;)
+        else:
+            return HttpResponse(json.dumps(&#39;{&amp;quot;status&amp;quot;:&amp;quot;fail&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;添加错误&amp;quot;}&#39;, ensure_ascii=False), content_type=&amp;quot;application/json,charset=utf-8&amp;quot;)
+            # return JsonResponse(&#39;{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;}&#39;, safe=False)
+        # else:
+            # return JsonResponse(&#39;{&amp;quot;status&amp;quot;:&amp;quot;fail&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;添加错误&amp;quot;}&#39;, safe=False)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;备注：django一般用JsonResponse来返回json数据格式，这种方式返回简单，但是中文会乱码&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 格式
+return JsonResponse(result, safe=False)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如若显示中文，需要改用HttpResponse来返回&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 格式
+return HttpResponse(json.dumps(result,ensure_ascii=False),content_type=&amp;quot;application/json,charset=utf-8&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意： 此处有坑,result要严格按照JSON格式书写.即&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;result = {&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;}
+result = {&amp;quot;status&amp;quot;:&amp;quot;fail&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;添加错误&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;写下面的javascript代码，对表单提交进行监听&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;{% block custom_js %}
+&amp;lt;script&amp;gt;
+    $(function () {
+        $(&#39;#jsStayBtn&#39;).on(&#39;click&#39;, function () {
+            $.ajax({
+                cache: false,
+                type: &amp;quot;POST&amp;quot;,
+                url: &amp;quot;{% url &#39;org:add_ask&#39; %}&amp;quot;,
+                data: $(&#39;#jsStayForm&#39;).serialize(),
+                async: true,
+                success: function (data) {
+                    console.log(data)
+                    # 装换成JSON格式，否则data.status为undefined
+                    data = JSON.parse(data)
+                    console.log(data.status)
+                    if (data.status == &#39;success&#39;) {
+                        $(&#39;#jsStayForm&#39;)[0].reset();
+                        alert(&amp;quot;提交成功&amp;quot;)
+                    } else if (data.status == &#39;fail&#39;) {
+                        $(&#39;#jsCompanyTips&#39;).html(data.msg)
+                    }
+                },
+            });
+        });
+    })
+&amp;lt;/script&amp;gt;
+{% endblock %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;机构首页课程介绍讲师&#34;&gt;机构首页/课程/介绍/讲师&lt;/h3&gt;
+&lt;p&gt;点击机构图片查看机构详情等操作&lt;/p&gt;
+&lt;p&gt;与前面操作类似，唯一需要提到的是url配置，因为点击机构图片logo的时候需要传递参数，以便知道是哪个机构，所以&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# url配置
+url(r&#39;^home/(?P&amp;lt;org_id&amp;gt;.*)/$&#39;, OrgHomeView.as_view(), name=&amp;quot;org_home&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# view逻辑
+class OrgHomeView(View):
+    &amp;quot;&amp;quot;&amp;quot;
+    机构首页
+    &amp;quot;&amp;quot;&amp;quot;
+    def get(self, request, org_id):
+        current_page = &amp;quot;home&amp;quot;
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        has_fav = False
+        if request.user.is_authenticated:
+            if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
+                has_fav = True
+        # 这里可以通过外键_set来反向获取外键数据
+        all_courses = course_org.course_set.all()[:3]
+        all_teachers = course_org.teacher_set.all()[:2]
+
+        return render(request, &#39;org-detail-homepage.html&#39;, {
+            &amp;quot;all_courses&amp;quot;: all_courses,
+            &amp;quot;all_teachers&amp;quot;: all_teachers,
+            &amp;quot;course_org&amp;quot;: course_org,
+            &amp;quot;current_page&amp;quot;: current_page,
+            &amp;quot;has_fav&amp;quot;: has_fav
+        })
+
+
+class OrgCourseView(View):
+    &amp;quot;&amp;quot;&amp;quot;
+    机构课程
+    &amp;quot;&amp;quot;&amp;quot;
+
+    def get(self, request, org_id):
+        current_page = &amp;quot;course&amp;quot;
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        has_fav = False
+        if request.user.is_authenticated:
+            if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
+                has_fav = True
+        all_courses = course_org.course_set.all()
+
+        return render(request, &#39;org-detail-course.html&#39;, {
+            &amp;quot;all_courses&amp;quot;: all_courses,
+            &amp;quot;course_org&amp;quot;: course_org,
+            &amp;quot;current_page&amp;quot;: current_page,
+            &amp;quot;has_fav&amp;quot;: has_fav
+        })
+
+
+class OrgDescView(View):
+    &amp;quot;&amp;quot;&amp;quot;
+    机构介绍
+    &amp;quot;&amp;quot;&amp;quot;
+
+    def get(self, request, org_id):
+        current_page = &amp;quot;desc&amp;quot;
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        has_fav = False
+        if request.user.is_authenticated:
+            if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
+                has_fav = True
+
+        return render(request, &#39;org-detail-desc.html&#39;, {
+            &amp;quot;course_org&amp;quot;: course_org,
+            &amp;quot;current_page&amp;quot;: current_page,
+            &amp;quot;has_fav&amp;quot;: has_fav
+        })
+
+
+class OrgTeacherView(View):
+    &amp;quot;&amp;quot;&amp;quot;
+    机构讲师
+    &amp;quot;&amp;quot;&amp;quot;
+
+    def get(self, request, org_id):
+        current_page = &amp;quot;teacher&amp;quot;
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        has_fav = False
+        if request.user.is_authenticated:
+            if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
+                has_fav = True
+        all_teachers = course_org.teacher_set.all()
+
+        return render(request, &#39;org-detail-teachers.html&#39;, {
+            &amp;quot;all_teachers&amp;quot;: all_teachers,
+            &amp;quot;course_org&amp;quot;: course_org,
+            &amp;quot;current_page&amp;quot;: current_page,
+            &amp;quot;has_fav&amp;quot;: has_fav
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 访问时需要在url &#39;org:org_home&#39;后空一格，然后带上id
+&amp;lt;a href=&amp;quot;{% url &#39;org:org_home&#39; org.id %}&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其他操作均相同，略&lt;/p&gt;
+&lt;h3 id=&#34;用户收藏&#34;&gt;用户收藏&lt;/h3&gt;
+&lt;p&gt;用户收藏操作同样是异步操作，需要ajax，因为页面采用继承式，所以只需要在org_base.html中更改即可，首先在organization的url中配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;url(r&#39;^add_fav/$&#39;, AddFavoriteView.as_view(), name=&amp;quot;add_fav&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;由于页面中的继承，在点击左侧的时候页面会刷新，导致收藏按钮更改，所以需要对每个操作（机构首页/课程/介绍/讲师）等均进行判断是否收藏，前端需要注意的是，由于界面中不存在form表单提交，所以无法使用&lt;code&gt;{% csrf-token %}&lt;/code&gt;，需要在ajax向后提交的时候补充发送，即：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;//收藏分享
+function add_fav(current_elem, fav_id, fav_type) {
+    $.ajax({
+        cache: false,
+        type: &amp;quot;POST&amp;quot;,
+        url: &amp;quot;{% url &#39;org:add_fav&#39; %}&amp;quot;,
+        data: {&#39;fav_id&#39;: fav_id, &#39;fav_type&#39;: fav_type},
+        async: true,
+        # ！！！！！！！！！！！！！！！！！！！！！！！
+        beforeSend: function (xhr, settings) {
+            xhr.setRequestHeader(&amp;quot;X-CSRFToken&amp;quot;, &amp;quot;{{ csrf_token }}&amp;quot;);
+        },
+        # ！！！！！！！！！！！！！！！！！！！！！！！
+        success: function (data) {
+            data = JSON.parse(data)
+            console.log(data)
+            console.log(data.status)
+            console.log(data.msg)
+            if (data.status == &#39;fail&#39;) {
+                if (data.msg == &#39;用户未登录&#39;) {
+                    window.location.href = &amp;quot;{% url &#39;login&#39; %}&amp;quot;;
+                } else {
+                    alert(data.msg)
+                }
+
+            } else if (data.status == &#39;success&#39;) {
+                current_elem.text(data.msg)
+            }
+        },
+    });
+}
+
+$(&#39;.collectionbtn&#39;).on(&#39;click&#39;, function () {
+    add_fav($(this), {{ course_org.id }}, 2);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;后台逻辑&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class AddFavoriteView(View):
+    &amp;quot;&amp;quot;&amp;quot;
+    用户收藏
+    &amp;quot;&amp;quot;&amp;quot;
+    def post(self, request):
+    	# 拿到前端数据
+        fav_id = request.POST.get(&#39;fav_id&#39;, 0)
+        fav_type = request.POST.get(&#39;fav_type&#39;, 0)
+
+        # 判断用户是否登录(即使在未登录的情况下，request对象也会产生不同于自定义User的user对象，判断是否登录)
+        if not request.user.is_authenticated:
+            return HttpResponse(json.dumps(&#39;{&amp;quot;status&amp;quot;:&amp;quot;fail&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;用户未登录&amp;quot;}&#39;, ensure_ascii=False), content_type=&amp;quot;application/json, charset=utf-8&amp;quot;)
+        exit_records = UserFavorite.objects.filter(user=request.user, fav_id=int(fav_id), fav_type=int(fav_type))
+        if exit_records:
+            # 如果存在则证明已收藏，现取消收藏
+            exit_records.delete()
+            # 返回JSON数据
+            return HttpResponse(json.dumps(&#39;{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;收藏&amp;quot;}&#39;, ensure_ascii=False), content_type=&amp;quot;application/json, charset=utf-8&amp;quot;)
+        else:
+            user_fav = UserFavorite()
+            if int(fav_id) &amp;gt; 0 and int(fav_type) &amp;gt; 0:
+                user_fav.user = request.user
+                user_fav.fav_id = int(fav_id)
+                user_fav.fav_type = int(fav_type)
+                user_fav.save()
+                return HttpResponse(json.dumps(&#39;{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;已收藏&amp;quot;}&#39;, ensure_ascii=False), content_type=&amp;quot;application/json, charset=utf-8&amp;quot;)
+            else:
+                return HttpResponse(json.dumps(&#39;{&amp;quot;status&amp;quot;:&amp;quot;fail&amp;quot;, &amp;quot;msg&amp;quot;: &amp;quot;收藏出错&amp;quot;}&#39;, ensure_ascii=False), content_type=&amp;quot;application/json, charset=utf-8&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;公开课&#34;&gt;公开课&lt;/h2&gt;
+&lt;p&gt;首先在courses下创建urls.py文件，然后通过导入到项目下的urls.py文件下，配置操作：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# urls.py
+# 配置课程相关url
+url(r&#39;^course/&#39;, include(&#39;courses.urls&#39;, namespace=&amp;quot;course&amp;quot;)),
+
+# courses下urls.py
+url(r&#39;^list/$&#39;, CourseListView.as_view(), name=&amp;quot;course_list&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;View&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class CourseListView(View):
+    def get(self, request):
+        all_courses = Course.objects.all().order_by(&amp;quot;-add_time&amp;quot;)
+
+        hot_courses = Course.objects.all().order_by(&amp;quot;-click_nums&amp;quot;)[:3]
+        sort = request.GET.get(&amp;quot;sort&amp;quot;, &amp;quot;&amp;quot;)
+        if sort:
+            if sort == &amp;quot;students&amp;quot;:
+                all_courses = all_courses.order_by(&amp;quot;-students&amp;quot;)
+            elif sort == &amp;quot;hot&amp;quot;:
+                all_courses = all_courses.order_by(&amp;quot;-click_nums&amp;quot;)
+        org_nums = all_courses.count()
+
+        # 对课程分页
+        try:
+            page = request.GET.get(&#39;page&#39;, 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_courses, 6, request=request)
+
+        corses = p.page(page)
+
+        return render(request, &#39;course-list.html&#39;, {
+            &amp;quot;all_courses&amp;quot;: corses,
+            &amp;quot;hot_courses&amp;quot;: hot_courses,
+            &amp;quot;sort&amp;quot;: sort
+        })
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;课程列表&#34;&gt;课程列表&lt;/h3&gt;
+&lt;p&gt;同课程机构一样，首先修改页面，只需要在对应位置进行修改（{% block %}）即可完成页面配置，然后进行url配置，在course下创建urls.py文件，最后编写后台View逻辑&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# url 配置
+url(r&#39;^list/$&#39;, CourseListView.as_view(), name=&amp;quot;course_list&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class CourseListView(View):
+    def get(self, request):
+        all_courses = Course.objects.all().order_by(&amp;quot;-add_time&amp;quot;)
+
+        hot_courses = Course.objects.all().order_by(&amp;quot;-click_nums&amp;quot;)[:3]
+        sort = request.GET.get(&amp;quot;sort&amp;quot;, &amp;quot;&amp;quot;)
+        if sort:
+            if sort == &amp;quot;students&amp;quot;:
+                all_courses = all_courses.order_by(&amp;quot;-students&amp;quot;)
+            elif sort == &amp;quot;hot&amp;quot;:
+                all_courses = all_courses.order_by(&amp;quot;-click_nums&amp;quot;)
+        org_nums = all_courses.count()
+
+        # 对课程分页
+        try:
+            page = request.GET.get(&#39;page&#39;, 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_courses, 6, request=request)
+
+        corses = p.page(page)
+
+        return render(request, &#39;course-list.html&#39;, {
+            &amp;quot;all_courses&amp;quot;: corses,
+            &amp;quot;hot_courses&amp;quot;: hot_courses,
+            &amp;quot;sort&amp;quot;: sort
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;课程详情&#34;&gt;课程详情&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 课程详情页
+url(r&#39;^detail/(?P&amp;lt;course_id&amp;gt;.*)/$&#39;, CourseDetailView.as_view(), name=&amp;quot;course_detail&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;class CourseDetailView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        # 增加课程点击数
+        course.click_nums += 1
+        course.save()
+
+        # 判断是否收藏
+        has_fav_course = False
+        has_fav_org = False
+        if request.user.is_authenticated:
+            if UserFavorite.objects.filter(user=request.user, fav_id=course.id, fav_type=1):
+                has_fav_course = True
+            if UserFavorite.objects.filter(user=request.user, fav_id=course.course_org.id, fav_type=2):
+                has_fav_org = True
+
+        tag = course.tag
+        if tag:
+            relate_courses = Course.objects.filter(tag=tag)[:1]
+        else:
+            relate_courses = []
+        return render(request, &#39;course-detail.html&#39;, {
+            &amp;quot;course&amp;quot;: course,
+            &amp;quot;relate_courses&amp;quot;: relate_courses,
+            &amp;quot;has_fav_course&amp;quot;: has_fav_course,
+            &amp;quot;has_fav_org&amp;quot;: has_fav_org,
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;课程章节信息配置&#34;&gt;课程章节信息配置&lt;/h4&gt;
+&lt;p&gt;获取课程的章节：打开courses/models.py文件，在Course函数里面，新定义函数def get_course_lesson用于获取课程的章节：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;def get_course_lesson(self):
+# 获取课程所有章节
+	return self.lesson_set.all()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在lesson函数里面，新定义函数def get_lesson_video用于获取章节的视频信息：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;def get_lesson_video(self):
+	# 获取章节视频信息
+	return self.video_set.all()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;现在打开&lt;strong&gt;course-video.html&lt;/strong&gt;页面，配置数据的动态显示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{% for lesson in course.get_course_lesson %}
+&amp;lt;div class=&amp;quot;chapter chapter-active&amp;quot; &amp;gt;
+&amp;lt;h3&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;i class=&amp;quot;state-expand&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;{{ lesson.name }}&amp;lt;/strong&amp;gt;&amp;lt;/h3&amp;gt;
+&amp;lt;ul class=&amp;quot;video&amp;quot;&amp;gt;
+{% for video in lesson.get_lesson_video %}
+	&amp;lt;li&amp;gt;
+    &amp;lt;a target=&amp;quot;_blank&amp;quot; href=&#39;https://CoMath21.github.io/video/3662&#39; class=&amp;quot;J-media-item studyvideo&amp;quot;&amp;gt;{{ video.name }}({{ video.learn_times }})
+    &amp;lt;i class=&amp;quot;study-state&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+	&amp;lt;/a&amp;gt;
+	&amp;lt;/li&amp;gt;
+{% endfor %}
+&amp;lt;/ul&amp;gt;
+&amp;lt;/div&amp;gt;
+{% endfor %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;课程评论&#34;&gt;课程评论&lt;/h3&gt;
+&lt;p&gt;打开courses/urls.py文件，配置课程评论页面的url&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from .views import CourseCommentView
+
+ # 课程评论页面url
+    re_path(&#39;comment/(?P&amp;lt;course_id&amp;gt;.*)/&#39;, CourseCommentView.as_view(), name=&amp;quot;course_comment&amp;quot;),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后打开courses/views.py文件，新定义课程评论页面函数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from operation.models import CourseComments
+
+# 课程评论页面
+class CourseCommentView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+        all_comments = CourseComments.objects.all()
+        return render(request, &amp;quot;course-comment.html&amp;quot;, {
+            &amp;quot;course&amp;quot;: course,
+            &amp;quot;all_resources&amp;quot;: all_resources,
+            &amp;quot;all_comments&amp;quot;: all_comments,
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;接着打开&lt;strong&gt;course-comment.html&lt;/strong&gt;页面,修改跳转代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;lt;li&amp;gt;&amp;lt;a class=&amp;quot;ui-tabs-active active&amp;quot; id=&amp;quot;learnOn&amp;quot;  href=&amp;quot;{% url &#39;courses:course_info&#39; course.id %}&amp;quot;&amp;gt;&amp;lt;span&amp;gt;章节&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;a id=&amp;quot;commentOn&amp;quot; class=&amp;quot;&amp;quot; href=&amp;quot;{% url &#39;course:course_comment&#39; course.id %}&amp;quot;&amp;gt;&amp;lt;span&amp;gt;评论&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后打开&lt;strong&gt;course-comment.html&lt;/strong&gt;页面，修改课程信息，资料下载，讲师提示等, 和前面在video页面配置的一样&lt;/p&gt;
+&lt;h3 id=&#34;课程资源&#34;&gt;课程资源&lt;/h3&gt;
+&lt;p&gt;第一步，前往xadmin后台为某一门课添加课程资源，第二步打开courses/views.py文件，修改视图函数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from .models import  CourseResource
+
+all_resources = CourseResource.objects.filter(course=course)
+return render(request, &amp;quot;course-video.html&amp;quot;, {
+            &amp;quot;all_resources&amp;quot;: all_resources,
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;打开&lt;strong&gt;course-video.html&lt;/strong&gt;页面，配置资源下载的动态显示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{% for resources in all_resources %}
+                               &amp;lt;li&amp;gt;
+                                &amp;lt;span &amp;gt;&amp;lt;i class=&amp;quot;aui-iconfont aui-icon-file&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;{{ resources.name }}&amp;lt;/span&amp;gt;
+                                &amp;lt;a href=&amp;quot;{{ MEDIA_URL }}{{ resources.download }}&amp;quot; class=&amp;quot;downcode&amp;quot; target=&amp;quot;_blank&amp;quot; download=&amp;quot;&amp;quot; data-id=&amp;quot;274&amp;quot; title=&amp;quot;&amp;quot;&amp;gt;下载&amp;lt;/a&amp;gt;
+                            &amp;lt;/li&amp;gt;
+                           {% endfor %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后刷新页面，发现显示没有问题。&lt;/p&gt;
+&lt;p&gt;接下在&lt;strong&gt;course-video.html&lt;/strong&gt;页面完成课程信息的修改：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;lt;div class=&amp;quot;static-item &amp;quot;&amp;gt;
+	&amp;lt;span class=&amp;quot;meta-value&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;{{ course.get_degree_display }}&amp;lt;/strong&amp;gt;&amp;lt;/span&amp;gt;
+	&amp;lt;span class=&amp;quot;meta&amp;quot;&amp;gt;难度&amp;lt;/span&amp;gt;
+	&amp;lt;em&amp;gt;&amp;lt;/em&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;static-item static-time&amp;quot;&amp;gt;
+	&amp;lt;span class=&amp;quot;meta-value&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;{{ course.learn_times }}分钟&amp;lt;/strong&amp;gt;	&amp;lt;/span&amp;gt;
+	&amp;lt;span class=&amp;quot;meta&amp;quot;&amp;gt;时长&amp;lt;/span&amp;gt;
+	&amp;lt;em&amp;gt;&amp;lt;/em&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;static-item&amp;quot;&amp;gt;
+	&amp;lt;span class=&amp;quot;meta-value&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;{{ course.students }}人&amp;lt;/strong&amp;gt;&amp;lt;/span&amp;gt;
+	&amp;lt;span class=&amp;quot;meta&amp;quot;&amp;gt;学习人数&amp;lt;/span&amp;gt;
+	&amp;lt;em&amp;gt;&amp;lt;/em&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在配置讲师提示的时候，发现讲师和课程之间没有建立外键连接，所以在courses/models.py文件的Course函数，新增讲师字段 :&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from organization.models import Teacher
+
+teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name=&amp;quot;讲师&amp;quot;, null=True, blank=True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;记得数据库的变动需要两部曲：makemigrations和migrate&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;然后前往xadmin后台为这门课添加一个讲师。然后修改&lt;strong&gt;course-video.html&lt;/strong&gt;页面&lt;/p&gt;
+&lt;h4 id=&#34;课程相关推荐&#34;&gt;课程相关推荐&lt;/h4&gt;
+&lt;p&gt;打开courses/views.py文件，找到CourseInfoView这个函数，修改为如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 课程章节信息
+class CourseInfoView(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+
+        # 取出所有选过这门课的学生
+        user_courses = UserCourse.objects.filter(course=course)
+        # 取出所有选过这门课的学生的id,采用递归表达式形式
+        user_ids = [user_course.user.id for user_course in user_courses]
+        # 取出刚才那些学生选过的所有的课程
+        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+        # 取出刚才那些学生选过的所有的课程的id,同样采用递归表达式形式
+        course_ids = [all_user_course.course_id for all_user_course in all_user_courses]
+        # 取出学过该课程用户学过的其他课程
+        relate_courses = Course.objects.filter(id__in=course_ids).order_by(&amp;quot;-click_nums&amp;quot;)[:5]
+        return render(request, &amp;quot;course-video.html&amp;quot;, {
+            &amp;quot;course&amp;quot;: course,
+            &amp;quot;all_resources&amp;quot;: all_resources,
+            &amp;quot;relate_courses&amp;quot;: relate_courses,
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;注意：双下划线代表代表传进来的是一个可以遍历的list。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;接着就是在前端页面配置动态加载信息了（记得course-video.html和course_comment.html这两个页面都需要配置，一模一样）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;&amp;lt;ul class=&amp;quot;other-list&amp;quot;&amp;gt;
+{% for relate_course in relate_courses %}
+	&amp;lt;li class=&amp;quot;curr&amp;quot;&amp;gt;
+	&amp;lt;a href=&amp;quot;{% url &#39;course:course_detail&#39; relate_course.id %}&amp;quot;target=&amp;quot;_blank&amp;quot;&amp;gt;
+	&amp;lt;img src=&amp;quot;{{ MEDIA_URL }}{{ relate_course.image }}&amp;quot;alt=&amp;quot;{{ relate_course.name }}&amp;quot;&amp;gt;
+	&amp;lt;span class=&amp;quot;name autowrap&amp;quot;&amp;gt;{{ relate_course.name }}&amp;lt;/span&amp;gt;
+	&amp;lt;/a&amp;gt;
+	&amp;lt;/li&amp;gt;
+{% endfor %}
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;存在问题：那就是用户如果没有登录，那是不能让他进入课程章节这个页面的，因此需要判断一下。这里因为使用的是方法型编程所以可以使用装饰器loginrequired来进行判断。&lt;/p&gt;
+&lt;p&gt;在utils文件夹下面，新建一个名为mixin_utils.py文件，在里面添加如下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+class LoginRequiredMixin(object):
+
+    @method_decorator(login_required(login_url=&#39;https://CoMath21.github.io/login/&#39;))
+    def dispatch(self, request, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;接着打开courses/views.py文件，在里面修改CourseInfoView和CourseCommentView，修改后如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from utils.mixin_utils import LoginRequiredMixin
+
+# 课程章节信息
+class CourseInfoView(LoginRequiredMixin, View):
+     login_url = &#39;/login/&#39;
+    redirect_field_name = &#39;redirect_to&#39;
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+
+        # 查询用户是否已经开始学习了该课程，如果没有则开始学习
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        if not user_courses:
+            user_course = UserCourse(user=request.user, course=course)
+            course.students += 1
+            course.save()
+            user_course.save()
+
+        # 取出所有选过这门课的学生
+        user_courses = UserCourse.objects.filter(course=course)
+        # 取出所有选过这门课的学生的id,采用递归表达式形式
+        user_ids = [user_course.user.id for user_course in user_courses]
+        # 取出刚才那些学生选过的所有的课程
+        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+        # 取出刚才那些学生选过的所有的课程的id,同样采用递归表达式形式
+        course_ids = [all_user_course.course_id for all_user_course in all_user_courses]
+        # 取出学过该课程用户学过的其他课程
+        relate_courses = Course.objects.filter(id__in=course_ids).order_by(&amp;quot;-click_nums&amp;quot;)[:5]
+        return render(request, &amp;quot;course-video.html&amp;quot;, {
+            &amp;quot;course&amp;quot;: course,
+            &amp;quot;all_resources&amp;quot;: all_resources,
+            &amp;quot;relate_courses&amp;quot;: relate_courses,
+        })
+
+
+# 课程评论页面
+class CourseCommentView(LoginRequiredMixin, View):
+    login_url = &#39;/login/&#39;
+    redirect_field_name = &#39;redirect_to&#39; 
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        all_resources = CourseResource.objects.filter(course=course)
+        all_comments = CourseComments.objects.all()
+        return render(request, &amp;quot;course-comment.html&amp;quot;, {
+            &amp;quot;course&amp;quot;: course,
+            &amp;quot;all_resources&amp;quot;: all_resources,
+            &amp;quot;all_comments&amp;quot;: all_comments,
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;刷新一下页面，点几个课程试试看，发现都在该同学还学过哪些课里推荐了。&lt;/p&gt;
+&lt;h3 id=&#34;课程视频&#34;&gt;课程视频&lt;/h3&gt;
+&lt;h4 id=&#34;课程播放页面配置&#34;&gt;课程播放页面配置&lt;/h4&gt;
+&lt;p&gt;打开courses/urls.py文件，新增代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from .views import  VideoPlayView
+
+# 视频播放页面url
+re_path(&#39;video/(?P&amp;lt;video_id&amp;gt;.*)/&#39;, VideoPlayView.as_view(), name=&amp;quot;video_play&amp;quot;),
+或者 re_path(&#39;video/(?P&amp;lt;video_id&amp;gt;\d+)/&#39;, VideoPlayView.as_view(), name=&amp;quot;video_play&amp;quot;),都是可以的
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;接着打开courses/views.py文件，新增代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from .models import  Video
+
+# 视频播放页面
+class VideoPlayView(LoginRequiredMixin, View):
+    login_url = &#39;/login/&#39;
+    redirect_field_name = &#39;redirect_to&#39;
+    
+    def get(self, request, video_id):
+        video = Video.objects.get(id=int(video_id))
+        course = video.lesson.course
+        all_resources = CourseResource.objects.filter(course=course)
+        # 查询用户是否已经开始学习了该课程，如果没有则开始学习
+        user_courses = UserCourse.objects.filter(user=request.user, course=course)
+        if not user_courses:
+            user_course = UserCourse(user=request.user, course=course)
+            course.students += 1
+            course.save()
+            user_course.save()
+
+        # 取出所有选过这门课的学生
+        user_courses = UserCourse.objects.filter(course=course)
+        # 取出所有选过这门课的学生的id,采用递归表达式形式
+        user_ids = [user_course.user.id for user_course in user_courses]
+        # 取出刚才那些学生选过的所有的课程
+        all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+        # 取出刚才那些学生选过的所有的课程的id,同样采用递归表达式形式
+        course_ids = [all_user_course.course_id for all_user_course in all_user_courses]
+        # 取出学过该课程用户学过的其他课程
+        relate_courses = Course.objects.filter(id__in=course_ids).order_by(&amp;quot;-click_nums&amp;quot;)[:5]
+
+        return render(request, &amp;quot;course-play.html&amp;quot;, {
+            &amp;quot;course&amp;quot;: course,
+            &amp;quot;all_resources&amp;quot;: all_resources,
+            &amp;quot;relate_courses&amp;quot;: relate_courses,
+            &amp;quot;video&amp;quot;: video,
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的代码和之前在课程章节信息里面定义的几乎一模一样，只是course的来源不一样。&lt;/p&gt;
+&lt;p&gt;接着打开&lt;strong&gt;course-video.html&lt;/strong&gt;文件，配置跳转链接：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{% for video in lesson.get_lesson_video %}
+    &amp;lt;li&amp;gt;
+        &amp;lt;a target=&amp;quot;_blank&amp;quot; href=&#39;{% url &#39;course:video_play&#39; video.id %}&#39;
+ class=&amp;quot;J-media-item studyvideo&amp;quot;&amp;gt;{{ video.name }}({{ video.learn_times }})
+     &amp;lt;i class=&amp;quot;study-state&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+&amp;lt;/a&amp;gt;
+&amp;lt;/li&amp;gt;
+{% endfor %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后打开&lt;strong&gt;course-video.html&lt;/strong&gt;文件，配置视频链接，记住由于我们这边是&lt;strong&gt;type=&amp;lsquo;video/mp4&amp;rsquo;&lt;strong&gt;所以后台所添加的视频必须是&lt;/strong&gt;.mp4&lt;/strong&gt;结尾，否则会出错。&lt;/p&gt;
+&lt;p&gt;备注：&lt;strong&gt;{{ forloop.counter|add:2 }}是为了从第三个开始计数的，这是Django自带的功能&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;{% if forloop.counter|divisibleby:5 %}five{% endif %}表示如果能被5整除则显示five，这也是Django自带的功能&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;404和500页面的配置&#34;&gt;404和500页面的配置&lt;/h2&gt;
+&lt;p&gt;从前端资料里面拷贝我们的404和500页面到templates文件夹并修改文件里面的静态文件地址。打开eduline/urls.py文件，新增代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 全局404页面配置
+handler404 = &#39;users.views.page_not_found&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后打开users/views.py文件，新增以下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 404页面对应的处理函数
+def page_not_found(request):
+    from django.shortcuts import render_to_response
+    response = render_to_response(&amp;quot;404.html&amp;quot;, {})
+    # 设置response的状态码
+    response.status_code = 404
+    return response
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;接着运行项目，随意输入一个地址，发现页面并没有出来，那是因为在eduline/settings.py文件里面：&lt;code&gt;DEBUG = True&lt;/code&gt;，所以我们需要修改它为&lt;code&gt;False&lt;/code&gt;，还有下面的允许访问IP地址，否则404页面也是出不来的：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;DEBUG = False
+
+ALLOWED_HOSTS = [&#39;*&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样重新运行一下项目，发现页面有了，但是样子却没加载出来，这是为什么呢？&lt;/p&gt;
+&lt;p&gt;因为DEBUG为True时，系统会自动前往STATICFILES_DIRS下寻找文件。所以一般都会选择True，便于错误信息的显示。&lt;/p&gt;
+&lt;p&gt;但是一旦DEBUG为False时，情况就不一样了，Django就不会代管静态文件，而事实上一般静态文件都是通过第三方http服务器来代理转发。（如常见的服务器Nignx 和 Apache都会自动代理这些静态文件）&lt;/p&gt;
+&lt;p&gt;为了解决上述问题，可以：打开eduline/settings.py文件，新增代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;STATIC_ROOT = os.path.join(BASE_DIR, &#39;static&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;打开eduline/urls.py文件，新增代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from eduline.settings import  STATIC_ROOT
+# 配置静态文件上传的访问处理url
+    re_path(&#39;static/(?P&amp;lt;path&amp;gt;.*)&#39;, serve, {&amp;quot;document_root&amp;quot;: STATIC_ROOT}),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;重新运行项目即可.500的页面的配置和这个一样（注意函数名为page_error）&lt;/p&gt;
+&lt;p&gt;隐藏的坑：按照上述步骤可以解决404/500等问题，但是进入到后台管理界面(127.0.0.1:800/xadmin)界面则会发现样式丢失！&lt;/p&gt;
+&lt;h6 id=&#34;产生原因&#34;&gt;产生原因：&lt;/h6&gt;
+&lt;p&gt;django的生产环境不同开发环境，在生产环境下（DEBUG=False）,&lt;code&gt;django.contrib.staticfiles &lt;/code&gt;是不起任何作用的，也就说 &lt;code&gt;django.contrib.staticfiles &lt;/code&gt;只对开发环境（DEBUG=True）开启。所以会导致xadmin样式丢失现象。&lt;/p&gt;
+&lt;h6 id=&#34;解决方案&#34;&gt;解决方案：&lt;/h6&gt;
+&lt;p&gt;① 在settings.py中添加如下配置，同时注释STATICFILES_DIRS&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, &amp;quot;static&amp;quot;),
+# )
+
+STATIC_ROOT = os.path.join(BASE_DIR, &#39;static&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;② 修改主项目中的urls.py文件&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from.settings import STATIC_ROOT
+
+urlpatterns = [
+    //...
+    url(r&#39;^static/(?P&amp;lt;path&amp;gt;.*)$&#39;, serve, {&amp;quot;document_root&amp;quot;: STATIC_ROOT}),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;③ 在控制台执行如下命令，它会在根目录下生成static文件，里边存储的是xadmin的样式文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;&amp;gt; collectstatic
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./41.jpg&#34; alt=&#34;1565939339498&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./42.jpg&#34; alt=&#34;1565939297975&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常见的web攻击&#34;&gt;常见的Web攻击&lt;/h2&gt;
+&lt;p&gt;具体包括&lt;strong&gt;SQL注入攻击及防护&lt;/strong&gt;，&lt;strong&gt;XSS攻击及防护&lt;/strong&gt;以及&lt;strong&gt;CSRF攻击及防护&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;sql注入攻击及防护&#34;&gt;SQL注入攻击及防护&lt;/h3&gt;
+&lt;p&gt;什么是SQL注入？&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;所谓SQL注入，就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。具体来说，它是利用现有应用程序，将（恶意的）SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句。比如先前的很多影视网站泄露VIP会员密码大多就是通过WEB表单递交查询字符暴出的，这类表单特别容易受到SQL注入式攻击。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;SQL注入的危害:&lt;/p&gt;
+&lt;p&gt;非法读取、篡改、删除数据库中的数据&lt;/p&gt;
+&lt;p&gt;盗取用户的各类敏感信息，获取利益&lt;/p&gt;
+&lt;p&gt;通过修改数据库来修改网页上的内容&lt;/p&gt;
+&lt;p&gt;注入木马等等&lt;/p&gt;
+&lt;p&gt;下面通过一段代码了解一下SQL注入的过程：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# users/views.py文件：
+class LoginUnsafeView(View):
+    def get(self, request):
+        return render(request, &amp;quot;login.html&amp;quot;, {})
+    def post(self, request):
+        user_name = request.POST.get(&amp;quot;username&amp;quot;, &amp;quot;&amp;quot;)
+        pass_word = request.POST.get(&amp;quot;password&amp;quot;, &amp;quot;&amp;quot;)
+
+        import MySQLdb
+        conn = MySQLdb.connect(host=&#39;127.0.0.1&#39;, user=&#39;root&#39;, passwd=&#39;root&#39;, db=&#39;mxonline&#39;, charset=&#39;utf8&#39;)
+        cursor = conn.cursor()
+        sql_select = &amp;quot;select * from users_userprofile where email=&#39;{0}&#39; and password=&#39;{1}&#39;&amp;quot;.format(user_name, pass_word)
+
+        result = cursor.execute(sql_select)
+        for row in cursor.fetchall():
+            # 查询到用户
+            pass
+        print &#39;hello&#39;
+
+# eduline/urls.py文件:
+from users.views import LoginUnsafeView
+
+urlpatterns = [
+    path(&#39;login/&#39;, LoginUnsafeView.as_view(), name=&#39;login&#39;),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里竟然把sql语句写到这里，所以可以在参数中加入sql语句，使之拼接字符串从而为真被系统识别通过，盗取用户信息。但是在Django自带了orm,可以对这个进行验证，从而保证系统的安全。因此建议采用orm这种形式，不要使用原生的sql语句。&lt;/p&gt;
+&lt;h3 id=&#34;xss攻击及防护&#34;&gt;XSS攻击及防护&lt;/h3&gt;
+&lt;h3 id=&#34;csrf攻击及防护&#34;&gt;CSRF攻击及防护&lt;/h3&gt;
+&lt;h2 id=&#34;xadmin进阶&#34;&gt;xadmin进阶&lt;/h2&gt;
+&lt;h3 id=&#34;自定义icon&#34;&gt;自定义icon&lt;/h3&gt;
+&lt;p&gt;以修改邮箱验证码为例，打开users/adminx.py文件，在EmailVerifyRecordAdmin函数新增一行代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;model_icon = &#39;fa fa-user&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其实这个样式就是对应于&lt;a href=&#34;http://fontawesome.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;font awesome&lt;/a&gt;/http://www.fontawesome.com.cn/里面的图标，你可以下载新的源代码对目录下的css和fonts文件夹进行替换：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./43.jpg&#34; alt=&#34;1565963538707&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后刷新一下就出现想要的样式icon了。（如果为出现，用Ctrl+F5强制刷新，还是不行的话，注销重新登录）&lt;/p&gt;
+&lt;h3 id=&#34;默认排序字段只读字段隐藏&#34;&gt;默认排序，字段只读，字段隐藏&lt;/h3&gt;
+&lt;p&gt;我们以课程为例，来介绍这3个小功能。打开couses/adminx.py文件，在CourseAdmin中加入以下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 默认排序：以点击数排序
+ordering = [&#39;-click_nums&#39;]
+
+# 字段只读：点击数只允许读取
+readonly_fields = [&#39;click_nums&#39;, &#39;fav_nums&#39;]
+
+# 字段隐藏：收藏数隐藏显示
+exclude = [&#39;fav_nums&#39;]
+
+# 注意字段只读和字段隐藏是冲突的，不允许设置一个字段只读同时隐藏
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;搜索框&#34;&gt;搜索框&lt;/h3&gt;
+&lt;p&gt;当课程很多时，我们不能以下拉菜单的形式来查找课程，需要有搜索框。课程它有一个外键是课程机构，因此需要到课程机构里面进行搜索框的配置。打开organization/adminx.py文件，在CourseOrgAdmin函数里面添加一行代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 搜索框，当课程数据量过大时，有课程指向它，会以ajax方式加载
+    relfield_style = &#39;fk-ajax&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./44.jpg&#34; alt=&#34;1565963789074&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./45.jpg&#34; alt=&#34;1565963895535&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;inlines添加数据&#34;&gt;inlines添加数据&lt;/h3&gt;
+&lt;p&gt;在这之前，新增课程的时候是不能同时新增课程章节信息的，需要跳到另一个页面，这是很麻烦的。所以考虑采用inlines来添加数据从而完成在一个页面直接完成章节信息的添加。&lt;/p&gt;
+&lt;p&gt;打开couses/adminx.py文件，在最顶部新定义一个函数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 课程直接添加章节
+class LessonInline(object):
+    model = Lesson
+    extra = 0
+
+# 同时在CourseAdmin中，新增一行代码
+# 课程直接添加章节
+class CourseAdmin(object):
+    inlines = [LessonInline] # 数组，支持多个
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;刷新一下后台，发现章节信息在课程页面底部&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./46.jpg&#34; alt=&#34;1565963922420&#34;&gt;&lt;/p&gt;
+&lt;p&gt;支持多个添加，但不支持嵌套添加（只能添加一级）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# 再添加 一个CourseRecourseInline
+
+class CourseRecourseInline(object):
+    model = CourseRecource
+    extra = 0
+
+# 同时在CourseAdmin中，新增一行代码
+# 课程直接添加章节
+class CourseAdmin(object):
+    inlines = [LessonInline, CourseRecourseInline] # 数组，支持多个
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样存储到这两个中的数据会保存到对应的表中&lt;/p&gt;
+&lt;h3 id=&#34;一张表分两个model来进行管理&#34;&gt;一张表分两个model来进行管理&lt;/h3&gt;
+&lt;p&gt;录播课程与非轮播课程可以分开管理，但是最好是在一张表里显示。打开courses/models.py文件，在course函数下面新增代码&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class BannerCourse(Course):  # 注意是继承Course而不是object这个最高类
+    class Meta:
+        verbose_name = &amp;quot;轮播课程&amp;quot;
+        verbose_name_plural = verbose_name
+        proxy = True  # 很重要，否则会生成另外一张表，这样设置具有model的功能，但不会生成表
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后打开courses/adminx.py文件，修改之前的代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;from .models import  BannerCourse
+
+class CourseAdmin(object):
+    list_display = [&#39;image&#39;, ....&#39;,&#39;add_time&#39;]  # 一次显示你想出现的多行数据
+    search_fields = [&#39;name&#39;, ...，&#39;click_nums&#39;]  # 查询你想要的数据
+    list_filter = [&#39;name&#39;, ..., &#39;click_nums&#39;,&#39;add_time&#39;]  # 过滤器
+    # # 默认排序：以点击数排序
+    # ordering = [&#39;-click_nums&#39;]
+    #
+    # # 字段只读：点击数只允许读取
+    # readonly_fields = [&#39;click_nums&#39;, &#39;fav_nums&#39;]
+    #
+    # # 字段隐藏：收藏数隐藏显示
+    # exclude = [&#39;fav_nums&#39;]
+    # # 注意字段只读和字段隐藏是冲突的，不允许设置一个字段只读同时隐藏
+
+    # 课程直接添加章节,课程资源
+    inlines = [LessonInline, CourseResourceInline]
+
+    # 过滤列表中的数据：为了两个页面信息不重复
+    def queryset(self):
+        qs = super(CourseAdmin, self).queryset()
+        qs = qs.filter(is_banner=False)
+        return qs
+
+
+class BannerCourseAdmin(object):
+     list_display = [&#39;image&#39;, ....&#39;,&#39;add_time&#39;]  # 一次显示你想出现的多行数据
+    search_fields = [&#39;name&#39;, ...，&#39;click_nums&#39;]  # 查询你想要的数据
+    list_filter = [&#39;name&#39;, ..., &#39;click_nums&#39;,&#39;add_time&#39;]  # 过滤器
+    # # 默认排序：以点击数排序
+    # ordering = [&#39;-click_nums&#39;]
+    #
+    # # 字段只读：点击数只允许读取
+    # readonly_fields = [&#39;click_nums&#39;, &#39;fav_nums&#39;]
+    #
+    # # 字段隐藏：收藏数隐藏显示
+    # exclude = [&#39;fav_nums&#39;]
+    # # 注意字段只读和字段隐藏是冲突的，不允许设置一个字段只读同时隐藏
+
+    # 课程直接添加章节,课程资源
+    inlines = [LessonInline, CourseResourceInline]
+
+    # 过滤列表中的数据
+    def queryset(self):
+        qs = super(BannerCourseAdmin, self).queryset()
+        qs = qs.filter(is_banner=True)
+        return qs
+
+xadmin.site.register(BannerCourse, BannerCourseAdmin)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./47.jpg&#34; alt=&#34;1565965032042&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;直接列表页编辑&#34;&gt;直接列表页编辑&lt;/h3&gt;
+&lt;p&gt;即可以直接在列表页进行更改编辑操作，在courses/adminx.py文件的CourseAdmin函数，新增一行代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt; # 直接列表页编辑
+    list_editable = [&#39;degree&#39;, &#39;desc&#39;, ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./48.jpg&#34; alt=&#34;1565965179247&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;列表页显示章节数&#34;&gt;列表页显示章节数&lt;/h3&gt;
+&lt;p&gt;在courses/adminx.py文件的CourseAdmin和BannerCourseAdmin函数的list_display中，新增显示字段&lt;code&gt;get_zj_nums&lt;/code&gt;，刷新后台发现是黑色的英文&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./49.jpg&#34; alt=&#34;1565965771620&#34;&gt;&lt;/p&gt;
+&lt;p&gt;需要修改，新增一行代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;get_zj_nums.short_description = &amp;quot;章节数&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./50.jpg&#34; alt=&#34;1565965942119&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;显示自定义的html代码&#34;&gt;显示自定义的html代码&lt;/h3&gt;
+&lt;p&gt;在刚才的页面下面新增以下代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def go_to(self):
+	from django.utils.safestring import mark_safe
+     # 如果不使用mark_safe，系统则会对其进行转义
+    return mark_safe(&amp;quot;&amp;lt;a href=&#39;http://www.baidu.com&#39;&amp;gt;跳转&amp;lt;/&amp;gt;&amp;quot;)
+
+go_to.short_description = &amp;quot;跳转&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;列表页定时刷新&#34;&gt;列表页定时刷新&lt;/h3&gt;
+&lt;p&gt;打开courses/adminx.py文件，在之前的CourseAdmin函数里面，新增一行代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; refresh_times = 3,5  # 列表页定时刷新3s或者5s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;字段联动&#34;&gt;字段联动&lt;/h3&gt;
+&lt;p&gt;某一字段发生改变的时候不需要手动更改，比如添加一门课程之后，机构的课程数需要+1&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# CourseAdmin中添加
+
+def save_models(self):
+    # 在保存课程的时候,统计课程机构的课程数
+    obj = self.new_obj
+    # 新增课程还没有保存，统计的课程数就会少一个
+    obj.save()
+    # 必须确定存在
+    if obj.course_org is not None:
+        # obj实际是一个course对象
+        course_org = obj.course_org
+        course_org.course_nums = Course.objects.filter(course_org=course_org).count()
+        course_org.save()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;xadmin目录&#34;&gt;xadmin目录&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;- locale  对应语言包
+- migrations 是数据表的记录
+- plugins 每一个后台页面都是一个plugin插件
+- static 静态文件夹，里面有js,css
+- template 这是xadmin自己使用的html文件
+- templatetags  这是tag模板
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;xadmin集成富文本&#34;&gt;xadmin集成富文本&lt;/h3&gt;
+&lt;p&gt;首先点击&lt;a href=&#34;https://xadmin.readthedocs.io/en/docs-chinese/make_plugin.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Xadmin 插件制作&lt;/a&gt;，学着官网的介绍，自己尝试做一个插件:富文本编辑器.&lt;/p&gt;
+&lt;p&gt;有坑的插件！！！先看完！！！
+点击&lt;a href=&#34;https://github.com/zhangfisher/DjangoUeditor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DjangoUeditor&lt;/a&gt;，获取&lt;strong&gt;DjangoUeditor&lt;/strong&gt;的安装包，然后按照帮助文档或者下面的要求安装DjangoUeditor；或者&lt;a href=&#34;https://pypi.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PYPI&lt;/a&gt;下载DjangoUeditor.&lt;/p&gt;
+&lt;h4 id=&#34;1安装方法注意需要转到虚拟环境下面才能安装&#34;&gt;1、安装方法(注意需要转到虚拟环境下面才能安装)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;方法一：将github整个源码包下载，在命令行运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;方法二：使用pip工具在命令行运行(推荐)：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;pip install DjangoUeditor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;2在django中安装djangoueditor&#34;&gt;2、在Django中安装DjangoUeditor&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在INSTALL_APPS里面增加&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;INSTALLED_APPS = [
+    &#39;captcha&#39;, # 验证码
+    &#39;pure_pagination&#39;, # 分页
+    &#39;DjangoUeditor&#39;,
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3富文本相关path配置&#34;&gt;3、富文本相关path配置&lt;/h4&gt;
+&lt;p&gt;配置url&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# 富文本相关url
+url(&amp;quot;ueditor/&amp;quot;, include(&#39;DjangoUeditor.urls&#39;)),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;4在models中的使用&#34;&gt;4、在models中的使用&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;# courses/models.py文件：
+
+from DjangoUeditor.models import UEditorField
+
+class Course(models.Model):
+
+detail = UEditorField(verbose_name=&#39;课程详情&#39;, width=600, height=300, imagePath=&amp;quot;courses/ueditor/&amp;quot;,filePath=&amp;quot;courses/ueditor/&amp;quot;, default=&#39;&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;5书写代码&#34;&gt;5、书写代码&lt;/h4&gt;
+&lt;p&gt;在xadmin的plugins文件夹下面，新增一个&lt;strong&gt;ueditor.py&lt;/strong&gt;文件，在里面新增：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import xadmin
+
+from xadmin.views import BaseAdminPlugin, CreateAdminView, ModelFormAdminView, UpdateAdminView
+from DjangoUeditor.models import UEditorField
+from DjangoUeditor.widgets import UEditorWidget
+from django.conf import settings
+
+class XadminUEditorWidget(UEditorWidget):
+	def __init__(self,**kwargs):
+        self.ueditor_options=kwargs
+        self.Media.js = None
+        super(XadminUEditorWidget,self).__init__(kwargs)
+        
+class UeditorPlugin(BaseAdminPlugin):
+    def get_field_style(self, attrs, db_field, style, **kwargs):
+        if style == &#39;ueditor&#39;:
+            if isinstance(db_field, UEditorField):
+                widget = db_field.formfield().widget
+                param = {}
+                param.update(widget.ueditor_settings)
+                param.update(widget.attrs)
+                return {&#39;widget&#39;: XadminUEditorWidget(**param)}
+        return attrs
+    
+    # 在生成的页面中放入自己的js文件
+    def block_extrahead(self, context, nodes):
+        js = &#39;&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;%s&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#39; % (settings.STATIC_URL + &amp;quot;ueditor/ueditor.config.js&amp;quot;)         #自己的静态目录
+        js += &#39;&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;%s&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#39; % (settings.STATIC_URL + &amp;quot;ueditor/ueditor.all.min.js&amp;quot;)   #自己的静态目录
+        nodes.append(js)
+        
+# 新增页面
+xadmin.site.register_plugin(UeditorPlugin, UpdateAdminView)
+
+# 修改页面
+xadmin.site.register_plugin(UeditorPlugin, CreateAdminView)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;6字段显示样式&#34;&gt;6、字段显示样式&lt;/h4&gt;
+&lt;p&gt;courses/adminx.py文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class CourseAdmin(object):
+	# 字段显示样式
+	style_fields = {&amp;quot;detail&amp;quot;: &amp;quot;ueditor&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;7注册进入plugins&#34;&gt;7、注册进入plugins&lt;/h4&gt;
+&lt;p&gt;找到plugins文件夹下的__init__.py文件，在PLUGINS中写入&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;PLUGINS= (&#39;ueditor&#39;,)	# 与文件名一致
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有坑！！！&lt;/p&gt;
+&lt;p&gt;会报错！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./51.jpg&#34; alt=&#34;1565968548065&#34;&gt;&lt;/p&gt;
+&lt;p&gt;原因是UEditor 好像是没有Python3版本的。 直接这样安装，要自己修改里面的一些Python2的语法&lt;/p&gt;
+&lt;p&gt;解决方法：找到DjangoUeditor3下载命令行安装，或者解压后复制到项目下的extra_apps下&lt;/p&gt;
+&lt;p&gt;（可能还需要将DjangoUeditor下static中的ueditor文件夹拷贝到根目录下的static文件中）&lt;/p&gt;
+&lt;h4 id=&#34;excel导入插件&#34;&gt;Excel导入插件&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;./52.jpg&#34; alt=&#34;1566010637041&#34;&gt;&lt;/p&gt;
+&lt;p&gt;1、根目录下找到\extra_apps\xadmin\plugins\路径，创建excel.py文件&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# _*_ coding:utf-8 _*_
+import xadmin
+from xadmin.views import BaseAdminPlugin, ListAdminView
+from django.template import loader
+from xadmin.plugins.utils import get_context_dict
+
+
+# excel 导入
+class ListImportExcelPlugin(BaseAdminPlugin):
+    import_excel = False
+
+    def init_request(self, *args, **kwargs):
+        return bool(self.import_excel)
+
+    def block_top_toolbar(self, context, nodes):
+        # context = {&amp;quot;context&amp;quot;: context}
+        nodes.append(loader.render_to_string(&#39;xadmin/excel/model_list.top_toolbar.import.html&#39;,
+                                             context=get_context_dict(context)))
+
+
+xadmin.site.register_plugin(ListImportExcelPlugin, ListAdminView)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：这里有个坑！按照视频或者网站上的说法写的excel.py文件会报错&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./53.jpg&#34; alt=&#34;1566016115014&#34;&gt;&lt;/p&gt;
+&lt;p&gt;原因是：&lt;code&gt;context_instance&lt;/code&gt;字段在Django1.8以后产生，而在Django1.10之后就移除了，按照网上的修改方法将改成&lt;code&gt;context&lt;/code&gt;，即：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;nodes.append(loader.render_to_string(&#39;xadmin/excel/model_list.top_toolbar.import.html&#39;, context))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;仍会报错！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./54.jpg&#34; alt=&#34;1566016056433&#34;&gt;&lt;/p&gt;
+&lt;p&gt;再更改为&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;context = {&amp;quot;context&amp;quot;: context}
+nodes.append(loader.render_to_string(&#39;xadmin/excel/model_list.top_toolbar.import.html&#39;, context))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以完成操作，但是会报警告！&lt;/p&gt;
+&lt;p&gt;2、配置.html文件，即项目根目录下找到\extra_apps\xadmin\templates\xadmin，创建excel文件夹，在excel文件夹下创建model_list.top_toolbar.import.html文件，复制以下代码.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;{% load i18n %}
+&amp;lt;div class=&amp;quot;btn-group export&amp;quot;&amp;gt;
+  &amp;lt;a class=&amp;quot;dropdown-toggle btn btn-default btn-sm&amp;quot; data-toggle=&amp;quot;dropdown&amp;quot; href=&amp;quot;#&amp;quot;&amp;gt;
+    &amp;lt;i class=&amp;quot;icon-share&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; 导入 &amp;lt;span class=&amp;quot;caret&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+  &amp;lt;/a&amp;gt;
+  &amp;lt;ul class=&amp;quot;dropdown-menu&amp;quot; role=&amp;quot;menu&amp;quot; aria-labelledby=&amp;quot;dLabel&amp;quot;&amp;gt;
+      &amp;lt;li&amp;gt;&amp;lt;a data-toggle=&amp;quot;modal&amp;quot; data-target=&amp;quot;#export-modal-import-excel&amp;quot;&amp;gt;&amp;lt;i class=&amp;quot;icon-circle-arrow-down&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; 导入 Excel&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+  &amp;lt;/ul&amp;gt;
+    &amp;lt;script&amp;gt;
+        function fileChange(target){
+//检测上传文件的类型
+            var imgName = document.all.submit_upload.value;
+            var ext,idx;
+            if (imgName == &#39;&#39;){
+                document.all.submit_upload_b.disabled=true;
+                alert(&amp;quot;请选择需要上传的 xls 文件!&amp;quot;);
+                return;
+            } else {
+                idx = imgName.lastIndexOf(&amp;quot;.&amp;quot;);
+                if (idx != -1){
+                    ext = imgName.substr(idx+1).toUpperCase();
+                    ext = ext.toLowerCase( );
+					{# alert(&amp;quot;ext=&amp;quot;+ext);#}
+                    if (ext != &#39;xls&#39; &amp;amp;&amp;amp; ext != &#39;xlsx&#39;){
+                        document.all.submit_upload_b.disabled=true;
+                        alert(&amp;quot;只能上传 .xls 类型的文件!&amp;quot;);
+ 
+                        return;
+                    }
+                } else {
+                    document.all.submit_upload_b.disabled=true;
+                    alert(&amp;quot;只能上传 .xls 类型的文件!&amp;quot;);
+                    return;
+                }
+            }
+        }
+    &amp;lt;/script&amp;gt;
+    &amp;lt;div id=&amp;quot;export-modal-import-excel&amp;quot; class=&amp;quot;modal fade&amp;quot;&amp;gt;
+      &amp;lt;div class=&amp;quot;modal-dialog&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;modal-content&amp;quot;&amp;gt;
+          &amp;lt;form method=&amp;quot;post&amp;quot; action=&amp;quot;&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt;
+              {% csrf_token %}
+          &amp;lt;div class=&amp;quot;modal-header&amp;quot;&amp;gt;
+            &amp;lt;button type=&amp;quot;button&amp;quot; class=&amp;quot;close&amp;quot; data-dismiss=&amp;quot;modal&amp;quot; aria-hidden=&amp;quot;true&amp;quot;&amp;gt;×&amp;lt;/button&amp;gt;
+            &amp;lt;h4 class=&amp;quot;modal-title&amp;quot;&amp;gt;导入 Excel&amp;lt;/h4&amp;gt;
+          &amp;lt;/div&amp;gt;
+          &amp;lt;div class=&amp;quot;modal-body&amp;quot;&amp;gt;
+               &amp;lt;input type=&amp;quot;file&amp;quot; οnchange=&amp;quot;fileChange(this)&amp;quot; name=&amp;quot;excel&amp;quot; id=&amp;quot;submit_upload&amp;quot;&amp;gt;
+ 
+          &amp;lt;/div&amp;gt;
+          &amp;lt;div class=&amp;quot;modal-footer&amp;quot;&amp;gt;
+            &amp;lt;button type=&amp;quot;button&amp;quot; class=&amp;quot;btn btn-default&amp;quot; data-dismiss=&amp;quot;modal&amp;quot;&amp;gt;{% trans &amp;quot;Close&amp;quot; %}&amp;lt;/button&amp;gt;
+            &amp;lt;button class=&amp;quot;btn btn-success&amp;quot; type=&amp;quot;submit&amp;quot; id=&amp;quot;submit_upload_b&amp;quot;&amp;gt;&amp;lt;i class=&amp;quot;icon-share&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; 导入&amp;lt;/button&amp;gt;
+          &amp;lt;/div&amp;gt;
+          &amp;lt;/form&amp;gt;
+        &amp;lt;/div&amp;gt;&amp;lt;!-- /.modal-content --&amp;gt;
+      &amp;lt;/div&amp;gt;&amp;lt;!-- /.modal-dalog --&amp;gt;
+    &amp;lt;/div&amp;gt;&amp;lt;!-- /.modal --&amp;gt;
+ 
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;3、在想导入的XxxAdmin下添加&lt;code&gt;impotr_excel = True&lt;/code&gt;，并且重写post方法&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt; def post(self, request, *args, **kwargs):
+    #  导入逻辑
+    if &#39;excel&#39; in request.FILES:
+        pass
+    return super(CourseAdmin, self).post(request, args, kwargs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;4、最后在xadmin/plugins文件夹下找到&lt;code&gt;__init__.py&lt;/code&gt;文件夹，添加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;PLUGINS = (
+    &#39;excel&#39;,
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./55.jpg&#34; alt=&#34;1566021359412&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

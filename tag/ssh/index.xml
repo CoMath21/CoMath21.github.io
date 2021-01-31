@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSH | CoMath</title>
+    <link>https://CoMath21.github.io/tag/ssh/</link>
+      <atom:link href="https://CoMath21.github.io/tag/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <description>SSH</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
+      <title>SSH</title>
+      <link>https://CoMath21.github.io/tag/ssh/</link>
+    </image>
+    
+    <item>
+      <title>SSH框架整合基本步骤</title>
+      <link>https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/</guid>
+      <description>&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+&lt;p&gt;　　首先需要找到开发软件：Eclipse-J2EE版本，并且安装相应插件（最好安装，便于初期简单编程）.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：云盘中一个压缩包中有完整软件.&lt;/p&gt;
+&lt;p&gt;安装插件步骤：
+打开Eclipse-J2EE版本，找到Help→Install New SoftWare → Work with右面的Add ，在Archive…中找到对应软件的路径，点集OK即可.
+需要的软件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;hibernate的插件：hibernatetools-Update-4.1.1.Final_2013-12-08_01-06-33-B605.zip&lt;/li&gt;
+&lt;li&gt;Spring的插件：springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果没有服务器，需要安装Tomcat服务器.&lt;/p&gt;
+&lt;h2 id=&#34;springhibernatestruts的顺序整合框架&#34;&gt;Spring→Hibernate→Struts的顺序整合框架&lt;/h2&gt;
+&lt;h3 id=&#34;1-加入spring&#34;&gt;1. 加入Spring&lt;/h3&gt;
+&lt;h4 id=&#34;1加入-spring-所需要的-jar-包文件&#34;&gt;1)	加入 Spring 所需要的 Jar 包文件&lt;/h4&gt;
+&lt;p&gt;　　找到 Spring 的 jar 包文件夹，\Jar包文件\Spring4.0.0\spring-framework-4.0.0.RELEASE\required，大约15个左右；&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;com.springsource.net.sf.cglib-2.2.0.jar&lt;/li&gt;
+&lt;li&gt;com.springsource.org.aopalliance-1.0.0.jar&lt;/li&gt;
+&lt;li&gt;com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;commons-logging-1.2.jar&lt;/li&gt;
+&lt;li&gt;spring-aop-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-aspects-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-beans-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-context-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-core-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-expression-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-jdbc-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-orm-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-tx-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-web-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-webmvc-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2配置-webxml-文件&#34;&gt;2)	配置 web.xml 文件&lt;/h4&gt;
+&lt;p&gt;　　配置web.xml文件可以找到ContextLoaderListener会自动生成以下代码，随后将Location改为applicationContext（Spring配置文件）的路径.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置  Spring 配置文件的名称和位置 --&amp;gt;
+&amp;lt;context-param&amp;gt;
+  &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt;
+  &amp;lt;param-value&amp;gt;classpath:applicationContext.xml&amp;lt;/param-value&amp;gt;
+&amp;lt;/context-param&amp;gt;
+		
+&amp;lt;!-- 启动 IOC 容器的  ServletContextListener --&amp;gt;
+&amp;lt;listener&amp;gt;
+&amp;lt;listener-class&amp;gt;
+org.springframework.web.context.ContextLoaderListener
+&amp;lt;/listener-class&amp;gt;
+&amp;lt;/listener&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3加入-spring-的配置文件&#34;&gt;3)	加入 Spring 的配置文件&lt;/h4&gt;
+&lt;p&gt;　　可以先创建一个资源文件conf，将资源文件放入其中（也可以直接在src下创建），在资源文件下创建一个Spring的配置文件点击右键找到Spring Bean Configuration File，输入配置文件的名字，（注意这里面的名字要与web.xml下的的配置文件的名字相同，也就是一个文件）；然后选中aop、beans、context、tx等选项，（注意这里面所选取的是最基本的，根据需要可以自行添加其他选项）；最后Finish即可.
+&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2加入hibernate&#34;&gt;2.	加入Hibernate&lt;/h3&gt;
+&lt;h4 id=&#34;1-建立持久化类-和其对应的-hbmxml-文件-生成对应的数据表&#34;&gt;1). 建立持久化类, 和其对应的 .hbm.xml 文件, 生成对应的数据表&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;i. 配置hibernate.cfg.xml文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;　　鼠标右键找到Hibernate Configuration File(cfg.xml)创建hibernate.cfg.xml配置文件并配置基本信息（可根据需求自行添加）.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;hibernate-configuration&amp;gt;
+&amp;lt;session-factory&amp;gt;
+    &amp;lt;!-- 配置基本属性 --&amp;gt;
+    &amp;lt;!-- 方言 --&amp;gt;
+&amp;lt;property name=&amp;quot;hibernate.dialect&amp;quot;&amp;gt;org.hibernate.dialect.SQLServer2008Dialect
+&amp;lt;/property&amp;gt;
+&amp;lt;property name=&amp;quot;hibernate.dialect&amp;quot;&amp;gt; org.hibernate.dialect.MySQL5InnoDBDialect&amp;lt;/property&amp;gt;
+
+    &amp;lt;!-- 是否显示及格式化SQL --&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.show_sql&amp;quot;&amp;gt;true&amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.format_sql&amp;quot;&amp;gt;true&amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.temp.use_jdbc_metadata_defaults&amp;quot;&amp;gt;false&amp;lt;/property&amp;gt;  
+    &amp;lt;!-- 生成数据表的策略 --&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.hbm2ddl.auto&amp;quot;&amp;gt;update&amp;lt;/property&amp;gt;
+    &amp;lt;!-- 生成二级缓存 --&amp;gt;
+  &amp;lt;/session-factory&amp;gt;
+&amp;lt;/hibernate-configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;ii. 建立持久化类&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;　　也就是平时所说的对象类、beans（一般创建在domain包下或者entities下），并生成对应参数的getter and setter；之后鼠标右键创建Hibernate XML Mapping file (hbm.xml)文件，直接创建即可. 就会生成对应的*. hbm.xml文件（根据不同的需求可能够对*. hbm.xml文件进行适当的修改）&lt;/p&gt;
+&lt;h4 id=&#34;2-spring-整合-hibernate&#34;&gt;2). Spring 整合 Hibernate&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;步骤&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;①  加入 jar 包: 找到 Hibernate 的 jar 包文件夹，\Jar包文件\Jar包文件\Hibernate4.2.21\hibernate-release-4.2.21.Final\lib\required路径下的所有 jar 包.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;antlr-2.7.7.jar&lt;/li&gt;
+&lt;li&gt;dom4j-1.6.1.jar&lt;/li&gt;
+&lt;li&gt;hibernate-commons-annotations-4.0.2.Final.jar&lt;/li&gt;
+&lt;li&gt;hibernate-core-4.2.21.Final.jar&lt;/li&gt;
+&lt;li&gt;hibernate-jpa-2.0-api-1.0.1.Final.jar&lt;/li&gt;
+&lt;li&gt;javassist-3.18.1-GA.jar&lt;/li&gt;
+&lt;li&gt;jboss-logging-3.1.0.GA.jar&lt;/li&gt;
+&lt;li&gt;jboss-transaction-api_1.1_spec-1.0.1.Final.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;②  在类路径下加入 hibernate.cfg.xml 文件，并在其中配置   hibernate 的基本属性&lt;/p&gt;
+&lt;p&gt;③  建立持久化类和其对应的  .hbm.xml 文件（过）&lt;/p&gt;
+&lt;p&gt;④  和 Spring 进行整合（过）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;加入c3p0和SQLServer的驱动（需要引入相关jar包文件：c3p0-0.9.2.1.jar、sqljdbc4.jar（SQL2005））&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;（c3p0:是一个 数据库连接池 ，利用 sqljdbc4 建立与数据库的连接 ， 并且管理这些连接，不用每次访问数据库都 重新发出数据库连接请求；大大提升性能）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;具体实现：
+首先要创建*.properties文件，并对其进行配置，主要为数据库的相关参数设置.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 资源文件样式 --&amp;gt;
+  jdbc.user=sa
+  jdbc.password=sa123
+  jdbc.driverClass=com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jdbc.jdbcUrl=jdbc:sqlserver://localhost:1433; DatabaseName=PwdManagerTest
+
+  jdbc.initialPoolSize=5
+  jdbc.maxPoolSize=10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后在applicationContext.xml中添加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 导入资源文件 --&amp;gt;
+  &amp;lt;context:property-placeholder location=&amp;quot;classpath:db.properties&amp;quot; /&amp;gt;
+&amp;lt;!-- 配置 C3P0 数据源 --&amp;gt;
+&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;com.mchange.v2.c3p0.ComboPooledDataSource&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;user&amp;quot; value=&amp;quot;${jdbc.user}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;${jdbc.password}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;driverClass&amp;quot; value=&amp;quot;${jdbc.driverClass}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;jdbcUrl&amp;quot; value=&amp;quot;${jdbc.jdbcUrl}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+    
+  &amp;lt;property name=&amp;quot;initialPoolSize&amp;quot; value=&amp;quot;${jdbc.initialPoolSize}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;maxPoolSize&amp;quot; value=&amp;quot;${jdbc.maxPoolSize}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;这里会报一个错误：Error creating bean with name &amp;lsquo;dataSource&amp;rsquo; defined in class path resource [applicationContext.xml]:&amp;hellip;&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;错误原因&lt;/strong&gt;：缺少mchange-commons-java-0.2.3.4.jar包.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：mchange-commons-java-0.2.3.4.jar包是c3p0数据库连接池的辅助包，如果没有这个包系统启动时会报classnotfoundexception，这是更新c3p0-0.9.2版本后分离出来的包，0.9.1的时候还是只是一个包.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方法&lt;/strong&gt;：导入mchange-commons-java-0.2.3.4.jar包即可.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：Jar包文件\C3P0\C3P0-0.9-2.1JAR\c3p0-0.9.2.1\lib...&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Spring 的配置文件中配置:数据源dataSource,SessionFactory,声明式事务（先了解事务，包括事务隔离级别等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置 SessionFactory --&amp;gt;
+&amp;lt;bean id=&amp;quot;sessionFactory&amp;quot;					class=&amp;quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;dataSource&amp;quot; ref=&amp;quot;dataSource&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;configLocation&amp;quot; value=&amp;quot;classpath:hibernate.cfg.xml&amp;quot;/&amp;gt;
+  &amp;lt;property name=&amp;quot;mappingLocations&amp;quot; value=&amp;quot;classpath:com/PwdManager/domain/*.hbm.xml&amp;quot; /&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=blue&gt;说明：执行到当前操作即可打开服务器，运行当前项目检测，正常情况下，不会报错，没有错误信息，而且在数据库中会生成对应的表结构. &lt;/font&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置 Spring 的声明式事务 --&amp;gt;
+&amp;lt;!-- 1. 配置 Hibernate 的事务管理器 --&amp;gt;
+&amp;lt;bean id=&amp;quot;transactionManager&amp;quot; class=&amp;quot;org.springframework.orm.hibernate4.HibernateTransactionManager&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;sessionFactory&amp;quot; ref=&amp;quot;sessionFactory&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+      
+&amp;lt;!-- 2. 配置事务属性 --&amp;gt;
+&amp;lt;tx:advice id=&amp;quot;txAdvice&amp;quot; transaction-manager=&amp;quot;transactionManager&amp;quot;&amp;gt;
+    &amp;lt;tx:attributes&amp;gt;
+      &amp;lt;tx:method name=&amp;quot;get*&amp;quot; read-only=&amp;quot;true&amp;quot;/&amp;gt;
+      &amp;lt;tx:method name=&amp;quot;*&amp;quot;/&amp;gt;
+    &amp;lt;/tx:attributes&amp;gt;
+&amp;lt;/tx:advice&amp;gt;
+	
+&amp;lt;!-- 3. 配置事务切入点,再把事务属性和事务切入点关联起来 --&amp;gt;
+  &amp;lt;aop:config&amp;gt;
+  &amp;lt;!-- 任一修饰符,任意返回值 ..下的所有类下的所有方法,参数值任意--&amp;gt;
+  &amp;lt;aop:pointcut expression=&amp;quot;execution(* com.PwdManager.service.*.*(..))&amp;quot; id=&amp;quot;txPointcut&amp;quot;/&amp;gt;
+  &amp;lt;!-- 把事务属性和事务切入点关联起来 --&amp;gt;
+  &amp;lt;aop:advisor advice-ref=&amp;quot;txAdvice&amp;quot; pointcut-ref=&amp;quot;txPointcut&amp;quot;/&amp;gt;
+&amp;lt;/aop:config&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;3-加入-stuts2&#34;&gt;3. 加入 Stuts2&lt;/h3&gt;
+&lt;h4 id=&#34;1-加入--jar-包&#34;&gt;1) 加入  jar 包&lt;/h4&gt;
+&lt;p&gt;　　找到 Stuts2 的 jar 包文件夹，\Jar包文件 \Jar包文件\Struts2.3.34\struts-2.3.34\apps\struts2-blank\WEB-INF\lib路径下的所有 jar 包.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;xwork-core-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;struts2-spring-plugin-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;struts2-json-plugin-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;struts2-core-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;ognl-3.0.21.jar&lt;/li&gt;
+&lt;li&gt;log4j-core-2.3.jar&lt;/li&gt;
+&lt;li&gt;log4j-api-2.3.jar&lt;/li&gt;
+&lt;li&gt;javassist-3.11.0.GA.jar&lt;/li&gt;
+&lt;li&gt;freemarker-2.3.22.jar&lt;/li&gt;
+&lt;li&gt;commons-lang3-3.2.jar&lt;/li&gt;
+&lt;li&gt;commons-io-2.2.jar&lt;/li&gt;
+&lt;li&gt;commons-fileupload-1.3.2.jar&lt;/li&gt;
+&lt;li&gt;asm-tree-3.3.jar&lt;/li&gt;
+&lt;li&gt;asm-commons-3.3.jar&lt;/li&gt;
+&lt;li&gt;asm-3.3.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-在webxml文件中配置struts2的filter&#34;&gt;2) 在web.xml文件中配置Struts2的Filter&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置 Struts2 的 Filter --&amp;gt;
+&amp;lt;filter&amp;gt;
+  &amp;lt;filter-name&amp;gt;struts2&amp;lt;/filter-name&amp;gt;
+  &amp;lt;filter-class&amp;gt;
+    org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+  &amp;lt;/filter-class&amp;gt;
+&amp;lt;/filter&amp;gt;
+
+&amp;lt;filter-mapping&amp;gt;
+  &amp;lt;filter-name&amp;gt;struts2&amp;lt;/filter-name&amp;gt;
+  &amp;lt;url-pattern&amp;gt;/*&amp;lt;/url-pattern&amp;gt;
+&amp;lt;/filter-mapping&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3-加入-struts2-的配置文件&#34;&gt;3) 加入 Struts2 的配置文件&lt;/h4&gt;
+&lt;p&gt;　　可以拷贝例子下的struts.xml文件，例子可以在Jar包文件\Struts2.3.34\struts-2.3.34\apps\struts2-blank\WEB-INF\src\java\struts.xml文件参考.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; ?&amp;gt;
+&amp;lt;!DOCTYPE struts PUBLIC
+  &amp;quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&amp;quot;
+  &amp;quot;http://struts.apache.org/dtds/struts-2.3.dtd&amp;quot;&amp;gt;
+&amp;lt;struts&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.enable.DynamicMethodInvocation&amp;quot; value=&amp;quot;false&amp;quot; /&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.devMode&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
+  &amp;lt;package name=&amp;quot;default&amp;quot; namespace=&amp;quot;/&amp;quot; extends=&amp;quot;struts-default&amp;quot;&amp;gt;
+      &amp;lt;action name=&amp;quot;index&amp;quot;&amp;gt;
+        &amp;lt;result type=&amp;quot;redirectAction&amp;quot;&amp;gt;
+            &amp;lt;param name=&amp;quot;actionName&amp;quot;&amp;gt;HelloWorld&amp;lt;/param&amp;gt;
+        &amp;lt;/result&amp;gt;
+    &amp;lt;/action&amp;gt;
+&amp;lt;/package&amp;gt;
+&amp;lt;!-- Add packages here --&amp;gt;
+&amp;lt;/struts&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;4-整合-spring&#34;&gt;4) 整合 Spring&lt;/h4&gt;
+&lt;p&gt;① 加入 Struts2 的 Spring 插件的 jar 包  struts2-spring-plugin-2.3.34.jar.&lt;/p&gt;
+&lt;p&gt;② 在 Spring 的配置文件中正常配置 Action ,注意 Action 中需要配置 scope 属性为 prototype 不是单例的.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;XxxAction&amp;quot;&amp;gt; class=&amp;quot;&amp;quot; scope=&amp;quot;prototype&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;&amp;quot; ref=&amp;quot;&amp;quot; &amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&amp;lt;!-- 实例  --&amp;gt;
+&amp;lt;bean id=&amp;quot;userloginDao&amp;quot; class=&amp;quot;com.dao.userLoginDao&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;sessionFactory&amp;quot; ref=&amp;quot;sessionFactory&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+
+&amp;lt;bean id=&amp;quot;userloginService&amp;quot; class=&amp;quot;com.service.userLoginService&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;userLoginDao&amp;quot; ref=&amp;quot;userloginDao&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+  
+&amp;lt;bean id=&amp;quot;userloginAction&amp;quot; class=&amp;quot;com.action.userLoginAction&amp;quot; scope=&amp;quot;prototype&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;userLoginService&amp;quot; ref=&amp;quot;userloginService&amp;quot;/&amp;gt;	
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;这里面需要注意的是&lt;/font&gt;：如果是在搭建初期只是为了测试是否成功，在创建对应的Package和Class后，在属性值为sessionFactory的Class下要创建sessionFactory的实例对象并设置setter方法，即&lt;code&gt;&amp;lt;property name=&amp;quot;sessionFactory&amp;quot; ref=&amp;quot;sessionFactory&amp;quot;/&amp;gt;&lt;/code&gt;的&lt;code&gt;&amp;lt;bean id=&amp;quot;userloginDao&amp;quot; class=&amp;quot;com.dao.userLoginDao&amp;quot;&amp;gt;&lt;/code&gt;需要在类userLoginDao下实例：&lt;code&gt;private SessionFactory sessionFactory&lt;/code&gt;;并设置&lt;code&gt;setter&lt;/code&gt;方法（可以带上&lt;code&gt;getter&lt;/code&gt;方法），以下其他bean相同. （依赖注入相关知识）&lt;/p&gt;
+&lt;p&gt;③ 在Struts2的配置文件中配置Action时,class 属性指向该 Action 在Spring IOC中的id.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;首先要定义拦截器&lt;/strong&gt;
+I. 在JSP页面如果没有采用Ajax可以直接使用以下action&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;action name=&amp;quot;XxxName&amp;quot; class=&amp;quot;XxxAction&amp;quot;&amp;gt;
+  &amp;lt;result&amp;gt;/success.jsp&amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;JSP	页面form表单提交直接交给XxxName，即：&lt;code&gt;&amp;lt;form action=&amp;quot;XxxName&amp;quot;&amp;gt;&lt;/code&gt;
+这种情况需要接受的action中提供form表单中input的name所对应的getter和setter
+然后可以直接获取到form表单中的值.
+II. 如果JSP页面使用了Ajax则需要使用以下action&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;action name=&amp;quot;userJson-*&amp;quot; class=&amp;quot;com.action.userJsonAction&amp;quot; method=&amp;quot;{1}&amp;quot;&amp;gt;
+  &amp;lt;result name=&amp;quot;success&amp;quot; type=&amp;quot;json&amp;quot;&amp;gt;
+    &amp;lt;param name=&amp;quot;root&amp;quot;&amp;gt;result&amp;lt;/param&amp;gt;
+  &amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;result为返回ajax的data数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这里需要注意的是在使用Ajax搭配Json实现数据的交互时，需要定义拦截器的时候继承json-default拦截器，同时继承两者也可以.
+这里要是采用AJAX的方式，可能需要引入JSON的相关Jar包：
+但是这里需要注意的是存在两种不同的JSON的Jar包，主要区别在于实现构造方法的变量不同.&lt;/p&gt;
+&lt;p&gt;例如：
+&lt;font color=red&gt;√&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JSONObject json = new JSONObject(map);&lt;/code&gt;带参构造需要引入org.json.JSONObject; &lt;code&gt;JSONObject json = new JSONObject();&lt;/code&gt;   无参构造引入的是net.sf.json.JSONObject
+org.json.JSONObject类在json.jar包下—— \Jar包文件\JSON\org.json
+net.sf.json.JSONObject其他包中—— \Jar包文件\JSON\net.sf.json&lt;/p&gt;
+&lt;p&gt;{&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;commons-beanutils-1.7.0.jar&lt;/li&gt;
+&lt;li&gt;commons-collections-3.2.1.jar&lt;/li&gt;
+&lt;li&gt;commons-httpclient-3.1.jar&lt;/li&gt;
+&lt;li&gt;commons-lang-2.3.jar&lt;/li&gt;
+&lt;li&gt;commons-logging-1.1.1.jar&lt;/li&gt;
+&lt;li&gt;ezmorph-1.0.3.jar&lt;/li&gt;
+&lt;li&gt;json-lib-2.2.3-jdk15.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;获取ajax传过来的参数需要使用：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 用于获取data数据，定义request
+HttpServletRequest request = null;
+request = ServletActionContext.getRequest();
+String UserID = request.getParameter(&amp;quot;UserID&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;struts&amp;gt;				
+  &amp;lt;constant name=&amp;quot;struts.i18n.encoding&amp;quot; value=&amp;quot;UTF-8&amp;quot;&amp;gt;&amp;lt;/constant&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.enable.DynamicMethodInvocation&amp;quot; value=&amp;quot;false&amp;quot; /&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.devMode&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
+  &amp;lt;package name=&amp;quot;default&amp;quot; namespace=&amp;quot;/&amp;quot; extends=&amp;quot;json-default,struts-default&amp;quot;&amp;gt;
+  &amp;lt;!-- 定义新的拦截器栈, 配置prepare拦截器栈的alwaysInvokePrepare参数值为false --&amp;gt;
+    &amp;lt;interceptors&amp;gt;
+      &amp;lt;interceptor-stack name=&amp;quot;sshStack&amp;quot;&amp;gt;
+        &amp;lt;interceptor-ref name=&amp;quot;paramsPrepareParamsStack&amp;quot;&amp;gt;
+          &amp;lt;param name=&amp;quot;prepare.alwaysInvokePrepare&amp;quot;&amp;gt;false&amp;lt;/param&amp;gt;
+        &amp;lt;/interceptor-ref&amp;gt;
+      &amp;lt;/interceptor-stack&amp;gt;
+    &amp;lt;/interceptors&amp;gt;
+    &amp;lt;!-- 使用新的拦截器栈 --&amp;gt;
+    &amp;lt;default-interceptor-ref name=&amp;quot;sshStack&amp;quot;&amp;gt;&amp;lt;/default-interceptor-ref&amp;gt;
+                  
+    &amp;lt;action name=&amp;quot;userJson-*&amp;quot; class=&amp;quot;com.action.userJsonAction&amp;quot; method=&amp;quot;{1}&amp;quot;&amp;gt;
+      &amp;lt;result name=&amp;quot;success&amp;quot; type=&amp;quot;json&amp;quot;&amp;gt;
+        &amp;lt;param name=&amp;quot;root&amp;quot;&amp;gt;result&amp;lt;/param&amp;gt;
+      &amp;lt;/result&amp;gt;
+    &amp;lt;/action&amp;gt;
+  &amp;lt;/package&amp;gt;			
+  &amp;lt;/struts&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;$.ajax({
+  url : &amp;quot;blogJson-readArticle&amp;quot;,
+  type : &amp;quot;POST&amp;quot;,	
+  data : {
+    userID : &amp;quot;132&amp;quot;,
+    artID : $(&amp;quot;input:hidden[name=&#39;artID&#39;]&amp;quot;).val()
+  },
+  timeout : 30000,
+  dataType : &amp;quot;json&amp;quot;,// 设置需要返回的数据类型
+  scriptCharset : &#39;utf-8&#39;,
+  success : function(data) {
+    var obj = $.parseJSON(data);
+    var data = obj.data;
+    
+  },
+  error : function(XMLHttpRequest, textStatus, errorThrown) {
+    alert(errorThrown + 123);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;4-完成功能&#34;&gt;4. 完成功能&lt;/h3&gt;
+&lt;p&gt;　　具体方式可以按照自己的要求实施，&lt;strong&gt;大致方法&lt;/strong&gt;：
+在dao层可以直接管理有关数据库的一切方法，通过service层调用dao层的方法，在action层对service方法进行调用即可；这里需要注意一点，就是关于一些属性的设置问题，具体跟上述使用JSON时注意的事项一样.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

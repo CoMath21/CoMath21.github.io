@@ -5,12 +5,1235 @@
     <link>https://CoMath21.github.io/tag/java/</link>
       <atom:link href="https://CoMath21.github.io/tag/java/index.xml" rel="self" type="application/rss+xml" />
     <description>Java</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Fri, 29 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
       <title>Java</title>
       <link>https://CoMath21.github.io/tag/java/</link>
     </image>
+    
+    <item>
+      <title>SSH框架整合基本步骤</title>
+      <link>https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/</guid>
+      <description>&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+&lt;p&gt;　　首先需要找到开发软件：Eclipse-J2EE版本，并且安装相应插件（最好安装，便于初期简单编程）.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：云盘中一个压缩包中有完整软件.&lt;/p&gt;
+&lt;p&gt;安装插件步骤：
+打开Eclipse-J2EE版本，找到Help→Install New SoftWare → Work with右面的Add ，在Archive…中找到对应软件的路径，点集OK即可.
+需要的软件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;hibernate的插件：hibernatetools-Update-4.1.1.Final_2013-12-08_01-06-33-B605.zip&lt;/li&gt;
+&lt;li&gt;Spring的插件：springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果没有服务器，需要安装Tomcat服务器.&lt;/p&gt;
+&lt;h2 id=&#34;springhibernatestruts的顺序整合框架&#34;&gt;Spring→Hibernate→Struts的顺序整合框架&lt;/h2&gt;
+&lt;h3 id=&#34;1-加入spring&#34;&gt;1. 加入Spring&lt;/h3&gt;
+&lt;h4 id=&#34;1加入-spring-所需要的-jar-包文件&#34;&gt;1)	加入 Spring 所需要的 Jar 包文件&lt;/h4&gt;
+&lt;p&gt;　　找到 Spring 的 jar 包文件夹，\Jar包文件\Spring4.0.0\spring-framework-4.0.0.RELEASE\required，大约15个左右；&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;com.springsource.net.sf.cglib-2.2.0.jar&lt;/li&gt;
+&lt;li&gt;com.springsource.org.aopalliance-1.0.0.jar&lt;/li&gt;
+&lt;li&gt;com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;commons-logging-1.2.jar&lt;/li&gt;
+&lt;li&gt;spring-aop-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-aspects-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-beans-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-context-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-core-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-expression-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-jdbc-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-orm-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-tx-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-web-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;li&gt;spring-webmvc-4.0.0.RELEASE.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2配置-webxml-文件&#34;&gt;2)	配置 web.xml 文件&lt;/h4&gt;
+&lt;p&gt;　　配置web.xml文件可以找到ContextLoaderListener会自动生成以下代码，随后将Location改为applicationContext（Spring配置文件）的路径.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置  Spring 配置文件的名称和位置 --&amp;gt;
+&amp;lt;context-param&amp;gt;
+  &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt;
+  &amp;lt;param-value&amp;gt;classpath:applicationContext.xml&amp;lt;/param-value&amp;gt;
+&amp;lt;/context-param&amp;gt;
+		
+&amp;lt;!-- 启动 IOC 容器的  ServletContextListener --&amp;gt;
+&amp;lt;listener&amp;gt;
+&amp;lt;listener-class&amp;gt;
+org.springframework.web.context.ContextLoaderListener
+&amp;lt;/listener-class&amp;gt;
+&amp;lt;/listener&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3加入-spring-的配置文件&#34;&gt;3)	加入 Spring 的配置文件&lt;/h4&gt;
+&lt;p&gt;　　可以先创建一个资源文件conf，将资源文件放入其中（也可以直接在src下创建），在资源文件下创建一个Spring的配置文件点击右键找到Spring Bean Configuration File，输入配置文件的名字，（注意这里面的名字要与web.xml下的的配置文件的名字相同，也就是一个文件）；然后选中aop、beans、context、tx等选项，（注意这里面所选取的是最基本的，根据需要可以自行添加其他选项）；最后Finish即可.
+&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2加入hibernate&#34;&gt;2.	加入Hibernate&lt;/h3&gt;
+&lt;h4 id=&#34;1-建立持久化类-和其对应的-hbmxml-文件-生成对应的数据表&#34;&gt;1). 建立持久化类, 和其对应的 .hbm.xml 文件, 生成对应的数据表&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;i. 配置hibernate.cfg.xml文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;　　鼠标右键找到Hibernate Configuration File(cfg.xml)创建hibernate.cfg.xml配置文件并配置基本信息（可根据需求自行添加）.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;hibernate-configuration&amp;gt;
+&amp;lt;session-factory&amp;gt;
+    &amp;lt;!-- 配置基本属性 --&amp;gt;
+    &amp;lt;!-- 方言 --&amp;gt;
+&amp;lt;property name=&amp;quot;hibernate.dialect&amp;quot;&amp;gt;org.hibernate.dialect.SQLServer2008Dialect
+&amp;lt;/property&amp;gt;
+&amp;lt;property name=&amp;quot;hibernate.dialect&amp;quot;&amp;gt; org.hibernate.dialect.MySQL5InnoDBDialect&amp;lt;/property&amp;gt;
+
+    &amp;lt;!-- 是否显示及格式化SQL --&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.show_sql&amp;quot;&amp;gt;true&amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.format_sql&amp;quot;&amp;gt;true&amp;lt;/property&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.temp.use_jdbc_metadata_defaults&amp;quot;&amp;gt;false&amp;lt;/property&amp;gt;  
+    &amp;lt;!-- 生成数据表的策略 --&amp;gt;
+    &amp;lt;property name=&amp;quot;hibernate.hbm2ddl.auto&amp;quot;&amp;gt;update&amp;lt;/property&amp;gt;
+    &amp;lt;!-- 生成二级缓存 --&amp;gt;
+  &amp;lt;/session-factory&amp;gt;
+&amp;lt;/hibernate-configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;ii. 建立持久化类&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;　　也就是平时所说的对象类、beans（一般创建在domain包下或者entities下），并生成对应参数的getter and setter；之后鼠标右键创建Hibernate XML Mapping file (hbm.xml)文件，直接创建即可. 就会生成对应的*. hbm.xml文件（根据不同的需求可能够对*. hbm.xml文件进行适当的修改）&lt;/p&gt;
+&lt;h4 id=&#34;2-spring-整合-hibernate&#34;&gt;2). Spring 整合 Hibernate&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;步骤&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;①  加入 jar 包: 找到 Hibernate 的 jar 包文件夹，\Jar包文件\Jar包文件\Hibernate4.2.21\hibernate-release-4.2.21.Final\lib\required路径下的所有 jar 包.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;antlr-2.7.7.jar&lt;/li&gt;
+&lt;li&gt;dom4j-1.6.1.jar&lt;/li&gt;
+&lt;li&gt;hibernate-commons-annotations-4.0.2.Final.jar&lt;/li&gt;
+&lt;li&gt;hibernate-core-4.2.21.Final.jar&lt;/li&gt;
+&lt;li&gt;hibernate-jpa-2.0-api-1.0.1.Final.jar&lt;/li&gt;
+&lt;li&gt;javassist-3.18.1-GA.jar&lt;/li&gt;
+&lt;li&gt;jboss-logging-3.1.0.GA.jar&lt;/li&gt;
+&lt;li&gt;jboss-transaction-api_1.1_spec-1.0.1.Final.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;②  在类路径下加入 hibernate.cfg.xml 文件，并在其中配置   hibernate 的基本属性&lt;/p&gt;
+&lt;p&gt;③  建立持久化类和其对应的  .hbm.xml 文件（过）&lt;/p&gt;
+&lt;p&gt;④  和 Spring 进行整合（过）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;加入c3p0和SQLServer的驱动（需要引入相关jar包文件：c3p0-0.9.2.1.jar、sqljdbc4.jar（SQL2005））&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;（c3p0:是一个 数据库连接池 ，利用 sqljdbc4 建立与数据库的连接 ， 并且管理这些连接，不用每次访问数据库都 重新发出数据库连接请求；大大提升性能）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;具体实现：
+首先要创建*.properties文件，并对其进行配置，主要为数据库的相关参数设置.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 资源文件样式 --&amp;gt;
+  jdbc.user=sa
+  jdbc.password=sa123
+  jdbc.driverClass=com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jdbc.jdbcUrl=jdbc:sqlserver://localhost:1433; DatabaseName=PwdManagerTest
+
+  jdbc.initialPoolSize=5
+  jdbc.maxPoolSize=10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后在applicationContext.xml中添加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 导入资源文件 --&amp;gt;
+  &amp;lt;context:property-placeholder location=&amp;quot;classpath:db.properties&amp;quot; /&amp;gt;
+&amp;lt;!-- 配置 C3P0 数据源 --&amp;gt;
+&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;com.mchange.v2.c3p0.ComboPooledDataSource&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;user&amp;quot; value=&amp;quot;${jdbc.user}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;${jdbc.password}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;driverClass&amp;quot; value=&amp;quot;${jdbc.driverClass}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;jdbcUrl&amp;quot; value=&amp;quot;${jdbc.jdbcUrl}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+    
+  &amp;lt;property name=&amp;quot;initialPoolSize&amp;quot; value=&amp;quot;${jdbc.initialPoolSize}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;maxPoolSize&amp;quot; value=&amp;quot;${jdbc.maxPoolSize}&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;这里会报一个错误：Error creating bean with name &amp;lsquo;dataSource&amp;rsquo; defined in class path resource [applicationContext.xml]:&amp;hellip;&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;错误原因&lt;/strong&gt;：缺少mchange-commons-java-0.2.3.4.jar包.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：mchange-commons-java-0.2.3.4.jar包是c3p0数据库连接池的辅助包，如果没有这个包系统启动时会报classnotfoundexception，这是更新c3p0-0.9.2版本后分离出来的包，0.9.1的时候还是只是一个包.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方法&lt;/strong&gt;：导入mchange-commons-java-0.2.3.4.jar包即可.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：Jar包文件\C3P0\C3P0-0.9-2.1JAR\c3p0-0.9.2.1\lib...&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Spring 的配置文件中配置:数据源dataSource,SessionFactory,声明式事务（先了解事务，包括事务隔离级别等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置 SessionFactory --&amp;gt;
+&amp;lt;bean id=&amp;quot;sessionFactory&amp;quot;					class=&amp;quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;dataSource&amp;quot; ref=&amp;quot;dataSource&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+  &amp;lt;property name=&amp;quot;configLocation&amp;quot; value=&amp;quot;classpath:hibernate.cfg.xml&amp;quot;/&amp;gt;
+  &amp;lt;property name=&amp;quot;mappingLocations&amp;quot; value=&amp;quot;classpath:com/PwdManager/domain/*.hbm.xml&amp;quot; /&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=blue&gt;说明：执行到当前操作即可打开服务器，运行当前项目检测，正常情况下，不会报错，没有错误信息，而且在数据库中会生成对应的表结构. &lt;/font&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置 Spring 的声明式事务 --&amp;gt;
+&amp;lt;!-- 1. 配置 Hibernate 的事务管理器 --&amp;gt;
+&amp;lt;bean id=&amp;quot;transactionManager&amp;quot; class=&amp;quot;org.springframework.orm.hibernate4.HibernateTransactionManager&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;sessionFactory&amp;quot; ref=&amp;quot;sessionFactory&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+      
+&amp;lt;!-- 2. 配置事务属性 --&amp;gt;
+&amp;lt;tx:advice id=&amp;quot;txAdvice&amp;quot; transaction-manager=&amp;quot;transactionManager&amp;quot;&amp;gt;
+    &amp;lt;tx:attributes&amp;gt;
+      &amp;lt;tx:method name=&amp;quot;get*&amp;quot; read-only=&amp;quot;true&amp;quot;/&amp;gt;
+      &amp;lt;tx:method name=&amp;quot;*&amp;quot;/&amp;gt;
+    &amp;lt;/tx:attributes&amp;gt;
+&amp;lt;/tx:advice&amp;gt;
+	
+&amp;lt;!-- 3. 配置事务切入点,再把事务属性和事务切入点关联起来 --&amp;gt;
+  &amp;lt;aop:config&amp;gt;
+  &amp;lt;!-- 任一修饰符,任意返回值 ..下的所有类下的所有方法,参数值任意--&amp;gt;
+  &amp;lt;aop:pointcut expression=&amp;quot;execution(* com.PwdManager.service.*.*(..))&amp;quot; id=&amp;quot;txPointcut&amp;quot;/&amp;gt;
+  &amp;lt;!-- 把事务属性和事务切入点关联起来 --&amp;gt;
+  &amp;lt;aop:advisor advice-ref=&amp;quot;txAdvice&amp;quot; pointcut-ref=&amp;quot;txPointcut&amp;quot;/&amp;gt;
+&amp;lt;/aop:config&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;3-加入-stuts2&#34;&gt;3. 加入 Stuts2&lt;/h3&gt;
+&lt;h4 id=&#34;1-加入--jar-包&#34;&gt;1) 加入  jar 包&lt;/h4&gt;
+&lt;p&gt;　　找到 Stuts2 的 jar 包文件夹，\Jar包文件 \Jar包文件\Struts2.3.34\struts-2.3.34\apps\struts2-blank\WEB-INF\lib路径下的所有 jar 包.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;xwork-core-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;struts2-spring-plugin-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;struts2-json-plugin-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;struts2-core-2.3.34.jar&lt;/li&gt;
+&lt;li&gt;ognl-3.0.21.jar&lt;/li&gt;
+&lt;li&gt;log4j-core-2.3.jar&lt;/li&gt;
+&lt;li&gt;log4j-api-2.3.jar&lt;/li&gt;
+&lt;li&gt;javassist-3.11.0.GA.jar&lt;/li&gt;
+&lt;li&gt;freemarker-2.3.22.jar&lt;/li&gt;
+&lt;li&gt;commons-lang3-3.2.jar&lt;/li&gt;
+&lt;li&gt;commons-io-2.2.jar&lt;/li&gt;
+&lt;li&gt;commons-fileupload-1.3.2.jar&lt;/li&gt;
+&lt;li&gt;asm-tree-3.3.jar&lt;/li&gt;
+&lt;li&gt;asm-commons-3.3.jar&lt;/li&gt;
+&lt;li&gt;asm-3.3.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-在webxml文件中配置struts2的filter&#34;&gt;2) 在web.xml文件中配置Struts2的Filter&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置 Struts2 的 Filter --&amp;gt;
+&amp;lt;filter&amp;gt;
+  &amp;lt;filter-name&amp;gt;struts2&amp;lt;/filter-name&amp;gt;
+  &amp;lt;filter-class&amp;gt;
+    org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+  &amp;lt;/filter-class&amp;gt;
+&amp;lt;/filter&amp;gt;
+
+&amp;lt;filter-mapping&amp;gt;
+  &amp;lt;filter-name&amp;gt;struts2&amp;lt;/filter-name&amp;gt;
+  &amp;lt;url-pattern&amp;gt;/*&amp;lt;/url-pattern&amp;gt;
+&amp;lt;/filter-mapping&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3-加入-struts2-的配置文件&#34;&gt;3) 加入 Struts2 的配置文件&lt;/h4&gt;
+&lt;p&gt;　　可以拷贝例子下的struts.xml文件，例子可以在Jar包文件\Struts2.3.34\struts-2.3.34\apps\struts2-blank\WEB-INF\src\java\struts.xml文件参考.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; ?&amp;gt;
+&amp;lt;!DOCTYPE struts PUBLIC
+  &amp;quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&amp;quot;
+  &amp;quot;http://struts.apache.org/dtds/struts-2.3.dtd&amp;quot;&amp;gt;
+&amp;lt;struts&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.enable.DynamicMethodInvocation&amp;quot; value=&amp;quot;false&amp;quot; /&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.devMode&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
+  &amp;lt;package name=&amp;quot;default&amp;quot; namespace=&amp;quot;/&amp;quot; extends=&amp;quot;struts-default&amp;quot;&amp;gt;
+      &amp;lt;action name=&amp;quot;index&amp;quot;&amp;gt;
+        &amp;lt;result type=&amp;quot;redirectAction&amp;quot;&amp;gt;
+            &amp;lt;param name=&amp;quot;actionName&amp;quot;&amp;gt;HelloWorld&amp;lt;/param&amp;gt;
+        &amp;lt;/result&amp;gt;
+    &amp;lt;/action&amp;gt;
+&amp;lt;/package&amp;gt;
+&amp;lt;!-- Add packages here --&amp;gt;
+&amp;lt;/struts&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;4-整合-spring&#34;&gt;4) 整合 Spring&lt;/h4&gt;
+&lt;p&gt;① 加入 Struts2 的 Spring 插件的 jar 包  struts2-spring-plugin-2.3.34.jar.&lt;/p&gt;
+&lt;p&gt;② 在 Spring 的配置文件中正常配置 Action ,注意 Action 中需要配置 scope 属性为 prototype 不是单例的.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;XxxAction&amp;quot;&amp;gt; class=&amp;quot;&amp;quot; scope=&amp;quot;prototype&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;&amp;quot; ref=&amp;quot;&amp;quot; &amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&amp;lt;!-- 实例  --&amp;gt;
+&amp;lt;bean id=&amp;quot;userloginDao&amp;quot; class=&amp;quot;com.dao.userLoginDao&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;sessionFactory&amp;quot; ref=&amp;quot;sessionFactory&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+
+&amp;lt;bean id=&amp;quot;userloginService&amp;quot; class=&amp;quot;com.service.userLoginService&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;userLoginDao&amp;quot; ref=&amp;quot;userloginDao&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+  
+&amp;lt;bean id=&amp;quot;userloginAction&amp;quot; class=&amp;quot;com.action.userLoginAction&amp;quot; scope=&amp;quot;prototype&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;userLoginService&amp;quot; ref=&amp;quot;userloginService&amp;quot;/&amp;gt;	
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;这里面需要注意的是&lt;/font&gt;：如果是在搭建初期只是为了测试是否成功，在创建对应的Package和Class后，在属性值为sessionFactory的Class下要创建sessionFactory的实例对象并设置setter方法，即&lt;code&gt;&amp;lt;property name=&amp;quot;sessionFactory&amp;quot; ref=&amp;quot;sessionFactory&amp;quot;/&amp;gt;&lt;/code&gt;的&lt;code&gt;&amp;lt;bean id=&amp;quot;userloginDao&amp;quot; class=&amp;quot;com.dao.userLoginDao&amp;quot;&amp;gt;&lt;/code&gt;需要在类userLoginDao下实例：&lt;code&gt;private SessionFactory sessionFactory&lt;/code&gt;;并设置&lt;code&gt;setter&lt;/code&gt;方法（可以带上&lt;code&gt;getter&lt;/code&gt;方法），以下其他bean相同. （依赖注入相关知识）&lt;/p&gt;
+&lt;p&gt;③ 在Struts2的配置文件中配置Action时,class 属性指向该 Action 在Spring IOC中的id.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;首先要定义拦截器&lt;/strong&gt;
+I. 在JSP页面如果没有采用Ajax可以直接使用以下action&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;action name=&amp;quot;XxxName&amp;quot; class=&amp;quot;XxxAction&amp;quot;&amp;gt;
+  &amp;lt;result&amp;gt;/success.jsp&amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;JSP	页面form表单提交直接交给XxxName，即：&lt;code&gt;&amp;lt;form action=&amp;quot;XxxName&amp;quot;&amp;gt;&lt;/code&gt;
+这种情况需要接受的action中提供form表单中input的name所对应的getter和setter
+然后可以直接获取到form表单中的值.
+II. 如果JSP页面使用了Ajax则需要使用以下action&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;action name=&amp;quot;userJson-*&amp;quot; class=&amp;quot;com.action.userJsonAction&amp;quot; method=&amp;quot;{1}&amp;quot;&amp;gt;
+  &amp;lt;result name=&amp;quot;success&amp;quot; type=&amp;quot;json&amp;quot;&amp;gt;
+    &amp;lt;param name=&amp;quot;root&amp;quot;&amp;gt;result&amp;lt;/param&amp;gt;
+  &amp;lt;/result&amp;gt;
+&amp;lt;/action&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;result为返回ajax的data数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这里需要注意的是在使用Ajax搭配Json实现数据的交互时，需要定义拦截器的时候继承json-default拦截器，同时继承两者也可以.
+这里要是采用AJAX的方式，可能需要引入JSON的相关Jar包：
+但是这里需要注意的是存在两种不同的JSON的Jar包，主要区别在于实现构造方法的变量不同.&lt;/p&gt;
+&lt;p&gt;例如：
+&lt;font color=red&gt;√&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JSONObject json = new JSONObject(map);&lt;/code&gt;带参构造需要引入org.json.JSONObject; &lt;code&gt;JSONObject json = new JSONObject();&lt;/code&gt;   无参构造引入的是net.sf.json.JSONObject
+org.json.JSONObject类在json.jar包下—— \Jar包文件\JSON\org.json
+net.sf.json.JSONObject其他包中—— \Jar包文件\JSON\net.sf.json&lt;/p&gt;
+&lt;p&gt;{&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;commons-beanutils-1.7.0.jar&lt;/li&gt;
+&lt;li&gt;commons-collections-3.2.1.jar&lt;/li&gt;
+&lt;li&gt;commons-httpclient-3.1.jar&lt;/li&gt;
+&lt;li&gt;commons-lang-2.3.jar&lt;/li&gt;
+&lt;li&gt;commons-logging-1.1.1.jar&lt;/li&gt;
+&lt;li&gt;ezmorph-1.0.3.jar&lt;/li&gt;
+&lt;li&gt;json-lib-2.2.3-jdk15.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;获取ajax传过来的参数需要使用：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 用于获取data数据，定义request
+HttpServletRequest request = null;
+request = ServletActionContext.getRequest();
+String UserID = request.getParameter(&amp;quot;UserID&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;struts&amp;gt;				
+  &amp;lt;constant name=&amp;quot;struts.i18n.encoding&amp;quot; value=&amp;quot;UTF-8&amp;quot;&amp;gt;&amp;lt;/constant&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.enable.DynamicMethodInvocation&amp;quot; value=&amp;quot;false&amp;quot; /&amp;gt;
+  &amp;lt;constant name=&amp;quot;struts.devMode&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
+  &amp;lt;package name=&amp;quot;default&amp;quot; namespace=&amp;quot;/&amp;quot; extends=&amp;quot;json-default,struts-default&amp;quot;&amp;gt;
+  &amp;lt;!-- 定义新的拦截器栈, 配置prepare拦截器栈的alwaysInvokePrepare参数值为false --&amp;gt;
+    &amp;lt;interceptors&amp;gt;
+      &amp;lt;interceptor-stack name=&amp;quot;sshStack&amp;quot;&amp;gt;
+        &amp;lt;interceptor-ref name=&amp;quot;paramsPrepareParamsStack&amp;quot;&amp;gt;
+          &amp;lt;param name=&amp;quot;prepare.alwaysInvokePrepare&amp;quot;&amp;gt;false&amp;lt;/param&amp;gt;
+        &amp;lt;/interceptor-ref&amp;gt;
+      &amp;lt;/interceptor-stack&amp;gt;
+    &amp;lt;/interceptors&amp;gt;
+    &amp;lt;!-- 使用新的拦截器栈 --&amp;gt;
+    &amp;lt;default-interceptor-ref name=&amp;quot;sshStack&amp;quot;&amp;gt;&amp;lt;/default-interceptor-ref&amp;gt;
+                  
+    &amp;lt;action name=&amp;quot;userJson-*&amp;quot; class=&amp;quot;com.action.userJsonAction&amp;quot; method=&amp;quot;{1}&amp;quot;&amp;gt;
+      &amp;lt;result name=&amp;quot;success&amp;quot; type=&amp;quot;json&amp;quot;&amp;gt;
+        &amp;lt;param name=&amp;quot;root&amp;quot;&amp;gt;result&amp;lt;/param&amp;gt;
+      &amp;lt;/result&amp;gt;
+    &amp;lt;/action&amp;gt;
+  &amp;lt;/package&amp;gt;			
+  &amp;lt;/struts&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;$.ajax({
+  url : &amp;quot;blogJson-readArticle&amp;quot;,
+  type : &amp;quot;POST&amp;quot;,	
+  data : {
+    userID : &amp;quot;132&amp;quot;,
+    artID : $(&amp;quot;input:hidden[name=&#39;artID&#39;]&amp;quot;).val()
+  },
+  timeout : 30000,
+  dataType : &amp;quot;json&amp;quot;,// 设置需要返回的数据类型
+  scriptCharset : &#39;utf-8&#39;,
+  success : function(data) {
+    var obj = $.parseJSON(data);
+    var data = obj.data;
+    
+  },
+  error : function(XMLHttpRequest, textStatus, errorThrown) {
+    alert(errorThrown + 123);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;4-完成功能&#34;&gt;4. 完成功能&lt;/h3&gt;
+&lt;p&gt;　　具体方式可以按照自己的要求实施，&lt;strong&gt;大致方法&lt;/strong&gt;：
+在dao层可以直接管理有关数据库的一切方法，通过service层调用dao层的方法，在action层对service方法进行调用即可；这里需要注意一点，就是关于一些属性的设置问题，具体跟上述使用JSON时注意的事项一样.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JSP简介</title>
+      <link>https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/</guid>
+      <description>&lt;h2 id=&#34;为什么要jsp技术&#34;&gt;为什么要JSP技术?&lt;/h2&gt;
+&lt;p&gt;　　开发web网站的时候，servlet做界面比较麻烦. JSP 是基于 Servlet API 的，所以拥有 Servlet 拥有的一系列好处.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;jsp运行在服务器端&lt;/li&gt;
+&lt;li&gt;jsp（java service page）&lt;/li&gt;
+&lt;li&gt;jsp的基础是servlet&lt;/li&gt;
+&lt;li&gt;jsp是一个综合技术  jsp=html+css+javascript+java代码+jsp标签(Servlet)&lt;/li&gt;
+&lt;li&gt;jsp无需配置，可以直接使用；如果修改了jsp文件，不需要重新reload web应用&lt;/li&gt;
+&lt;li&gt;jsp访问方法：http://ip:8080/web应用名/jsp路径&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;特点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内容的生成和显示相分离&lt;/li&gt;
+&lt;li&gt;可移植性&lt;/li&gt;
+&lt;li&gt;采用标签简化页面开发&lt;/li&gt;
+&lt;li&gt;使用可重用组件&lt;/li&gt;
+&lt;li&gt;完善的存储管理和安全性
+&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;jsp语法基础&#34;&gt;JSP语法基础：&lt;/h2&gt;
+&lt;h3 id=&#34;基本元素&#34;&gt;基本元素：&lt;/h3&gt;
+&lt;h4 id=&#34;注释jsp自带的注释规范是隐式注释htmlxml的注释是显示注释&#34;&gt;注释(JSP自带的注释规范是隐式注释,HTML/XML的注释是显示注释)&lt;/h4&gt;
+&lt;p&gt;HTML/XML的注释(显示注释)：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 个注释 --&amp;gt;
+&amp;lt;!-- 个注释 ：&amp;lt;%counter++;%&amp;gt;--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里会对counter++进行编译,显示编译后的结果
+隐式注释：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%-- 注释 --%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;JSP在编译时不会对&amp;lt;%&amp;ndash;和&amp;ndash;%&amp;gt;中的进行编译;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Scriptlets中的注释：跟java注释一致.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;指令元素&#34;&gt;指令元素&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;页面(page)指令：
+页面page指令用于定义JSP文件中的全局属性,一个JSP页面可以包含多个页面指令.除了import指令外其他的页面指令定义的属性或值只能出现一次.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ page attribute=&amp;quot;value&amp;quot;%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中attribute的可取值为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;language(定义使用的脚本&amp;mdash;语言默认java)、import(定义JSP网页使用的java API)、&lt;/li&gt;
+&lt;li&gt;contentType(定义MIME类型和JSP网页的编码方式—默认TYPE=text/html CHARSET=iso-8859-1)、&lt;/li&gt;
+&lt;li&gt;pageEncoding(JSP页面的字符编码&amp;mdash;默认pageEncoding=&amp;ldquo;iso-8859-1&amp;rdquo;)、
+　&lt;strong&gt;区别&lt;/strong&gt;：contentType—pageEncoding.
+&lt;ul&gt;
+&lt;li&gt;contentType：只能指定网页以什么方式显示&lt;/li&gt;
+&lt;li&gt;pageEncoding：除了显示之外还可以以指定形式保存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;session(定义该JSP网页是否可以使用session对象—-默认true)、&lt;/li&gt;
+&lt;li&gt;buffer(指定客户输出流的缓冲模式,如果是none,则不缓冲,如果指定数值,就定义了缓冲区的大小)、默认8K&lt;/li&gt;
+&lt;li&gt;autoFlush(定义输出流的缓存区是否要自动清除-—默认true)、&lt;/li&gt;
+&lt;li&gt;isThreadSafe(定义该JSP页面是否能处理多个请求&amp;mdash;默认true)、&lt;/li&gt;
+&lt;li&gt;info(定义该JSP网页的相关信息-—默认忽略)、&lt;/li&gt;
+&lt;li&gt;errorPage(定义此页面出现意外时的调用的页面—-默认忽略)、跳转到错误页面&lt;/li&gt;
+&lt;li&gt;isErrorPage(定义该JSP网页是否为处理意外错误的网页—-默认false)、&lt;/li&gt;
+&lt;li&gt;extends().&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;include指令：
+include指令通知容器在当前JSP页面中指定位置包含另一个文件的内容. 被包含的文件内容可以被JSP引擎解析,这种解析发生在编译期间
+&amp;lt;%@ include file=&amp;ldquo;filename&amp;rdquo;%&amp;gt;
+include只有这一个属性. 其中filename为包含的文件路径,一般来说是指相对路径.
+由于被包含的内容常常是代码片断,因此代码片断的后缀名最好以“f”(表示fragment)结尾,例如.htmlf&lt;/li&gt;
+&lt;li&gt;标签库taglib指令：
+taglib指令允许页面使用者自定义标签. 先用户开发标签库，为标签库编写.tld配置文件，然后再JSP页面使用自定义标签.
+&amp;lt;%@ taglib uri=&amp;ldquo;URL&amp;rdquo; prefix=&amp;ldquo;tagPrefix&amp;rdquo;%&amp;gt;
+uri 用来表示标签描述符，也就是如何找到标签文件和标签库；
+tagPrefix 定义了子JSP页面里引用这个标签的前缀.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;脚本元素&#34;&gt;脚本元素&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;声明(Declaration)
+声明就是在JSP程序中声明合法的变量和方法,用&amp;lt;%!和%&amp;gt;来表示)：
+当代码只用于单一页面时：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%!
+  variable declaration;
+    method declaration(paramType param,...)
+%&amp;gt;
+
+&amp;lt;%!
+  private static int counter;
+  public void counterInit(){
+    counter = 0 ;
+  };
+%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;表达式(Expression)—用来吧java数据直接插入到输出：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;font color=red&gt;表达式&lt;/font&gt;是位于&lt;font color=red&gt;&amp;lt;%=&lt;/font&gt;和&lt;font color=red&gt;%&amp;gt;&lt;/font&gt;之间的代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%= &amp;quot;你是第&amp;quot;+counter+&amp;quot;次访问&amp;quot; %&amp;gt;
+&amp;lt;%= &amp;quot;hello world&amp;quot; %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Web服务器将其编译成Servlet后，变成：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;out.wreite(String.valueOf(&amp;quot;hello world&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;相当于JSP页面中的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;out.println(&amp;quot;hello world&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;注：表达式结束处可以不使用省略号，表达式可以包含表达式.&lt;/font&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;脚本小程序(Scriptlet)&amp;mdash;可以在处理请求时间执行的java代码：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Scriptlet则位于&amp;lt;%和%&amp;gt;之间,他们是合法的java代码
+&lt;code&gt;&amp;lt;%counter++;%&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;动作元素&#34;&gt;动作元素&lt;/h4&gt;
+&lt;p&gt;　　JSP规范定义了一系列的标准动作. 以jsp作为前缀,例如使用JavaBean的动作元素&amp;lt;jsp:useBean&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:tag attribute=value attribute=value.../&amp;gt;
+&amp;lt;!-- 或者 --&amp;gt;
+&amp;lt;jsp:tag attribute=value attribute=value...&amp;gt;
+...
+&amp;lt;/jsp:tag&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;动作元素是在请求处理阶段起作用的.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文本导入标签&amp;lt;jsp:include&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:include page=&amp;quot;filename&amp;quot; flush=&amp;quot;true&amp;quot;/&amp;gt;
+&amp;lt;!-- 或者 --&amp;gt;
+&amp;lt;jsp:include page=&amp;quot;filename&amp;quot; flush=&amp;quot;true&amp;quot;&amp;gt;
+  &amp;lt;jsp:param name=&amp;quot;paramName&amp;quot; value=&amp;quot;paramValue&amp;quot;/&amp;gt;
+  ...
+&amp;lt;/jsp:include&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;　　&amp;lt;jsp:param&amp;gt;用于传递一个或者多个参数给动态页面;&amp;lt;jsp:include&amp;gt;动作与&amp;lt;%@include%&amp;gt;指令的不同是：前者包含的内容可以是动态改变的，它在执行时才确定；而后者包含的内容是固定不变的，在编译阶段就已经确定而不能改变.&lt;/p&gt;
+&lt;p&gt;案例：Login.html、Ex1.jsp、Ex2.jsp&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;页面转发标签&amp;lt;jsp:forward&amp;gt;该操作允许将请求转发到另一个JSP、Servlet或者其他静态资源文件. 请求被转至的资源必须位于同JSP发送请求相同的上下文环境之中. 每当遇到&amp;lt;jsp:forward&amp;gt;操作时，就停止执行当前的JSP，转至执行被转发的资源.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:forward page=&amp;quot;uri&amp;quot;/&amp;gt;
+&amp;lt;!-- 或者 --&amp;gt;
+&amp;lt;jsp:forward&amp;gt;
+  &amp;lt;jsp:param name=&amp;quot;paramName&amp;quot; value=&amp;quot;paramValue&amp;quot;/&amp;gt;
+  ...
+&amp;lt;/jsp:forward&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中page=&amp;ldquo;uri&amp;rdquo; 指明将要定向的文件或url地址,&lt;code&gt;&amp;lt;jsp:param name=&amp;quot;paramName&amp;quot; value=&amp;quot;paramValue&amp;quot;/&amp;gt;&lt;/code&gt;中name指定参数名，value指定参数值. 参数被发送到一个动态文件，参数可以是一个或多个值，而这个文件却必须是动态文件.&lt;/p&gt;
+&lt;p&gt;案例：Ex3.jsp、Ex4.jsp、Ex5.jsp&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实例化JavaBean标签&lt;a href=&#34;jsp:useBean&#34;&gt;jsp:useBean&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:useBean id=&amp;quot;id&amp;quot; scope=&amp;quot;page|request|session|application typeSpec&amp;quot;/&amp;gt;
+&amp;lt;!-- id 是大小写相关的名字,用来表示这个实例;scope表示此对象作用的范围；typeSpace可以是以下四者之一：class=&amp;quot;className&amp;quot; --&amp;gt;
+class=&amp;quot;className&amp;quot; type=&amp;quot;typeName&amp;quot;
+          beanName=&amp;quot;beanName&amp;quot; type=&amp;quot;typeName&amp;quot;
+          type=&amp;quot;typeName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;scope表示Bean的作用域，此属性是可选的，默认是page.&lt;/p&gt;
+&lt;p&gt;① &lt;strong&gt;page&lt;/strong&gt;：
+能够在包含&amp;lt;jsp:useBean&amp;gt;标签的JSP文件以及此文件中的所有静态包含文件中使用Bean，直到页面执行完毕客户端发回响应或转到另一个文件为止. 超出这个范围Bean就失效了.&lt;/p&gt;
+&lt;p&gt;② &lt;strong&gt;request&lt;/strong&gt;：
+如果该Bean不是请求上下文的一部分，将在请求上下文中创建并保存该Bean.&lt;/p&gt;
+&lt;p&gt;③ &lt;strong&gt;session&lt;/strong&gt;：
+从创建Bean开始，就开始在session有效范围内使用这个Bean，这个Bean对于JSP来说是共享的. 但在创建Bean的JSP文件里，page指令必须指定session=True.&lt;/p&gt;
+&lt;p&gt;④ &lt;strong&gt;application&lt;/strong&gt;：
+如果此Bean尚不存在于Web应用程序上下文中，则在应用程序上下文中创建并储存此Bean. application对象在应用服务器启东市就创建了，直到应用服务器关闭. 这个Bean存在于整个application生命周期内，任何在此分享application的JSP文件都能使用同一个Bean. class=&amp;ldquo;className&amp;quot;代表的是Bean的类路径和类名. 这个class不是抽象的，必须有一个公用的、没有参数的构造器. beanName=&amp;ldquo;beanName&amp;rdquo; 表示Bean的名称，而Type=&amp;ldquo;typeName&amp;quot;则用于指定Bean的类型. type=&amp;ldquo;typeName&amp;quot;指定雷鸣，既可以是本身，也可以是一个类的父类，或者是一个类的接口. 如果没有使用class或者BeanName指定type，Bean将不会被实例化.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置JavaBean属性标签&amp;lt;jsp:setProperty&amp;gt;
+　　该动作主要用于设定JavaBean的属性，因此必须和useBean一起协作. &amp;lt;jsp:setProperty&amp;gt;标签通过JavaBean给定的&lt;code&gt;setXXX()&lt;/code&gt;方法，在javaBean中设置一个或多个属性值. 利用此动作标签设置属性值有多种方法：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:setProperty name=&amp;quot;beanInstanceName&amp;quot; propertyDetails/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中beanInstanceName是必选属性，即JavaBean实例的名字，在使用前通过&amp;lt;jsp:useBean&amp;gt;引入. propertyDetails指可以通过三种不同的方式来指定属性信息：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;property=&amp;quot;*&amp;quot;&lt;/strong&gt;:
+这种赋值方式表示请求参数的所有值. 在Bean中的属性名字必须和Request对象中的参数名一致.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;property=&amp;ldquo;propertyName&amp;rdquo;[param=&amp;ldquo;parameterName&amp;rdquo;]&lt;/strong&gt;:
+这种赋值方式使用request中的一个参数值来指定Bean中的一个属性值. property指定Bean的属性名，param指定request中的参数名. 如果Bean属性和request参数的名字不同，name就必须指定property和param的值；若果同名，则需要指明property就可以了. 参数值为空，那么对应的属性值也不会被设定.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;property=&amp;ldquo;propertyName&amp;rdquo; value=&amp;ldquo;propertyValue&amp;rdquo;&lt;/strong&gt;:
+这种赋值方式使用指定的值来设定Bean属性. propertyValue可以是字符串也可以是表达式. 如果是字符串，那么他就会被转换成Bean属性类型. 如果是表达式，那么它的类型就必须和它将要设定的属性值类型保持一致.
+注：不能在一个&amp;lt;jsp:setProperty&amp;gt;中同时使用param和value.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;获取JavaBean对象属性标签&amp;lt;jsp:getproperty&amp;gt;
+　　与&amp;lt;jsp:setproperty&amp;gt;相对应，访问一个JavaBean属性，因此使用该动作标签之前必须用&amp;lt;jsp:useBean&amp;gt;引入一个JavaBean对象.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jdp:getProperty name=&amp;quot;beanInstanceName&amp;quot; property=&amp;quot;propertyName&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中beanInstanceName对应&amp;lt;jsp:useBean&amp;gt;的id，因此name要和&amp;lt;jsp:useBean&amp;gt;的id相同.
+propertyName是要获得的属性值.&lt;/p&gt;
+&lt;p&gt;c.d.e.的案例：Zhuce.jsp、Ex6.jsp、StudentBean.java&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;追加参数标签&amp;lt;jsp:param&amp;gt;
+　　＼&lt;a href=&#34;jsp:param&#34;&gt;jsp:param&lt;/a&gt;标签用来提供key/value的值，与&lt;a href=&#34;jsp:inclde&#34;&gt;jsp:inclde&lt;/a&gt;、&lt;a href=&#34;jsp:forwadrd&#34;&gt;jsp:forwadrd&lt;/a&gt;等标签一起搭配使用.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:param name=&amp;quot;parameterName&amp;quot; value=&amp;quot;parameterValue&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;name=&amp;ldquo;parameterName&amp;rdquo; ：该属性表示参数的名字
+value=&amp;ldquo;parameterValue&amp;rdquo;：表示参数的值．&lt;/p&gt;
+&lt;h2 id=&#34;servlet容器概念&#34;&gt;Servlet容器概念&lt;/h2&gt;
+&lt;p&gt;　　Servlet容器为Java_Web应用提供运行时环境,它负责管理Servlet和JSP的生命周期,以及管理他们的共享数据.
+Servlet容器也称为Java_Web应用容器,或者Servlet/JSP容器．&lt;/p&gt;
+&lt;p&gt;流行的Servlet容器软件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;—Tomcat&lt;/li&gt;
+&lt;li&gt;—Resin
+&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;部署tomcat服务器&#34;&gt;部署tomcat服务器：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;解压文件apache-tomcat&lt;/li&gt;
+&lt;li&gt;启动：startup.bat&amp;mdash;&amp;mdash;启动服务器&lt;/li&gt;
+&lt;li&gt;需要配置环境：JAVA_HOME   java   jdk的根目录&lt;/li&gt;
+&lt;li&gt;想在任意目录下打开服务器
+&lt;ul&gt;
+&lt;li&gt;设置环境CATALINA_HOME&amp;mdash;-bin/catalina.bat&lt;/li&gt;
+&lt;li&gt;Tomcat的管理程(manager)：要访问manager web应用程序,需要添加具有管理员权限的账号,编辑conf目录下的tomcat-users.xml文件,添加manager角色设置用户名密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第一个web程序&#34;&gt;第一个web程序：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在Eclipse新建一个Java Project&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在Java项目下创建Web开发的目录结构
+&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在WebContent目录下新建一个JSP文件：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把WebContent 目录复制到Tomcat的webapps目录下&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最后在浏览器打开&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;javaeen版-eclipse开发web&#34;&gt;JavaEEn版 Eclipse开发web&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;显切换到JavaEE&lt;/li&gt;
+&lt;li&gt;Servers下新建一个Tomcat服务器&amp;ndash;&amp;gt;关联到Tomcat根目录&lt;/li&gt;
+&lt;li&gt;新建一个Dynamic Web Project 其中Target Runtime需选中&lt;/li&gt;
+&lt;li&gt;开发应用&lt;/li&gt;
+&lt;li&gt;可以通过run so server 来运行WEB项目&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;servlet-的helloworld&#34;&gt;Servlet 的HelloWorld&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个Servlet接口的实现类&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;public class HelloWorld implements Servlet
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在web.xml 文件中配置和映射这个Servlet&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置和映射Servlet --&amp;gt;
+&amp;lt;Servlet&amp;gt;
+  &amp;lt;!—Servlet 注册的名字 –&amp;gt;
+  &amp;lt;servlet-name&amp;gt;类名&amp;lt;/servlet-name&amp;gt;
+  &amp;lt;!—Servlet 的全类名 --&amp;gt;
+  &amp;lt;servlet-class&amp;gt;包名&amp;lt;/servlet-class&amp;gt;
+&amp;lt;/Servlet&amp;gt;
+&amp;lt;servlet-mapping&amp;gt;
+  &amp;lt;!—需要和某一个Servlet 节点的servlet-name 子节点的文本节点一致–&amp;gt;
+  &amp;lt;servlet-name&amp;gt;类名&amp;lt;/servlet-name&amp;gt;
+&amp;lt;!—映射具体的访问路径：/代表当前WEB应用的根目录 –&amp;gt;
+  &amp;lt;url-pattern&amp;gt;/hello&amp;lt;/url-pattern&amp;gt;
+&amp;lt;/servlet-mapping&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;关于servlet-mapping&#34;&gt;关于servlet-mapping：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;同一个Servlet可以被映射到多个URL上,即多个&lt;servlet-mapping&gt;元素的&lt;servlet-name&gt;子元素的设置值可以是同一个Servlet的注册名.&lt;/li&gt;
+&lt;li&gt;在Servlet映射到的URL中也可以使用&lt;em&gt;通配符,但是只能有两种固定的格式：一种格式是“&lt;/em&gt;.扩展名”,另一种格式是以正斜杠（/）开头并以“/*”结尾.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;servlet-容器&#34;&gt;Servlet 容器：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;可以创建Servlet,并调用Servlet的相关生命周期&lt;/li&gt;
+&lt;li&gt;JSP,Filter,Listener&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;servlet-生命周期方法以下方法都是servlet容器负责调用&#34;&gt;Servlet 生命周期方法：以下方法都是Servlet容器负责调用&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;构造器：只被调用一次,只有第一次请求Servlet时,创建Servlet的实例,调用构造器,这说明Servlet是单实例的.&lt;/li&gt;
+&lt;li&gt;init方法：只被调用一次,在创建好的实例后即被调用,用于初始化当前Servlet.&lt;/li&gt;
+&lt;li&gt;service：被多次调用. 每次请求都会调用service方法,实际响应请求的.&lt;/li&gt;
+&lt;li&gt;destroy：只被调用一次,在当前Servlet所在的Web应用被卸载前调用,用于释放当前的Servlet所占用的资源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;loda-on-start-up参数&#34;&gt;loda-on-start-up参数：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;配置在servlet节点中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Servlet&amp;gt;
+  &amp;lt;!—Servlet 注册的名字 –&amp;gt;
+    &amp;lt;servlet-name&amp;gt;类名1&amp;lt;/servlet-name&amp;gt;
+    &amp;lt;!—Servlet 的全类名 --&amp;gt;
+    &amp;lt;servlet-class&amp;gt;包名&amp;lt;/servlet-class&amp;gt;
+    &amp;lt;!—可以指定Servlet 被创建的时机 --&amp;gt;
+&amp;lt;load-on-startup&amp;gt;2&amp;lt;/load-on-startup&amp;gt;
+&amp;lt;/Servlet&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;load-on-startup：可以指定Servlet被创建的时机.如为负数,则在第一次请求时创建;若为0或正数,则在当前WEB应用被Servlet 容器加载时创建实例,且越小越早被创建.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Spring2.5学习笔记</title>
+      <link>https://CoMath21.github.io/post/1-spring2.5/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-spring2.5/</guid>
+      <description>&lt;h2 id=&#34;1什么是spring&#34;&gt;1、什么是Spring&lt;/h2&gt;
+&lt;p&gt;　　Spring是一个开源的控制反转(Inversion of Control,IoC)和面向切面(AOP)的容器框架，它的主要目的是简化企业开发. 用于配置bean,并维护bean之间关系的框架.&lt;/p&gt;
+&lt;p&gt;　　在SSH框架中spring充当了管理容器的角色. 我们都知道Hibernate用来做持久层，因为它将JDBC做了一个良好的封装，程序员在与数据库进行交互时可以不用书写大量的SQL语句. Struts是用来做应用层的，他它负责调用业务逻辑serivce层. 所以SSH框架的流程大致是：Jsp页面&amp;mdash;-Struts&amp;mdash;&amp;mdash;Service（业务逻辑处理类）&amp;mdash;Hibernate（左到右）. Struts负责控制Service（业务逻辑处理类），从而控制了Service的生命周期，这样层与层之间的依赖很强，属于耦合. 这时，使用spring框架就起到了控制Action对象（Strus中的）和Service类的作用，两者之间的关系就松散了，Spring的Ioc机制（控制反转和依赖注入）正是用在此处.&lt;/p&gt;
+&lt;p&gt;　　Spring的Ioc（控制反转和依赖注入）&lt;/p&gt;
+&lt;p&gt;　　控制反转：就是由容器控制程序之间的（依赖）关系，而非传统实现中，由程序代码直接操控. 应用本身不负责以来对象的而创建和维护，以来对象的创建和维护是由外部容器负责的. 这样控制权就有应用转到了外部容器，控制权的转移就是所谓反转.&lt;/p&gt;
+&lt;p&gt;　　依赖注入：组件之间的依赖关系由容器在运行期决定 ，由容器动态的将某种依赖关系注入到组件之中 .&lt;/p&gt;
+&lt;h2 id=&#34;2为什么要使用springspring的好处&#34;&gt;2、为什么要使用Spring（Spring的好处）&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;降低组建之间的耦合度，实现软件隔层之间的解耦；&lt;/li&gt;
+&lt;li&gt;可以使用容器提供的众多服务，如：事务管理服务、消息服务等等. 当我们使用容器管理服务时，开发人员就不在需要手工控制事务，也不需要处理复杂的事务传播；&lt;/li&gt;
+&lt;li&gt;容器提供单例模式支持，开发人员不需要自己编写实现代码；&lt;/li&gt;
+&lt;li&gt;容器提供AOP技术，利用这些类能够够加快应用的开发，如：JdbcTemplate、HibernateTemplate；&lt;/li&gt;
+&lt;li&gt;Spring对于主流的应用框架提供了集成支持，如：集成Hibernate、JPA、Struts等，这样更便于应用开发.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;轻量级与重量级概念的区分&lt;/p&gt;
+&lt;p&gt;　　主要看它使用了多少服务，使用服务越多，容器为java对象做的工作就越多，必然会影响到应用的发布时间或者运行性能.&lt;/p&gt;
+&lt;p&gt;　　对于Spring容器，它提供了很多服务，但这些服务并不是默认应用打开的，应用需要某种服务，还需要知名使用该服务，如果应用使用的服务很少，如：只是用了Spring的核心服务，那么我们可以认为此时应用属于轻量级的，如果使用了Spring提供的大部分服务，这时应用属于重量级的，目前EJB容器就因为它默认为应用提供了EJB规范中的所有功能，所以它属于重量级的.&lt;/p&gt;
+&lt;h2 id=&#34;3配置spring所需要的jar包&#34;&gt;3、配置spring所需要的jar包&lt;/h2&gt;
+&lt;p&gt;　　spring.jar是包含有完整发布的单个jar 包，spring.jar中包含除了spring-mock.jar里所包含的内容外其它所有jar包的内容，因为只有在开发环境下才会用到 spring-mock.jar来进行辅助测试，正式应用系统中是用不得这些类的.&lt;/p&gt;
+&lt;p&gt;　　除了spring.jar文件，Spring还包括有其它13个独立的jar包，各自包含着对应的Spring组件，用户可以根据自己的需要来选择组合自己的jar包，而不必引入整个spring.jar的所有类文件.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;b&gt;spring-core.jar&lt;/b&gt;：这个jar文件包含Spring框架基本的核心工具类，Spring其它组件要都要使用到这个包里的类，是其它组件的基本核心，当然你也可以在自己的应用系统中使用这些工具类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-beans.jar&lt;/b&gt;：这个jar文件是所有应用都要用到的，它包含访问配置文件、创建和管理bean以及进行Inversion of Control / Dependency Injection（IoC/DI）操作相关的所有类. 如果应用只需基本的IoC/DI支持，引入spring-core.jar及spring-beans.jar文件就可以了.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-aop.jar&lt;/b&gt;：这个jar文件包含在应用中使用Spring的AOP特性时所需的类. 使用基于AOP的Spring特性，如声明型事务管理（Declarative Transaction Management），也要在应用里包含这个jar包.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-context.jar&lt;/b&gt;：这个jar文件为Spring核心提供了大量扩展. 可以找到使用Spring ApplicationContext特性时所需的全部类，JDNI所需的全部类，UI方面的用来与模板（Templating）引擎如Velocity、FreeMarker、JasperReports集成的类，以及校验Validation方面的相关类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-dao.jar&lt;/b&gt;：这个jar文件包含Spring DAO、Spring Transaction进行数据访问的所有类. 为了使用声明型事务支持，还需在自己的应用里包含spring-aop.jar.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-hibernate.jar&lt;/b&gt;：这个jar文件包含Spring对Hibernate 2及Hibernate 3进行封装的所有类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-jdbc.jar&lt;/b&gt;：这个jar文件包含对Spring对JDBC数据访问进行封装的所有类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-orm.jar&lt;/b&gt;：这个jar文件包含Spring对DAO特性集进行了扩展，使其支持 iBATIS、JDO、OJB、TopLink，因为Hibernate已经独立成包了，现在不包含在这个包里了. 这个jar文件里大部分的类都要依赖spring-dao.jar里的类，用这个包时你需要同时包含spring-dao.jar包.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-remoting.jar&lt;/b&gt;：这个jar文件包含支持EJB、JMS、远程调用Remoting（RMI、Hessian、Burlap、Http Invoker、JAX-RPC）方面的类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-support.jar&lt;/b&gt;：这个jar文件包含支持缓存Cache（ehcache）、JCA、JMX、邮件服务（Java Mail、COS Mail）、任务计划Scheduling（Timer、Quartz）方面的类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-web.jar&lt;/b&gt;：这个jar文件包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-webmvc.jar&lt;/b&gt;：这个jar文件包含Spring MVC框架相关的所有类. 包含国际化、标签、Theme、视图展现的FreeMarker、JasperReports、Tiles、Velocity、XSLT相关类. 当然，如果你的应用使用了独立的MVC框架，则无需这个JAR文件里的任何类.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;spring-mock.jar&lt;/b&gt;：这个jar文件包含Spring一整套mock类来辅助应用的测试. Spring测试套件使用了其中大量mock类，这样测试就更加简单. 模拟HttpServletRequest和HttpServletResponse类在Web应用单元测试是很方便的.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如何选择这些发布包，决定选用哪些发布包其实相当简单.&lt;/p&gt;
+&lt;p&gt;　　如果你正在构建Web应用并将全程使用Spring，那么最好就使用单个全部的spring.jar文件；
+如果你的应用仅仅用到简单的Inversion of Control / Dependency Injection（IoC/DI）容器，那么只需spring-core.jar与spring-beans.jar即可；&lt;/p&gt;
+&lt;p&gt;　　如果你对发布的大小要求很高，那么就得精挑细选了，只取包含自己所需特性的jar文件了.
+采用独立的发布包你可以避免包含自己的应用不需要的全部类. 当然你可以采用其它的一些工具来设法令整个应用包变小，节省空间的重点在于准确地找出自己所需的Spring依赖类，然后合并所需的类与包就可以了.&lt;/p&gt;
+&lt;p&gt;Eclispe有个插件叫ClassPath Helper可以帮你找找所依赖的类.&lt;/p&gt;
+&lt;h2 id=&#34;4spring包依赖说明&#34;&gt;4、Spring包依赖说明:&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;spring-core.jar需commons-collections.jar，spring-core.jar是以下其它各个的基本.&lt;/li&gt;
+&lt;li&gt;spring-beans.jar需spring-core.jar，cglib-nodep-2.1_3.jar&lt;/li&gt;
+&lt;li&gt;spring-aop.jar需spring-core.jar，spring-beans.jar，cglib-nodep-2.1_3.jar，aopalliance.jar&lt;/li&gt;
+&lt;li&gt;spring-context.jar需spring-core.jar，spring-beans.jar，spring-aop.jar，commons-collections.jar，aopalliance.jar&lt;/li&gt;
+&lt;li&gt;spring-dao.jar需spring-core.jar，spring-beans.jar，spring-aop.jar，spring-context.jar&lt;/li&gt;
+&lt;li&gt;spring-jdbc.jar需spring-core.jar，spring-beans.jar，spring-dao.jar&lt;/li&gt;
+&lt;li&gt;spring-web.jar需spring-core.jar，spring-beans.jar，spring-context.jar&lt;/li&gt;
+&lt;li&gt;spring-webmvc.jar需spring-core.jar/spring-beans.jar/spring-context.jar/spring-web.jar&lt;/li&gt;
+&lt;li&gt;spring-hibernate.jar需spring-core.jar，spring- beans.jar，spring-aop.jar，spring-dao.jar，spring-jdbc.jar，spring- orm.jar，spring-web.jar，spring-webmvc.jar&lt;/li&gt;
+&lt;li&gt;spring-orm.jar需spring-core.jar，spring-beans.jar，spring-aop.jar，spring-dao.jar，spring-jdbc.jar，spring-web.jar，spring-webmvc.jar&lt;/li&gt;
+&lt;li&gt;spring-remoting.jar需spring-core.jar，spring-beans.jar，spring- aop.jar，spring-dao.jar，spring-context.jar，spring-web.jar，spring- webmvc.jar&lt;/li&gt;
+&lt;li&gt;spring-support.jar需spring-core.jar，spring-beans.jar，spring-aop.jar，spring-dao.jar，spring-context.jar，spring-jdbc.jar&lt;/li&gt;
+&lt;li&gt;spring-mock.jar需spring-core.jar，spring-beans.jar，spring-dao.jar，spring-context.jar，spring-jdbc.jar&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;b&gt;一、只是使用spring框架&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;dist\spring.jar&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lib\jakarta-commons\commons-logging.jar&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果使用到了切面编程(AOP)，还需要下列jar文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;lib\aspectj\aspectjweaver.jsr 和 aspectjrt.jar&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lib\cglib\cglib-nodep-2.1_3.jar&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果使用了JSR-250中的注解如&lt;code&gt;@Resource/@PostConstruct/@PreDestroy&lt;/code&gt;,还需下列jar文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lib\j2ee\common-annotations.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;二、只是使用spring框架若使用注解方式&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　只要加一些命名空间和开启解析器,并且@Resource需要加lib\j2ee\common-annotations.jar&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;context:annotation-config/&amp;gt;&lt;/code&gt;打开处理器&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;三、要自动扫描&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　只要开启解析器和一些命名空间
+&lt;code&gt;&amp;lt;context:component-scan base-package=&amp;quot;&amp;quot;/&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;四、spring框架采用aop编程&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;需要导入一些命名空间
+xmlns:aop&amp;hellip;&amp;hellip;.
+&lt;code&gt;&amp;lt;aop:aspectj-autoproxy/&amp;gt;&lt;/code&gt;开启解析器
+如果使用到了切面编程(AOP)，还需要下列jar文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lib\aspectj\aspectjweaver.jsr 和 aspectjrt.jar&lt;/li&gt;
+&lt;li&gt;lib\cglib\cglib-nodep-2.1_3.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;五、spring+Jdbc开发&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　需要数据源文件 lib\jakarta-commons\commons-pool.jar、lib\jakarta-commons\commons-dbcp.jar&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;spring文件 ：
+dist\spring.jar、
+lib\jakarta-commons\commons-logging.jar&lt;/li&gt;
+&lt;li&gt;jdbc驱动文件 mysql**** sql*** ：
+导入tx命名空间
+&amp;lt;tx:annotation-driven transaction-manager=&amp;quot;&amp;quot;/&amp;gt;
+对事务注解的解析器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;b&gt;六、spring2.5+hibernate3.3+struts1.3&lt;/b&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;hibernate核心包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;hibernate3.jar&lt;/li&gt;
+&lt;li&gt;lib\required*.jar&lt;/li&gt;
+&lt;li&gt;lib\optional\ehcache-1.2.3.jar (二级缓存文件)&lt;/li&gt;
+&lt;li&gt;hibernate注解包
+l+ ib\test\slf4j-log4j12.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;spring包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;dist\spring.jar&lt;/li&gt;
+&lt;li&gt;lib\jakarta-commons\commons-logging.jar 和commons-pool.jar、commons-dbcp.jar(后为数据源文件)&lt;/li&gt;
+&lt;li&gt;dist\modules\spring-webmvc-struts.jar (与struts1的集成)&lt;/li&gt;
+&lt;li&gt;lib\aspectj\aspectjweaver.jsr 和 aspectjrt.jar (Aop文件)&lt;/li&gt;
+&lt;li&gt;lib\cglib\cglib-nodep-2.1_3.jar     (Aop文件)&lt;/li&gt;
+&lt;li&gt;lib\j2ee\common-annotations.jar     (注解文件)&lt;/li&gt;
+&lt;li&gt;lib\log4j\log4j-1.2.15.jar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;sturs1.3.8&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;　　建议将jstl-1.0.2.jar和standard-1.0.2.jar文件更换为1.1版本，此时JSTL文件．还有spring已存在antlr-2.7.6.jar文件所以将struts中的antlr-2.7.6.jar文件删除以免冲突．&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;七、spring2.5+hibernate3.3+struts2整合开发&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;　　struts2文件lib里面所有不带-plugin结尾的jar文件，但除了struts2-spring-plugin-2.0.11.1.jar.&lt;/p&gt;
+&lt;h2 id=&#34;5实例化spring容器&#34;&gt;5、实例化Spring容器&lt;/h2&gt;
+&lt;h3 id=&#34;51实例化spring容器的方式有两种&#34;&gt;5.1、实例化Spring容器的方式有两种：&lt;/h3&gt;
+&lt;p&gt;方法一：
+在类路径下寻找配置文件来实例化容器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ApplicationContext ctx =
+ new ClassPathXmlApplicationContext(&amp;quot;beans.xml&amp;quot;);
+//1.创建Spring的IOC容器对象ApplicationContext代表IOC容器
+// ClassPathXmlApplicationContext:类路径下的XML格式的配置文件
+ApplicationContext ctx = new ClassPathXmlApplicationContext(&amp;quot;applicationContext.xml&amp;quot;);
+//2.从IOC容器对象中获取Bean实例
+HelloWorld helloWorld2 = (HelloWorld) ctx.getBean(&amp;quot;helloworld&amp;quot;);
+//3.调用hello方法
+helloWorld2.hello();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方法二：
+在文件内系统路径下寻找配置文件来实现容器：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ApplicationContext ctx =
+new FileSystemXmlApplicationContext(&amp;quot;beans.xml&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Spring配置文件可以指定多个，可以通过String数组传入.
+配置Spring环境&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;beans xmlns=&amp;quot;http://www.springframework.org/schema/beans&amp;quot;
+  xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; 
+  xmlns:context=&amp;quot;http://www.springframework.org/schema/context&amp;quot;
+  xsi:schemaLocation=&amp;quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd&amp;quot;&amp;gt;
+&amp;lt;/beans&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;
+测试是否搭建成功:项目右键新建Junit Test Case.
+&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;
+&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;6如何将业务bean交给spring管理&#34;&gt;6、如何将业务bean交给Spring管理&lt;/h2&gt;
+&lt;p&gt;　　在Spring配置中添加&lt;code&gt;&amp;lt;bean id=”名称” name=”名称” class=””&amp;gt;&amp;lt;/bean&amp;gt;&lt;/code&gt;，此时bean就可以由Spring容器帮助创建和维护，当我们要用到bean的时候只需要从Spring容器中获取即可，获取的时候可以用ApplicationContext.getBean(id);（返回值为 Object），可以通过bean的接口对其进行引用，之后即可调用其方法.&lt;/p&gt;
+&lt;p&gt;注意：id中不能包含特殊字符例如&lt;code&gt;“/”&lt;/code&gt;，而name中可以包含. 如果包含特殊字符则用&lt;code&gt;name=””&lt;/code&gt;；其他可以用&lt;code&gt;id=””&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;实例：首先创建一个业务bean&amp;ndash;PersonServiceBean，建议使用面向接口编程（要实现软件之间的解耦），所以可以抽取接口，然后交给Spring管理.
+&lt;img src=&#34;./4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;7三种实例化bean的方式&#34;&gt;7、三种实例化bean的方式：&lt;/h2&gt;
+&lt;h3 id=&#34;71实用类构造器实例化&#34;&gt;7.1、实用类构造器实例化&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;personService&amp;quot;
+  class=&amp;quot;com.haibao.service.impl.PersonServiceBean&amp;quot;/&amp;gt; 
+&amp;lt;!--  配置bean
+  class:bean的全类名，通过反射的方式在IOC容器中创建Bean，所以Bean中必须有无参构造器
+  id:表示容器中的bean唯一
+--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;72使用静态工厂方法实例化&#34;&gt;7.2、使用静态工厂方法实例化&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;personService2&amp;quot; 
+  class=&amp;quot;com.haibao.service.impl.PersonServiceFactory&amp;quot; 
+  factory-method=&amp;quot;createPersonService&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./5.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class PersonServiceFactory {
+  public static PersonServiceBean createPersonService() {
+    return new PersonServiceBean();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;73使用实例化工厂实例化&#34;&gt;7.3、使用实例化工厂实例化&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;personServiceFactory&amp;quot; 
+  class=&amp;quot;com.haibao.service.impl.PersonServiceFactory&amp;quot;/&amp;gt;
+&amp;lt;bean id=&amp;quot;personService3&amp;quot; 
+factory-bean=&amp;quot;personServiceFactory&amp;quot; 
+factory-method=&amp;quot;createPersonService2&amp;quot;/&amp;gt;
+public class PersonServiceFactory {
+  public PersonServiceBean createPersonService() {
+    return new PersonServiceBean();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;8bean的作用域及bean的生命周期&#34;&gt;8、Bean的作用域及bean的生命周期&lt;/h2&gt;
+&lt;p&gt;　　.sigleton（单例模式，Spring容器启动的时候bean就被实例化）
+在每个Spring IoC容器中一个bean定义只有一个对象实例. 默认情况下会在容器启动时初始化bean，我们可以指定Bean节点的laz-init=”true”来延迟初始化bean，这时候，只有第一次获取bean才会初始化bean.
+例如：&lt;code&gt;&amp;lt;bean id=”XXX” class=”XXX” lazy-init=“true”/&amp;gt; &lt;/code&gt;,
+（设置lazy-init=“true”后Spring容器启动的时候bean不会被实例化）.如果想所有的应用都应用延迟初始化，可以在根节点beans设置default-lazy-init=”true”;即：&lt;code&gt;&amp;lt;bean id=”XXX” class=”XXX” default-lazy-init=“true”/&amp;gt;&lt;/code&gt;,.prototype(调用getBean()方法的时候bean才会被实例化).每次从容器获取bean都是新对象.
+&lt;code&gt;&amp;lt;bean id=”XXX” class=”XXX” scope=” prototype”/&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;初始化：初始化方法可以在bean的配置中用&lt;code&gt;init-method=&amp;quot;&amp;quot;&lt;/code&gt;方法调用初始化函数.&lt;/p&gt;
+&lt;p&gt;销毁：默认情况下只有Spring容器北校关闭才会销毁. 可以在bean的配置中用&lt;code&gt;destroy-method=&amp;quot;&amp;quot;&lt;/code&gt;方法销毁.&lt;/p&gt;
+&lt;h2 id=&#34;9依赖注入对象&#34;&gt;9、依赖注入对象：&lt;/h2&gt;
+&lt;p&gt;　　所谓依赖注入是指：在运行期，外部容器动态的将以来对象注入到组件.&lt;/p&gt;
+&lt;p&gt;基本类型对象注入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;orderService&amp;quot; class=&amp;quot;orderServiceBean&amp;quot;&amp;gt;
+  //构造器注入
+  &amp;lt;constructor-arg index=&amp;quot;0&amp;quot; type=&amp;quot;java.lang.String&amp;quot; value=&amp;quot;XXX&amp;quot;&amp;gt;
+  //属性setter方法注入
+  &amp;lt;property name=&amp;quot;name&amp;quot; value=&amp;quot;value&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方式一：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;orderDao&amp;quot; class=&amp;quot;PersonDaoBean&amp;quot;/&amp;gt;
+&amp;lt;bean id=&amp;quot;orderService&amp;quot; class=&amp;quot;PersonServiceBean&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;orderDao&amp;quot; ref=&amp;quot;orderDao&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+// ref：指向其他bean
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方式二：(使用内部bean，但该bean不能被其他bean使用)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;orderService&amp;quot; class=&amp;quot;PersonServiceBean&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;orderDao&amp;quot; ref=&amp;quot;orderDao&amp;quot;&amp;gt;
+&amp;lt;bean class=&amp;quot; orderDao&amp;quot;/&amp;gt;
+&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当我们把依赖对象注入交给外部容器负责创建，namePersonServiceBean类可以改成：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class PersonServiceBean implements PersonService {
+  private  PersonDao personDao;
+  public PersonDao getPerson(){
+    return personDao;
+}
+	
+  public void getPersonDao(PersonDao personDao){
+    this.personDao = personDao;
+  }
+	
+  public void save(){
+    personDao.add();
+  }
+}
+
+public class PersonDaoBean implements PersonDao{
+  public void add(){
+    System.out.println(&amp;quot;add()方法&amp;quot;);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;beans.xml配置中：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;personDaoname&amp;quot; class=&amp;quot;PersonDaoBean&amp;quot;/&amp;gt;
+&amp;lt;bean id=&amp;quot;personService&amp;quot; class=&amp;quot;PersonServiceBean&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;personDao&amp;quot; ref=&amp;quot;personDaoname &amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;属性setter方法注入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对基本类型进行注入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;property name=&amp;quot;name&amp;quot; value=&amp;quot;value&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;集合类型的装配&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public calss orderServiceBean{
+  private Set&amp;lt;String&amp;gt; sets = new HashSet&amp;lt;Striing&amp;gt;();
+  private List&amp;lt;String&amp;gt; lists = new ArrayList&amp;lt;Striing&amp;gt;();
+  private Properties properties = new Properties ();
+  private Map&amp;lt;String,String&amp;gt; maps = new HashMap&amp;lt;String,Striing&amp;gt;();
+  // 一定要生成getter、setter方法
+} 
+&amp;lt;property name=&amp;quot;sets&amp;quot;&amp;gt;
+  &amp;lt;set&amp;gt;
+    &amp;lt;value&amp;gt;值1&amp;lt;/value&amp;gt;
+    &amp;lt;value&amp;gt;值2&amp;lt;/value&amp;gt;
+    &amp;lt;value&amp;gt;值3&amp;lt;/value&amp;gt;.
+  &amp;lt;/set&amp;gt;
+&amp;lt;property/&amp;gt;
+&amp;lt;property name=&amp;quot;lists&amp;quot;&amp;gt;
+  &amp;lt;list&amp;gt;
+    &amp;lt;value&amp;gt;值1&amp;lt;/value&amp;gt;
+    &amp;lt;value&amp;gt;值2&amp;lt;/value&amp;gt;
+    &amp;lt;value&amp;gt;值3&amp;lt;/value&amp;gt;
+  &amp;lt;/list&amp;gt;
+&amp;lt;property/&amp;gt;
+ 
+
+&amp;lt;property name=&amp;quot;properties&amp;quot;&amp;gt;
+  &amp;lt;props&amp;gt;
+    &amp;lt;prop key=&amp;quot;key1&amp;quot;&amp;gt;值1&amp;lt;/prop&amp;gt;
+    &amp;lt;prop key=&amp;quot;key2&amp;quot;&amp;gt;值2&amp;lt;/prop&amp;gt;
+    &amp;lt;prop key=&amp;quot;key3&amp;quot;&amp;gt;值3&amp;lt;/prop&amp;gt;.
+  &amp;lt;/props&amp;gt;
+&amp;lt;property/&amp;gt;
+&amp;lt;property name=&amp;quot;maps&amp;quot;&amp;gt;
+  &amp;lt;map&amp;gt;
+    &amp;lt;entry key=&amp;quot;key1&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;
+    &amp;lt;entry key=&amp;quot;key2&amp;quot; value=&amp;quot;2&amp;quot;/&amp;gt;
+    &amp;lt;entry key=&amp;quot;key3&amp;quot; value=&amp;quot;3&amp;quot;/&amp;gt;.
+  &amp;lt;/map&amp;gt;
+&amp;lt;property/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;构造器参数注入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;constructor-arg index=&amp;quot;0&amp;quot; type=&amp;quot;java.lang.String&amp;quot; value=&amp;quot;XXX&amp;quot;/&amp;gt;
+&amp;lt;constructor-arg index=&amp;quot;1&amp;quot; type=&amp;quot;java.lang.String&amp;quot; value=&amp;quot;XXX&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;使用Field注入（用于注解方式）
+　　注入以来对象可以采用手工装配或自动装配，在实际应用中建议使用手工装配，因为自动装配会产生未知情况，开发人员无法预见最终结果.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;91依赖注入---手工装配&#34;&gt;9.1、依赖注入&amp;mdash;手工装配&lt;/h3&gt;
+&lt;p&gt;手工装配依赖对象，在这种方式中有两种变成方式&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在xml配置文件中通过bean节点下配置. 如：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;orderDao&amp;quot; class=&amp;quot;PersonDaoBean&amp;quot;/&amp;gt;
+&amp;lt;bean id=&amp;quot;orderService&amp;quot; class=&amp;quot;PersonServiceBean&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;orderDao&amp;quot; ref=&amp;quot;orderDao&amp;quot;&amp;gt;&amp;lt;/property&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在java代码中使用@Autowire或@Resource注解方式进行装配. 但我们需要在xml配置文件中配置以下信息：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;beans xmlns=&amp;quot;http://www.springframework.org/schema/beans&amp;quot;			 xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot; 
+  xmlns:context=http://www.springframework.org/schema/context 	xsi:schemaLocation=&amp;quot;http://www.  springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd&amp;quot;&amp;gt;
+&amp;lt;context:annotation-config/&amp;gt;
+&amp;lt;/beans&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这个配置也是注册了多个对注释进行解析处理的处理器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AutwiredAnnotationBeanProcessor&lt;/li&gt;
+&lt;li&gt;CommonAnnotationBeanPostProcessor&lt;/li&gt;
+&lt;li&gt;PersistenceAnnotationBeanPostProcessor&lt;/li&gt;
+&lt;li&gt;RequiredAnnotationBeanProcessor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;font color=red&gt;注：@Resource注解在Spring安装目录下的lib\j2ee\common-annotation.jar&lt;/font&gt;
+　　在java代码中使用@Autowire或@Resource注解方式进行装配，这两个注解的区别是：@Autowire默认按类型装配，@Resource，默认按名称装配，当找不到与名称匹配的bean才会按类型装配.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Autowire
+private PersonDao personDao;//用于字段上
+@Autowire
+public void setOrderDao(PersonDao personDao){
+//用于属性的setter方法上
+	this.orderDao = orderDao；
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;@Autowire注解是按类型装配依赖对象，默认情况下他要求对象必须存在，如果允许为null值，可以设置它的required属性为false. 如果想使用按名称装配，可以结合@Qualifier注解一起使用. 如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Autowire @Qualifier(“personDaoBean”)
+private PersonDao personDao；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;@Resource注解和@Autowire一样，也可以标注在字段或属性的setter方法上，但他默认按名称装配. 名称可以通过@Resource的name属性指定，如果没有指定name属性，当注解标注在字段上，即默认取字段的名称作为bean名称寻找依赖对象，当注解标注在属性的setter方法上，即默认取属性名作为bean名称寻找依赖对象.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Resource(name=”personDaoBean”)
+private PersonDao personDao;//用于字段上
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：如果没有指定name属性，并且按照默认名称仍然找不到依赖对象时，@Resource注解会回退到安类型装配，但一旦指定了name属性，就只能按名称装配了.&lt;/p&gt;
+&lt;h2 id=&#34;10aop--代理对象主要用在权限&#34;&gt;10、AOP&amp;ndash;代理对象（主要用在权限）&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;环绕通知&lt;/li&gt;
+&lt;li&gt;前置通知&lt;/li&gt;
+&lt;li&gt;后置通知&lt;/li&gt;
+&lt;li&gt;例外通知&lt;/li&gt;
+&lt;li&gt;最终通知&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;public Object invoke(Object proxy, Method method,Object[] args)
+    throws Throwable {
+  PersonServiceBean bean = (PersonServiceBean) this.targetObject;
+  Object result = null;//环绕通知
+  if(bean.getUser () != null {
+    // ..... advice ( )--&amp;gt;前置通知
+    try {
+      result = method.invoke (targetObject, args);
+        //afteradvice() --&amp;gt;后置通知
+  } catch(RuntimeException e){
+      // exceptionadvice ()--&amp;gt;例外通知
+  }finally{
+    // tinallyadvice () : --&amp;gt;最终通知
+  }
+    }
+  return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;101aop中的概念基于注解方式声明切面&#34;&gt;10.1、AOP中的概念：（基于注解方式声明切面）&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Aspect(切面)：指横切性关注点的抽象即为切面，它与类相似，只是两者的关注点不一样，类是对物体特征的抽象，而切面是横切性关注点的抽象.&lt;/li&gt;
+&lt;li&gt;joinpoint(连接点)：所谓连接点是指那些被拦截到的点. 在spring中，这些点指的是方法，因为spring只支持方法类型的连接点，实际上joinpoint还可以是field或类构造器.&lt;/li&gt;
+&lt;li&gt;Pointcut(切入点)：所为切入点是我们要对那些joinpoint进行拦截的定义.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;注解：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Pointcut (“execution(* com.haibao.service.*.*(..))”)
+private void anyMethod(){}//声明一个切入点
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;说明&lt;/font&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置事务拦截器拦截哪些类的哪些方法,一般设置成拦截Service --&amp;gt;
+&amp;lt;aop:config&amp;gt;
+  &amp;lt;aop:pointcut expression=&amp;quot;execution(* com.xy.service.*.*(..))&amp;quot;
+                              id=&amp;quot;allDaoMethod&amp;quot; /&amp;gt;
+  &amp;lt;aop:advisor advice-ref=&amp;quot;txAdvice&amp;quot; pointcut-ref=&amp;quot;allDaoMethod&amp;quot; /&amp;gt; 
+&amp;lt;/aop:config&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;表示com.xy.service包下的所有方法为为事务管理.&lt;/p&gt;
+&lt;p&gt;execution(&lt;font color=green&gt;*&lt;/font&gt; com.aptech.jb.epet.dao.hibimpl.&lt;font color=red&gt;*&lt;/font&gt;.&lt;font color=blue&gt;*&lt;/font&gt;(..))
+这是com.aptech.jb.epet.dao.hibimpl包下所有的类的所有方法.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个&lt;font color=green&gt;*&lt;/font&gt;代表所有的返回值类型&lt;/li&gt;
+&lt;li&gt;第二个&lt;font color=red&gt;*&lt;/font&gt;代表所有的类&lt;/li&gt;
+&lt;li&gt;第三个&lt;font color=blue&gt;*&lt;/font&gt;代表类所有方法 最后一个..代表所有的参数.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;一些常见切入点表达式的例子：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;任意公共方法的执行：&lt;code&gt;execution(public * *(..))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;任何一个以“set”开始的方法的执行：&lt;code&gt;execution(* set*(..))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;AccountService 接口的任意方法的执行：
+&lt;code&gt;execution(* com.xyz.service.AccountService.*(..))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;定义在service包里的任意方法的执行：
+&lt;code&gt;execution(* com.xyz.service.*.*(..))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;定义在service包或者子包里的任意类的任意方法的执行：
+&lt;code&gt;execution(* com.xyz.service..*.*(..))&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Advice(通知)：所谓通知是指拦截到joinpoint之后所做的事情，通知分为前置通知（@Before(“anyMethod()”)）、&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;后置通知（@AfterReturning(“anyMethod()”)）、&lt;/li&gt;
+&lt;li&gt;最终通知（@After(“anyMethod()”)）、&lt;/li&gt;
+&lt;li&gt;例外通知（@AfterThrowing(“anyMethod()”)）、&lt;/li&gt;
+&lt;li&gt;环绕通知（@Around(“anyMethod()”)）.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;public Object doBasicProfiling(ProceedingJoinPoint p) throws Throwable{
+  Object result = p.proceed();//必须执行该方法
+return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Target(目标对象)：代理的目标对象.&lt;/p&gt;
+&lt;p&gt;Weave(织入)：指将aspects应用到target对象并导致proxy对象创建的过程称为织入.&lt;/p&gt;
+&lt;p&gt;Introduction(引入)：在不修改代码的前提下，Introduction可以在运行期间为类动态的添加一些方法或Field.&lt;/p&gt;
+&lt;h3 id=&#34;102基于xml配置方式声明切面&#34;&gt;10.2、基于XML配置方式声明切面&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;aop:aspectj-autoproxy /&amp;gt;
+  &amp;lt;bean id=&amp;quot;aspetbean&amp;quot; class=&amp;quot;...&amp;quot;&amp;gt;&amp;lt;/bean&amp;gt;
+  &amp;lt;aop:config&amp;gt;
+    &amp;lt;aop:aspect id=&amp;quot;asp&amp;quot; ref=&amp;quot;aspetbean&amp;quot;&amp;gt;
+      &amp;lt;!-- 定义切入点 id=名称 expression 表示拦截... --&amp;gt;
+      &amp;lt;aop:pointcut id=&amp;quot;mycut&amp;quot; expression=  &amp;quot;execution(* com.xy.service.*.*(..))&amp;quot;/&amp;gt;
+      &amp;lt;!-- 前置通知 --&amp;gt;
+      &amp;lt;aop:before pointcut-ref=&amp;quot;mycut&amp;quot;  method=&amp;quot;&amp;quot;/&amp;gt;
+      &amp;lt;!-- 后置通知 --&amp;gt;
+      &amp;lt;aop:after-returning pointcut-ref=  &amp;quot;mycut&amp;quot;  method=&amp;quot;&amp;quot;/&amp;gt;
+      &amp;lt;!-- 例外通知 --&amp;gt;
+      &amp;lt;aop:after-throwing pointcut-ref=&amp;quot;mycut&amp;quot;  method=&amp;quot;&amp;quot;/&amp;gt;
+      &amp;lt;!-- 最终通知 --&amp;gt;
+      &amp;lt;aop:after pointcut-ref=&amp;quot;mycut&amp;quot;  method=&amp;quot;&amp;quot;/&amp;gt;
+      &amp;lt;!-- 环绕通知 --&amp;gt;
+      &amp;lt;aop:around pointcut-ref=&amp;quot;mycut&amp;quot;  method=&amp;quot;&amp;quot;/&amp;gt;
+  &amp;lt;/aop:aspect&amp;gt;
+&amp;lt;/aop:config&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;11springjdbc组合开发&#34;&gt;11、Spring+JDBC组合开发&lt;/h2&gt;
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置数据源，如：
+依赖的jar文件： commons-dbcp.jar、
+commons-logging.jar、
+commons-pool.jar&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;dataSource&amp;quot; 
+class=&amp;quot;org.apach.commons.dbcp.BasicDataSource&amp;quot; 
+destroy-method=&amp;quot;close&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;driveClassName&amp;quot; 
+value=&amp;quot;org.gjt.mm.mysql.Driver&amp;quot;/&amp;gt;
+&amp;lt;property name=&amp;quot;url&amp;quot;
+value=&amp;quot;jdbc:mysql://localhost:3306/dbname?useUnicode=true
+转义&amp;amp;←&amp;amp;amp;characterEncoding=UTF-8&amp;quot;/&amp;gt;
+&amp;lt;property name=&amp;quot;username&amp;quot; value=&amp;quot;root&amp;quot;/&amp;gt;
+&amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;root&amp;quot;/&amp;gt;
+&amp;lt;!-- 连接池启动时的初始值 --&amp;gt;
+&amp;lt;property name=&amp;quot;initialSize&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;!-- 连接池最大值 --&amp;gt;
+&amp;lt;property name=&amp;quot;maxActive&amp;quot; value=&amp;quot;500&amp;quot;/&amp;gt;
+&amp;lt;!-- 最大空闲值，当经历过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 --&amp;gt;
+&amp;lt;property name=&amp;quot;maxIdle&amp;quot; value=&amp;quot;2&amp;quot;/&amp;gt;
+&amp;lt;!-- 最小空闲值，当空闲的连接数少于阙值时，连接池会预申请去一些连接，以免洪峰来时不及申请 --&amp;gt;
+&amp;lt;property name=&amp;quot;minIdle&amp;quot; value=&amp;quot;1&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+或者使用属性文件保存参数值
+&amp;lt;context:property-placeholder location=&amp;quot;classpath.properties&amp;quot;/&amp;gt;
+classpath:在类路径下
+&amp;lt;bean id=&amp;quot;dataSource&amp;quot; 
+class=&amp;quot;org.apach.commons.dbcp.BasicDataSource&amp;quot; 
+destroy-method=&amp;quot;close&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;driveClassName&amp;quot; value=&amp;quot;${ driveClassName}&amp;quot;/&amp;gt;
+&amp;lt;property name=&amp;quot;url&amp;quot;value=&amp;quot;${ url }&amp;quot;/&amp;gt;
+&amp;lt;property name=&amp;quot;username&amp;quot; value=&amp;quot;${ username}&amp;quot;/&amp;gt;
+&amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;${ password }&amp;quot;/&amp;gt;
+&amp;lt;!-- 连接池启动时的初始值 --&amp;gt;
+&amp;lt;property name=&amp;quot;initialSize&amp;quot; value=&amp;quot;${ initialSize }&amp;quot;/&amp;gt;
+&amp;lt;!-- 连接池最大值 --&amp;gt;
+&amp;lt;property name=&amp;quot;maxActive&amp;quot; value=&amp;quot;${ maxActive }&amp;quot;/&amp;gt;
+&amp;lt;!-- 最大空闲值，当经历过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 --&amp;gt;
+&amp;lt;property name=&amp;quot;maxIdle&amp;quot; value=&amp;quot;${ maxIdle }&amp;quot;/&amp;gt;
+&amp;lt;!-- 最小空闲值，当空闲的连接数少于阙值时，连接池会预申请去一些连接，以免洪峰来时不及申请 --&amp;gt;
+&amp;lt;property name=&amp;quot;minIdle&amp;quot; value=&amp;quot;${ minIdle }&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;配置事务：配置事务时，需要在XML配置文件中引入声明事务的tx命名空间，事务的配置方式有两种：注解方式和基于XML配置方式.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;111采用注解方式配置事务在xml文件中配置事务管理器&#34;&gt;11.1、采用注解方式配置事务：在XML文件中配置事务管理器&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;txManager&amp;quot; 
+class=&amp;quot;org.springframework.jdbc.datasource.DataSourceTranszctionManager&amp;quot;&amp;gt;
+&amp;lt;property name=&amp;quot;dataSource&amp;quot; ref=&amp;quot;dataSource&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+&amp;lt;!-- 采用@Transactional注解方式使用事务 --&amp;gt;
+&amp;lt;tx:annotation-driven transaction-manager=&amp;quot;txManager&amp;quot;&amp;gt;   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;tx命名空间.&lt;/p&gt;
+&lt;p&gt;xmlns:tx=&amp;ldquo;&lt;a href=&#34;http://www.springframework.org/schema/tx%22&#34;&gt;http://www.springframework.org/schema/tx&amp;quot;&lt;/a&gt;
+&lt;a href=&#34;http://www.springframework.org/schema/tx&#34;&gt;http://www.springframework.org/schema/tx&lt;/a&gt;
+&lt;a href=&#34;http://www.springframework.org/schema/tx/spring-tx-2.5.xsd&#34;&gt;http://www.springframework.org/schema/tx/spring-tx-2.5.xsd&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;12采用基于xml方式配置事务&#34;&gt;12、采用基于XML方式配置事务&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;bean id=&amp;quot;txManager&amp;quot; class=&amp;quot;org.springframework.jdbc.datasource.DatasourceTransactionManager&amp;quot;&amp;gt;
+  &amp;lt;property name=&amp;quot;dataSource&amp;quot; ref=&amp;quot;dataSource&amp;quot;/&amp;gt;
+&amp;lt;/bean&amp;gt;
+&amp;lt;aop:config&amp;gt;
+  &amp;lt;aop:pointcut id=&amp;quot;transactionPointcut&amp;quot; expression=&amp;quot;execute()…&amp;quot;/&amp;gt;
+  &amp;lt;aop:advisor advice=&amp;quot;txAdvice&amp;quot; point-ref=&amp;quot;transactionPointcut&amp;quot;/&amp;gt;
+&amp;lt;/aop:config&amp;gt;
+&amp;lt;tx:advice id=&amp;quot;txAdvice&amp;quot; transaction-manager=&amp;quot;txManager&amp;quot;&amp;gt;
+  &amp;lt;tx:attributes&amp;gt;
+    &amp;lt;tx:method name=&amp;quot;get*&amp;quot; read-only=&amp;quot;true&amp;quot; proportion=&amp;quot;NOT_SUPPORTED&amp;quot;/&amp;gt;
+    &amp;lt;tx:method name=&amp;quot;*&amp;quot;/&amp;gt;
+  &amp;lt;/tx:attributes&amp;gt;
+&amp;lt;/tx:advice&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;13spring管理事务提交的规则&#34;&gt;13、Spring管理事务提交的规则：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;遇到unckecked（运行期例外）事物会发生回滚，即：执行无效.&lt;/li&gt;
+&lt;li&gt;遇到checked事物不会发生回滚.&lt;/li&gt;
+&lt;li&gt;要求回滚：@Transcation(rollbackFor=Exception.class)&lt;/li&gt;
+&lt;li&gt;事物传播属性：@Transcation(propagation=Propagation. NOT_SUPPORTED)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;REQUIRED&lt;/strong&gt;:（默认）业务方法需要在一个事务中运行. 如果方法运行时，已经处在一个事务中，那么加入到该事务中，否则自己创建一个新事务.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NOT_SUPPORTED&lt;/strong&gt;:声明方法不需要事务. 如果方法没有关联一个事务，容器不会为它开启事务；如果方法在一个事务中被调用，该事务会挂起，在方法调用结束后，原先的事务便会恢复执行.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;REQUIRESNEW&lt;/strong&gt;:属性表明不管是否存在事务，业务方法总会为自己发起一个新的事务. 如果方法已经运行在一个事务中，则原事务会被挂起，新事务会被日创建，直到方法结束，新事务才算结束，原先的事务才会恢复.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MANDATORY&lt;/strong&gt;:该属性指定业务方法在某个事务范围，业务方法不能发起自己的事务. 如果业务方法在事务范围外被调用，则方法在没有事务的环境下执行.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SUPPORKTS&lt;/strong&gt;：这一事务属性表明，如果业务方法在某个事务范围内被调用，则方法成为该事务的一部分. 如果业务方法在没有事务的环境下调用，则方法在没有事务的环境下执行.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Never&lt;/strong&gt;:指定业务方法绝对不能在事务范围内执行. 若果业务方法在某个事务中执行，容器会抛出例外，只有业务方法没有关联到任何事务，才能正常执行.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NESTED&lt;/strong&gt;:如果一个活动的事务存在，则运行在一个嵌套的事务中，如果没有活动事务，则按REQUIRED属性执行，它使用了一个人单独的事务，这个事务拥有多个可以回滚的保存点. 内部事务的回滚不会对外部事务造成影响. 他只对DataSourceTransactionManager事务管理器起效.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;14数据库系统提供了四种事务隔离级&#34;&gt;14、数据库系统提供了四种事务隔离级&lt;/h2&gt;
+&lt;p&gt;　　数据库系统提供了四级事务隔离级别供用户选择. 不同的隔离级别采用不同的所类型实现，在四级隔离级别中，Serislixstion的隔离级别最高，Read Uncommited的隔离级别最低. 大多数据库默认的隔离级别为Read Commited，如SQLServer 2000 &amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Read Uncommited&lt;/strong&gt;：读未提交数据（会出现脏读，不可重复读和幻读）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read Commited&lt;/strong&gt;：读已提交数据（会出现不可重复读和幻读）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Repeatable Read&lt;/strong&gt;：可重复读（会出现幻读）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Serializable&lt;/strong&gt;：串行化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;脏读&lt;/strong&gt;：一个事务读取到另一个事务未提交的更新数据.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可重复读&lt;/strong&gt;：在同一个事务中多次读取数据时，能够保证所读数据一样，也就是，后续读取不能读到另外一个事务已提交的更新数据.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不可重复读&lt;/strong&gt;：在同一个事务中多次读取同一数据返回的结果有所不同，也就是，后续读取能读到另外一个事务已提交的更新数据.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;幻读&lt;/strong&gt;：一个事务读取到另一事务已提交的insert数据.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Hibernate学习笔记</title>
@@ -2031,14 +3254,6 @@ listKey=&amp;quot;key&amp;quot; listValue=&amp;quot;value&amp;quot; value=&amp;q
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;以上配置加入了“token”拦截器和“ivalid.token”结果，因为“token”拦截器在会话的token与请求的token不一致时，将会直接返回“ivalid.token”结果.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Spring2.5学习笔记</title>
-      <link>https://CoMath21.github.io/post/1-spring2.5/</link>
-      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://CoMath21.github.io/post/1-spring2.5/</guid>
-      <description></description>
     </item>
     
   </channel>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JSP | CoMath</title>
+    <link>https://CoMath21.github.io/tag/jsp/</link>
+      <atom:link href="https://CoMath21.github.io/tag/jsp/index.xml" rel="self" type="application/rss+xml" />
+    <description>JSP</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
+      <title>JSP</title>
+      <link>https://CoMath21.github.io/tag/jsp/</link>
+    </image>
+    
+    <item>
+      <title>JSP简介</title>
+      <link>https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/</guid>
+      <description>&lt;h2 id=&#34;为什么要jsp技术&#34;&gt;为什么要JSP技术?&lt;/h2&gt;
+&lt;p&gt;　　开发web网站的时候，servlet做界面比较麻烦. JSP 是基于 Servlet API 的，所以拥有 Servlet 拥有的一系列好处.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;jsp运行在服务器端&lt;/li&gt;
+&lt;li&gt;jsp（java service page）&lt;/li&gt;
+&lt;li&gt;jsp的基础是servlet&lt;/li&gt;
+&lt;li&gt;jsp是一个综合技术  jsp=html+css+javascript+java代码+jsp标签(Servlet)&lt;/li&gt;
+&lt;li&gt;jsp无需配置，可以直接使用；如果修改了jsp文件，不需要重新reload web应用&lt;/li&gt;
+&lt;li&gt;jsp访问方法：http://ip:8080/web应用名/jsp路径&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;特点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内容的生成和显示相分离&lt;/li&gt;
+&lt;li&gt;可移植性&lt;/li&gt;
+&lt;li&gt;采用标签简化页面开发&lt;/li&gt;
+&lt;li&gt;使用可重用组件&lt;/li&gt;
+&lt;li&gt;完善的存储管理和安全性
+&lt;img src=&#34;./1.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;jsp语法基础&#34;&gt;JSP语法基础：&lt;/h2&gt;
+&lt;h3 id=&#34;基本元素&#34;&gt;基本元素：&lt;/h3&gt;
+&lt;h4 id=&#34;注释jsp自带的注释规范是隐式注释htmlxml的注释是显示注释&#34;&gt;注释(JSP自带的注释规范是隐式注释,HTML/XML的注释是显示注释)&lt;/h4&gt;
+&lt;p&gt;HTML/XML的注释(显示注释)：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 个注释 --&amp;gt;
+&amp;lt;!-- 个注释 ：&amp;lt;%counter++;%&amp;gt;--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里会对counter++进行编译,显示编译后的结果
+隐式注释：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%-- 注释 --%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;JSP在编译时不会对&amp;lt;%&amp;ndash;和&amp;ndash;%&amp;gt;中的进行编译;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Scriptlets中的注释：跟java注释一致.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;指令元素&#34;&gt;指令元素&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;页面(page)指令：
+页面page指令用于定义JSP文件中的全局属性,一个JSP页面可以包含多个页面指令.除了import指令外其他的页面指令定义的属性或值只能出现一次.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ page attribute=&amp;quot;value&amp;quot;%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中attribute的可取值为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;language(定义使用的脚本&amp;mdash;语言默认java)、import(定义JSP网页使用的java API)、&lt;/li&gt;
+&lt;li&gt;contentType(定义MIME类型和JSP网页的编码方式—默认TYPE=text/html CHARSET=iso-8859-1)、&lt;/li&gt;
+&lt;li&gt;pageEncoding(JSP页面的字符编码&amp;mdash;默认pageEncoding=&amp;ldquo;iso-8859-1&amp;rdquo;)、
+　&lt;strong&gt;区别&lt;/strong&gt;：contentType—pageEncoding.
+&lt;ul&gt;
+&lt;li&gt;contentType：只能指定网页以什么方式显示&lt;/li&gt;
+&lt;li&gt;pageEncoding：除了显示之外还可以以指定形式保存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;session(定义该JSP网页是否可以使用session对象—-默认true)、&lt;/li&gt;
+&lt;li&gt;buffer(指定客户输出流的缓冲模式,如果是none,则不缓冲,如果指定数值,就定义了缓冲区的大小)、默认8K&lt;/li&gt;
+&lt;li&gt;autoFlush(定义输出流的缓存区是否要自动清除-—默认true)、&lt;/li&gt;
+&lt;li&gt;isThreadSafe(定义该JSP页面是否能处理多个请求&amp;mdash;默认true)、&lt;/li&gt;
+&lt;li&gt;info(定义该JSP网页的相关信息-—默认忽略)、&lt;/li&gt;
+&lt;li&gt;errorPage(定义此页面出现意外时的调用的页面—-默认忽略)、跳转到错误页面&lt;/li&gt;
+&lt;li&gt;isErrorPage(定义该JSP网页是否为处理意外错误的网页—-默认false)、&lt;/li&gt;
+&lt;li&gt;extends().&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;include指令：
+include指令通知容器在当前JSP页面中指定位置包含另一个文件的内容. 被包含的文件内容可以被JSP引擎解析,这种解析发生在编译期间
+&amp;lt;%@ include file=&amp;ldquo;filename&amp;rdquo;%&amp;gt;
+include只有这一个属性. 其中filename为包含的文件路径,一般来说是指相对路径.
+由于被包含的内容常常是代码片断,因此代码片断的后缀名最好以“f”(表示fragment)结尾,例如.htmlf&lt;/li&gt;
+&lt;li&gt;标签库taglib指令：
+taglib指令允许页面使用者自定义标签. 先用户开发标签库，为标签库编写.tld配置文件，然后再JSP页面使用自定义标签.
+&amp;lt;%@ taglib uri=&amp;ldquo;URL&amp;rdquo; prefix=&amp;ldquo;tagPrefix&amp;rdquo;%&amp;gt;
+uri 用来表示标签描述符，也就是如何找到标签文件和标签库；
+tagPrefix 定义了子JSP页面里引用这个标签的前缀.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;脚本元素&#34;&gt;脚本元素&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;声明(Declaration)
+声明就是在JSP程序中声明合法的变量和方法,用&amp;lt;%!和%&amp;gt;来表示)：
+当代码只用于单一页面时：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%!
+  variable declaration;
+    method declaration(paramType param,...)
+%&amp;gt;
+
+&amp;lt;%!
+  private static int counter;
+  public void counterInit(){
+    counter = 0 ;
+  };
+%&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;表达式(Expression)—用来吧java数据直接插入到输出：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;font color=red&gt;表达式&lt;/font&gt;是位于&lt;font color=red&gt;&amp;lt;%=&lt;/font&gt;和&lt;font color=red&gt;%&amp;gt;&lt;/font&gt;之间的代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;%= &amp;quot;你是第&amp;quot;+counter+&amp;quot;次访问&amp;quot; %&amp;gt;
+&amp;lt;%= &amp;quot;hello world&amp;quot; %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Web服务器将其编译成Servlet后，变成：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;out.wreite(String.valueOf(&amp;quot;hello world&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;相当于JSP页面中的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;out.println(&amp;quot;hello world&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;font color=red&gt;注：表达式结束处可以不使用省略号，表达式可以包含表达式.&lt;/font&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;脚本小程序(Scriptlet)&amp;mdash;可以在处理请求时间执行的java代码：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Scriptlet则位于&amp;lt;%和%&amp;gt;之间,他们是合法的java代码
+&lt;code&gt;&amp;lt;%counter++;%&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;动作元素&#34;&gt;动作元素&lt;/h4&gt;
+&lt;p&gt;　　JSP规范定义了一系列的标准动作. 以jsp作为前缀,例如使用JavaBean的动作元素&amp;lt;jsp:useBean&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:tag attribute=value attribute=value.../&amp;gt;
+&amp;lt;!-- 或者 --&amp;gt;
+&amp;lt;jsp:tag attribute=value attribute=value...&amp;gt;
+...
+&amp;lt;/jsp:tag&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;动作元素是在请求处理阶段起作用的.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文本导入标签&amp;lt;jsp:include&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:include page=&amp;quot;filename&amp;quot; flush=&amp;quot;true&amp;quot;/&amp;gt;
+&amp;lt;!-- 或者 --&amp;gt;
+&amp;lt;jsp:include page=&amp;quot;filename&amp;quot; flush=&amp;quot;true&amp;quot;&amp;gt;
+  &amp;lt;jsp:param name=&amp;quot;paramName&amp;quot; value=&amp;quot;paramValue&amp;quot;/&amp;gt;
+  ...
+&amp;lt;/jsp:include&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;　　&amp;lt;jsp:param&amp;gt;用于传递一个或者多个参数给动态页面;&amp;lt;jsp:include&amp;gt;动作与&amp;lt;%@include%&amp;gt;指令的不同是：前者包含的内容可以是动态改变的，它在执行时才确定；而后者包含的内容是固定不变的，在编译阶段就已经确定而不能改变.&lt;/p&gt;
+&lt;p&gt;案例：Login.html、Ex1.jsp、Ex2.jsp&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;页面转发标签&amp;lt;jsp:forward&amp;gt;该操作允许将请求转发到另一个JSP、Servlet或者其他静态资源文件. 请求被转至的资源必须位于同JSP发送请求相同的上下文环境之中. 每当遇到&amp;lt;jsp:forward&amp;gt;操作时，就停止执行当前的JSP，转至执行被转发的资源.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:forward page=&amp;quot;uri&amp;quot;/&amp;gt;
+&amp;lt;!-- 或者 --&amp;gt;
+&amp;lt;jsp:forward&amp;gt;
+  &amp;lt;jsp:param name=&amp;quot;paramName&amp;quot; value=&amp;quot;paramValue&amp;quot;/&amp;gt;
+  ...
+&amp;lt;/jsp:forward&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中page=&amp;ldquo;uri&amp;rdquo; 指明将要定向的文件或url地址,&lt;code&gt;&amp;lt;jsp:param name=&amp;quot;paramName&amp;quot; value=&amp;quot;paramValue&amp;quot;/&amp;gt;&lt;/code&gt;中name指定参数名，value指定参数值. 参数被发送到一个动态文件，参数可以是一个或多个值，而这个文件却必须是动态文件.&lt;/p&gt;
+&lt;p&gt;案例：Ex3.jsp、Ex4.jsp、Ex5.jsp&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实例化JavaBean标签&lt;a href=&#34;jsp:useBean&#34;&gt;jsp:useBean&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:useBean id=&amp;quot;id&amp;quot; scope=&amp;quot;page|request|session|application typeSpec&amp;quot;/&amp;gt;
+&amp;lt;!-- id 是大小写相关的名字,用来表示这个实例;scope表示此对象作用的范围；typeSpace可以是以下四者之一：class=&amp;quot;className&amp;quot; --&amp;gt;
+class=&amp;quot;className&amp;quot; type=&amp;quot;typeName&amp;quot;
+          beanName=&amp;quot;beanName&amp;quot; type=&amp;quot;typeName&amp;quot;
+          type=&amp;quot;typeName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;scope表示Bean的作用域，此属性是可选的，默认是page.&lt;/p&gt;
+&lt;p&gt;① &lt;strong&gt;page&lt;/strong&gt;：
+能够在包含&amp;lt;jsp:useBean&amp;gt;标签的JSP文件以及此文件中的所有静态包含文件中使用Bean，直到页面执行完毕客户端发回响应或转到另一个文件为止. 超出这个范围Bean就失效了.&lt;/p&gt;
+&lt;p&gt;② &lt;strong&gt;request&lt;/strong&gt;：
+如果该Bean不是请求上下文的一部分，将在请求上下文中创建并保存该Bean.&lt;/p&gt;
+&lt;p&gt;③ &lt;strong&gt;session&lt;/strong&gt;：
+从创建Bean开始，就开始在session有效范围内使用这个Bean，这个Bean对于JSP来说是共享的. 但在创建Bean的JSP文件里，page指令必须指定session=True.&lt;/p&gt;
+&lt;p&gt;④ &lt;strong&gt;application&lt;/strong&gt;：
+如果此Bean尚不存在于Web应用程序上下文中，则在应用程序上下文中创建并储存此Bean. application对象在应用服务器启东市就创建了，直到应用服务器关闭. 这个Bean存在于整个application生命周期内，任何在此分享application的JSP文件都能使用同一个Bean. class=&amp;ldquo;className&amp;quot;代表的是Bean的类路径和类名. 这个class不是抽象的，必须有一个公用的、没有参数的构造器. beanName=&amp;ldquo;beanName&amp;rdquo; 表示Bean的名称，而Type=&amp;ldquo;typeName&amp;quot;则用于指定Bean的类型. type=&amp;ldquo;typeName&amp;quot;指定雷鸣，既可以是本身，也可以是一个类的父类，或者是一个类的接口. 如果没有使用class或者BeanName指定type，Bean将不会被实例化.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置JavaBean属性标签&amp;lt;jsp:setProperty&amp;gt;
+　　该动作主要用于设定JavaBean的属性，因此必须和useBean一起协作. &amp;lt;jsp:setProperty&amp;gt;标签通过JavaBean给定的&lt;code&gt;setXXX()&lt;/code&gt;方法，在javaBean中设置一个或多个属性值. 利用此动作标签设置属性值有多种方法：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:setProperty name=&amp;quot;beanInstanceName&amp;quot; propertyDetails/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中beanInstanceName是必选属性，即JavaBean实例的名字，在使用前通过&amp;lt;jsp:useBean&amp;gt;引入. propertyDetails指可以通过三种不同的方式来指定属性信息：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;property=&amp;quot;*&amp;quot;&lt;/strong&gt;:
+这种赋值方式表示请求参数的所有值. 在Bean中的属性名字必须和Request对象中的参数名一致.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;property=&amp;ldquo;propertyName&amp;rdquo;[param=&amp;ldquo;parameterName&amp;rdquo;]&lt;/strong&gt;:
+这种赋值方式使用request中的一个参数值来指定Bean中的一个属性值. property指定Bean的属性名，param指定request中的参数名. 如果Bean属性和request参数的名字不同，name就必须指定property和param的值；若果同名，则需要指明property就可以了. 参数值为空，那么对应的属性值也不会被设定.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;property=&amp;ldquo;propertyName&amp;rdquo; value=&amp;ldquo;propertyValue&amp;rdquo;&lt;/strong&gt;:
+这种赋值方式使用指定的值来设定Bean属性. propertyValue可以是字符串也可以是表达式. 如果是字符串，那么他就会被转换成Bean属性类型. 如果是表达式，那么它的类型就必须和它将要设定的属性值类型保持一致.
+注：不能在一个&amp;lt;jsp:setProperty&amp;gt;中同时使用param和value.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;获取JavaBean对象属性标签&amp;lt;jsp:getproperty&amp;gt;
+　　与&amp;lt;jsp:setproperty&amp;gt;相对应，访问一个JavaBean属性，因此使用该动作标签之前必须用&amp;lt;jsp:useBean&amp;gt;引入一个JavaBean对象.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jdp:getProperty name=&amp;quot;beanInstanceName&amp;quot; property=&amp;quot;propertyName&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中beanInstanceName对应&amp;lt;jsp:useBean&amp;gt;的id，因此name要和&amp;lt;jsp:useBean&amp;gt;的id相同.
+propertyName是要获得的属性值.&lt;/p&gt;
+&lt;p&gt;c.d.e.的案例：Zhuce.jsp、Ex6.jsp、StudentBean.java&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;追加参数标签&amp;lt;jsp:param&amp;gt;
+　　＼&lt;a href=&#34;jsp:param&#34;&gt;jsp:param&lt;/a&gt;标签用来提供key/value的值，与&lt;a href=&#34;jsp:inclde&#34;&gt;jsp:inclde&lt;/a&gt;、&lt;a href=&#34;jsp:forwadrd&#34;&gt;jsp:forwadrd&lt;/a&gt;等标签一起搭配使用.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 格式： --&amp;gt;
+&amp;lt;jsp:param name=&amp;quot;parameterName&amp;quot; value=&amp;quot;parameterValue&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;name=&amp;ldquo;parameterName&amp;rdquo; ：该属性表示参数的名字
+value=&amp;ldquo;parameterValue&amp;rdquo;：表示参数的值．&lt;/p&gt;
+&lt;h2 id=&#34;servlet容器概念&#34;&gt;Servlet容器概念&lt;/h2&gt;
+&lt;p&gt;　　Servlet容器为Java_Web应用提供运行时环境,它负责管理Servlet和JSP的生命周期,以及管理他们的共享数据.
+Servlet容器也称为Java_Web应用容器,或者Servlet/JSP容器．&lt;/p&gt;
+&lt;p&gt;流行的Servlet容器软件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;—Tomcat&lt;/li&gt;
+&lt;li&gt;—Resin
+&lt;img src=&#34;./2.png&#34; alt=&#34;png&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;部署tomcat服务器&#34;&gt;部署tomcat服务器：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;解压文件apache-tomcat&lt;/li&gt;
+&lt;li&gt;启动：startup.bat&amp;mdash;&amp;mdash;启动服务器&lt;/li&gt;
+&lt;li&gt;需要配置环境：JAVA_HOME   java   jdk的根目录&lt;/li&gt;
+&lt;li&gt;想在任意目录下打开服务器
+&lt;ul&gt;
+&lt;li&gt;设置环境CATALINA_HOME&amp;mdash;-bin/catalina.bat&lt;/li&gt;
+&lt;li&gt;Tomcat的管理程(manager)：要访问manager web应用程序,需要添加具有管理员权限的账号,编辑conf目录下的tomcat-users.xml文件,添加manager角色设置用户名密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第一个web程序&#34;&gt;第一个web程序：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在Eclipse新建一个Java Project&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在Java项目下创建Web开发的目录结构
+&lt;img src=&#34;./3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在WebContent目录下新建一个JSP文件：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把WebContent 目录复制到Tomcat的webapps目录下&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最后在浏览器打开&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;javaeen版-eclipse开发web&#34;&gt;JavaEEn版 Eclipse开发web&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;显切换到JavaEE&lt;/li&gt;
+&lt;li&gt;Servers下新建一个Tomcat服务器&amp;ndash;&amp;gt;关联到Tomcat根目录&lt;/li&gt;
+&lt;li&gt;新建一个Dynamic Web Project 其中Target Runtime需选中&lt;/li&gt;
+&lt;li&gt;开发应用&lt;/li&gt;
+&lt;li&gt;可以通过run so server 来运行WEB项目&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;servlet-的helloworld&#34;&gt;Servlet 的HelloWorld&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个Servlet接口的实现类&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;public class HelloWorld implements Servlet
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在web.xml 文件中配置和映射这个Servlet&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 配置和映射Servlet --&amp;gt;
+&amp;lt;Servlet&amp;gt;
+  &amp;lt;!—Servlet 注册的名字 –&amp;gt;
+  &amp;lt;servlet-name&amp;gt;类名&amp;lt;/servlet-name&amp;gt;
+  &amp;lt;!—Servlet 的全类名 --&amp;gt;
+  &amp;lt;servlet-class&amp;gt;包名&amp;lt;/servlet-class&amp;gt;
+&amp;lt;/Servlet&amp;gt;
+&amp;lt;servlet-mapping&amp;gt;
+  &amp;lt;!—需要和某一个Servlet 节点的servlet-name 子节点的文本节点一致–&amp;gt;
+  &amp;lt;servlet-name&amp;gt;类名&amp;lt;/servlet-name&amp;gt;
+&amp;lt;!—映射具体的访问路径：/代表当前WEB应用的根目录 –&amp;gt;
+  &amp;lt;url-pattern&amp;gt;/hello&amp;lt;/url-pattern&amp;gt;
+&amp;lt;/servlet-mapping&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;关于servlet-mapping&#34;&gt;关于servlet-mapping：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;同一个Servlet可以被映射到多个URL上,即多个&lt;servlet-mapping&gt;元素的&lt;servlet-name&gt;子元素的设置值可以是同一个Servlet的注册名.&lt;/li&gt;
+&lt;li&gt;在Servlet映射到的URL中也可以使用&lt;em&gt;通配符,但是只能有两种固定的格式：一种格式是“&lt;/em&gt;.扩展名”,另一种格式是以正斜杠（/）开头并以“/*”结尾.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;servlet-容器&#34;&gt;Servlet 容器：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;可以创建Servlet,并调用Servlet的相关生命周期&lt;/li&gt;
+&lt;li&gt;JSP,Filter,Listener&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;servlet-生命周期方法以下方法都是servlet容器负责调用&#34;&gt;Servlet 生命周期方法：以下方法都是Servlet容器负责调用&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;构造器：只被调用一次,只有第一次请求Servlet时,创建Servlet的实例,调用构造器,这说明Servlet是单实例的.&lt;/li&gt;
+&lt;li&gt;init方法：只被调用一次,在创建好的实例后即被调用,用于初始化当前Servlet.&lt;/li&gt;
+&lt;li&gt;service：被多次调用. 每次请求都会调用service方法,实际响应请求的.&lt;/li&gt;
+&lt;li&gt;destroy：只被调用一次,在当前Servlet所在的Web应用被卸载前调用,用于释放当前的Servlet所占用的资源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;loda-on-start-up参数&#34;&gt;loda-on-start-up参数：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;配置在servlet节点中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Servlet&amp;gt;
+  &amp;lt;!—Servlet 注册的名字 –&amp;gt;
+    &amp;lt;servlet-name&amp;gt;类名1&amp;lt;/servlet-name&amp;gt;
+    &amp;lt;!—Servlet 的全类名 --&amp;gt;
+    &amp;lt;servlet-class&amp;gt;包名&amp;lt;/servlet-class&amp;gt;
+    &amp;lt;!—可以指定Servlet 被创建的时机 --&amp;gt;
+&amp;lt;load-on-startup&amp;gt;2&amp;lt;/load-on-startup&amp;gt;
+&amp;lt;/Servlet&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;load-on-startup：可以指定Servlet被创建的时机.如为负数,则在第一次请求时创建;若为0或正数,则在当前WEB应用被Servlet 容器加载时创建实例,且越小越早被创建.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

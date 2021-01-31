@@ -1,0 +1,1472 @@
+<!DOCTYPE html><html lang="zh-Hans" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="CoMath">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Java Server Pages快速入门.">
+
+  
+  <link rel="alternate" hreflang="zh-Hans" href="https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9d711cebf380679328885aff8188d64e.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="CoMath">
+  <meta property="og:url" content="https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/">
+  <meta property="og:title" content="JSP简介 | CoMath">
+  <meta property="og:description" content="Java Server Pages快速入门."><meta property="og:image" content="https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/featured.jpg">
+  <meta property="twitter:image" content="https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/featured.jpg"><meta property="og:locale" content="zh-Hans">
+  
+    
+      <meta property="article:published_time" content="2021-01-30T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-01-30T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/"
+  },
+  "headline": "JSP简介",
+  
+  "image": [
+    "https://CoMath21.github.io/post/1-jsp%E7%AE%80%E4%BB%8B/featured.jpg"
+  ],
+  
+  "datePublished": "2021-01-30T00:00:00Z",
+  "dateModified": "2021-01-30T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Xin态好先生"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CoMath",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Java Server Pages快速入门."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>JSP简介 | CoMath</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7264cf0eba3b66951b36da7d2cecf9c5.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>搜索</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="搜索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="搜索...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="切换导航">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>首页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/category"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tag"><span>标签</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>说说</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/people"><span>关于</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="搜索"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>浅色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>深色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>自动</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>JSP简介</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/admin/">Xin态好先生</a></span>, <span >
+      <a href="/authors/comath/">CoMath</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2021年1月30日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 分钟阅读时长
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>, <a href="/category/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 450px;">
+  <div style="position: relative">
+    <img src="/post/1-jsp%E7%AE%80%E4%BB%8B/featured.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">CoMath</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="为什么要jsp技术">为什么要JSP技术?</h2>
+<p>　　开发web网站的时候，servlet做界面比较麻烦. JSP 是基于 Servlet API 的，所以拥有 Servlet 拥有的一系列好处.</p>
+<ol>
+<li>jsp运行在服务器端</li>
+<li>jsp（java service page）</li>
+<li>jsp的基础是servlet</li>
+<li>jsp是一个综合技术  jsp=html+css+javascript+java代码+jsp标签(Servlet)</li>
+<li>jsp无需配置，可以直接使用；如果修改了jsp文件，不需要重新reload web应用</li>
+<li>jsp访问方法：http://ip:8080/web应用名/jsp路径</li>
+</ol>
+<p><strong>特点：</strong></p>
+<ul>
+<li>内容的生成和显示相分离</li>
+<li>可移植性</li>
+<li>采用标签简化页面开发</li>
+<li>使用可重用组件</li>
+<li>完善的存储管理和安全性
+<img src="./1.png" alt="png"></li>
+</ul>
+<h2 id="jsp语法基础">JSP语法基础：</h2>
+<h3 id="基本元素">基本元素：</h3>
+<h4 id="注释jsp自带的注释规范是隐式注释htmlxml的注释是显示注释">注释(JSP自带的注释规范是隐式注释,HTML/XML的注释是显示注释)</h4>
+<p>HTML/XML的注释(显示注释)：</p>
+<pre><code>&lt;!-- 个注释 --&gt;
+&lt;!-- 个注释 ：&lt;%counter++;%&gt;--&gt;
+</code></pre>
+<p>这里会对counter++进行编译,显示编译后的结果
+隐式注释：</p>
+<pre><code>&lt;%-- 注释 --%&gt;
+</code></pre>
+<p>JSP在编译时不会对&lt;%&ndash;和&ndash;%&gt;中的进行编译;</p>
+<pre><code>Scriptlets中的注释：跟java注释一致.
+</code></pre>
+<h4 id="指令元素">指令元素</h4>
+<ul>
+<li>页面(page)指令：
+页面page指令用于定义JSP文件中的全局属性,一个JSP页面可以包含多个页面指令.除了import指令外其他的页面指令定义的属性或值只能出现一次.</li>
+</ul>
+<pre><code>&lt;%@ page attribute=&quot;value&quot;%&gt;
+</code></pre>
+<p>其中attribute的可取值为：</p>
+<ol>
+<li>language(定义使用的脚本&mdash;语言默认java)、import(定义JSP网页使用的java API)、</li>
+<li>contentType(定义MIME类型和JSP网页的编码方式—默认TYPE=text/html CHARSET=iso-8859-1)、</li>
+<li>pageEncoding(JSP页面的字符编码&mdash;默认pageEncoding=&ldquo;iso-8859-1&rdquo;)、
+　<strong>区别</strong>：contentType—pageEncoding.
+<ul>
+<li>contentType：只能指定网页以什么方式显示</li>
+<li>pageEncoding：除了显示之外还可以以指定形式保存</li>
+</ul>
+</li>
+<li>session(定义该JSP网页是否可以使用session对象—-默认true)、</li>
+<li>buffer(指定客户输出流的缓冲模式,如果是none,则不缓冲,如果指定数值,就定义了缓冲区的大小)、默认8K</li>
+<li>autoFlush(定义输出流的缓存区是否要自动清除-—默认true)、</li>
+<li>isThreadSafe(定义该JSP页面是否能处理多个请求&mdash;默认true)、</li>
+<li>info(定义该JSP网页的相关信息-—默认忽略)、</li>
+<li>errorPage(定义此页面出现意外时的调用的页面—-默认忽略)、跳转到错误页面</li>
+<li>isErrorPage(定义该JSP网页是否为处理意外错误的网页—-默认false)、</li>
+<li>extends().</li>
+</ol>
+<ul>
+<li>include指令：
+include指令通知容器在当前JSP页面中指定位置包含另一个文件的内容. 被包含的文件内容可以被JSP引擎解析,这种解析发生在编译期间
+&lt;%@ include file=&ldquo;filename&rdquo;%&gt;
+include只有这一个属性. 其中filename为包含的文件路径,一般来说是指相对路径.
+由于被包含的内容常常是代码片断,因此代码片断的后缀名最好以“f”(表示fragment)结尾,例如.htmlf</li>
+<li>标签库taglib指令：
+taglib指令允许页面使用者自定义标签. 先用户开发标签库，为标签库编写.tld配置文件，然后再JSP页面使用自定义标签.
+&lt;%@ taglib uri=&ldquo;URL&rdquo; prefix=&ldquo;tagPrefix&rdquo;%&gt;
+uri 用来表示标签描述符，也就是如何找到标签文件和标签库；
+tagPrefix 定义了子JSP页面里引用这个标签的前缀.</li>
+</ul>
+<h4 id="脚本元素">脚本元素</h4>
+<ul>
+<li>声明(Declaration)
+声明就是在JSP程序中声明合法的变量和方法,用&lt;%!和%&gt;来表示)：
+当代码只用于单一页面时：</li>
+</ul>
+<pre><code>&lt;%!
+  variable declaration;
+    method declaration(paramType param,...)
+%&gt;
+
+&lt;%!
+  private static int counter;
+  public void counterInit(){
+    counter = 0 ;
+  };
+%&gt;
+</code></pre>
+<ul>
+<li>表达式(Expression)—用来吧java数据直接插入到输出：</li>
+</ul>
+<p><font color=red>表达式</font>是位于<font color=red>&lt;%=</font>和<font color=red>%&gt;</font>之间的代码</p>
+<pre><code>&lt;%= &quot;你是第&quot;+counter+&quot;次访问&quot; %&gt;
+&lt;%= &quot;hello world&quot; %&gt;
+</code></pre>
+<p>Web服务器将其编译成Servlet后，变成：</p>
+<pre><code>out.wreite(String.valueOf(&quot;hello world&quot;));
+</code></pre>
+<p>相当于JSP页面中的：</p>
+<pre><code>out.println(&quot;hello world&quot;);
+</code></pre>
+<p><font color=red>注：表达式结束处可以不使用省略号，表达式可以包含表达式.</font></p>
+<ul>
+<li>脚本小程序(Scriptlet)&mdash;可以在处理请求时间执行的java代码：</li>
+</ul>
+<p>Scriptlet则位于&lt;%和%&gt;之间,他们是合法的java代码
+<code>&lt;%counter++;%&gt;</code></p>
+<h4 id="动作元素">动作元素</h4>
+<p>　　JSP规范定义了一系列的标准动作. 以jsp作为前缀,例如使用JavaBean的动作元素&lt;jsp:useBean&gt;</p>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jsp:tag attribute=value attribute=value.../&gt;
+&lt;!-- 或者 --&gt;
+&lt;jsp:tag attribute=value attribute=value...&gt;
+...
+&lt;/jsp:tag&gt;
+</code></pre>
+<p>动作元素是在请求处理阶段起作用的.</p>
+<ul>
+<li>文本导入标签&lt;jsp:include&gt;</li>
+</ul>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jsp:include page=&quot;filename&quot; flush=&quot;true&quot;/&gt;
+&lt;!-- 或者 --&gt;
+&lt;jsp:include page=&quot;filename&quot; flush=&quot;true&quot;&gt;
+  &lt;jsp:param name=&quot;paramName&quot; value=&quot;paramValue&quot;/&gt;
+  ...
+&lt;/jsp:include&gt;
+</code></pre>
+<p>　　&lt;jsp:param&gt;用于传递一个或者多个参数给动态页面;&lt;jsp:include&gt;动作与&lt;%@include%&gt;指令的不同是：前者包含的内容可以是动态改变的，它在执行时才确定；而后者包含的内容是固定不变的，在编译阶段就已经确定而不能改变.</p>
+<p>案例：Login.html、Ex1.jsp、Ex2.jsp</p>
+<ul>
+<li>页面转发标签&lt;jsp:forward&gt;该操作允许将请求转发到另一个JSP、Servlet或者其他静态资源文件. 请求被转至的资源必须位于同JSP发送请求相同的上下文环境之中. 每当遇到&lt;jsp:forward&gt;操作时，就停止执行当前的JSP，转至执行被转发的资源.</li>
+</ul>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jsp:forward page=&quot;uri&quot;/&gt;
+&lt;!-- 或者 --&gt;
+&lt;jsp:forward&gt;
+  &lt;jsp:param name=&quot;paramName&quot; value=&quot;paramValue&quot;/&gt;
+  ...
+&lt;/jsp:forward&gt;
+</code></pre>
+<p>其中page=&ldquo;uri&rdquo; 指明将要定向的文件或url地址,<code>&lt;jsp:param name=&quot;paramName&quot; value=&quot;paramValue&quot;/&gt;</code>中name指定参数名，value指定参数值. 参数被发送到一个动态文件，参数可以是一个或多个值，而这个文件却必须是动态文件.</p>
+<p>案例：Ex3.jsp、Ex4.jsp、Ex5.jsp</p>
+<ul>
+<li>实例化JavaBean标签<a href="jsp:useBean">jsp:useBean</a></li>
+</ul>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jsp:useBean id=&quot;id&quot; scope=&quot;page|request|session|application typeSpec&quot;/&gt;
+&lt;!-- id 是大小写相关的名字,用来表示这个实例;scope表示此对象作用的范围；typeSpace可以是以下四者之一：class=&quot;className&quot; --&gt;
+class=&quot;className&quot; type=&quot;typeName&quot;
+          beanName=&quot;beanName&quot; type=&quot;typeName&quot;
+          type=&quot;typeName&quot;
+</code></pre>
+<p>scope表示Bean的作用域，此属性是可选的，默认是page.</p>
+<p>① <strong>page</strong>：
+能够在包含&lt;jsp:useBean&gt;标签的JSP文件以及此文件中的所有静态包含文件中使用Bean，直到页面执行完毕客户端发回响应或转到另一个文件为止. 超出这个范围Bean就失效了.</p>
+<p>② <strong>request</strong>：
+如果该Bean不是请求上下文的一部分，将在请求上下文中创建并保存该Bean.</p>
+<p>③ <strong>session</strong>：
+从创建Bean开始，就开始在session有效范围内使用这个Bean，这个Bean对于JSP来说是共享的. 但在创建Bean的JSP文件里，page指令必须指定session=True.</p>
+<p>④ <strong>application</strong>：
+如果此Bean尚不存在于Web应用程序上下文中，则在应用程序上下文中创建并储存此Bean. application对象在应用服务器启东市就创建了，直到应用服务器关闭. 这个Bean存在于整个application生命周期内，任何在此分享application的JSP文件都能使用同一个Bean. class=&ldquo;className&quot;代表的是Bean的类路径和类名. 这个class不是抽象的，必须有一个公用的、没有参数的构造器. beanName=&ldquo;beanName&rdquo; 表示Bean的名称，而Type=&ldquo;typeName&quot;则用于指定Bean的类型. type=&ldquo;typeName&quot;指定雷鸣，既可以是本身，也可以是一个类的父类，或者是一个类的接口. 如果没有使用class或者BeanName指定type，Bean将不会被实例化.</p>
+<ul>
+<li>设置JavaBean属性标签&lt;jsp:setProperty&gt;
+　　该动作主要用于设定JavaBean的属性，因此必须和useBean一起协作. &lt;jsp:setProperty&gt;标签通过JavaBean给定的<code>setXXX()</code>方法，在javaBean中设置一个或多个属性值. 利用此动作标签设置属性值有多种方法：</li>
+</ul>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jsp:setProperty name=&quot;beanInstanceName&quot; propertyDetails/&gt;
+</code></pre>
+<p>其中beanInstanceName是必选属性，即JavaBean实例的名字，在使用前通过&lt;jsp:useBean&gt;引入. propertyDetails指可以通过三种不同的方式来指定属性信息：</p>
+<ol>
+<li><strong>property=&quot;*&quot;</strong>:
+这种赋值方式表示请求参数的所有值. 在Bean中的属性名字必须和Request对象中的参数名一致.</li>
+<li><strong>property=&ldquo;propertyName&rdquo;[param=&ldquo;parameterName&rdquo;]</strong>:
+这种赋值方式使用request中的一个参数值来指定Bean中的一个属性值. property指定Bean的属性名，param指定request中的参数名. 如果Bean属性和request参数的名字不同，name就必须指定property和param的值；若果同名，则需要指明property就可以了. 参数值为空，那么对应的属性值也不会被设定.</li>
+<li><strong>property=&ldquo;propertyName&rdquo; value=&ldquo;propertyValue&rdquo;</strong>:
+这种赋值方式使用指定的值来设定Bean属性. propertyValue可以是字符串也可以是表达式. 如果是字符串，那么他就会被转换成Bean属性类型. 如果是表达式，那么它的类型就必须和它将要设定的属性值类型保持一致.
+注：不能在一个&lt;jsp:setProperty&gt;中同时使用param和value.</li>
+</ol>
+<ul>
+<li>获取JavaBean对象属性标签&lt;jsp:getproperty&gt;
+　　与&lt;jsp:setproperty&gt;相对应，访问一个JavaBean属性，因此使用该动作标签之前必须用&lt;jsp:useBean&gt;引入一个JavaBean对象.</li>
+</ul>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jdp:getProperty name=&quot;beanInstanceName&quot; property=&quot;propertyName&quot;/&gt;
+</code></pre>
+<p>其中beanInstanceName对应&lt;jsp:useBean&gt;的id，因此name要和&lt;jsp:useBean&gt;的id相同.
+propertyName是要获得的属性值.</p>
+<p>c.d.e.的案例：Zhuce.jsp、Ex6.jsp、StudentBean.java</p>
+<ul>
+<li>追加参数标签&lt;jsp:param&gt;
+　　＼<a href="jsp:param">jsp:param</a>标签用来提供key/value的值，与<a href="jsp:inclde">jsp:inclde</a>、<a href="jsp:forwadrd">jsp:forwadrd</a>等标签一起搭配使用.</li>
+</ul>
+<pre><code>&lt;!-- 格式： --&gt;
+&lt;jsp:param name=&quot;parameterName&quot; value=&quot;parameterValue&quot;/&gt;
+</code></pre>
+<p>name=&ldquo;parameterName&rdquo; ：该属性表示参数的名字
+value=&ldquo;parameterValue&rdquo;：表示参数的值．</p>
+<h2 id="servlet容器概念">Servlet容器概念</h2>
+<p>　　Servlet容器为Java_Web应用提供运行时环境,它负责管理Servlet和JSP的生命周期,以及管理他们的共享数据.
+Servlet容器也称为Java_Web应用容器,或者Servlet/JSP容器．</p>
+<p>流行的Servlet容器软件</p>
+<ul>
+<li>—Tomcat</li>
+<li>—Resin
+<img src="./2.png" alt="png"></li>
+</ul>
+<h3 id="部署tomcat服务器">部署tomcat服务器：</h3>
+<ul>
+<li>解压文件apache-tomcat</li>
+<li>启动：startup.bat&mdash;&mdash;启动服务器</li>
+<li>需要配置环境：JAVA_HOME   java   jdk的根目录</li>
+<li>想在任意目录下打开服务器
+<ul>
+<li>设置环境CATALINA_HOME&mdash;-bin/catalina.bat</li>
+<li>Tomcat的管理程(manager)：要访问manager web应用程序,需要添加具有管理员权限的账号,编辑conf目录下的tomcat-users.xml文件,添加manager角色设置用户名密码</li>
+</ul>
+</li>
+</ul>
+<h3 id="第一个web程序">第一个web程序：</h3>
+<ul>
+<li>
+<p>在Eclipse新建一个Java Project</p>
+</li>
+<li>
+<p>在Java项目下创建Web开发的目录结构
+<img src="./3.png" alt="png"></p>
+</li>
+<li>
+<p>在WebContent目录下新建一个JSP文件：</p>
+</li>
+<li>
+<p>把WebContent 目录复制到Tomcat的webapps目录下</p>
+</li>
+<li>
+<p>最后在浏览器打开</p>
+</li>
+</ul>
+<h2 id="javaeen版-eclipse开发web">JavaEEn版 Eclipse开发web</h2>
+<ol>
+<li>显切换到JavaEE</li>
+<li>Servers下新建一个Tomcat服务器&ndash;&gt;关联到Tomcat根目录</li>
+<li>新建一个Dynamic Web Project 其中Target Runtime需选中</li>
+<li>开发应用</li>
+<li>可以通过run so server 来运行WEB项目</li>
+</ol>
+<h2 id="servlet-的helloworld">Servlet 的HelloWorld</h2>
+<ol>
+<li>创建一个Servlet接口的实现类</li>
+</ol>
+<pre><code>public class HelloWorld implements Servlet
+</code></pre>
+<ol start="2">
+<li>在web.xml 文件中配置和映射这个Servlet</li>
+</ol>
+<pre><code>&lt;!-- 配置和映射Servlet --&gt;
+&lt;Servlet&gt;
+  &lt;!—Servlet 注册的名字 –&gt;
+  &lt;servlet-name&gt;类名&lt;/servlet-name&gt;
+  &lt;!—Servlet 的全类名 --&gt;
+  &lt;servlet-class&gt;包名&lt;/servlet-class&gt;
+&lt;/Servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;!—需要和某一个Servlet 节点的servlet-name 子节点的文本节点一致–&gt;
+  &lt;servlet-name&gt;类名&lt;/servlet-name&gt;
+&lt;!—映射具体的访问路径：/代表当前WEB应用的根目录 –&gt;
+  &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<h3 id="关于servlet-mapping">关于servlet-mapping：</h3>
+<ol>
+<li>同一个Servlet可以被映射到多个URL上,即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以是同一个Servlet的注册名.</li>
+<li>在Servlet映射到的URL中也可以使用<em>通配符,但是只能有两种固定的格式：一种格式是“</em>.扩展名”,另一种格式是以正斜杠（/）开头并以“/*”结尾.</li>
+</ol>
+<h3 id="servlet-容器">Servlet 容器：</h3>
+<ol>
+<li>可以创建Servlet,并调用Servlet的相关生命周期</li>
+<li>JSP,Filter,Listener</li>
+</ol>
+<h3 id="servlet-生命周期方法以下方法都是servlet容器负责调用">Servlet 生命周期方法：以下方法都是Servlet容器负责调用</h3>
+<ol>
+<li>构造器：只被调用一次,只有第一次请求Servlet时,创建Servlet的实例,调用构造器,这说明Servlet是单实例的.</li>
+<li>init方法：只被调用一次,在创建好的实例后即被调用,用于初始化当前Servlet.</li>
+<li>service：被多次调用. 每次请求都会调用service方法,实际响应请求的.</li>
+<li>destroy：只被调用一次,在当前Servlet所在的Web应用被卸载前调用,用于释放当前的Servlet所占用的资源</li>
+</ol>
+<h3 id="loda-on-start-up参数">loda-on-start-up参数：</h3>
+<ol>
+<li>配置在servlet节点中</li>
+</ol>
+<pre><code>&lt;Servlet&gt;
+  &lt;!—Servlet 注册的名字 –&gt;
+    &lt;servlet-name&gt;类名1&lt;/servlet-name&gt;
+    &lt;!—Servlet 的全类名 --&gt;
+    &lt;servlet-class&gt;包名&lt;/servlet-class&gt;
+    &lt;!—可以指定Servlet 被创建的时机 --&gt;
+&lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
+&lt;/Servlet&gt;
+</code></pre>
+<ol start="2">
+<li>load-on-startup：可以指定Servlet被创建的时机.如为负数,则在第一次请求时创建;若为0或正数,则在当前WEB应用被Servlet 容器加载时创建实例,且越小越早被创建.</li>
+</ol>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/java/">Java</a>
+  
+  <a class="badge badge-light" href="/tag/jsp/">JSP</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg" alt="Xin态好先生"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">Xin态好先生</a></h5>
+      
+      <p class="card-text">机会是给有准备的人的.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:comath@qq.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1375264022&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">
+        <i class="fab fa-qq"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CoMath21" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/comath/avatar_hu5dbed3c1e225bfb246e59dc7d66e77de_260503_270x270_fill_lanczos_center_2.png" alt="CoMath"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">CoMath</a></h5>
+      <h6 class="card-subtitle">微信公众号</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>相关</h3>
+    <ul>
+      
+      <li><a href="/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">SSH框架整合基本步骤</a></li>
+      
+      <li><a href="/post/1-spring2.5/">Spring2.5学习笔记</a></li>
+      
+      <li><a href="/post/1-hibernate/">Hibernate学习笔记</a></li>
+      
+      <li><a href="/post/1-struts2/">Struts2学习笔记</a></li>
+      
+      <li><a href="/post/1-%E6%85%95%E8%AF%BE%E7%BD%91mxonline/">Django学习笔记</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 CoMath Powered by Hugo Theme Academic
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> 复制
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> 下载
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"没有找到结果","placeholder":"搜索...","results":"搜索结果"};
+      const content_type = {
+        'post': "文章",
+        'project': "项目",
+        'publication' : "出版物",
+        'event' : "演讲",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

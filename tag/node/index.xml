@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node | CoMath</title>
+    <link>https://CoMath21.github.io/tag/node/</link>
+      <atom:link href="https://CoMath21.github.io/tag/node/index.xml" rel="self" type="application/rss+xml" />
+    <description>Node</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 CoMath Powered by Hugo Theme Academic</copyright><lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_300x300_fit_lanczos_2.png</url>
+      <title>Node</title>
+      <link>https://CoMath21.github.io/tag/node/</link>
+    </image>
+    
+    <item>
+      <title>node.js介绍(一)</title>
+      <link>https://CoMath21.github.io/post/1-node.js/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://CoMath21.github.io/post/1-node.js/</guid>
+      <description>&lt;h2 id=&#34;什么是nodejs&#34;&gt;什么是node.js&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;node.js是一个开发平台，就像Java开发平台、.Net开发平台、PHP开发平台、Apple开发平台一样。
+-何为开发平台？有对应的编程语言、有语言运行时、有能实现特定功能的API（SDK:Software Development Kit）&lt;/li&gt;
+&lt;li&gt;该平台使用的编程语言是Javascript 语言。&lt;/li&gt;
+&lt;li&gt;node.js平台是基于Chrome V8 Javascript引擎构建。&lt;/li&gt;
+&lt;li&gt;基于node.js可以开发控制台程序（命令行程序、CLI程序）、桌面应用程序（GUI）（借助 node-webkit、electron等框架实现）、Web应用程序（网站）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;PHP开发技术栈：LAMP-Linux Apache MySQL PHP&lt;/p&gt;
+&lt;p&gt;node.js全栈开发技术栈：MEAN-MongoDB Express Angular Node.js&lt;/p&gt;
+&lt;h2 id=&#34;nodejs有哪些特点&#34;&gt;node.js有哪些特点？&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;事件驱动（当事件被触发时，执行传递过去的回调函数）&lt;/li&gt;
+&lt;li&gt;非阻塞I/0模型（当执行I/0操作时，不会阻塞线程）&lt;/li&gt;
+&lt;li&gt;单线程&lt;/li&gt;
+&lt;li&gt;拥有世界最大的开源库生态系统一npm。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;nodejs网站&#34;&gt;node.js网站&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;[node.js官方网站]（https://nodejs.org/）&lt;/li&gt;
+&lt;li&gt;[node.js中文网]（http://nodejs.cn/）&lt;/li&gt;
+&lt;li&gt;[node.js中文社区]（https://cnodejs.org/）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;为什么要学习nodejs&#34;&gt;为什么要学习Node.js？&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;通过学习Node.js开发深入理解&lt;strong&gt;服务器开发&lt;/strong&gt;、*&lt;em&gt;Web请求和响应过程&lt;/em&gt;、*&lt;em&gt;了解服务器端如何与客户端配合&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;学习服务器端渲染&lt;/li&gt;
+&lt;li&gt;学习服务器端为客户端编写接口&lt;/li&gt;
+&lt;li&gt;现在前端工程师面试，对Node.js开发有要求&lt;/li&gt;
+&lt;li&gt;补充提问：
+-在Node.js平台开发时，能使用Dom API吗？比如：document.getElementById（&amp;lsquo;id&amp;rsquo;）；window.location等？&lt;/li&gt;
+&lt;li&gt;复习浏览器端JavaScript 组成：ECMAscript、Dom、Bom&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;学习目标&#34;&gt;学习目标&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;了解服务器开发过程&lt;/li&gt;
+&lt;li&gt;会使用node.js开发基本的http服务程序（Web应用程序）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;nodejs安装和配置&#34;&gt;Node.js安装和配置&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;下载地址&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;[当前版本]（https://nodejs.org/en/download/）&lt;/li&gt;
+&lt;li&gt;[历史版本]（https://nodejs.org/en/download/releases/）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;官网术语解释&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;LTS版本：Long-term Support版本，长期支持版，即稳定版。&lt;/li&gt;
+&lt;li&gt;Current 版本：Latest Features版本，最新版本，新特性会在该版本中最先加入。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;注意：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;安装完毕后通过命令：node-v来确定是否安装成功【注意：打开“命令窗口”的时候建议使用“管理员方式“打开】&lt;/li&gt;
+&lt;li&gt;如果需要则配置环境变量。 
+！ [配置环境变量]（imgs/env_pathpng）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;通过nvm-windows管理一台计算机上的多个node版本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;node-version-managernode-版本管理器&#34;&gt;Node Version Manager（Node 版本管理器）&lt;/h3&gt;
+&lt;h4 id=&#34;nvmlinuxunixos-x&#34;&gt;nvm（Linux、Unix、OS-X）&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/creationix/nvm&#34;&gt;https://github.com/creationix/nvm&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;产用命令：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;nvm-install-node（安装最新版本的node）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;nvm-use node-（使用指定版本的node）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;nvm-windowswindows&#34;&gt;nvm-windows·（Windows）&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/coreybutler/nvm-windows&#34;&gt;https://github.com/coreybutler/nvm-windows&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;常用命令：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;nvm-version&lt;/p&gt;
+&lt;p&gt;nvm-install-latest&lt;/p&gt;
+&lt;p&gt;nvm-instal1-版本号&lt;/p&gt;
+&lt;p&gt;nvm-uninstall版本号&lt;/p&gt;
+&lt;p&gt;nvm-list&lt;/p&gt;
+&lt;p&gt;nvm-use 版本号
+#在node.js上编写程序
+##REPL介绍&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;REPL全称：Read-Eval-Print-Loop（交互式解释器）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;R 读取-读取用户输入，解析输入了Javascript 数据结构并存储内存中。&lt;/li&gt;
+&lt;li&gt;E 执行-执行输入的数据结构&lt;/li&gt;
+&lt;li&gt;P 打印-输出结果&lt;/li&gt;
+&lt;li&gt;L循环-循环操作以上步骤直到用户两次按下ctrl-c按钮退出。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在REPL中编写程序（类似于浏览器开发人员工具中的控制台功能）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;直接在控制台输入node命令进入REPL环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;按两次Control+C退出REPL界面或者输入exit退出REPL界面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;按住control键不要放开，然后按两下c键
+##创建JavaScript文件编写程序
+###编程注意事项&lt;/li&gt;
+&lt;li&gt;配置一下Sublime Text的代码缩进格式为2个空格&lt;/li&gt;
+&lt;li&gt;方式一&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;！[@配置方式1]（imgs/sublimeconf1.png）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方式二&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;！[@配置方式2-第一步]（imgs/sublimeconf21.png）&lt;/p&gt;
+&lt;p&gt;！[配置方式2-第二步]（imgs/sublimeconf22.png）
+##写入文件操作&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;//执行文件操作&lt;br&gt;
+//&amp;mdash;&amp;mdash;&amp;mdash;-实现文件写入操作&amp;ndash;&lt;br&gt;
+//1.加载文件操作模块，fs模块。&lt;br&gt;
+var fs=require（&amp;lsquo;fs&amp;rsquo;）；&lt;br&gt;
+//2.实现文件写入操作&lt;br&gt;
+var msg=&amp;lsquo;Hello world，你好世界！’；&lt;br&gt;
+//调用fs.writeFile（）进行文件写入&lt;br&gt;
+//fs.writeFile（file，datal，options]，callback）&lt;br&gt;
+fs.writeFile（&amp;rsquo;./hello.txt&#39;，msg，&amp;lsquo;utf8&amp;rsquo;，function（err）{&lt;br&gt;
+//body..&lt;br&gt;
+//如果err===null，表示写入文件成功，没有错误！&lt;br&gt;
+//只要err里面不是null，就表示写入文件失败了！&lt;br&gt;
+if（err）{&lt;br&gt;
+    console.1og（&amp;lsquo;写文件出错啦！具体错误：‘+err）；&lt;br&gt;
+}else{&lt;br&gt;
+    console.log（&amp;lsquo;ok&amp;quot;）；&lt;br&gt;
+}
+}）；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;##读取文件操作&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;//&amp;mdash;&amp;mdash;&amp;mdash;-实现文件写入操作&amp;ndash; &lt;br&gt;
+//1.加载文件操作模块，fs模块。&lt;br&gt;
+var fs=require(&amp;lsquo;fs&amp;rsquo;)；&lt;br&gt;
+调用fs.readFile（）方法来读取文件&lt;br&gt;
+//fs.readFile（filel，options]，callback）&lt;br&gt;
+fs.readFile（&amp;rsquo;./hello.txt&amp;rsquo;，function-（err，-data）-{&lt;br&gt;
+if(err){ throw-err；}&lt;br&gt;
+//data参数的数据类型是一个Buffer对象，里面保存的就是一个一个的字节（理解为字节数组）&lt;br&gt;
+//把buffer对象转换为字符串，调用tostring（）方法&lt;br&gt;
+//console.log（data）；console.log（data.toString  （&amp;lsquo;utf8&amp;rsquo;））;
+}）;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;注意:&lt;/strong&gt;
+//此处的./相对路径，相对的是执行node命令的路径&lt;br&gt;
+//而不是相对于正在执行的这个js文件来查找hello.txt&lt;br&gt;
+//解决在文件读取中./相对路径的问题&lt;br&gt;
+//解决：dirname、filename&lt;br&gt;
+//dirname：表示，当前正在执行的js文件所在的目录&lt;br&gt;
+//filename：表示，当前正在执行的js文件的完整路径&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;路径拼接：path.join(&#39;/foo&#39;,&amp;lsquo;bar&amp;rsquo;,&#39;/ad&#39;,&#39;&amp;hellip;&#39;);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;http服务程序&#34;&gt;HTTP服务程序&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;//创建一个简单的http服务器程序&lt;br&gt;
+//1.加载http模块&lt;br&gt;
+var http=require（&amp;lsquo;http&amp;rsquo;）；&lt;br&gt;
+//2.创建一个http服务对象&lt;br&gt;
+var server=http.createServer（）；&lt;br&gt;
+//3.监听用户的请求事件（request事件）&lt;br&gt;
+//request 对象包含了用户请求报文中的所有内容，通过request对象可以获取所有用户提交过来的数据&lt;br&gt;
+//response 对象用来向用户响应一些数据，当服务器要向客户端响应数据的时候必须使用response.对象&lt;br&gt;
+//有了request对象和response对象，就既可以获取用户提交的数据，也可以向用户响应数据了 &lt;br&gt;
+server.on（&amp;lsquo;request&amp;rsquo;，function（re4，res）{&lt;br&gt;
+//body&amp;hellip;&lt;br&gt;
+//解决乱码的思路：服务器通过设置http响应报文头，告诉浏览器使用相应的编码来解析网页res.setHeader(&amp;lsquo;Content-Type&amp;rsquo;,&amp;lsquo;text/plain;charset=utf-8&amp;rsquo;)；
+res.write（&amp;lsquo;Hello world！！！！&#39;）；&lt;br&gt;
+//对于每一个请求，服务器必须结束响应，否则客户端（浏览器）会一直等待服务器响应结束&lt;br&gt;
+res.end（）; 
+}）;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;//4.启动服务&lt;br&gt;
+server.listen(8080，function(){
+console.1og(&amp;lsquo;服务器启动了，请访问：http://1ocalhost：8080&amp;rsquo;；
+});&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;获取用户请求路径&#34;&gt;获取用户请求路径&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;req.url&lt;br&gt;
+通过 req.url 后区用户请求的路径，根据不同请求作出不同的响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;if(req.url === &amp;lsquo;/&amp;rsquo; || req.u === &amp;lsquo;/index&amp;rsquo;){&lt;br&gt;
+     res.end(&amp;lsquo;Hello World&amp;rsquo;);&lt;br&gt;
+}else if(&amp;rsquo;&amp;hellip;&#39;){&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###根据用户不同请求相应不同页面&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;var http=require(&amp;lsquo;http&amp;rsquo;);&lt;br&gt;
+//加载fs模块&lt;br&gt;
+var fs=require(&amp;lsquo;fs&amp;rsquo;);&lt;br&gt;
+//加载path模块&lt;br&gt;
+var path=require(&amp;lsquo;path&amp;rsquo;);&lt;br&gt;
+//创建http服务，并启动该服务&lt;br&gt;
+http.createServer(function(req，res){&lt;br&gt;
+//通过req.url获取用户请求的路径，根据不同的请求路径服务器做出不同的响应&lt;br&gt;
+if(req.url===&#39;/&#39;|| req.url===&amp;quot;/index&#39;){&lt;br&gt;
+//读取index.html文件&lt;br&gt;
+fs.readFile（path.join(__dirname, &amp;lsquo;htmls&amp;rsquo;, &amp;lsquo;index.html&amp;quot;), function(err, data){&lt;br&gt;
+if(err){&lt;br&gt;
+throw err;&lt;br&gt;
+//把读取到的index.html中的内容直接发送给浏览器&lt;br&gt;
+res.end(data);&lt;br&gt;
+});&lt;br&gt;
+}else if(req.url-==·&amp;quot;/login)}else if(req.url-==·&amp;quot;/list)&lt;br&gt;
+}else if(req.url===&amp;quot;/register&amp;rsquo;){&lt;br&gt;
+}else{&lt;br&gt;
+}).listen（9090，function(){&lt;br&gt;
+console.1log(&amp;lsquo;http://1ocalhost:9090&amp;rsquo;)；&lt;br&gt;
+});&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

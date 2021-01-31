@@ -1,0 +1,1407 @@
+<!DOCTYPE html><html lang="zh-Hans" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="CoMath">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="node.js介绍 .">
+
+  
+  <link rel="alternate" hreflang="zh-Hans" href="https://CoMath21.github.io/post/1-node.js/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9d711cebf380679328885aff8188d64e.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://CoMath21.github.io/post/1-node.js/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="CoMath">
+  <meta property="og:url" content="https://CoMath21.github.io/post/1-node.js/">
+  <meta property="og:title" content="node.js介绍(一) | CoMath">
+  <meta property="og:description" content="node.js介绍 ."><meta property="og:image" content="https://CoMath21.github.io/post/1-node.js/featured.jpg">
+  <meta property="twitter:image" content="https://CoMath21.github.io/post/1-node.js/featured.jpg"><meta property="og:locale" content="zh-Hans">
+  
+    
+      <meta property="article:published_time" content="2021-01-30T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-01-30T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://CoMath21.github.io/post/1-node.js/"
+  },
+  "headline": "node.js介绍(一)",
+  
+  "image": [
+    "https://CoMath21.github.io/post/1-node.js/featured.jpg"
+  ],
+  
+  "datePublished": "2021-01-30T00:00:00Z",
+  "dateModified": "2021-01-30T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Xin态好先生"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CoMath",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "node.js介绍 ."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>node.js介绍(一) | CoMath</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7264cf0eba3b66951b36da7d2cecf9c5.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>搜索</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="搜索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="搜索...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="切换导航">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>首页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/category"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tag"><span>标签</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>说说</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/people"><span>关于</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="搜索"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>浅色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>深色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>自动</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>node.js介绍(一)</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/admin/">Xin态好先生</a></span>, <span >
+      <a href="/authors/comath/">CoMath</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2021年1月30日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 分钟阅读时长
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>, <a href="/category/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 500px; max-height: 306px;">
+  <div style="position: relative">
+    <img src="/post/1-node.js/featured.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">CoMath</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="什么是nodejs">什么是node.js</h2>
+<ol>
+<li>node.js是一个开发平台，就像Java开发平台、.Net开发平台、PHP开发平台、Apple开发平台一样。
+-何为开发平台？有对应的编程语言、有语言运行时、有能实现特定功能的API（SDK:Software Development Kit）</li>
+<li>该平台使用的编程语言是Javascript 语言。</li>
+<li>node.js平台是基于Chrome V8 Javascript引擎构建。</li>
+<li>基于node.js可以开发控制台程序（命令行程序、CLI程序）、桌面应用程序（GUI）（借助 node-webkit、electron等框架实现）、Web应用程序（网站）</li>
+</ol>
+<p>PHP开发技术栈：LAMP-Linux Apache MySQL PHP</p>
+<p>node.js全栈开发技术栈：MEAN-MongoDB Express Angular Node.js</p>
+<h2 id="nodejs有哪些特点">node.js有哪些特点？</h2>
+<ol>
+<li>事件驱动（当事件被触发时，执行传递过去的回调函数）</li>
+<li>非阻塞I/0模型（当执行I/0操作时，不会阻塞线程）</li>
+<li>单线程</li>
+<li>拥有世界最大的开源库生态系统一npm。</li>
+</ol>
+<h2 id="nodejs网站">node.js网站</h2>
+<ol>
+<li>[node.js官方网站]（https://nodejs.org/）</li>
+<li>[node.js中文网]（http://nodejs.cn/）</li>
+<li>[node.js中文社区]（https://cnodejs.org/）</li>
+</ol>
+<h2 id="为什么要学习nodejs">为什么要学习Node.js？</h2>
+<ol>
+<li>通过学习Node.js开发深入理解<strong>服务器开发</strong>、*<em>Web请求和响应过程</em>、*<em>了解服务器端如何与客户端配合</em></li>
+<li>学习服务器端渲染</li>
+<li>学习服务器端为客户端编写接口</li>
+<li>现在前端工程师面试，对Node.js开发有要求</li>
+<li>补充提问：
+-在Node.js平台开发时，能使用Dom API吗？比如：document.getElementById（&lsquo;id&rsquo;）；window.location等？</li>
+<li>复习浏览器端JavaScript 组成：ECMAscript、Dom、Bom</li>
+</ol>
+<h2 id="学习目标">学习目标</h2>
+<ol>
+<li>了解服务器开发过程</li>
+<li>会使用node.js开发基本的http服务程序（Web应用程序）</li>
+</ol>
+<h2 id="nodejs安装和配置">Node.js安装和配置</h2>
+<ol>
+<li>下载地址</li>
+</ol>
+<ul>
+<li>[当前版本]（https://nodejs.org/en/download/）</li>
+<li>[历史版本]（https://nodejs.org/en/download/releases/）</li>
+</ul>
+<ol start="2">
+<li>官网术语解释</li>
+</ol>
+<ul>
+<li>LTS版本：Long-term Support版本，长期支持版，即稳定版。</li>
+<li>Current 版本：Latest Features版本，最新版本，新特性会在该版本中最先加入。</li>
+</ul>
+<ol start="3">
+<li>注意：</li>
+</ol>
+<ul>
+<li>安装完毕后通过命令：node-v来确定是否安装成功【注意：打开“命令窗口”的时候建议使用“管理员方式“打开】</li>
+<li>如果需要则配置环境变量。 
+！ [配置环境变量]（imgs/env_pathpng）</li>
+</ul>
+<ol start="4">
+<li>通过nvm-windows管理一台计算机上的多个node版本</li>
+</ol>
+<h3 id="node-version-managernode-版本管理器">Node Version Manager（Node 版本管理器）</h3>
+<h4 id="nvmlinuxunixos-x">nvm（Linux、Unix、OS-X）</h4>
+<ul>
+<li>
+<p><a href="https://github.com/creationix/nvm">https://github.com/creationix/nvm</a></p>
+</li>
+<li>
+<p>产用命令：</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>nvm-install-node（安装最新版本的node）</p>
+</li>
+<li>
+<p>nvm-use node-（使用指定版本的node）</p>
+</li>
+</ul>
+<h4 id="nvm-windowswindows">nvm-windows·（Windows）</h4>
+<ul>
+<li>
+<p><a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a></p>
+</li>
+<li>
+<p>常用命令：</p>
+</li>
+</ul>
+<p>nvm-version</p>
+<p>nvm-install-latest</p>
+<p>nvm-instal1-版本号</p>
+<p>nvm-uninstall版本号</p>
+<p>nvm-list</p>
+<p>nvm-use 版本号
+#在node.js上编写程序
+##REPL介绍</p>
+<ol>
+<li>REPL全称：Read-Eval-Print-Loop（交互式解释器）</li>
+</ol>
+<ul>
+<li>R 读取-读取用户输入，解析输入了Javascript 数据结构并存储内存中。</li>
+<li>E 执行-执行输入的数据结构</li>
+<li>P 打印-输出结果</li>
+<li>L循环-循环操作以上步骤直到用户两次按下ctrl-c按钮退出。</li>
+</ul>
+<ol start="2">
+<li>在REPL中编写程序（类似于浏览器开发人员工具中的控制台功能）</li>
+</ol>
+<ul>
+<li>直接在控制台输入node命令进入REPL环境</li>
+</ul>
+<ol start="3">
+<li>按两次Control+C退出REPL界面或者输入exit退出REPL界面</li>
+</ol>
+<ul>
+<li>按住control键不要放开，然后按两下c键
+##创建JavaScript文件编写程序
+###编程注意事项</li>
+<li>配置一下Sublime Text的代码缩进格式为2个空格</li>
+<li>方式一</li>
+</ul>
+<p>！[@配置方式1]（imgs/sublimeconf1.png）</p>
+<ul>
+<li>方式二</li>
+</ul>
+<p>！[@配置方式2-第一步]（imgs/sublimeconf21.png）</p>
+<p>！[配置方式2-第二步]（imgs/sublimeconf22.png）
+##写入文件操作</p>
+<blockquote>
+<p>//执行文件操作<br>
+//&mdash;&mdash;&mdash;-实现文件写入操作&ndash;<br>
+//1.加载文件操作模块，fs模块。<br>
+var fs=require（&lsquo;fs&rsquo;）；<br>
+//2.实现文件写入操作<br>
+var msg=&lsquo;Hello world，你好世界！’；<br>
+//调用fs.writeFile（）进行文件写入<br>
+//fs.writeFile（file，datal，options]，callback）<br>
+fs.writeFile（&rsquo;./hello.txt'，msg，&lsquo;utf8&rsquo;，function（err）{<br>
+//body..<br>
+//如果err===null，表示写入文件成功，没有错误！<br>
+//只要err里面不是null，就表示写入文件失败了！<br>
+if（err）{<br>
+    console.1og（&lsquo;写文件出错啦！具体错误：‘+err）；<br>
+}else{<br>
+    console.log（&lsquo;ok&quot;）；<br>
+}
+}）；</p>
+</blockquote>
+<p>##读取文件操作</p>
+<blockquote>
+<p>//&mdash;&mdash;&mdash;-实现文件写入操作&ndash; <br>
+//1.加载文件操作模块，fs模块。<br>
+var fs=require(&lsquo;fs&rsquo;)；<br>
+调用fs.readFile（）方法来读取文件<br>
+//fs.readFile（filel，options]，callback）<br>
+fs.readFile（&rsquo;./hello.txt&rsquo;，function-（err，-data）-{<br>
+if(err){ throw-err；}<br>
+//data参数的数据类型是一个Buffer对象，里面保存的就是一个一个的字节（理解为字节数组）<br>
+//把buffer对象转换为字符串，调用tostring（）方法<br>
+//console.log（data）；console.log（data.toString  （&lsquo;utf8&rsquo;））;
+}）;</p>
+</blockquote>
+<hr>
+<p><strong>注意:</strong>
+//此处的./相对路径，相对的是执行node命令的路径<br>
+//而不是相对于正在执行的这个js文件来查找hello.txt<br>
+//解决在文件读取中./相对路径的问题<br>
+//解决：dirname、filename<br>
+//dirname：表示，当前正在执行的js文件所在的目录<br>
+//filename：表示，当前正在执行的js文件的完整路径</p>
+<ul>
+<li>路径拼接：path.join('/foo',&lsquo;bar&rsquo;,'/ad','&hellip;');</li>
+</ul>
+<h2 id="http服务程序">HTTP服务程序</h2>
+<blockquote>
+<p>//创建一个简单的http服务器程序<br>
+//1.加载http模块<br>
+var http=require（&lsquo;http&rsquo;）；<br>
+//2.创建一个http服务对象<br>
+var server=http.createServer（）；<br>
+//3.监听用户的请求事件（request事件）<br>
+//request 对象包含了用户请求报文中的所有内容，通过request对象可以获取所有用户提交过来的数据<br>
+//response 对象用来向用户响应一些数据，当服务器要向客户端响应数据的时候必须使用response.对象<br>
+//有了request对象和response对象，就既可以获取用户提交的数据，也可以向用户响应数据了 <br>
+server.on（&lsquo;request&rsquo;，function（re4，res）{<br>
+//body&hellip;<br>
+//解决乱码的思路：服务器通过设置http响应报文头，告诉浏览器使用相应的编码来解析网页res.setHeader(&lsquo;Content-Type&rsquo;,&lsquo;text/plain;charset=utf-8&rsquo;)；
+res.write（&lsquo;Hello world！！！！'）；<br>
+//对于每一个请求，服务器必须结束响应，否则客户端（浏览器）会一直等待服务器响应结束<br>
+res.end（）; 
+}）;</p>
+</blockquote>
+<blockquote>
+<p>//4.启动服务<br>
+server.listen(8080，function(){
+console.1og(&lsquo;服务器启动了，请访问：http://1ocalhost：8080&rsquo;；
+});</p>
+</blockquote>
+<h3 id="获取用户请求路径">获取用户请求路径</h3>
+<ul>
+<li>req.url<br>
+通过 req.url 后区用户请求的路径，根据不同请求作出不同的响应</li>
+</ul>
+<blockquote>
+<p>if(req.url === &lsquo;/&rsquo; || req.u === &lsquo;/index&rsquo;){<br>
+     res.end(&lsquo;Hello World&rsquo;);<br>
+}else if(&rsquo;&hellip;'){</p>
+</blockquote>
+<blockquote>
+<p>}</p>
+</blockquote>
+<p>###根据用户不同请求相应不同页面</p>
+<blockquote>
+<p>var http=require(&lsquo;http&rsquo;);<br>
+//加载fs模块<br>
+var fs=require(&lsquo;fs&rsquo;);<br>
+//加载path模块<br>
+var path=require(&lsquo;path&rsquo;);<br>
+//创建http服务，并启动该服务<br>
+http.createServer(function(req，res){<br>
+//通过req.url获取用户请求的路径，根据不同的请求路径服务器做出不同的响应<br>
+if(req.url==='/'|| req.url===&quot;/index'){<br>
+//读取index.html文件<br>
+fs.readFile（path.join(__dirname, &lsquo;htmls&rsquo;, &lsquo;index.html&quot;), function(err, data){<br>
+if(err){<br>
+throw err;<br>
+//把读取到的index.html中的内容直接发送给浏览器<br>
+res.end(data);<br>
+});<br>
+}else if(req.url-==·&quot;/login)}else if(req.url-==·&quot;/list)<br>
+}else if(req.url===&quot;/register&rsquo;){<br>
+}else{<br>
+}).listen（9090，function(){<br>
+console.1log(&lsquo;http://1ocalhost:9090&rsquo;)；<br>
+});</p>
+</blockquote>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  
+  <a class="badge badge-light" href="/tag/node/">Node</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg" alt="Xin态好先生"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">Xin态好先生</a></h5>
+      
+      <p class="card-text">机会是给有准备的人的.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:comath@qq.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1375264022&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">
+        <i class="fab fa-qq"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CoMath21" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/comath/avatar_hu5dbed3c1e225bfb246e59dc7d66e77de_260503_270x270_fill_lanczos_center_2.png" alt="CoMath"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">CoMath</a></h5>
+      <h6 class="card-subtitle">微信公众号</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>相关</h3>
+    <ul>
+      
+      <li><a href="/post/1-%E6%85%95%E8%AF%BE%E7%BD%91mxonline/">Django学习笔记</a></li>
+      
+      <li><a href="/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">SSH框架整合基本步骤</a></li>
+      
+      <li><a href="/post/1-xml%E7%AC%94%E8%AE%B0/">XML学习笔记</a></li>
+      
+      <li><a href="/post/1-spring2.5/">Spring2.5学习笔记</a></li>
+      
+      <li><a href="/post/1-hibernate/">Hibernate学习笔记</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 CoMath Powered by Hugo Theme Academic
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> 复制
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> 下载
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"没有找到结果","placeholder":"搜索...","results":"搜索结果"};
+      const content_type = {
+        'post': "文章",
+        'project': "项目",
+        'publication' : "出版物",
+        'event' : "演讲",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

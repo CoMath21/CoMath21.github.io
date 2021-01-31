@@ -1,0 +1,1492 @@
+<!DOCTYPE html><html lang="zh-Hans" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="CoMath">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Spring&#43;Struts&#43;hibernate整合环境(Struts2.1.6、hibernate3.3.2、spring2.5.6)">
+
+  
+  <link rel="alternate" hreflang="zh-Hans" href="https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.9d711cebf380679328885aff8188d64e.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hue90aa69698efeb53250d93a62bbb007f_97431_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="CoMath">
+  <meta property="og:url" content="https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">
+  <meta property="og:title" content="SSH框架整合基本步骤 | CoMath">
+  <meta property="og:description" content="Spring&#43;Struts&#43;hibernate整合环境(Struts2.1.6、hibernate3.3.2、spring2.5.6)"><meta property="og:image" content="https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/featured.jpg">
+  <meta property="twitter:image" content="https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/featured.jpg"><meta property="og:locale" content="zh-Hans">
+  
+    
+      <meta property="article:published_time" content="2021-01-31T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-01-31T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/"
+  },
+  "headline": "SSH框架整合基本步骤",
+  
+  "image": [
+    "https://CoMath21.github.io/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/featured.jpg"
+  ],
+  
+  "datePublished": "2021-01-31T00:00:00Z",
+  "dateModified": "2021-01-31T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Xin态好先生"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CoMath",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://CoMath21.github.io/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Spring+Struts+hibernate整合环境(Struts2.1.6、hibernate3.3.2、spring2.5.6)"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>SSH框架整合基本步骤 | CoMath</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7264cf0eba3b66951b36da7d2cecf9c5.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>搜索</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="搜索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="搜索...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="切换导航">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hud8da91bfe93f3d7d35fd2296e35ef0bf_39934_0x70_resize_lanczos_2.png" alt="CoMath"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>首页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>归档</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/category"><span>分类</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tag"><span>标签</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talk"><span>说说</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/people"><span>关于</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="搜索"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>浅色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>深色</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>自动</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>SSH框架整合基本步骤</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/admin/">Xin态好先生</a></span>, <span >
+      <a href="/authors/comath/">CoMath</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2021年1月31日
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 分钟阅读时长
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>, <a href="/category/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 500px; max-height: 311px;">
+  <div style="position: relative">
+    <img src="/post/1-ssh%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/featured.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">CoMath</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="准备工作">准备工作</h2>
+<p>　　首先需要找到开发软件：Eclipse-J2EE版本，并且安装相应插件（最好安装，便于初期简单编程）.</p>
+<p><strong>注</strong>：云盘中一个压缩包中有完整软件.</p>
+<p>安装插件步骤：
+打开Eclipse-J2EE版本，找到Help→Install New SoftWare → Work with右面的Add ，在Archive…中找到对应软件的路径，点集OK即可.
+需要的软件：</p>
+<ol>
+<li>hibernate的插件：hibernatetools-Update-4.1.1.Final_2013-12-08_01-06-33-B605.zip</li>
+<li>Spring的插件：springsource-tool-suite-3.4.0.RELEASE-e4.3.1-updatesite.zip</li>
+</ol>
+<p>如果没有服务器，需要安装Tomcat服务器.</p>
+<h2 id="springhibernatestruts的顺序整合框架">Spring→Hibernate→Struts的顺序整合框架</h2>
+<h3 id="1-加入spring">1. 加入Spring</h3>
+<h4 id="1加入-spring-所需要的-jar-包文件">1)	加入 Spring 所需要的 Jar 包文件</h4>
+<p>　　找到 Spring 的 jar 包文件夹，\Jar包文件\Spring4.0.0\spring-framework-4.0.0.RELEASE\required，大约15个左右；</p>
+<ul>
+<li>com.springsource.net.sf.cglib-2.2.0.jar</li>
+<li>com.springsource.org.aopalliance-1.0.0.jar</li>
+<li>com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar</li>
+<li>commons-logging-1.2.jar</li>
+<li>spring-aop-4.0.0.RELEASE.jar</li>
+<li>spring-aspects-4.0.0.RELEASE.jar</li>
+<li>spring-beans-4.0.0.RELEASE.jar</li>
+<li>spring-context-4.0.0.RELEASE.jar</li>
+<li>spring-core-4.0.0.RELEASE.jar</li>
+<li>spring-expression-4.0.0.RELEASE.jar</li>
+<li>spring-jdbc-4.0.0.RELEASE.jar</li>
+<li>spring-orm-4.0.0.RELEASE.jar</li>
+<li>spring-tx-4.0.0.RELEASE.jar</li>
+<li>spring-web-4.0.0.RELEASE.jar</li>
+<li>spring-webmvc-4.0.0.RELEASE.jar</li>
+</ul>
+<h4 id="2配置-webxml-文件">2)	配置 web.xml 文件</h4>
+<p>　　配置web.xml文件可以找到ContextLoaderListener会自动生成以下代码，随后将Location改为applicationContext（Spring配置文件）的路径.</p>
+<pre><code>&lt;!-- 配置  Spring 配置文件的名称和位置 --&gt;
+&lt;context-param&gt;
+  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+  &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+		
+&lt;!-- 启动 IOC 容器的  ServletContextListener --&gt;
+&lt;listener&gt;
+&lt;listener-class&gt;
+org.springframework.web.context.ContextLoaderListener
+&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<h4 id="3加入-spring-的配置文件">3)	加入 Spring 的配置文件</h4>
+<p>　　可以先创建一个资源文件conf，将资源文件放入其中（也可以直接在src下创建），在资源文件下创建一个Spring的配置文件点击右键找到Spring Bean Configuration File，输入配置文件的名字，（注意这里面的名字要与web.xml下的的配置文件的名字相同，也就是一个文件）；然后选中aop、beans、context、tx等选项，（注意这里面所选取的是最基本的，根据需要可以自行添加其他选项）；最后Finish即可.
+<img src="./1.png" alt="png">
+<img src="./2.png" alt="png"></p>
+<h3 id="2加入hibernate">2.	加入Hibernate</h3>
+<h4 id="1-建立持久化类-和其对应的-hbmxml-文件-生成对应的数据表">1). 建立持久化类, 和其对应的 .hbm.xml 文件, 生成对应的数据表</h4>
+<p><strong>i. 配置hibernate.cfg.xml文件：</strong></p>
+<p>　　鼠标右键找到Hibernate Configuration File(cfg.xml)创建hibernate.cfg.xml配置文件并配置基本信息（可根据需求自行添加）.</p>
+<pre><code>&lt;hibernate-configuration&gt;
+&lt;session-factory&gt;
+    &lt;!-- 配置基本属性 --&gt;
+    &lt;!-- 方言 --&gt;
+&lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.SQLServer2008Dialect
+&lt;/property&gt;
+&lt;property name=&quot;hibernate.dialect&quot;&gt; org.hibernate.dialect.MySQL5InnoDBDialect&lt;/property&gt;
+
+    &lt;!-- 是否显示及格式化SQL --&gt;
+    &lt;property name=&quot;hibernate.show_sql&quot;&gt;true&lt;/property&gt;
+    &lt;property name=&quot;hibernate.format_sql&quot;&gt;true&lt;/property&gt;
+    &lt;property name=&quot;hibernate.temp.use_jdbc_metadata_defaults&quot;&gt;false&lt;/property&gt;  
+    &lt;!-- 生成数据表的策略 --&gt;
+    &lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;
+    &lt;!-- 生成二级缓存 --&gt;
+  &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre>
+<p><strong>ii. 建立持久化类</strong>:</p>
+<p>　　也就是平时所说的对象类、beans（一般创建在domain包下或者entities下），并生成对应参数的getter and setter；之后鼠标右键创建Hibernate XML Mapping file (hbm.xml)文件，直接创建即可. 就会生成对应的*. hbm.xml文件（根据不同的需求可能够对*. hbm.xml文件进行适当的修改）</p>
+<h4 id="2-spring-整合-hibernate">2). Spring 整合 Hibernate</h4>
+<p><strong>步骤</strong></p>
+<p>①  加入 jar 包: 找到 Hibernate 的 jar 包文件夹，\Jar包文件\Jar包文件\Hibernate4.2.21\hibernate-release-4.2.21.Final\lib\required路径下的所有 jar 包.</p>
+<ul>
+<li>antlr-2.7.7.jar</li>
+<li>dom4j-1.6.1.jar</li>
+<li>hibernate-commons-annotations-4.0.2.Final.jar</li>
+<li>hibernate-core-4.2.21.Final.jar</li>
+<li>hibernate-jpa-2.0-api-1.0.1.Final.jar</li>
+<li>javassist-3.18.1-GA.jar</li>
+<li>jboss-logging-3.1.0.GA.jar</li>
+<li>jboss-transaction-api_1.1_spec-1.0.1.Final.jar</li>
+</ul>
+<p>②  在类路径下加入 hibernate.cfg.xml 文件，并在其中配置   hibernate 的基本属性</p>
+<p>③  建立持久化类和其对应的  .hbm.xml 文件（过）</p>
+<p>④  和 Spring 进行整合（过）</p>
+<ul>
+<li>加入c3p0和SQLServer的驱动（需要引入相关jar包文件：c3p0-0.9.2.1.jar、sqljdbc4.jar（SQL2005））</li>
+</ul>
+<p><em>（c3p0:是一个 数据库连接池 ，利用 sqljdbc4 建立与数据库的连接 ， 并且管理这些连接，不用每次访问数据库都 重新发出数据库连接请求；大大提升性能）</em></p>
+<p>具体实现：
+首先要创建*.properties文件，并对其进行配置，主要为数据库的相关参数设置.</p>
+<pre><code>&lt;!-- 资源文件样式 --&gt;
+  jdbc.user=sa
+  jdbc.password=sa123
+  jdbc.driverClass=com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jdbc.jdbcUrl=jdbc:sqlserver://localhost:1433; DatabaseName=PwdManagerTest
+
+  jdbc.initialPoolSize=5
+  jdbc.maxPoolSize=10
+</code></pre>
+<p>然后在applicationContext.xml中添加</p>
+<pre><code>&lt;!-- 导入资源文件 --&gt;
+  &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; /&gt;
+&lt;!-- 配置 C3P0 数据源 --&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+  &lt;property name=&quot;user&quot; value=&quot;${jdbc.user}&quot;&gt;&lt;/property&gt;
+  &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;&gt;&lt;/property&gt;
+  &lt;property name=&quot;driverClass&quot; value=&quot;${jdbc.driverClass}&quot;&gt;&lt;/property&gt;
+  &lt;property name=&quot;jdbcUrl&quot; value=&quot;${jdbc.jdbcUrl}&quot;&gt;&lt;/property&gt;
+    
+  &lt;property name=&quot;initialPoolSize&quot; value=&quot;${jdbc.initialPoolSize}&quot;&gt;&lt;/property&gt;
+  &lt;property name=&quot;maxPoolSize&quot; value=&quot;${jdbc.maxPoolSize}&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+<p><font color=red>这里会报一个错误：Error creating bean with name &lsquo;dataSource&rsquo; defined in class path resource [applicationContext.xml]:&hellip;</font></p>
+<p><strong>错误原因</strong>：缺少mchange-commons-java-0.2.3.4.jar包.</p>
+<p><strong>作用</strong>：mchange-commons-java-0.2.3.4.jar包是c3p0数据库连接池的辅助包，如果没有这个包系统启动时会报classnotfoundexception，这是更新c3p0-0.9.2版本后分离出来的包，0.9.1的时候还是只是一个包.</p>
+<p><strong>解决方法</strong>：导入mchange-commons-java-0.2.3.4.jar包即可.</p>
+<p><strong>路径</strong>：Jar包文件\C3P0\C3P0-0.9-2.1JAR\c3p0-0.9.2.1\lib...</p>
+<ul>
+<li>在Spring 的配置文件中配置:数据源dataSource,SessionFactory,声明式事务（先了解事务，包括事务隔离级别等）</li>
+</ul>
+<pre><code>&lt;!-- 配置 SessionFactory --&gt;
+&lt;bean id=&quot;sessionFactory&quot;					class=&quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&quot;&gt;
+  &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+  &lt;property name=&quot;configLocation&quot; value=&quot;classpath:hibernate.cfg.xml&quot;/&gt;
+  &lt;property name=&quot;mappingLocations&quot; value=&quot;classpath:com/PwdManager/domain/*.hbm.xml&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+<p><font color=blue>说明：执行到当前操作即可打开服务器，运行当前项目检测，正常情况下，不会报错，没有错误信息，而且在数据库中会生成对应的表结构. </font></p>
+<pre><code>&lt;!-- 配置 Spring 的声明式事务 --&gt;
+&lt;!-- 1. 配置 Hibernate 的事务管理器 --&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.orm.hibernate4.HibernateTransactionManager&quot;&gt;
+  &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+      
+&lt;!-- 2. 配置事务属性 --&gt;
+&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+    &lt;tx:attributes&gt;
+      &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;
+      &lt;tx:method name=&quot;*&quot;/&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+	
+&lt;!-- 3. 配置事务切入点,再把事务属性和事务切入点关联起来 --&gt;
+  &lt;aop:config&gt;
+  &lt;!-- 任一修饰符,任意返回值 ..下的所有类下的所有方法,参数值任意--&gt;
+  &lt;aop:pointcut expression=&quot;execution(* com.PwdManager.service.*.*(..))&quot; id=&quot;txPointcut&quot;/&gt;
+  &lt;!-- 把事务属性和事务切入点关联起来 --&gt;
+  &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPointcut&quot;/&gt;
+&lt;/aop:config&gt;
+</code></pre>
+<h3 id="3-加入-stuts2">3. 加入 Stuts2</h3>
+<h4 id="1-加入--jar-包">1) 加入  jar 包</h4>
+<p>　　找到 Stuts2 的 jar 包文件夹，\Jar包文件 \Jar包文件\Struts2.3.34\struts-2.3.34\apps\struts2-blank\WEB-INF\lib路径下的所有 jar 包.</p>
+<ul>
+<li>xwork-core-2.3.34.jar</li>
+<li>struts2-spring-plugin-2.3.34.jar</li>
+<li>struts2-json-plugin-2.3.34.jar</li>
+<li>struts2-core-2.3.34.jar</li>
+<li>ognl-3.0.21.jar</li>
+<li>log4j-core-2.3.jar</li>
+<li>log4j-api-2.3.jar</li>
+<li>javassist-3.11.0.GA.jar</li>
+<li>freemarker-2.3.22.jar</li>
+<li>commons-lang3-3.2.jar</li>
+<li>commons-io-2.2.jar</li>
+<li>commons-fileupload-1.3.2.jar</li>
+<li>asm-tree-3.3.jar</li>
+<li>asm-commons-3.3.jar</li>
+<li>asm-3.3.jar</li>
+</ul>
+<h4 id="2-在webxml文件中配置struts2的filter">2) 在web.xml文件中配置Struts2的Filter</h4>
+<pre><code>&lt;!-- 配置 Struts2 的 Filter --&gt;
+&lt;filter&gt;
+  &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+  &lt;filter-class&gt;
+    org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+  &lt;/filter-class&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+<h4 id="3-加入-struts2-的配置文件">3) 加入 Struts2 的配置文件</h4>
+<p>　　可以拷贝例子下的struts.xml文件，例子可以在Jar包文件\Struts2.3.34\struts-2.3.34\apps\struts2-blank\WEB-INF\src\java\struts.xml文件参考.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE struts PUBLIC
+  &quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;
+  &quot;http://struts.apache.org/dtds/struts-2.3.dtd&quot;&gt;
+&lt;struts&gt;
+  &lt;constant name=&quot;struts.enable.DynamicMethodInvocation&quot; value=&quot;false&quot; /&gt;
+  &lt;constant name=&quot;struts.devMode&quot; value=&quot;true&quot; /&gt;
+  &lt;package name=&quot;default&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;
+      &lt;action name=&quot;index&quot;&gt;
+        &lt;result type=&quot;redirectAction&quot;&gt;
+            &lt;param name=&quot;actionName&quot;&gt;HelloWorld&lt;/param&gt;
+        &lt;/result&gt;
+    &lt;/action&gt;
+&lt;/package&gt;
+&lt;!-- Add packages here --&gt;
+&lt;/struts&gt;
+</code></pre>
+<h4 id="4-整合-spring">4) 整合 Spring</h4>
+<p>① 加入 Struts2 的 Spring 插件的 jar 包  struts2-spring-plugin-2.3.34.jar.</p>
+<p>② 在 Spring 的配置文件中正常配置 Action ,注意 Action 中需要配置 scope 属性为 prototype 不是单例的.</p>
+<pre><code>&lt;bean id=&quot;XxxAction&quot;&gt; class=&quot;&quot; scope=&quot;prototype&quot;&gt;
+  &lt;property name=&quot;&quot; ref=&quot;&quot; &gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- 实例  --&gt;
+&lt;bean id=&quot;userloginDao&quot; class=&quot;com.dao.userLoginDao&quot;&gt;
+  &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;userloginService&quot; class=&quot;com.service.userLoginService&quot;&gt;
+  &lt;property name=&quot;userLoginDao&quot; ref=&quot;userloginDao&quot;/&gt;
+&lt;/bean&gt;
+  
+&lt;bean id=&quot;userloginAction&quot; class=&quot;com.action.userLoginAction&quot; scope=&quot;prototype&quot;&gt;
+  &lt;property name=&quot;userLoginService&quot; ref=&quot;userloginService&quot;/&gt;	
+&lt;/bean&gt;
+</code></pre>
+<p><font color=red>这里面需要注意的是</font>：如果是在搭建初期只是为了测试是否成功，在创建对应的Package和Class后，在属性值为sessionFactory的Class下要创建sessionFactory的实例对象并设置setter方法，即<code>&lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;/&gt;</code>的<code>&lt;bean id=&quot;userloginDao&quot; class=&quot;com.dao.userLoginDao&quot;&gt;</code>需要在类userLoginDao下实例：<code>private SessionFactory sessionFactory</code>;并设置<code>setter</code>方法（可以带上<code>getter</code>方法），以下其他bean相同. （依赖注入相关知识）</p>
+<p>③ 在Struts2的配置文件中配置Action时,class 属性指向该 Action 在Spring IOC中的id.</p>
+<p><strong>首先要定义拦截器</strong>
+I. 在JSP页面如果没有采用Ajax可以直接使用以下action</p>
+<pre><code>&lt;action name=&quot;XxxName&quot; class=&quot;XxxAction&quot;&gt;
+  &lt;result&gt;/success.jsp&lt;/result&gt;
+&lt;/action&gt;
+</code></pre>
+<p>JSP	页面form表单提交直接交给XxxName，即：<code>&lt;form action=&quot;XxxName&quot;&gt;</code>
+这种情况需要接受的action中提供form表单中input的name所对应的getter和setter
+然后可以直接获取到form表单中的值.
+II. 如果JSP页面使用了Ajax则需要使用以下action</p>
+<pre><code>&lt;action name=&quot;userJson-*&quot; class=&quot;com.action.userJsonAction&quot; method=&quot;{1}&quot;&gt;
+  &lt;result name=&quot;success&quot; type=&quot;json&quot;&gt;
+    &lt;param name=&quot;root&quot;&gt;result&lt;/param&gt;
+  &lt;/result&gt;
+&lt;/action&gt;
+</code></pre>
+<p><strong>result为返回ajax的data数据</strong></p>
+<p>这里需要注意的是在使用Ajax搭配Json实现数据的交互时，需要定义拦截器的时候继承json-default拦截器，同时继承两者也可以.
+这里要是采用AJAX的方式，可能需要引入JSON的相关Jar包：
+但是这里需要注意的是存在两种不同的JSON的Jar包，主要区别在于实现构造方法的变量不同.</p>
+<p>例如：
+<font color=red>√</font></p>
+<p><code>JSONObject json = new JSONObject(map);</code>带参构造需要引入org.json.JSONObject; <code>JSONObject json = new JSONObject();</code>   无参构造引入的是net.sf.json.JSONObject
+org.json.JSONObject类在json.jar包下—— \Jar包文件\JSON\org.json
+net.sf.json.JSONObject其他包中—— \Jar包文件\JSON\net.sf.json</p>
+<p>{</p>
+<ul>
+<li>commons-beanutils-1.7.0.jar</li>
+<li>commons-collections-3.2.1.jar</li>
+<li>commons-httpclient-3.1.jar</li>
+<li>commons-lang-2.3.jar</li>
+<li>commons-logging-1.1.1.jar</li>
+<li>ezmorph-1.0.3.jar</li>
+<li>json-lib-2.2.3-jdk15.jar</li>
+</ul>
+<p>}</p>
+<p><strong>获取ajax传过来的参数需要使用：</strong></p>
+<pre><code>// 用于获取data数据，定义request
+HttpServletRequest request = null;
+request = ServletActionContext.getRequest();
+String UserID = request.getParameter(&quot;UserID&quot;);
+</code></pre>
+<p>实例：</p>
+<pre><code>&lt;struts&gt;				
+  &lt;constant name=&quot;struts.i18n.encoding&quot; value=&quot;UTF-8&quot;&gt;&lt;/constant&gt;
+  &lt;constant name=&quot;struts.enable.DynamicMethodInvocation&quot; value=&quot;false&quot; /&gt;
+  &lt;constant name=&quot;struts.devMode&quot; value=&quot;true&quot; /&gt;
+  &lt;package name=&quot;default&quot; namespace=&quot;/&quot; extends=&quot;json-default,struts-default&quot;&gt;
+  &lt;!-- 定义新的拦截器栈, 配置prepare拦截器栈的alwaysInvokePrepare参数值为false --&gt;
+    &lt;interceptors&gt;
+      &lt;interceptor-stack name=&quot;sshStack&quot;&gt;
+        &lt;interceptor-ref name=&quot;paramsPrepareParamsStack&quot;&gt;
+          &lt;param name=&quot;prepare.alwaysInvokePrepare&quot;&gt;false&lt;/param&gt;
+        &lt;/interceptor-ref&gt;
+      &lt;/interceptor-stack&gt;
+    &lt;/interceptors&gt;
+    &lt;!-- 使用新的拦截器栈 --&gt;
+    &lt;default-interceptor-ref name=&quot;sshStack&quot;&gt;&lt;/default-interceptor-ref&gt;
+                  
+    &lt;action name=&quot;userJson-*&quot; class=&quot;com.action.userJsonAction&quot; method=&quot;{1}&quot;&gt;
+      &lt;result name=&quot;success&quot; type=&quot;json&quot;&gt;
+        &lt;param name=&quot;root&quot;&gt;result&lt;/param&gt;
+      &lt;/result&gt;
+    &lt;/action&gt;
+  &lt;/package&gt;			
+  &lt;/struts&gt;
+</code></pre>
+<pre><code>$.ajax({
+  url : &quot;blogJson-readArticle&quot;,
+  type : &quot;POST&quot;,	
+  data : {
+    userID : &quot;132&quot;,
+    artID : $(&quot;input:hidden[name='artID']&quot;).val()
+  },
+  timeout : 30000,
+  dataType : &quot;json&quot;,// 设置需要返回的数据类型
+  scriptCharset : 'utf-8',
+  success : function(data) {
+    var obj = $.parseJSON(data);
+    var data = obj.data;
+    
+  },
+  error : function(XMLHttpRequest, textStatus, errorThrown) {
+    alert(errorThrown + 123);
+  }
+});
+</code></pre>
+<h3 id="4-完成功能">4. 完成功能</h3>
+<p>　　具体方式可以按照自己的要求实施，<strong>大致方法</strong>：
+在dao层可以直接管理有关数据库的一切方法，通过service层调用dao层的方法，在action层对service方法进行调用即可；这里需要注意一点，就是关于一些属性的设置问题，具体跟上述使用JSON时注意的事项一样.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  
+  <a class="badge badge-light" href="/tag/ssh/">SSH</a>
+  
+  <a class="badge badge-light" href="/tag/java/">Java</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu229ab2ae4b832f0d41c08e3dce763b22_681268_270x270_fill_q75_lanczos_center.jpg" alt="Xin态好先生"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">Xin态好先生</a></h5>
+      
+      <p class="card-text">机会是给有准备的人的.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:comath@qq.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1375264022&amp;site=qq&amp;menu=yes" target="_blank" rel="noopener">
+        <i class="fab fa-qq"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CoMath21" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://CoMath21.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/comath/avatar_hu5dbed3c1e225bfb246e59dc7d66e77de_260503_270x270_fill_lanczos_center_2.png" alt="CoMath"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://CoMath21.github.io/">CoMath</a></h5>
+      <h6 class="card-subtitle">微信公众号</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>相关</h3>
+    <ul>
+      
+      <li><a href="/post/1-spring2.5/">Spring2.5学习笔记</a></li>
+      
+      <li><a href="/post/1-hibernate/">Hibernate学习笔记</a></li>
+      
+      <li><a href="/post/1-struts2/">Struts2学习笔记</a></li>
+      
+      <li><a href="/post/1-%E6%85%95%E8%AF%BE%E7%BD%91mxonline/">Django学习笔记</a></li>
+      
+      <li><a href="/post/1-xml%E7%AC%94%E8%AE%B0/">XML学习笔记</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 CoMath Powered by Hugo Theme Academic
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> 复制
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> 下载
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"没有找到结果","placeholder":"搜索...","results":"搜索结果"};
+      const content_type = {
+        'post': "文章",
+        'project': "项目",
+        'publication' : "出版物",
+        'event' : "演讲",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
